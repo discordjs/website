@@ -11,7 +11,7 @@
       </ul>
       <ul>
         <li>Classes</li>
-        <li v-for="docclass in docs.classes"><a v-link='{ name:"classview", params:{class:docclass.name} }' @click="toggle">{{ docclass.name }}</a></li>
+        <li v-for="_class in publicClasses"><a v-link='{ name:"classview", params:{class:_class.name} }' @click="toggle">{{ _class.name }}</a></li>
       </ul>
       <ul>
         <li>TypeDefs</li>
@@ -27,6 +27,11 @@ export default {
     return {
       sidebarVisible: false,
     };
+  },
+  computed: {
+    publicClasses() {
+      return this.docs.classes.filter(c => c.access !== 'private');
+    },
   },
   methods: {
     toggle() {

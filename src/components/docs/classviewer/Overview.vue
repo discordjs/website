@@ -1,15 +1,15 @@
 <template>
   <div class="classOverview">
-    <div class="col" v-if="jsclass.properties.length > 0">
+    <div class="col" v-if="publicProperties.length > 0">
       <span class="title">Properties</span>
       <ul>
-        <li v-for="property in jsclass.properties" @click='scroll(property.name)'>{{ property.name }}</li>
+        <li v-for="property in publicProperties" @click='scroll(property.name)'>{{ property.name }}</li>
       </ul>
     </div>
-    <div class="col" v-if="jsclass.methods.length > 0">
+    <div class="col" v-if="publicMethods.length > 0">
       <span class="title">Methods</span>
       <ul>
-        <li v-for="method in jsclass.methods" @click='scroll(method.name)'>{{ method.name }}</li>
+        <li v-for="method in publicMethods" @click='scroll(method.name)'>{{ method.name }}</li>
       </ul>
     </div>
     <div class="col" v-if="jsclass.events.length > 0">
@@ -23,6 +23,14 @@
 <script>
 export default {
   props: ['jsclass'],
+  computed: {
+    publicProperties() {
+      return this.jsclass.properties.filter(p => p.access !== 'private');
+    },
+    publicMethods() {
+      return this.jsclass.methods.filter(m => m.access !== 'private');
+    },
+  },
   methods: {
     scroll(to) {
       this.$router.go({ name: 'classview', query: { scrollto: to } });

@@ -15,10 +15,10 @@
         </div>
       </div>
       <overview :jsclass="jsclass"></overview>
-      <span class="title" v-if="jsclass.properties.length > 0">Properties</span>
-      <prop-renderer v-for="prop in jsclass.properties" :prop="prop"></prop-renderer>
-      <span class="title" v-if="jsclass.methods.length > 0">Methods</span>
-      <method-renderer v-for="method in jsclass.methods" :method="method"></method-renderer>
+      <span class="title" v-if="publicProperties.length > 0">Properties</span>
+      <prop-renderer v-for="prop in publicProperties" :prop="prop"></prop-renderer>
+      <span class="title" v-if="publicMethods.length > 0">Methods</span>
+      <method-renderer v-for="method in publicMethods" :method="method"></method-renderer>
       <span class="title" v-if="jsclass.events.length > 0">Events</span>
       <event-renderer v-for="event in jsclass.events" :event="event"></event-renderer>
     </span>
@@ -60,6 +60,14 @@ export default {
       }
     }
     return {};
+  },
+  computed: {
+    publicProperties() {
+      return this.$data.jsclass.properties.filter(p => p.access !== 'private');
+    },
+    publicMethods() {
+      return this.$data.jsclass.methods.filter(m => m.access !== 'private');
+    },
   },
   route: {
     canReuse() {
