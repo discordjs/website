@@ -38,7 +38,7 @@ export default {
       }).catch(e => {
         transition.abort();
         alert(`Couldn't load docs for ${transition.to.params.tag} - ${e}`);
-        console.log(e);
+        console.error(e);
       });
     },
     canReuse() {

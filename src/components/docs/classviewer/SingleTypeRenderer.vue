@@ -7,8 +7,6 @@
 export default {
   props: ['type'],
   data() {
-    const link = this.$root.resolveReference(this.type[0]);
-    if (typeof link !== 'string') console.log(this.type[0], link);
     return {
       link: this.$root.resolveReference(this.type[0]),
     };
