@@ -18,8 +18,10 @@ function build(docs) {
     Array: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array',
     Map: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map',
     Object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
+    Date: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date',
     Promise: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise',
     EventEmitter: 'https://nodejs.org/dist/latest/docs/api/events.html#events_class_eventemitter',
+    Timeout: 'https://nodejs.org/dist/latest/docs/api/timers.html#timers_class_timeout',
   };
   docs.classes = docs.classes.sort((a, b) => a.name.localeCompare(b.name));
   docs.typedefs = docs.typedefs.sort((a, b) => a.name.localeCompare(b.name));
