@@ -19,6 +19,7 @@ function build(docs) {
     Map: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map',
     Object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
     Promise: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise',
+    EventEmitter: 'https://nodejs.org/dist/latest/docs/api/events.html#events_class_eventemitter',
   };
   docs.classes = docs.classes.sort((a, b) => a.name.localeCompare(b.name));
   docs.typedefs = docs.typedefs.sort((a, b) => a.name.localeCompare(b.name));
