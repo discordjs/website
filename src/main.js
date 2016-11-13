@@ -28,15 +28,16 @@ const App = Vue.extend({
       if (docs) {
         const path = docs.links[name];
         if (path === 'class') {
-          this.$router.go({ name: 'classview', params: { class: name } });
+          return { name: 'classview', params: { class: name } };
         } else if (path === 'interface') {
-          return;
+          return null;
         } else if (path === 'typedef') {
-          this.$router.go({ name: 'typedefview', params: { typedef: name } });
+          return { name: 'typedefview', params: { typedef: name } };
         } else if (path) {
-          window.location.href = path;
+          return path;
         }
       }
+      return null;
     },
   },
 });

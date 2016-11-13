@@ -34,16 +34,6 @@
       font-size: 14px;
       color: black;
       margin-left: 8px;
-
-      .typeLink {
-        text-decoration: none;
-        color: $primary_color;
-        cursor: pointer;
-      }
-
-      .typeLink:hover {
-        color: lighten($primary_color, 10%);
-      }
     }
   }
 
@@ -85,12 +75,11 @@
     padding: 4px 8px;
   }
 
-
   .methodType {
     border-left: 2px solid #ccc;
     padding: 4px 8px;
     color: #666;
-    
+
     .type {
       font-family: $monospace;
       font-size: 14px;
@@ -98,13 +87,7 @@
     }
 
     .typeLink {
-      text-decoration: none;
-      color: $primary_color;
       font-weight: bold;
-    }
-
-    .typeLink:hover {
-      color: lighten($primary_color, 20%);
     }
   }
 }

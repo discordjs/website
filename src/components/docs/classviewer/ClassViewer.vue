@@ -1,7 +1,9 @@
 <template>
     <span class="classViewer">
-      <span class="title"> {{* jsclass.name }}<span class="extendDetails" v-if="jsclass.extends">
-          extends {{* jsclass.extends }}
+      <span class="title">{{* jsclass.name }}
+        <span class="extendDetails" v-if="jsclass.extends">
+          extends
+          <single-type-renderer :type="jsclass.extends"></single-type-renderer>
         </span>
       </span>
       <p class="classdesc">{{{* jsclass.description | normalise | marked }}}</p>
@@ -29,6 +31,7 @@ import PropRenderer from './PropRenderer.vue';
 import MethodRenderer from './MethodRenderer.vue';
 import EventRenderer from './EventRenderer.vue';
 import ParamTable from './ParamTable.vue';
+import SingleTypeRenderer from './SingleTypeRenderer.vue';
 
 function gqp(qs) {
   qs = qs.split('+').join(' ');
@@ -48,6 +51,7 @@ export default {
     MethodRenderer,
     EventRenderer,
     ParamTable,
+    SingleTypeRenderer,
   },
   props: ['docs'],
   data() {
