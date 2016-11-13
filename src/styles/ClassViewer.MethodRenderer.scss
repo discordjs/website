@@ -1,7 +1,6 @@
 .classMethod {
   margin: 32px 0;
-  transition:2s background;
-
+  transition: 2s background;
   @include mq($from: desktop) {
     margin: 48px 0;
   }
@@ -15,12 +14,14 @@
     font-size: 18px;
     font-family: $monospace;
     margin-bottom: 4px;
-    color: black;
-    cursor: pointer;
-  }
 
-  .methodName:hover {
-    color: $primary_color;
+    a {
+      color: black;
+      text-decoration: inherit;
+      &:hover {
+        color: $primary_color;
+      }
+    }
   }
 
   .methodReturn {

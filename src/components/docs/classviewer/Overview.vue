@@ -3,19 +3,25 @@
     <div class="col" v-if="publicProperties.length > 0">
       <span class="title">Properties</span>
       <ul>
-        <li v-for="property in publicProperties" @click='scroll(property.name)'>{{ property.name }}</li>
+        <li v-for="property in publicProperties">
+          <a v-link="{ name: 'classview', query: { scrollto: property.name } }" @click='scroll(property.name)'>{{ property.name }}</a>
+        </li>
       </ul>
     </div>
     <div class="col" v-if="publicMethods.length > 0">
       <span class="title">Methods</span>
       <ul>
-        <li v-for="method in publicMethods" @click='scroll(method.name)'>{{ method.name }}</li>
+        <li v-for="method in publicMethods">
+          <a v-link="{ name: 'classview', query: { scrollto: method.name } }" @click='scroll(method.name)'>{{ method.name }}</a>
+        </li>
       </ul>
     </div>
     <div class="col" v-if="jsclass.events.length > 0">
       <span class="title">Events</span>
       <ul>
-        <li v-for="event in jsclass.events" @click='scroll(event.name)'>{{ event.name }}</li>
+        <li v-for="event in jsclass.events">
+          <a v-link="{ name: 'classview', query: { scrollto: event.name } }" @click='scroll(event.name)'>{{ event.name }}</a>
+        </li>
       </ul>
     </div>
   </div>
