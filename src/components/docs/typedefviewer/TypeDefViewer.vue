@@ -10,7 +10,6 @@
       </ul>
       <div v-if="typedef.properties && typedef.properties.length > 0">
         <param-table :params="typedef.properties"></param-table>
-        <prop-renderer v-for="prop in typedef.properties" :prop="prop"></prop-renderer>
       </div>
     </span>
 </template>
