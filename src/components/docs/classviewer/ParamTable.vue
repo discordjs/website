@@ -13,7 +13,7 @@
           <td>{{* param.name }}</td>
           <td><type-renderer v-for="type in param.type.types" :names="type"></type-renderer></td>
           <td>{{* param.optional ? 'yes' : ''}}</td>
-          <td>{{* typeof param.default !== 'undefined' ? param.default : 'none' }}</td>
+          <td>{{* param.optional ? typeof param.default !== 'undefined' ? param.default : 'none' : '' }}</td>
           <td>{{{* param.description | normalise | marked }}}</td>
         </tr>
       </tbody>
