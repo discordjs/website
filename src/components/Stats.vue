@@ -11,8 +11,8 @@
 const request = require('superagent');
 
 const data = {
-  downloads: '80,000+ ',
-  stars: '500+ ',
+  downloads: '90,000+ ',
+  stars: '600+ ',
   contributors: '30+ ',
 };
 

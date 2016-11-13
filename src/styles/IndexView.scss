@@ -6,6 +6,10 @@
   h1 {
     font-size: 4rem;
     margin: 0;
+    img {
+      width: 100%;
+      max-width: 600px;
+    }
   }
 
   h2 {
@@ -38,16 +42,16 @@
   }
 
   .slide:nth-child(1) {
-    @include bg-gradient-t2b($primary_color, darken($primary_color, 10%));
+    @include bg-gradient-t2b($primary_color, darken($primary_color, 6%));
     color: white;
     h1 {
       text-shadow: 0 3px 0 #555, 0 0 1rem black;
     }
     .code {
-      font-family: 'Droid Sans Mono', monospace;
+      font-family: $monospace;
       background: #fafafa;
       display: inline-block;
-      margin: 3rem;
+      margin: 1rem;
       color: black;
       padding: 1rem;
       border-radius: 5px;
