@@ -73,10 +73,9 @@ $speed: 300ms;
     li:hover:not(:first-child) a {
       color: $primary_color;
       font-weight: bold;
-      cursor: pointer;
       background: #fafafa;
-      border-left:2px solid;
-      padding-left:4px;
+      border-left: 2px solid;
+      padding-left: 4px;
     }
 
     li:first-child {

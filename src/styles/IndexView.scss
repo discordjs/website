@@ -8,7 +8,9 @@
     margin: 0;
     img {
       width: 100%;
-      max-width: 600px;
+      max-width: 700px;
+      -webkit-filter: drop-shadow(2px 2px 2px #222);
+      filter: drop-shadow(2px 2px 2px #222);
     }
   }
 
@@ -34,10 +36,10 @@
 
   .slide {
     @include mq($until:desktop) {
-      padding: 4rem 0;
+      padding: 2rem 0;
     }
     @include mq($from:desktop) {
-      padding: 8rem 0;
+      padding: 4rem 0;
     }
   }
 
