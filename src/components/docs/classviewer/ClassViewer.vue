@@ -11,7 +11,7 @@
         <span class="title">Constructor</span>
         <div class="classConstructor">
           <pre>
-            <code class="lang-js">new Discord.{{{* jsclass.name }}}(<span class="constructorParam" v-for="param in jsclass.classConstructor.params">{{* param.name }}</span>);</code>
+            <code class="lang-js">new Discord.{{{* jsclass.name }}}(<span class="constructorParam" v-for="param in constructorParams">{{* param.name }}</span>);</code>
           </pre>
           <param-table :params="jsclass.classConstructor.params"></param-table>
         </div>
@@ -71,6 +71,9 @@ export default {
     },
     publicMethods() {
       return this.$data.jsclass.methods.filter(m => m.access !== 'private');
+    },
+    constructorParams() {
+      return this.$data.jsclass.classConstructor.params.filter(p => !p.name.includes('.'));
     },
   },
   route: {
