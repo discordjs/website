@@ -3,6 +3,24 @@
     text-align: center;
   }
 
+  code {
+    font-family: $monospace;
+    background: #fafafa;
+    display: inline-block;
+    margin: 1rem;
+    color: black;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+
+  #example {
+    code {
+      white-space: pre-wrap;
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+
   h1 {
     font-size: 4rem;
     margin: 0;
@@ -43,24 +61,15 @@
     }
   }
 
-  .slide:nth-child(1) {
+  #jumbotron {
     @include bg-gradient-t2b($primary_color, darken($primary_color, 6%));
     color: white;
     h1 {
       text-shadow: 0 3px 0 #555, 0 0 1rem black;
     }
-    .code {
-      font-family: $monospace;
-      background: #fafafa;
-      display: inline-block;
-      margin: 1rem;
-      color: black;
-      padding: 1rem;
-      border-radius: 5px;
-    }
   }
 
-  .slide:nth-child(2), .slide:nth-child(3) {
+  #about {
     background: #fafafa;
     @include mq($until:desktop) {
       padding: 2rem 0;
@@ -70,12 +79,7 @@
     }
   }
 
-  .slide:nth-child(3) {
+  #example {
     background: #eee;
-    .stat {
-      margin: 1rem;
-      font-size: 2rem;
-      color: #777;
-    }
   }
 }

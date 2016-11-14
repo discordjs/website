@@ -26,6 +26,10 @@
     font-size: 13px;
   }
 
+  .title {
+    font-family: 'Roboto Condensed';
+  }
+
   *[data-selected] {
     background: lighten(#F3F321, 10%);
   }

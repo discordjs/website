@@ -14,4 +14,15 @@ footer {
   .container {
     text-align: center;
   }
+
+  .stats {
+    list-style: none;
+
+    li {
+      display: inline-block;
+      &:not(:last-child):after {
+        content: ','
+      }
+    }
+  }
 }

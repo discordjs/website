@@ -1,10 +1,9 @@
 <template>
-  <slide>
-    <h2>Stats</h2>
-    <div class="stat"><strong>{{ downloads }}</strong> downloads</div>
-    <div class="stat"><strong>{{ stars }}</strong> stars</div>
-    <div class="stat"><strong>{{ contributors }}</strong> contributors</div>
-  </slide>
+  <ul class="stats">
+    <li>{{ downloads }} downloads</li>
+    <li>{{ stars }} stars</li>
+    <li>{{ contributors }} contributors</li>
+  </ul>
 </template>
 <script>
 
