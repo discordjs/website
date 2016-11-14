@@ -16,18 +16,20 @@
     </slide>
     <slide id="example">
       <h2>Example</h2>
-      <code class="js">const Discord = require("discord.js");
-const client = new Discord.Client();
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
-});
-
-client.on('message', msg => {
-  if (msg.content == 'ping') msg.reply('Pong!');
-});
-
-client.login('some cool token');</code>
+      <code class="js">
+        const Discord = require("discord.js");<br />
+        const client = new Discord.Client();<br />
+        <br />
+        client.on('ready', () => {<br />
+          <pre>  </pre>console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);<br />
+        });<br />
+        <br />
+        client.on('message', msg => {<br />
+          <pre>  </pre>if (msg.content == 'ping') msg.reply('Pong!');<br />
+        });<br />
+        <br />
+        client.login('some cool token');
+      </code>
     </slide>
   </div>
 </template>
