@@ -18,6 +18,10 @@ a {
   }
 }
 
+code {
+  padding: 2px 4px;
+}
+
 .fade-resize-enter-active, .fade-resize-leave-active {
   transition: opacity 0.3s, transform 0.3s;
   transform-origin: top;

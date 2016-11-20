@@ -7,7 +7,7 @@
       </transition>
     </container>
 
-    <div id="scroll-top" @click="scrollTop"><em class="fa fa-arrow-up"></em></div>
+    <div id="scroll-top" title="Scroll to top" @click="scrollTop"><em class="fa fa-arrow-up"></em></div>
   </div>
 </template>
 

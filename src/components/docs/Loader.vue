@@ -2,7 +2,13 @@
   <div id="docs-body">
     <transition name="fade-resize" mode="out-in">
       <router-view :docs="docs" v-if="docs" />
-      <slide v-else><loading /></slide>
+      <slide v-else>
+        <loading v-if="!error" />
+        <p v-else id="docs-error">
+          Couldn't load the documentation data.
+          <pre>{{ error.toString() }}</pre>
+        </p>
+      </slide>
     </transition>
   </div>
 </template>
@@ -15,12 +21,15 @@
     data() {
       return {
         docs: null,
+        error: null,
       };
     },
 
     methods: {
       loadDocs() {
         this.docs = null;
+        this.error = null;
+
         this.source.fetchDocs(this.tag).then(docs => {
           // Sort everything
           docs.classes.sort((a, b) => a.name.localeCompare(b.name));
@@ -57,6 +66,8 @@
           for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
           this.docs = docs;
+        }).catch(err => {
+          this.error = err;
         });
       },
 
@@ -109,6 +120,16 @@
     }
     .sk-cube:before {
       background: $color-content-bg;
+    }
+  }
+
+  #docs-error {
+    padding: 50px 0;
+    text-align: center;
+    font-size: 1.5rem;
+
+    pre {
+      font-size: 1.0rem;
     }
   }
 
