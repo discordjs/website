@@ -1,5 +1,6 @@
 <template>
   <div id="typedef-viewer" class="docs-page">
+    <source-button :meta="typedef.meta" :docs="docs" />
     <h1>{{ typedef.name }}</h1>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
 
@@ -20,6 +21,7 @@
   import { hljs } from '../../util';
   import Types from './Types.vue';
   import ParamTable from './class-viewer/ParamTable.vue';
+  import SourceButton from './SourceButton.vue';
 
   export default {
     name: 'typedef-viewer',
@@ -27,6 +29,7 @@
     components: {
       Types,
       ParamTable,
+      SourceButton,
     },
 
     data() {
@@ -60,6 +63,10 @@
 
     .param-table-wrapper {
       border: 0;
+    }
+
+    .source-button {
+      float: right;
     }
   }
 </style>

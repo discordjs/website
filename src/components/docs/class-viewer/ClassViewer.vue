@@ -1,5 +1,7 @@
 <template>
   <div id="class-viewer" class="docs-page">
+    <source-button :meta="clarse.meta" :docs="docs" />
+
     <h1>{{ clarse.name }}</h1>
     <p id="class-extends" v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></p>
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
@@ -31,6 +33,7 @@
   import Property from './Property';
   import Method from './Method';
   import Event from './Event';
+  import SourceButton from '../SourceButton.vue';
   import { hljs } from '../../../util';
 
   export default {
@@ -43,6 +46,7 @@
       Property,
       Method,
       Event,
+      SourceButton,
     },
 
     data() {
@@ -91,6 +95,7 @@
     }
 
     h3 {
+      display: inline-block;
       margin: 0;
       font-family: $font-monospace;
 
@@ -125,12 +130,22 @@
     .class-item {
       margin: 20px 2px;
       padding: 8px;
+
+      .source-button {
+        float: none;
+        position: relative;
+        left: -8px;
+      }
     }
 
     .class-item-details {
       margin-top: 8px;
       padding: 6px 0 6px 8px;
       border-left: 2px solid darken($color-content-bg, 15%);
+    }
+
+    .source-button {
+      float: right;
     }
 
     code {

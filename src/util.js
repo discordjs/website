@@ -1,3 +1,5 @@
+import { resolve as resolveURL } from 'url';
+
 // Highlights an element with highlight.js, delaying until it's loaded
 export function hljs(el) {
   if (window.hljs) {
@@ -14,4 +16,9 @@ export function hljs(el) {
       }
     }, 100);
   }
+}
+
+// Creates a full URL for a GitHub source view
+export function sourceURL(url, tag, path, file, line) {
+  return resolveURL(url, `${tag}/${path}/${file}#L${line}`);
 }

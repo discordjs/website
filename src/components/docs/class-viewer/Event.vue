@@ -1,5 +1,7 @@
 <template>
   <div class="class-event class-item" :id="`doc-for-${event.name}`">
+    <source-button :meta="event.meta" :docs="docs" />
+
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: event.name } }">{{ event.name }}</router-link></h3>
 
     <div class="class-item-details">
@@ -12,12 +14,14 @@
 <script>
   import Vue from 'vue';
   import ParamTable from './ParamTable.vue';
+  import SourceButton from '../SourceButton.vue';
 
   export default {
     name: 'class-event',
     props: ['event', 'docs'],
     components: {
       ParamTable,
+      SourceButton,
     },
 
     data() {

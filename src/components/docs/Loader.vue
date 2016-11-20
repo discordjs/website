@@ -30,7 +30,10 @@
         this.docs = null;
         this.error = null;
 
+        const startSource = this.source;
         this.source.fetchDocs(this.tag).then(docs => {
+          if (this.source !== startSource) return;
+
           // Sort everything
           docs.classes.sort((a, b) => a.name.localeCompare(b.name));
           docs.typedefs.sort((a, b) => a.name.localeCompare(b.name));
@@ -65,6 +68,8 @@
           for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
           for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
+          docs.source = this.source.source;
+          docs.tag = this.tag;
           this.docs = docs;
         }).catch(err => {
           this.error = err;

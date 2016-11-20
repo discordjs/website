@@ -1,5 +1,7 @@
 <template>
   <div class="class-method class-item" :id="`doc-for-${method.name}`">
+    <source-button :meta="method.meta" :docs="docs" />
+
     <h3>
 			<router-link :to="{ name: 'docs-class', query: { scrollTo: method.name } }">
 				.{{ method.name }}(<!--
@@ -28,6 +30,7 @@
   import Vue from 'vue';
   import Types from '../Types.vue';
   import ParamTable from './ParamTable.vue';
+  import SourceButton from '../SourceButton.vue';
 
   export default {
     name: 'class-method',
@@ -35,6 +38,7 @@
     components: {
       Types,
       ParamTable,
+      SourceButton,
     },
 
     data() {

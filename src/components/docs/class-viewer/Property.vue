@@ -1,5 +1,7 @@
 <template>
   <div class="class-prop class-item" :id="`doc-for-${prop.name}`">
+    <source-button :meta="prop.meta" :docs="docs" />
+
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: prop.name } }">.{{ prop.name }}</router-link></h3>
 
     <div class="class-item-details">
@@ -17,6 +19,7 @@
   import Vue from 'vue';
   import Types from '../Types.vue';
   import ParamTable from './ParamTable.vue';
+  import SourceButton from '../SourceButton.vue';
 
   export default {
     name: 'class-property',
@@ -24,6 +27,7 @@
     components: {
       Types,
       ParamTable,
+      SourceButton,
     },
 
     data() {
