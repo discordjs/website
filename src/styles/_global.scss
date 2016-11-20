@@ -1,0 +1,36 @@
+body {
+  font-family: $font-regular;
+  background: $color-navbar-bg;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-header;
+  font-weight: normal;
+}
+
+a {
+  transition: color 0.3s, border-color 0.3s, background-color 0.3s;
+  color: $color-primary;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($color-primary, 20%);
+  }
+}
+
+.fade-resize-enter-active, .fade-resize-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+  transform-origin: top;
+}
+.fade-resize-enter, .fade-resize-leave-active {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: opacity 0.15s, transform 0.15s;
+}
+.fade-slide-enter, .fade-slide-leave-active {
+  opacity: 0;
+  transform: translateX(30px);
+}

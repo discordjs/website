@@ -1,12 +1,17 @@
 <template>
   <div class="slide">
     <container>
-      <slot></slot>
+      <slot />
     </container>
   </div>
 </template>
-<script>
-  export default {
 
-  };
+<script>
+  export default { name: 'slide' };
 </script>
+
+<style>
+  .slide {
+    padding: 16px;
+  }
+</style>

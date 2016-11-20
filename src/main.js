@@ -1,122 +1,107 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Views from './views/loader.js';
-import Components from './components/loader.js';
-import store from './store';
 import marked from 'marked';
+import { hljs } from './util';
 
-require('./styles/main.scss');
+import App from './App';
+import HomePageComponent from './components/pages/Home.vue';
+import DocumentationPageComponent from './components/pages/Documentation.vue';
+import UnknownRoutePageComponent from './components/pages/UnknownRoute.vue';
+import ContainerComponent from './components/Container.vue';
+import SlideComponent from './components/Slide.vue';
+import LoadingComponent from './components/Loading.vue';
+import DocsLoaderComponent from './components/docs/Loader.vue';
+import DocsViewerComponent from './components/docs/Viewer.vue';
+import FileViewerComponent from './components/docs/FileViewer.vue';
+import ClassViewerComponent from './components/docs/class-viewer/ClassViewer.vue';
+import TypedefViewerComponent from './components/docs/TypedefViewer.vue';
+import DocsSearchComponent from './components/docs/Search.vue';
 
+require('./styles/master.scss');
+
+// Set up the router
 Vue.use(VueRouter);
-Vue.component('app-navbar', Components.AppNavbar);
-Vue.component('app-footer', Components.AppFooter);
-Vue.component('container', Components.Container);
-Vue.component('slide', Components.Slide);
-Vue.component('github-star', Components.GitHubButton);
-Vue.component('lib-stats', Components.Stats);
-Vue.component('docs-bar', Components.DocsNavbar);
+const router = new VueRouter({
+  routes: [
+    { path: '/', name: 'home', component: HomePageComponent },
+    { path: '/docs', name: 'docs', component: DocumentationPageComponent, children: [
+      { path: ':source', name: 'docs-source', component: DocsLoaderComponent, children: [
+        { path: ':tag', name: 'docs-tag', component: DocsViewerComponent, children: [
+          { path: 'search', name: 'docs-search', component: DocsSearchComponent },
+          { path: 'class/:class', name: 'docs-class', component: ClassViewerComponent },
+          { path: 'typedef/:typedef', name: 'docs-typedef', component: TypedefViewerComponent },
+          { path: ':category/:file', name: 'docs-file', component: FileViewerComponent },
+        ] },
+      ] },
+    ] },
 
-const App = Vue.extend({
-  data() {
-    return {
-      store: store.data,
-    };
-  },
-  methods: {
-    resolveReference(name) {
-      const docs = this.store.docs[this.$route.params.tag];
-      if (docs) {
-        const path = docs.links[name];
-        if (path === 'class') {
-          return { name: 'classview', params: { class: name } };
-        } else if (path === 'interface') {
-          return null;
-        } else if (path === 'typedef') {
-          return { name: 'typedefview', params: { typedef: name } };
-        } else if (path) {
-          return path;
-        }
-      }
-      return null;
-    },
+    // Old URLs
+    { path: '/!', redirect: { name: 'home' }, children: [
+      { path: 'docs', redirect: { name: 'docs' }, children: [
+        { path: 'tag/:tag', redirect(to) {
+          return {
+            name: 'docs-tag',
+            params: { source: 'main', tag: to.params.tag },
+            query: { scrollTo: to.query.scrollto },
+          };
+        }, children: [
+          { path: 'file/:category/:file', redirect(to) {
+            return {
+              name: 'docs-file',
+              params: { source: 'main', tag: to.params.tag, category: to.params.category, file: to.params.file },
+              query: { scrollTo: to.query.scrollto },
+            };
+          } },
+          { path: 'class/:class', redirect(to) {
+            return {
+              name: 'docs-class',
+              params: { source: 'main', tag: to.params.tag, class: to.params.class },
+              query: { scrollTo: to.query.scrollto },
+            };
+          } },
+          { path: 'typedef/:typedef', redirect(to) {
+            return {
+              name: 'docs-typedef',
+              params: { source: 'main', tag: to.params.tag, typedef: to.params.typedef },
+              query: { scrollTo: to.query.scrollto },
+            };
+          } },
+        ] },
+      ] },
+    ] },
+
+    // Catch-all
+    { path: '*', component: UnknownRoutePageComponent },
+  ],
+  scrollBehavior(to, from, saved) {
+    if (saved) return saved;
+    return { x: 0, y: 0 };
   },
 });
 
-Vue.filter('marked', $text => {
-  let text = $text || 'error! I\'m not set!';
+// Register global components
+Vue.component('container', ContainerComponent);
+Vue.component('slide', SlideComponent);
+Vue.component('loading', LoadingComponent);
+
+// Register the hightlight.js directive
+Vue.directive('hljs', hljs);
+
+// Register filters
+Vue.filter('marked', text => {
+  text = text || 'error! I\'m not set!';
   text = text.replace(/<(info|warn)>([\s\S]+)<\/\1>/gi, '<div class="$1">$2</div>');
   return marked(text);
 });
-
-Vue.filter('joinParams', params => {
+Vue.filter('join-params', params => {
   params = params || [];
   return params.map(param => param.name).join(', ');
-  // events.map(event => event.name).join(', ');
 });
 
-Vue.filter('normalise', $text => {
-  let text = ($text || 'error! I\'m not set!').trim();
-  const firstChar = text.charAt(0);
-  const lastChar = text.charAt(text.length - 1).toLowerCase();
-  if (firstChar === firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase()) {
-    text = firstChar.toUpperCase() + text.substr(1);
-  }
-  if ('abcdefghijklmnopqrstuvwxyz'.indexOf(lastChar) >= 0) {
-    text += '.';
-  }
-  return text;
+// Initialise the application
+const app = new Vue({ // eslint-disable-line no-unused-vars
+  el: '#app',
+  components: { App },
+  template: '<App />',
+  router,
 });
-
-function camelize(str) {
-  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function c(letter, index) {
-    return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
-  }).replace(/\s+/g, '');
-}
-
-Vue.filter('camel', str => camelize(str));
-
-const router = new VueRouter();
-
-router.map({
-  '/': {
-    component: Views.Index,
-  },
-  '/docs': {
-    component: (resolve, reject) => {
-      Promise.all([store.fetchBranches(), store.fetchTags()]).then(() => {
-        resolve(Views.Docs);
-      }).catch(reject);
-    },
-    subRoutes: {
-      '/tag/:tag': {
-        component: Components.DocsViewer,
-        name: 'docview',
-        subRoutes: {
-          '/file/:category/:file': {
-            component: Components.FileViewer,
-            name: 'fileview',
-          },
-          '/class/:class': {
-            component: Components.ClassViewer,
-            name: 'classview',
-          },
-          '/typedef/:typedef': {
-            component: Components.TypeDefViewer,
-            name: 'typedefview',
-          },
-        },
-      },
-    },
-  },
-});
-
-router.redirect({
-  '/docs': '/docs/tag/master/file/general/Welcome',
-});
-
-router.beforeEach(transition => {
-  window.scrollTo(0, 0);
-  transition.next();
-});
-
-router.start(App, '#vue-root');

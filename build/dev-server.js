@@ -1,11 +1,12 @@
+require('./check-versions')()
+var config = require('../config')
+if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var config = require('../config')
+var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = process.env.NODE_ENV === 'testing'
-  ? require('./webpack.prod.conf')
-  : require('./webpack.dev.conf')
+var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -61,5 +62,11 @@ module.exports = app.listen(port, function (err) {
     console.log(err)
     return
   }
-  console.log('Listening at http://localhost:' + port + '\n')
+  var uri = 'http://localhost:' + port
+  console.log('Listening at ' + uri + '\n')
+
+  // when env is testing, don't need open it
+  if (process.env.NODE_ENV !== 'testing') {
+    opn(uri)
+  }
 })

@@ -5,44 +5,33 @@
     <li>{{ contributors }} contributors</li>
   </ul>
 </template>
+
 <script>
+  const request = require('superagent');
 
-const request = require('superagent');
+  const data = {
+    downloads: '90,000+',
+    stars: '600+',
+    contributors: '30+',
+  };
 
-const data = {
-  downloads: '90,000+ ',
-  stars: '600+ ',
-  contributors: '30+ ',
-};
+  export default {
+    name: 'stats',
 
-function load() {
-  request
-    .get('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js')
-    .end((err, res) => {
-      if (!err) {
+    data() {
+      request.get('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').end((err, res) => {
+        if (err) return;
         data.downloads = 0;
         for (const item of res.body.downloads) data.downloads += item.downloads;
         data.downloads = data.downloads.toLocaleString();
-      }
-    });
-
-  request
-    .get('https://api.github.com/repos/hydrabolt/discord.js')
-    .end((err, res) => {
-      if (!err) data.stars = `${res.body.stargazers_count}`.toLocaleString();
-    });
-
-  request
-    .get('https://api.github.com/repos/hydrabolt/discord.js/contributors')
-    .end((err, res) => {
-      if (!err) data.contributors = `${res.body.length}`.toLocaleString();
-    });
-}
-
-export default {
-  data() {
-    load();
-    return data;
-  },
-};
+      });
+      request.get('https://api.github.com/repos/hydrabolt/discord.js').end((err, res) => {
+        if (!err) data.stars = res.body.stargazers_count.toLocaleString();
+      });
+      request.get('https://api.github.com/repos/hydrabolt/discord.js/contributors').end((err, res) => {
+        if (!err) data.contributors = res.body.length.toLocaleString();
+      });
+      return data;
+    },
+  };
 </script>

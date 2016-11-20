@@ -1,47 +1,195 @@
 <template>
-  <div class='docs-sidebar'>
-    <div class='mob-button' @click="toggle"><i class="fa fa-bars"></i></div>
-    <div class='content {{ sidebarVisible ? "on" : "off" }}'>
-      <div class="mob-back" @click="toggle">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  <div id="docs-sidebar">
+    <div id="open-btn" @click="toggle"><em class="fa fa-bars"></em></div>
+
+    <div id="docs-sidebar-content" :class="visible ? 'open' : 'closed'">
+      <div id="close-btn" @click="toggle">
+        <em class="fa fa-arrow-left" aria-hidden="true"></em>
       </div>
-      <ul v-for="(category, catFiles) in docs.custom">
-        <li>{{ category }}</li>
-        <li v-for="file in catFiles"><a v-link='{ name:"fileview", params:{category:category, file:file.name} }' @click="toggle">{{ file.name }}</a></li>
-      </ul>
+
+      <em id="docs-visibility" class="fa" :class="showPrivate ? 'fa-eye' : 'fa-eye-slash'" :title="showPrivate ? 'Hide private' : 'Show private'" @click="togglePrivate"></em>
+
       <ul>
-        <li>Classes</li>
-        <li v-for="_class in publicClasses"><a v-link='{ name:"classview", params:{class:_class.name} }' @click="toggle">{{ _class.name }}</a></li>
-      </ul>
-      <ul>
-        <li>TypeDefs</li>
-        <li v-for="typedef in docs.typedefs"><a v-link='{ name:"typedefview", params:{typedef:typedef.name} }' @click="toggle">{{ typedef.name }}</a></li>
+        <li v-for="(files, category) in docs.custom">
+          {{ category }}
+          <ul>
+            <li v-for="file in files">
+              <router-link :to="{ name: 'docs-file', params: { category, file: file.name } }">
+                {{ file.name }}
+              </router-link>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Classes
+          <ul>
+            <li v-for="clarse in docs.classes" v-if="showPrivate || clarse.access !== 'private'">
+              <router-link exact :to="{ name: 'docs-class', params: { class: clarse.name } }">
+                {{ clarse.name }}
+              </router-link>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Typedefs
+          <ul>
+            <li v-for="typedef in docs.typedefs" v-if="showPrivate || typedef.access !== 'private'">
+              <router-link exact :to="{ name: 'docs-typedef', params: { typedef: typedef.name } }">
+                {{ typedef.name }}
+              </router-link>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
 </template>
+
 <script>
-export default {
-  props: ['docs'],
-  data() {
-    return {
-      sidebarVisible: false,
-    };
-  },
-  computed: {
-    publicClasses() {
-      return this.docs.classes.filter(c => c.access !== 'private');
+  export default {
+    name: 'docs-sidebar',
+    props: ['docs'],
+
+    data() {
+      return {
+        visible: false,
+        showPrivate: false,
+      };
     },
-  },
-  methods: {
-    toggle() {
-      this.sidebarVisible = !this.sidebarVisible;
+
+    methods: {
+      toggle() {
+        this.visible = !this.visible;
+      },
+
+      togglePrivate() {
+        this.showPrivate = !this.showPrivate;
+      },
     },
-  },
-  route: {
-    canReuse() {
-      return false;
+
+    watch: {
+      showPrivate(to) {
+        this.$emit('showPrivate', to);
+      },
+
+      $route(to) {
+        if (this.visible) this.visible = false;
+        if (!to.query.scrollTo && (window.pageYOffset || document.documentElement.scrollTop) > 300) {
+          window.scrollTo(0, 90);
+        }
+      },
     },
-  },
-};
+  };
 </script>
+
+<style lang="scss">
+  @import '../../styles/theming';
+  @import '../../styles/mq';
+
+  #docs-sidebar {
+    border-right: 1px solid $color-inactive-border;
+
+    @include mq($until: desktop) {
+      border-right: 0;
+
+      #docs-sidebar-content {
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -200px;
+        right: 0;
+        width: 0;
+        max-height: 100%;
+        padding: 0;
+        overflow: auto;
+        background: darken($color-content-bg, 2%);
+        box-shadow: 0 0 160px black;
+        transition: 300ms right, 300ms width, 300ms left;
+
+        li {
+          font-size: 1.25rem !important;
+          padding: 16px !important;
+        }
+
+        &.open {
+          left: 0;
+          width: 100%;
+          right: 10px;
+        }
+      }
+    }
+
+    #open-btn, #close-btn {
+      z-index: 1;
+      font-size: 1.1rem;
+      cursor: pointer;
+
+      @include mq($from: desktop) {
+        display: none;
+      }
+    }
+
+    #close-btn {
+      text-align: center;
+      padding: 16px 0;
+      color: white;
+      background: $color-primary;
+    }
+
+    ul {
+      margin: 0 0 16px 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: bold;
+        color: black;
+      }
+
+      ul li {
+        padding: 0;
+        text-transform: none;
+        font-size: 0.875rem;
+        font-weight: normal;
+        color: lighten($color-content-text, 20%);
+
+        a {
+          display: block;
+          padding: 4px 32px 4px 6px;
+          color: inherit;
+          text-decoration: none;
+          border-color: transparentize($color-primary, 1);
+
+          &:hover {
+            padding-left: 4px;
+            border-left: 2px solid $color-primary;
+            color: $color-primary;
+            background: darken($color-content-bg, 2%);
+          }
+        }
+      }
+    }
+
+    .router-link-active {
+      background: darken($color-content-bg, 4%);
+    }
+  }
+
+  #docs-visibility {
+    float: right;
+    position: relative;
+    right: 10px;
+    bottom: 8px;
+    padding: 5px;
+    cursor: pointer;
+
+    @include mq($until: desktop) {
+      display: none;
+    }
+  }
+</style>
