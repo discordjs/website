@@ -11,11 +11,15 @@
     props: ['docs'],
 
     data() {
-      const file = this.docs.custom[this.$route.params.category].find(f => f.name === this.$route.params.file);
       return {
-        file,
-        html: Vue.filter('marked')(file.data),
+        file: this.docs.custom[this.$route.params.category].find(f => f.name === this.$route.params.file),
       };
+    },
+
+    computed: {
+      html() {
+        return Vue.filter('marked')(this.file.data);
+      },
     },
 
     mounted() {

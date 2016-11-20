@@ -33,11 +33,15 @@
     },
 
     data() {
-      const typedef = this.docs.typedefs.find(t => t.name === this.$route.params.typedef);
       return {
-        typedef,
-        description: Vue.filter('marked')(typedef.description),
+        typedef: this.docs.typedefs.find(t => t.name === this.$route.params.typedef),
       };
+    },
+
+    computed: {
+      description() {
+        return Vue.filter('marked')(this.typedef.description);
+      },
     },
 
     mounted() {

@@ -50,10 +50,8 @@
     },
 
     data() {
-      const clarse = this.docs.classes.find(c => c.name === this.$route.params.class);
       return {
-        clarse,
-        description: Vue.filter('marked')(clarse.description),
+        clarse: this.docs.classes.find(c => c.name === this.$route.params.class),
       };
     },
 
@@ -70,6 +68,10 @@
       methods() {
         if (this.showPrivate) return this.clarse.methods;
         return this.clarse.methods.filter(p => p.access !== 'private');
+      },
+
+      description() {
+        return Vue.filter('marked')(this.clarse.description);
       },
     },
 

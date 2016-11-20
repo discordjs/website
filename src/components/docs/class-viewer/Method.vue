@@ -41,10 +41,10 @@
       SourceButton,
     },
 
-    data() {
-      return {
-        description: Vue.filter('marked')(this.method.description),
-      };
+    computed: {
+      description() {
+        return Vue.filter('marked')(this.method.description);
+      },
     },
   };
 </script>

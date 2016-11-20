@@ -24,10 +24,10 @@
       SourceButton,
     },
 
-    data() {
-      return {
-        description: Vue.filter('marked')(this.event.description),
-      };
+    computed: {
+      description() {
+        return Vue.filter('marked')(this.event.description);
+      },
     },
   };
 </script>
