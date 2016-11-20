@@ -1,5 +1,5 @@
 <template>
-  <div id="file-viewer" v-html="html"></div>
+  <div id="file-viewer" class="docs-page" v-html="html"></div>
 </template>
 
 <script>
@@ -31,13 +31,6 @@
   @import '../../styles/mq';
 
   #file-viewer {
-    width: 100%;
-    padding: 16px 32px;
-
-    @include mq($until: desktop) {
-      padding: 16px 0;
-    }
-
     code {
       font-family: $font-monospace;
       font-size: 0.8rem;

@@ -1,5 +1,5 @@
 <template>
-  <div id="class-viewer">
+  <div id="class-viewer" class="docs-page">
     <h1>{{ clarse.name }}</h1>
     <p id="class-extends" v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></p>
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
@@ -82,13 +82,6 @@
   @import '../../../styles/mq';
 
   #class-viewer {
-    padding: 16px 32px;
-    width: 100%;
-
-    @include mq($until: desktop) {
-      padding: 16px 0;
-    }
-
     h1, #class-extends {
       display: inline-block;
     }

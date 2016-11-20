@@ -1,5 +1,5 @@
 <template>
-  <div id="typedef-viewer">
+  <div id="typedef-viewer" class="docs-page">
     <h1>{{ typedef.name }}</h1>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
 
@@ -49,9 +49,6 @@
   @import '../../styles/theming';
 
   #typedef-viewer {
-    padding: 16px 32px;
-    width: 100%;
-
     h2 {
       font-size: 1.3rem;
       margin-top: 40px;

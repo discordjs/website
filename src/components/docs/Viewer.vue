@@ -148,9 +148,23 @@
 
     & > .container {
       display: flex;
+
       @include mq($until: desktop) {
         flex-direction: column;
       }
+    }
+  }
+
+  .docs-page {
+    width: 100%;
+    padding: 16px 32px;
+
+    @include mq($until: desktop) {
+      padding: 16px 0;
+    }
+
+    img {
+      max-width: 100%;
     }
   }
 
