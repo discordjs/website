@@ -38,9 +38,9 @@
           docs.classes.sort((a, b) => a.name.localeCompare(b.name));
           docs.typedefs.sort((a, b) => a.name.localeCompare(b.name));
           for (const c of docs.classes) {
-            if (c.events) c.events.sort((a, b) => a.name.localeCompare(b.name));
-            if (c.properties) c.properties.sort((a, b) => a.name.localeCompare(b.name));
+            if (c.props) c.props.sort((a, b) => a.name.localeCompare(b.name));
             if (c.methods) c.methods.sort((a, b) => a.name.localeCompare(b.name));
+            if (c.events) c.events.sort((a, b) => a.name.localeCompare(b.name));
           }
 
           // Built-in type links
