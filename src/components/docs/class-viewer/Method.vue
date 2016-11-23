@@ -9,6 +9,7 @@
 				-->)
 			</router-link>
 		</h3>
+    <span v-if="method.scope === 'static'" class="class-item-badge" title="This method is on the class constructor function, not instances.">Static</span>
     <span v-if="method.access === 'private'" class="class-item-badge" title="This method is private, and may not exist as-is in future versions.">Private</span>
 
     <div class="class-item-details">
@@ -63,7 +64,7 @@
 
 	.class-method {
 		p {
-			margin: 0 0 8px 0;
+			margin: 0 0 12px 0;
 		}
 
 		h3 a:hover .method-param {
