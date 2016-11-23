@@ -88,38 +88,44 @@
             results.count++;
           }
 
-          c.methods.forEach(m => {
-            if (!this.showPrivate && m.access === 'private') return;
-            if (m.name.toLowerCase().includes(q)) {
-              results.methods.push({
-                name: m.name,
-                class: c.name,
-              });
-              results.count++;
-            }
-          });
+          if (c.methods) {
+            c.methods.forEach(m => {
+              if (!this.showPrivate && m.access === 'private') return;
+              if (m.name.toLowerCase().includes(q)) {
+                results.methods.push({
+                  name: m.name,
+                  class: c.name,
+                });
+                results.count++;
+              }
+            });
+          }
 
-          c.properties.forEach(p => {
-            if (!this.showPrivate && p.access === 'private') return;
-            if (p.name.toLowerCase().includes(q)) {
-              results.props.push({
-                name: p.name,
-                class: c.name,
-              });
-              results.count++;
-            }
-          });
+          if (c.props) {
+            c.props.forEach(p => {
+              if (!this.showPrivate && p.access === 'private') return;
+              if (p.name.toLowerCase().includes(q)) {
+                results.props.push({
+                  name: p.name,
+                  class: c.name,
+                });
+                results.count++;
+              }
+            });
+          }
 
-          c.events.forEach(e => {
-            if (!this.showPrivate && e.access === 'private') return;
-            if (e.name.toLowerCase().includes(q)) {
-              results.events.push({
-                name: e.name,
-                class: c.name,
-              });
-              results.count++;
-            }
-          });
+          if (c.events) {
+            c.events.forEach(e => {
+              if (!this.showPrivate && e.access === 'private') return;
+              if (e.name.toLowerCase().includes(q)) {
+                results.events.push({
+                  name: e.name,
+                  class: c.name,
+                });
+                results.count++;
+              }
+            });
+          }
         });
 
         this.docs.typedefs.forEach(t => {

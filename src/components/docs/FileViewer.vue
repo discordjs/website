@@ -12,13 +12,14 @@
 
     data() {
       return {
-        file: this.docs.custom[this.$route.params.category].find(f => f.name === this.$route.params.file),
+        file: this.docs.custom[this.$route.params.category].find(f => f.id === this.$route.params.file),
       };
     },
 
     computed: {
       html() {
-        return Vue.filter('marked')(this.file.data);
+        const content = this.file.type !== 'js' ? this.file.content : `\`\`\`js\n${this.file.content}\n\`\`\``;
+        return Vue.filter('marked')(content);
       },
     },
 

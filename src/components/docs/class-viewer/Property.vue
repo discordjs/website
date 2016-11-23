@@ -3,10 +3,12 @@
     <source-button :meta="prop.meta" :docs="docs" />
 
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: prop.name } }">.{{ prop.name }}</router-link></h3>
+    <span v-if="prop.access === 'private'" class="class-item-badge" title="This property is private, and may not exist as-is in future versions.">Private</span>
+    <span v-if="prop.readonly" class="class-item-badge" title="This property cannot be modified.">Read-only</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>
-      <param-table :params="prop.props" :docs="docs" v-if="prop.props.length > 0" />
+      <param-table :params="prop.props" :docs="docs" v-if="prop.props && prop.props.length > 0" />
       <div class="prop-type">
         Type:
         <types v-for="type in prop.type.types" :names="type" :docs="docs" />

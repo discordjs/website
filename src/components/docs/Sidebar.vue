@@ -14,7 +14,7 @@
           {{ category }}
           <ul>
             <li v-for="file in files">
-              <router-link :to="{ name: 'docs-file', params: { category, file: file.name } }">
+              <router-link :to="{ name: 'docs-file', params: { category, file: file.id } }">
                 {{ file.name }}
               </router-link>
             </li>

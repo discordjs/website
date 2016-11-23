@@ -9,9 +9,9 @@
       <li v-for="type in typedef.type.types"><types :names="type" :docs="docs" /></li>
     </ul>
 
-    <div id="typedef-params" v-if="typedef.properties && typedef.properties.length > 0">
+    <div id="typedef-params" v-if="typedef.props && typedef.props.length > 0">
       <h2>Properties</h2>
-      <param-table :params="typedef.properties" :docs="docs" />
+      <param-table :params="typedef.props" :docs="docs" />
     </div>
   </div>
 </template>
@@ -71,6 +71,7 @@
 
     .source-button {
       float: right;
+      font-size: 1.3rem;
     }
   }
 </style>

@@ -9,13 +9,20 @@
 				-->)
 			</router-link>
 		</h3>
+    <span v-if="method.access === 'private'" class="class-item-badge" title="This method is private, and may not exist as-is in future versions.">Private</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>
-			<param-table v-if="method.params.length > 0" :params="method.params" :docs="docs" />
+
+			<param-table v-if="method.params && method.params.length > 0" :params="method.params" :docs="docs" />
+
 			<div class="method-return">
-				Returns:
-				<types v-for="rtrn in method.returns.types" :names="rtrn" :docs="docs" />
+        Returns:
+        <span v-if="method.returns">
+  				<types v-for="rtrn in method.returns.types" :names="rtrn" :docs="docs" />
+        </span>
+        <type-link v-else :type="['void']" :docs="docs" />
+        <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
 			</div>
 
 			<div class="method-examples" v-if="method.examples && method.examples.length > 0">
@@ -29,6 +36,7 @@
 <script>
   import Vue from 'vue';
   import Types from '../Types.vue';
+  import TypeLink from '../TypeLink.vue';
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
 
@@ -37,6 +45,7 @@
     props: ['method', 'docs'],
     components: {
       Types,
+      TypeLink,
       ParamTable,
       SourceButton,
     },
@@ -84,13 +93,18 @@
 	}
 
 	.method-return {
-		margin-top: 16px;
+		margin-top: 20px;
 		color: lighten($color-content-text, 35%);
 		font-weight: bold;
 
 		.docs-type {
 			font-family: $font-monospace;
 		}
+
+    p {
+      color: lighten($color-content-text, 10%);
+      font-weight: normal;
+    }
 	}
 
 	.method-examples {

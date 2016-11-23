@@ -1,6 +1,6 @@
 <template>
   <div id="class-overview">
-    <div class="col" v-if="properties.length > 0">
+    <div class="col" v-if="properties && properties.length > 0">
       <div class="title">Properties</div>
       <ul>
         <li v-for="property in properties" @click="scroll(property.name)">
@@ -9,7 +9,7 @@
       </ul>
     </div>
 
-    <div class="col" v-if="methods.length > 0">
+    <div class="col" v-if="methods && methods.length > 0">
       <div class="title">Methods</div>
       <ul>
         <li v-for="method in methods" @click="scroll(method.name)">
@@ -18,7 +18,7 @@
       </ul>
     </div>
 
-    <div class="col" v-if="clarse.events.length > 0">
+    <div class="col" v-if="clarse.events && clarse.events.length > 0">
       <div class="title">Events</div>
       <ul>
         <li v-for="event in clarse.events" @click="scroll(event.name)">
@@ -36,12 +36,14 @@
 
     computed: {
       properties() {
-        if (this.showPrivate) return this.clarse.properties;
-        return this.clarse.properties.filter(p => p.access !== 'private');
+        if (this.showPrivate) return this.clarse.props;
+        if (!this.clarse.props) return null;
+        return this.clarse.props.filter(p => p.access !== 'private');
       },
 
       methods() {
         if (this.showPrivate) return this.clarse.methods;
+        if (!this.clarse.methods) return null;
         return this.clarse.methods.filter(p => p.access !== 'private');
       },
     },

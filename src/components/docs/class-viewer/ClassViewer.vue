@@ -4,23 +4,24 @@
 
     <h1>{{ clarse.name }}</h1>
     <p id="class-extends" v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></p>
+    <span v-if="clarse.access === 'private'" class="class-item-badge" title="This class is private, and may not exist as-is in future versions.">Private</span>
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
 
-    <div id="class-constructor" v-if="clarse.classConstructor && (showPrivate || clarse.classConstructor.access !== 'private')">
+    <div id="class-constructor" v-if="clarse.construct && (showPrivate || clarse.construct.access !== 'private')">
       <h2>Constructor</h2>
       <pre><code class="js">new Discord.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams">{{ param.name }}</span>);</code></pre>
-      <param-table :params="clarse.classConstructor.params" :docs="docs" />
+      <param-table :params="clarse.construct.params" :docs="docs" />
     </div>
 
     <overview :clarse="clarse" :showPrivate="showPrivate" />
 
-    <h2 v-if="properties.length > 0">Properties</h2>
+    <h2 v-if="properties && properties.length > 0">Properties</h2>
     <property v-for="prop in properties" :prop="prop" :docs="docs" />
 
-    <h2 v-if="methods.length > 0">Methods</h2>
+    <h2 v-if="methods && methods.length > 0">Methods</h2>
     <method v-for="method in methods" :method="method" :docs="docs" />
 
-    <h2 v-if="clarse.events.length > 0">Events</h2>
+    <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
     <event v-for="event in clarse.events" :event="event" :docs="docs" />
   </div>
 </template>
@@ -57,16 +58,19 @@
 
     computed: {
       constructorParams() {
-        return this.clarse.classConstructor.params.filter(p => !p.name.includes('.'));
+        if (!this.clarse.construct || !this.clarse.construct.params) return null;
+        return this.clarse.construct.params.filter(p => !p.name.includes('.'));
       },
 
       properties() {
-        if (this.showPrivate) return this.clarse.properties;
-        return this.clarse.properties.filter(p => p.access !== 'private');
+        if (this.showPrivate) return this.clarse.props;
+        if (!this.clarse.props) return null;
+        return this.clarse.props.filter(p => p.access !== 'private');
       },
 
       methods() {
         if (this.showPrivate) return this.clarse.methods;
+        if (!this.clarse.methods) return null;
         return this.clarse.methods.filter(p => p.access !== 'private');
       },
 
@@ -134,9 +138,12 @@
       padding: 8px;
 
       .source-button {
-        float: none;
-        position: relative;
-        left: -8px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      &:hover .source-button {
+        opacity: 1;
       }
     }
 
@@ -146,8 +153,17 @@
       border-left: 2px solid darken($color-content-bg, 15%);
     }
 
+    .class-item-badge {
+      margin-left: 12px;
+      padding: 3px 4px;
+      color: white;
+      background: lighten($color-primary, 10%);
+      border-radius: 3px;
+    }
+
     .source-button {
       float: right;
+      font-size: 1.3rem;
     }
 
     code {

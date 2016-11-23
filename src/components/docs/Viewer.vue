@@ -7,6 +7,13 @@
       </transition>
     </container>
 
+    <div id="docs-meta">
+      <p>
+        Documentation built at {{ new Date(docs.meta.date).toUTCString() }}.<br />
+        Generator: v{{ docs.meta.generator }} &nbsp; Format: {{ docs.meta.format }}
+      </p>
+    </div>
+
     <div id="scroll-top" title="Scroll to top" @click="scrollTop"><em class="fa fa-arrow-up"></em></div>
   </div>
 </template>
@@ -128,17 +135,20 @@
       display: inline-block;
       margin: 0;
       padding: 8px;
+      border: 1px solid;
       border-left: 2px solid;
     }
 
     .info {
       background: lighten($color-info, 25%);
-      border-color: $color-info;
+      border-color: lighten($color-info, 15%);
+      border-left-color: $color-info;
     }
 
     .warn {
       background: lighten($color-warn, 25%);
-      border-color: $color-warn;
+      border-color: lighten($color-warn, 15%);
+      border-left-color: $color-warn;
     }
 
     .docs-type:not(:last-child):after {
@@ -165,6 +175,23 @@
 
     img {
       max-width: 100%;
+    }
+  }
+
+  #docs-meta {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 0.8em;
+
+    p {
+      display: inline;
+      color: lighten($color-content-text, 60%);
+      transition: all 0.3s;
+
+      &:hover {
+        font-size: 0.9rem;
+        color: lighten($color-content-text, 15%);
+      }
     }
   }
 

@@ -4,8 +4,8 @@
       <router-link to="/">discord.js</router-link>
 
       <nav>
-        <router-link to="/docs">Documentation</router-link>
-        <a href="https://github.com/hydrabolt/discord.js">GitHub</a>
+        <router-link to="/docs">Documentation</router-link><!--
+        --><a href="https://github.com/hydrabolt/discord.js">GitHub</a>
       </nav>
     </container>
   </header>

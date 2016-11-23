@@ -6,7 +6,7 @@
 
     <div class="class-item-details">
       <p v-html="description"></p>
-      <param-table :params="event.params" :docs="docs" v-if="event.params.length > 0" />
+      <param-table :params="event.params" :docs="docs" v-if="event.params && event.params.length > 0" />
     </div>
   </div>
 </template>
