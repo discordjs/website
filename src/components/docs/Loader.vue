@@ -77,15 +77,20 @@
         });
       },
 
-      scroll() {
+      scroll(fromRoute) {
         if (this.$route.query.scrollTo && this.docs) {
-          let el = document.getElementById(`doc-for-${this.$route.query.scrollTo}`);
-          if (!el) el = document.getElementById(this.$route.query.scrollTo);
-          if (!el) return;
-          el.setAttribute('data-scrolled', true);
-          setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
-          el.scrollIntoView(true);
-          window.scrollBy(0, -50);
+          const scroll = () => {
+            let el = document.getElementById(`doc-for-${this.$route.query.scrollTo}`);
+            if (!el) el = document.getElementById(this.$route.query.scrollTo);
+            if (!el) return;
+            el.setAttribute('data-scrolled', true);
+            setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
+            el.scrollIntoView(true);
+            window.scrollBy(0, -50);
+          };
+
+          if (fromRoute && this.$route.name !== fromRoute.name) setTimeout(scroll, 400);
+          else scroll();
         }
       },
     },
@@ -99,8 +104,8 @@
         if (!from) setTimeout(this.scroll, 600);
       },
 
-      $route() {
-        this.scroll();
+      $route(to, from) {
+        this.scroll(from);
       },
     },
 
