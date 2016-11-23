@@ -18,7 +18,9 @@
 
     computed: {
       html() {
-        const content = this.file.type !== 'js' ? this.file.content : `\`\`\`js\n${this.file.content}\n\`\`\``;
+        let content;
+        if (this.file.type === 'md') content = this.file.content;
+        else content = `# ${this.file.name}\n\`\`\`${this.file.type}\n${this.file.content}\n\`\`\``;
         return Vue.filter('marked')(content);
       },
     },
