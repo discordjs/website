@@ -47,7 +47,7 @@
             source: MainSource.id,
             tag: MainSource.defaultTag,
             category: MainSource.defaultFile.category,
-            file: MainSource.defaultFile.name,
+            file: MainSource.defaultFile.id,
           } });
           return;
         }
@@ -60,7 +60,7 @@
             source: this.source.id,
             tag: this.source.defaultTag,
             category: this.source.defaultFile.category,
-            file: this.source.defaultFile.name,
+            file: this.source.defaultFile.id,
           } });
           return;
         }
@@ -71,7 +71,7 @@
             source: this.source.id,
             tag: this.tag,
             category: this.source.defaultFile.category,
-            file: this.source.defaultFile.name,
+            file: this.source.defaultFile.id,
           } });
         }
       },
