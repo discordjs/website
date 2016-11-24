@@ -54,9 +54,10 @@
         this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: val } });
       },
 
-      source() {
+      source(to) {
         this.loadTags();
-        this.tagChoice = this.source.defaultTag;
+        this.sourceChoice = to.id;
+        this.tagChoice = this.$route.params.tag || to.defaultTag;
       },
 
       search(q) {
