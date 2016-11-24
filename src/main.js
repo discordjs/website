@@ -93,10 +93,6 @@ Vue.filter('marked', text => {
   text = text.replace(/<(info|warn)>([\s\S]+)<\/\1>/gi, '<div class="$1">$2</div>');
   return marked(text);
 });
-Vue.filter('join-params', params => {
-  params = params || [];
-  return params.map(param => param.name).join(', ');
-});
 
 // Initialise the application
 const app = new Vue({ // eslint-disable-line no-unused-vars

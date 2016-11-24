@@ -28,7 +28,9 @@
           Methods
           <ul>
             <li v-for="method in results.methods">
-              <router-link :to="{ name: 'docs-class', params: { class: method.class }, query: { scrollTo: method.name } }">{{ method.class }}.{{ method.name }}</router-link>
+              <router-link :to="{ name: 'docs-class', params: { class: method.class }, query: { scrollTo: scopedScrollTo(method) } }">
+                {{ method.class }}{{ method.scope === 'static' ? '.' : '#' }}{{ method.name }}
+              </router-link>
             </li>
           </ul>
         </li>
@@ -37,7 +39,9 @@
           Properties
           <ul>
             <li v-for="prop in results.props">
-              <router-link :to="{ name: 'docs-class', params: { class: prop.class }, query: { scrollTo: prop.name } }">{{ prop.class }}.{{ prop.name }}</router-link>
+              <router-link :to="{ name: 'docs-class', params: { class: prop.class }, query: { scrollTo: scopedScrollTo(prop) } }">
+                {{ prop.class }}{{ prop.scope === 'static' ? '.' : '#' }}{{ prop.name }}
+              </router-link>
             </li>
           </ul>
         </li>
@@ -46,7 +50,9 @@
           Events
           <ul>
             <li v-for="event in results.events">
-              <router-link :to="{ name: 'docs-class', params: { class: event.class }, query: { scrollTo: event.name } }">{{ event.class }}#{{ event.name }}</router-link>
+              <router-link :to="{ name: 'docs-class', params: { class: event.class }, query: { scrollTo: event.name } }">
+                {{ event.class }}#{{ event.name }}
+              </router-link>
             </li>
           </ul>
         </li>
@@ -94,6 +100,7 @@
               if (m.name.toLowerCase().includes(q)) {
                 results.methods.push({
                   name: m.name,
+                  scope: m.scope,
                   class: c.name,
                 });
                 results.count++;
@@ -107,6 +114,7 @@
               if (p.name.toLowerCase().includes(q)) {
                 results.props.push({
                   name: p.name,
+                  scope: p.scope,
                   class: c.name,
                 });
                 results.count++;
@@ -136,6 +144,12 @@
         });
 
         return results;
+      },
+    },
+
+    methods: {
+      scopedScrollTo(item) {
+        return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
       },
     },
 

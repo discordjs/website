@@ -91,7 +91,13 @@
             window.scrollBy(0, -50);
           };
 
-          if (fromRoute && this.$route.name !== fromRoute.name) setTimeout(scroll, 400);
+          const delayScroll = fromRoute && (
+            this.$route.name !== fromRoute.name ||
+            this.$route.params.class !== fromRoute.params.class ||
+            this.$route.params.typedef !== fromRoute.params.typedef ||
+            this.$route.params.file !== fromRoute.params.file
+          );
+          if (delayScroll) setTimeout(scroll, 400);
           else scroll();
         }
       },

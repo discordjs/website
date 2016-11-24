@@ -2,7 +2,7 @@
   <div class="class-prop class-item" :id="`doc-for-${prop.name}`">
     <source-button :meta="prop.meta" :docs="docs" />
 
-    <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: prop.name } }">.{{ prop.name }}</router-link></h3>
+    <h3><router-link :to="{ name: 'docs-class', query: { scrollTo } }">.{{ prop.name }}</router-link></h3>
     <span v-if="prop.scope === 'static'" class="class-item-badge" title="This property is on the class constructor function, not instances.">Static</span>
     <span v-if="prop.readonly" class="class-item-badge" title="This property cannot be modified.">Read-only</span>
     <span v-if="prop.access === 'private'" class="class-item-badge" title="This property is private, and may not exist as-is in future versions.">Private</span>
@@ -39,6 +39,10 @@
     computed: {
       description() {
         return Vue.filter('marked')(this.prop.description);
+      },
+
+      scrollTo() {
+        return `${this.prop.scope === 'static' ? 's-' : ''}${this.prop.name}`;
       },
     },
   };

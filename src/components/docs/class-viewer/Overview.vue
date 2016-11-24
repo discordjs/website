@@ -3,8 +3,8 @@
     <div class="col" v-if="properties && properties.length > 0">
       <div class="title">Properties</div>
       <ul>
-        <li v-for="property in properties" @click="scroll(property.name)">
-          <router-link :to="{ name: 'docs-class', query: { scrollTo: property.name } }">{{ property.name }}</router-link>
+        <li v-for="property in properties" @click="scroll(scopedScrollTo(property))">
+          <router-link :to="{ name: 'docs-class', query: { scrollTo: scopedScrollTo(property) } }">{{ property.name }}</router-link>
         </li>
       </ul>
     </div>
@@ -12,8 +12,8 @@
     <div class="col" v-if="methods && methods.length > 0">
       <div class="title">Methods</div>
       <ul>
-        <li v-for="method in methods" @click="scroll(methodScrollTo(method))">
-          <router-link :to="{ name: 'docs-class', query: { scrollTo: methodScrollTo(method) } }">{{ method.name }}</router-link>
+        <li v-for="method in methods" @click="scroll(scopedScrollTo(method))">
+          <router-link :to="{ name: 'docs-class', query: { scrollTo: scopedScrollTo(method) } }">{{ method.name }}</router-link>
         </li>
       </ul>
     </div>
@@ -49,8 +49,8 @@
     },
 
     methods: {
-      methodScrollTo(method) {
-        return `${method.scope === 'static' ? 's-' : ''}${method.name}`;
+      scopedScrollTo(item) {
+        return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
       },
 
       scroll(to) {

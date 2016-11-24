@@ -19,6 +19,8 @@
 </template>
 
 <script>
+  import { parseLink } from '../../util';
+
   export default {
     name: 'docs-see',
     props: ['see', 'docs'],
@@ -26,36 +28,7 @@
     computed: {
       parsed() {
         const parsed = new Array(this.see.length);
-        for (let s = 0; s < this.see.length; s++) {
-          const see = this.see[s].replace(/\{@link\s+(.+?)\s*\}/i, '$1');
-
-          // Type link
-          const split = see.split('.');
-          if (this.docs.links[split[0]]) {
-            const link = {
-              name: this.docs.links[split[0]].name,
-              params: this.docs.links[split[0]].params,
-              query: { scrollTo: split[1] },
-            };
-            parsed[s] = {
-              text: see,
-              link,
-            };
-            continue;
-          }
-
-          // Any link
-          if (see.match(/^https?:\/\//i)) {
-            parsed[s] = {
-              text: see,
-              link: see,
-            };
-            continue;
-          }
-
-          // Text
-          parsed[s] = { text: see };
-        }
+        for (let s = 0; s < this.see.length; s++) parsed[s] = parseLink(this.see[s], this.docs);
         return parsed;
       },
     },
