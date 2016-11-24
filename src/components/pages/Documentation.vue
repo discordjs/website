@@ -7,6 +7,7 @@
 
 <script>
   import MainSource from '../../data/MainSource';
+  import CommandoSource from '../../data/CommandoSource';
   import DocsNavbar from '../docs/Navbar.vue';
 
   export default {
@@ -19,10 +20,7 @@
       return {
         sources: {
           [MainSource.id]: MainSource,
-          // dummy: { id: 'dummy', name: 'Dummy source', defaultTag: 'lol', tags: ['master', 'megadumb', 'lol'],
-          //   fetchDocs() { return Promise.resolve({}); },
-          //   defaultFile: { category: 'nothin', name: 'derp' },
-          // },
+          [CommandoSource.id]: CommandoSource,
         },
         source: MainSource,
         tag: MainSource.defaultTag,

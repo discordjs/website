@@ -1,7 +1,7 @@
 <template>
   <div id="docs-body">
     <transition name="fade-resize" mode="out-in">
-      <router-view :docs="docs" v-if="docs" />
+      <router-view v-if="docs" :docs="docs" />
       <slide v-else>
         <loading v-if="!error" />
         <p v-else id="docs-error">
@@ -98,6 +98,10 @@
     },
 
     watch: {
+      source() {
+        this.loadDocs();
+      },
+
       tag() {
         this.loadDocs();
       },
