@@ -47,11 +47,13 @@
 
     watch: {
       sourceChoice(val) {
-        this.$router.push({ name: 'docs-source', params: { source: val } });
+        if (this.$route.params.source !== val) this.$router.push({ name: 'docs-source', params: { source: val } });
       },
 
       tagChoice(val) {
-        this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: val } });
+        if (this.$route.params.tag !== val) {
+          this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: val } });
+        }
       },
 
       source(to) {
