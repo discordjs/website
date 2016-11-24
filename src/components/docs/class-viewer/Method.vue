@@ -5,7 +5,7 @@
     <h3>
 			<router-link :to="{ name: 'docs-class', query: { scrollTo } }">
 				.{{ method.name }}(<!--
-				--><span v-for="param in method.params" class="method-param" :class="param.optional ? 'optional' : ''"><!--
+				--><span v-for="param in params" class="method-param" :class="param.optional ? 'optional' : ''"><!--
           -->{{ param.variable ? '...' : '' }}{{ param.name }}<!--
         --></span><!--
 				-->)
@@ -59,6 +59,11 @@
     },
 
     computed: {
+      params() {
+        if (!this.method.params) return null;
+        return this.method.params.filter(p => !p.name.includes('.'));
+      },
+
       description() {
         return Vue.filter('marked')(convertLinks(this.method.description, this.docs, this.$router, this.$route));
       },
