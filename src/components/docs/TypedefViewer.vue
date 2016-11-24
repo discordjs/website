@@ -7,7 +7,7 @@
 
     <h2>Types</h2>
     <ul id="typedef-types">
-      <li v-for="type in typedef.type.types"><types :names="type" :docs="docs" /></li>
+      <li v-for="type in typedef.type"><types :names="type" :docs="docs" /></li>
     </ul>
 
     <div id="typedef-params" v-if="typedef.props && typedef.props.length > 0">
