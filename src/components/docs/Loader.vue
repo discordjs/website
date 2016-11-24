@@ -70,6 +70,7 @@
           for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
           for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
+          docs.global = this.source.global;
           docs.source = this.source.source;
           docs.tag = this.tag;
           this.docs = docs;

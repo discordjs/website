@@ -10,7 +10,7 @@
 
     <div id="class-constructor" v-if="clarse.construct && (showPrivate || clarse.construct.access !== 'private')">
       <h2>Constructor</h2>
-      <pre><code class="js">new Discord.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams">{{ param.name }}</span>);</code></pre>
+      <pre><code class="js">new {{ docs.global }}.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams">{{ param.name }}</span>);</code></pre>
       <param-table :params="clarse.construct.params" :docs="docs" />
     </div>
 

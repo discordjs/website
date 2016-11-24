@@ -6,6 +6,7 @@ export default {
   name: 'Main library',
   defaultTag: 'master',
   defaultFile: { category: 'general', id: 'welcome' },
+  global: 'Discord',
   source: 'https://github.com/hydrabolt/discord.js/blob/',
   blacklist: new Set(['gh-pages', 'gh-pages-dev', 'docs', 'webpack', 'v8', 'indev-old']),
   tags: null,

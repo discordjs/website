@@ -6,6 +6,7 @@ export default {
   name: 'Commando',
   defaultTag: 'master',
   defaultFile: { category: 'general', id: 'welcome' },
+  global: 'Commando',
   source: 'https://github.com/Gawdl3y/discord.js-commando/blob/',
   blacklist: new Set(['gh-pages', 'docs']),
   tags: null,
