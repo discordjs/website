@@ -17,6 +17,7 @@
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
   import See from '../See';
+  import { convertLinks } from '../../../util';
 
   export default {
     name: 'class-event',
@@ -29,7 +30,7 @@
 
     computed: {
       description() {
-        return Vue.filter('marked')(this.event.description);
+        return Vue.filter('marked')(convertLinks(this.event.description, this.docs, this.$router, this.$route));
       },
     },
   };

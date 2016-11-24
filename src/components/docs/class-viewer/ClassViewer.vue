@@ -37,7 +37,7 @@
   import Event from './Event';
   import SourceButton from '../SourceButton.vue';
   import See from '../See';
-  import { hljs } from '../../../util';
+  import { hljs, convertLinks } from '../../../util';
 
   export default {
     name: 'class-viewer',
@@ -78,7 +78,7 @@
       },
 
       description() {
-        return Vue.filter('marked')(this.clarse.description);
+        return Vue.filter('marked')(convertLinks(this.clarse.description, this.docs, this.$router, this.$route));
       },
     },
 

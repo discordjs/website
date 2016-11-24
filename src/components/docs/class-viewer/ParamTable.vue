@@ -31,6 +31,7 @@
 <script>
   import Vue from 'vue';
   import Types from '../Types.vue';
+  import { convertLinks } from '../../../util';
 
   export default {
     name: 'param-table',
@@ -47,7 +48,7 @@
 
     methods: {
       description(param) {
-        return Vue.filter('marked')(param.description);
+        return Vue.filter('marked')(convertLinks(param.description, this.docs, this.$router, this.$route));
       },
     },
   };

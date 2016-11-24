@@ -25,6 +25,7 @@
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
   import See from '../See.vue';
+  import { convertLinks } from '../../../util';
 
   export default {
     name: 'class-property',
@@ -38,7 +39,7 @@
 
     computed: {
       description() {
-        return Vue.filter('marked')(this.prop.description);
+        return Vue.filter('marked')(convertLinks(this.prop.description, this.docs, this.$router, this.$route));
       },
 
       scrollTo() {

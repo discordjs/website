@@ -22,7 +22,7 @@
 			<div class="method-return">
         Returns:
         <span v-if="method.returns">
-  				<types v-for="rtrn in method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" />
+  				<types v-for="rtrn in method.returns.types || method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" />
         </span>
         <type-link v-else :type="['void']" :docs="docs" class="docs-type" />
         <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
@@ -45,6 +45,7 @@
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
   import See from '../See.vue';
+  import { convertLinks } from '../../../util';
 
   export default {
     name: 'class-method',
@@ -59,7 +60,7 @@
 
     computed: {
       description() {
-        return Vue.filter('marked')(this.method.description);
+        return Vue.filter('marked')(convertLinks(this.method.description, this.docs, this.$router, this.$route));
       },
 
       scrollTo() {
