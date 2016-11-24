@@ -1,9 +1,9 @@
 <template>
-  <div class="class-method class-item" :id="`doc-for-${method.name}`">
+  <div class="class-method class-item" :id="`doc-for-${scrollTo}`">
     <source-button :meta="method.meta" :docs="docs" />
 
     <h3>
-			<router-link :to="{ name: 'docs-class', query: { scrollTo: method.name } }">
+			<router-link :to="{ name: 'docs-class', query: { scrollTo } }">
 				.{{ method.name }}(<!--
 				--><span v-for="param in method.params" class="method-param" :class="param.optional ? 'optional' : ''">{{ param.name }}</span><!--
 				-->)
@@ -58,6 +58,10 @@
     computed: {
       description() {
         return Vue.filter('marked')(this.method.description);
+      },
+
+      scrollTo() {
+        return `${this.method.scope === 'static' ? 's-' : ''}${this.method.name}`;
       },
     },
   };

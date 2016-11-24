@@ -12,8 +12,8 @@
     <div class="col" v-if="methods && methods.length > 0">
       <div class="title">Methods</div>
       <ul>
-        <li v-for="method in methods" @click="scroll(method.name)">
-          <router-link :to="{ name: 'docs-class', query: { scrollTo: method.name } }">{{ method.name }}</router-link>
+        <li v-for="method in methods" @click="scroll(methodScrollTo(method))">
+          <router-link :to="{ name: 'docs-class', query: { scrollTo: methodScrollTo(method) } }">{{ method.name }}</router-link>
         </li>
       </ul>
     </div>
@@ -49,6 +49,10 @@
     },
 
     methods: {
+      methodScrollTo(method) {
+        return `${method.scope === 'static' ? 's-' : ''}${method.name}`;
+      },
+
       scroll(to) {
         const el = document.getElementById(`doc-for-${to}`);
         el.setAttribute('data-scrolled', true);
