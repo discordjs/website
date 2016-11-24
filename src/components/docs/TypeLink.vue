@@ -1,7 +1,8 @@
 <template>
   <span class="docs-type-link">
     <span v-if="type[0] === '*'" title="Any type">*</span><!--
-  --><router-link :to="link" v-else-if="typeof link !== 'string'">{{ typeName }}</router-link><!--
+  --><span v-else-if="!link">{{ typeName }}</span><!--
+  --><router-link :to="link" v-else-if="typeof link === 'object'">{{ typeName }}</router-link><!--
   --><a :href="link" v-else>{{ typeName }}</a><!--
   --><span v-if="type[1]">{{ type[1] }}</span>
   </span>
@@ -19,7 +20,7 @@
 
       link() {
         if (this.docs.links[this.type[0]]) return this.docs.links[this.type[0]];
-        return {};
+        return null;
       },
     },
   };
