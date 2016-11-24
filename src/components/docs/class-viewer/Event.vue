@@ -7,6 +7,7 @@
     <div class="class-item-details">
       <p v-html="description"></p>
       <param-table :params="event.params" :docs="docs" v-if="event.params && event.params.length > 0" />
+      <see v-if="event.see" :see="event.see" :docs="docs" />
     </div>
   </div>
 </template>
@@ -15,6 +16,7 @@
   import Vue from 'vue';
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
+  import See from '../See';
 
   export default {
     name: 'class-event',
@@ -22,6 +24,7 @@
     components: {
       ParamTable,
       SourceButton,
+      See,
     },
 
     computed: {
@@ -36,7 +39,7 @@
   @import '../../../styles/theming';
 
   .class-event {
-    p {
+    p:not(.docs-see) {
       margin: 0;
     }
 

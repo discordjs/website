@@ -14,6 +14,7 @@
         Type:
         <types v-for="type in prop.type.types" :names="type" :docs="docs" />
       </div>
+      <see v-if="prop.see" :see="prop.see" :docs="docs" />
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@
   import Types from '../Types.vue';
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
+  import See from '../See.vue';
 
   export default {
     name: 'class-property',
@@ -31,6 +33,7 @@
       Types,
       ParamTable,
       SourceButton,
+      See,
     },
 
     computed: {

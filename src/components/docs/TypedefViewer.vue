@@ -3,6 +3,7 @@
     <source-button :meta="typedef.meta" :docs="docs" />
     <h1>{{ typedef.name }}</h1>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
+    <see v-if="typedef.see" :see="typedef.see" :docs="docs" />
 
     <h2>Types</h2>
     <ul id="typedef-types">
@@ -22,6 +23,7 @@
   import Types from './Types.vue';
   import ParamTable from './class-viewer/ParamTable.vue';
   import SourceButton from './SourceButton.vue';
+  import See from './See.vue';
 
   export default {
     name: 'typedef-viewer',
@@ -30,6 +32,7 @@
       Types,
       ParamTable,
       SourceButton,
+      See,
     },
 
     data() {

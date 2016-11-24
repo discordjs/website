@@ -6,6 +6,7 @@
     <p id="class-extends" v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></p>
     <span v-if="clarse.access === 'private'" class="class-item-badge" title="This class is private, and may not exist as-is in future versions.">Private</span>
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
+    <see v-if="clarse.see" :see="clarse.see" :docs="docs" />
 
     <div id="class-constructor" v-if="clarse.construct && (showPrivate || clarse.construct.access !== 'private')">
       <h2>Constructor</h2>
@@ -35,6 +36,7 @@
   import Method from './Method';
   import Event from './Event';
   import SourceButton from '../SourceButton.vue';
+  import See from '../See';
   import { hljs } from '../../../util';
 
   export default {
@@ -48,6 +50,7 @@
       Method,
       Event,
       SourceButton,
+      See,
     },
 
     data() {

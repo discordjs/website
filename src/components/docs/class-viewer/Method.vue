@@ -22,7 +22,7 @@
         <span v-if="method.returns">
   				<types v-for="rtrn in method.returns.types" :names="rtrn" :docs="docs" />
         </span>
-        <type-link v-else :type="['void']" :docs="docs" />
+        <type-link v-else :type="['void']" :docs="docs" class="docs-type" />
         <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
 			</div>
 
@@ -30,6 +30,8 @@
 				Examples:
 				<pre v-for="example in method.examples"><code class="javascript">{{ example }}</code></pre>
 			</div>
+
+      <see v-if="method.see" :see="method.see" :docs="docs" />
     </div>
   </div>
 </template>
@@ -40,6 +42,7 @@
   import TypeLink from '../TypeLink.vue';
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
+  import See from '../See.vue';
 
   export default {
     name: 'class-method',
@@ -49,6 +52,7 @@
       TypeLink,
       ParamTable,
       SourceButton,
+      See,
     },
 
     computed: {
@@ -63,7 +67,7 @@
 	@import '../../../styles/theming';
 
 	.class-method {
-		p {
+		p:not(.docs-see) {
 			margin: 0 0 12px 0;
 		}
 

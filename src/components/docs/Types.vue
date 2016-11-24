@@ -20,6 +20,6 @@
   .docs-type {
     font-family: $font-monospace;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 </style>
