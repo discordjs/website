@@ -86,6 +86,7 @@
 	.method-param {
 		color: lighten($color-content-text, 20%);
 		font-size: 1rem;
+    transition: color 0.3s;
 
 		&.optional:before {
 			content: '[';
