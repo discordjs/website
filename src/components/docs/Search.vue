@@ -19,7 +19,7 @@
           Typedefs
           <ul>
             <li v-for="typedef in results.typedefs">
-              <router-link :to="{ name: 'docs-typedef', params: { typedef: typedef } }">{{ typedef }}</router-link>
+              <router-link :to="{ name: 'docs-typedef', params: { typedef } }">{{ typedef }}</router-link>
             </li>
           </ul>
         </li>
@@ -129,7 +129,10 @@
         });
 
         this.docs.typedefs.forEach(t => {
-          if (t.name.toLowerCase().includes(q)) results.typedefs.push(t.name);
+          if (t.name.toLowerCase().includes(q)) {
+            results.typedefs.push(t.name);
+            results.count++;
+          }
         });
 
         return results;
