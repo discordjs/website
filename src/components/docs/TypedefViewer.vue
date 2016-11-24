@@ -68,10 +68,5 @@
     .param-table-wrapper {
       border: 0;
     }
-
-    .source-button {
-      float: right;
-      font-size: 1.3rem;
-    }
   }
 </style>

@@ -137,13 +137,15 @@
       margin: 20px 2px;
       padding: 8px;
 
-      .source-button {
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
+      @include mq($from: desktop) {
+        .source-button {
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
 
-      &:hover .source-button {
-        opacity: 1;
+        &:hover .source-button {
+          opacity: 1;
+        }
       }
     }
 
@@ -159,11 +161,6 @@
       color: white;
       background: lighten($color-primary, 10%);
       border-radius: 3px;
-    }
-
-    .source-button {
-      float: right;
-      font-size: 1.3rem;
     }
 
     code {

@@ -24,5 +24,7 @@
 <style lang="scss">
   .source-button {
     display: inline-block;
+    float: right;
+    font-size: 1.3rem;
   }
 </style>
