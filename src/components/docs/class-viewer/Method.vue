@@ -5,7 +5,9 @@
     <h3>
 			<router-link :to="{ name: 'docs-class', query: { scrollTo } }">
 				.{{ method.name }}(<!--
-				--><span v-for="param in method.params" class="method-param" :class="param.optional ? 'optional' : ''">{{ param.name }}</span><!--
+				--><span v-for="param in method.params" class="method-param" :class="param.optional ? 'optional' : ''"><!--
+          -->{{ param.variable ? '...' : '' }}{{ param.name }}<!--
+        --></span><!--
 				-->)
 			</router-link>
 		</h3>
@@ -20,7 +22,7 @@
 			<div class="method-return">
         Returns:
         <span v-if="method.returns">
-  				<types v-for="rtrn in method.returns.types" :names="rtrn" :docs="docs" />
+  				<types v-for="rtrn in method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" />
         </span>
         <type-link v-else :type="['void']" :docs="docs" class="docs-type" />
         <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>

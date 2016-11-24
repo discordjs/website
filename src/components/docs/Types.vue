@@ -1,5 +1,8 @@
 <template>
-  <span class="docs-type"><type-link v-for="type in names" :type="type" :docs="docs" /></span>
+  <span class="docs-type">
+    {{ nullable ? '?' : ''}}{{ variable ? '...' : '' }}<!--
+    --><type-link v-for="type in names" :type="type" :docs="docs" />
+  </span>
 </template>
 
 <script>
@@ -7,7 +10,7 @@
 
   export default {
     name: 'types',
-    props: ['names', 'docs'],
+    props: ['names', 'variable', 'nullable', 'docs'],
     components: {
       TypeLink,
     },
