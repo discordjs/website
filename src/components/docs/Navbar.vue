@@ -51,7 +51,7 @@
       },
 
       tagChoice(val) {
-        if (this.$route.params.tag !== val) {
+        if (val && this.$route.params.tag !== val) {
           this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: val } });
         }
       },
@@ -65,6 +65,10 @@
       search(q) {
         if (this.$route.query.q) this.$router.replace({ name: 'docs-search', query: { q } });
         else this.$router.push({ name: 'docs-search', query: { q } });
+      },
+
+      $route(to) {
+        if (to.params.tag && this.tagChoice !== to.params.tag) this.tagChoice = to.params.tag;
       },
     },
 
