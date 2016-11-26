@@ -52,8 +52,14 @@
 <style lang="scss">
   @import '../../../styles/theming';
 
-  .class-prop p {
-    margin: 0 0 8px 0;
+  .class-prop {
+    p {
+      margin: 0 0 8px 0;
+    }
+
+    .param-table-wrapper {
+      margin-bottom: 8px;
+    }
   }
 
   .prop-type {
