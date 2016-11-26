@@ -1,5 +1,6 @@
 <template>
-  <div id="file-viewer" class="docs-page" v-html="html"></div>
+  <div v-if="file" id="file-viewer" class="docs-page" v-html="html"></div>
+  <unknown-page v-else class="docs-page" />
 </template>
 
 <script>
@@ -11,6 +12,7 @@
     props: ['docs'],
 
     data() {
+      if (!this.docs.custom[this.$route.params.category]) return { file: null };
       return {
         file: this.docs.custom[this.$route.params.category].find(f => f.id === this.$route.params.file),
       };

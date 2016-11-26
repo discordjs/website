@@ -1,5 +1,5 @@
 <template>
-  <div id="class-viewer" class="docs-page">
+  <div v-if="clarse" id="class-viewer" class="docs-page">
     <source-button :meta="clarse.meta" :docs="docs" />
 
     <h1>{{ clarse.name }}</h1>
@@ -25,6 +25,7 @@
     <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
     <event v-for="event in clarse.events" :event="event" :docs="docs" />
   </div>
+  <unknown-page v-else class="docs-page" />
 </template>
 
 <script>

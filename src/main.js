@@ -4,6 +4,7 @@ import marked from 'marked';
 import { hljs } from './util';
 
 import App from './App';
+import UnknownPageComponent from './components/UnknownPage.vue';
 import HomePageComponent from './components/pages/Home.vue';
 import DocumentationPageComponent from './components/pages/Documentation.vue';
 import UnknownRoutePageComponent from './components/pages/UnknownRoute.vue';
@@ -83,6 +84,7 @@ const router = new VueRouter({
 Vue.component('container', ContainerComponent);
 Vue.component('slide', SlideComponent);
 Vue.component('loading', LoadingComponent);
+Vue.component('unknown-page', UnknownPageComponent);
 
 // Register the hightlight.js directive
 Vue.directive('hljs', hljs);

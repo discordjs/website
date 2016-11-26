@@ -1,5 +1,5 @@
 <template>
-  <div id="typedef-viewer" class="docs-page">
+  <div v-if="typedef" id="typedef-viewer" class="docs-page">
     <source-button :meta="typedef.meta" :docs="docs" />
     <h1>{{ typedef.name }}</h1>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
@@ -15,6 +15,7 @@
       <param-table :params="typedef.props" :docs="docs" />
     </div>
   </div>
+  <unknown-page v-else class="docs-page" />
 </template>
 
 <script>
