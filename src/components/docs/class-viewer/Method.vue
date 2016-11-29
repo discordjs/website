@@ -11,13 +11,15 @@
 				-->)
 			</router-link>
 		</h3>
-    <span v-if="method.scope === 'static'" class="class-item-badge" title="This method is on the class constructor function, not instances.">Static</span>
-    <span v-if="method.access === 'private'" class="class-item-badge" title="This method is private, and may not exist as-is in future versions.">Private</span>
+    <span v-if="method.scope === 'static'" class="badge" title="This method is on the class constructor function, not instances.">Static</span>
+    <span v-if="method.abstract" class="badge" title="This method is abstract, and must be implemented in a child class.">Abstract</span>
+    <span v-if="method.deprecated" class="badge" title="This method is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="method.access === 'private'" class="badge" title="This method is private, and may change or be removed at any time.">Private</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>
 
-			<param-table v-if="method.params && method.params.length > 0" :params="method.params" :docs="docs" />
+			<param-table v-if="method.params" :params="method.params" :docs="docs" />
 
 			<div class="method-return">
         Returns:
@@ -28,7 +30,22 @@
         <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
 			</div>
 
-			<div class="method-examples" v-if="method.examples && method.examples.length > 0">
+      <div v-if="method.throws" class="method-throws">
+        Throws:
+        <types v-for="thrw in method.throws" :names="thrw" :docs="docs" />
+      </div>
+
+      <div v-if="emits" class="method-emits">
+        Emits:
+        <ul v-if="emits.length > 1">
+          <li v-for="event in emits">
+            <router-link :to="event.link" class="docs-type">{{ event.text }}</router-link>
+          </li>
+        </ul>
+        <router-link v-else :to="emits[0].link" class="docs-type">{{ emits[0].text }}</router-link>
+      </div>
+
+			<div v-if="method.examples" class="method-examples">
 				Examples:
 				<pre v-for="example in method.examples"><code class="javascript">{{ example }}</code></pre>
 			</div>
@@ -45,7 +62,7 @@
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
   import See from '../See.vue';
-  import { convertLinks } from '../../../util';
+  import { convertLinks, parseLink } from '../../../util';
 
   export default {
     name: 'class-method',
@@ -66,6 +83,11 @@
 
       description() {
         return Vue.filter('marked')(convertLinks(this.method.description, this.docs, this.$router, this.$route));
+      },
+
+      emits() {
+        if (!this.method.emits) return null;
+        return this.method.emits.map(e => parseLink(e.replace(/:event/i, ''), this.docs));
       },
 
       scrollTo() {
@@ -125,7 +147,7 @@
     }
 	}
 
-	.method-examples {
+	.method-throws, .method-emits, .method-examples {
 		margin-top: 16px;
 		color: lighten($color-content-text, 35%);
 		font-weight: bold;

@@ -106,24 +106,6 @@
       margin: 16px 0;
     }
 
-    .doc-part-view {
-      display: inline-block;
-      border-left: 1px solid #eee;
-      padding-left: 32px;
-      flex: 1;
-
-      p {
-        font-size: 14px;
-      }
-
-      h1 {
-        margin: 0;
-        color: #333;
-        color: lighten($color-content-text, 10%);
-        font-weight: 300;
-      }
-    }
-
     pre {
       margin: 16px;
       padding: 8px;
@@ -192,6 +174,18 @@
         font-size: 0.9rem;
         color: lighten($color-content-text, 15%);
       }
+    }
+  }
+
+  .badge {
+    margin-left: 2px;
+    padding: 3px 4px;
+    color: white;
+    background: lighten($color-primary, 10%);
+    border-radius: 3px;
+
+    &:first-of-type {
+      margin-left: 12px;
     }
   }
 

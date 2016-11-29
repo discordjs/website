@@ -3,6 +3,7 @@
     <source-button :meta="event.meta" :docs="docs" />
 
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: event.name } }">{{ event.name }}</router-link></h3>
+    <span v-if="event.deprecated" class="badge" title="This event is deprecated, and may be removed in a future version.">Deprecated</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>

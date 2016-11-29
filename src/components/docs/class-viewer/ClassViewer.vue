@@ -3,8 +3,14 @@
     <source-button :meta="clarse.meta" :docs="docs" />
 
     <h1>{{ clarse.name }}</h1>
-    <p id="class-extends" v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></p>
-    <span v-if="clarse.access === 'private'" class="class-item-badge" title="This class is private, and may not exist as-is in future versions.">Private</span>
+    <p class="class-name-extra">
+      <span v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></span>
+      <span v-if="clarse.implements">implements <type-link :type="clarse.implements" :docs="docs" /></span>
+    </p>
+    <span v-if="clarse.abstract" class="badge" title="This class is abstract, and may not be instantiated itself.">Abstract</span>
+    <span v-if="clarse.deprecated" class="badge" title="This class is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="clarse.access === 'private'" class="badge" title="This class is private, and may change or be removed at any time.">Private</span>
+
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
     <see v-if="clarse.see" :see="clarse.see" :docs="docs" />
 
@@ -96,7 +102,7 @@
   @import '../../../styles/mq';
 
   #class-viewer {
-    h1, #class-extends {
+    h1, .class-name-extra {
       display: inline-block;
     }
 
@@ -119,7 +125,7 @@
       }
     }
 
-    #class-extends {
+    .class-name-extra {
       color: lighten($color-content-text, 40%);
       font-family: $font-header;
       font-size: 1.1rem;
@@ -157,14 +163,6 @@
       margin-top: 8px;
       padding: 6px 0 6px 8px;
       border-left: 2px solid darken($color-content-bg, 15%);
-    }
-
-    .class-item-badge {
-      margin-left: 12px;
-      padding: 3px 4px;
-      color: white;
-      background: lighten($color-primary, 10%);
-      border-radius: 3px;
     }
 
     code {

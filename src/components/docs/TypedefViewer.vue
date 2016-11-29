@@ -1,7 +1,9 @@
 <template>
   <div v-if="typedef" id="typedef-viewer" class="docs-page">
     <source-button :meta="typedef.meta" :docs="docs" />
+
     <h1>{{ typedef.name }}</h1>
+    <span v-if="typedef.deprecated" class="badge" title="This typedef is deprecated, and may be removed in a future version.">Deprecated</span>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
     <see v-if="typedef.see" :see="typedef.see" :docs="docs" />
 
@@ -60,6 +62,10 @@
   @import '../../styles/theming';
 
   #typedef-viewer {
+    h1 {
+      display: inline-block;
+    }
+
     h2 {
       font-size: 1.3rem;
       margin-top: 40px;
