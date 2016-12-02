@@ -70,6 +70,7 @@ export function convertLinks(text, docs, router, route) {
     if (parsed.link) {
       let link;
       if (typeof parsed.link === 'object') {
+        if (!parsed.link.params) parsed.link.params = {};
         parsed.link.params.source = route.params.source;
         parsed.link.params.tag = route.params.tag;
         link = router.resolve(parsed.link).href;

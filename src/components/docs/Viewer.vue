@@ -199,8 +199,12 @@
     color: white;
     cursor: pointer;
 
-    transition: opacity 0.5s;
+    transition: opacity 0.5s, background 0.3s;
     display: none;
     opacity: 0;
+
+    &:hover {
+      background: lighten($color-primary, 15%);
+    }
   }
 </style>
