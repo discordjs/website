@@ -67,6 +67,9 @@
           };
 
           // Add links for everything
+          docs.externals = docs.external || [];
+          docs.classes = docs.classes || [];
+          docs.typedefs = docs.typedefs || [];
           for (const x of docs.externals) docs.links[x.name] = x.see[0].replace(/\{@link\s+(.+?)\s*\}/i, '$1');
           for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
           for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
