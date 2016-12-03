@@ -67,7 +67,7 @@
           };
 
           // Add links for everything
-          docs.externals = docs.external || [];
+          docs.externals = docs.externals || [];
           docs.classes = docs.classes || [];
           docs.typedefs = docs.typedefs || [];
           for (const x of docs.externals) docs.links[x.name] = x.see[0].replace(/\{@link\s+(.+?)\s*\}/i, '$1');
