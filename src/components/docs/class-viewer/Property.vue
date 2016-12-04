@@ -1,5 +1,5 @@
 <template>
-  <div class="class-prop class-item" :id="`doc-for-${prop.name}`">
+  <div class="class-prop class-item" :id="`doc-for-${scrollTo}`">
     <source-button :meta="prop.meta" :docs="docs" />
 
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo } }">.{{ prop.name }}</router-link></h3>
