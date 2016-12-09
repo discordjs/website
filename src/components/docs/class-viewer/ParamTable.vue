@@ -67,9 +67,9 @@
     }
 
     th {
-      background: darken($color-primary, 10%);
+      background: $color-primary;
       color: white;
-      font-weight: normal;
+      font-weight: 600;
       text-transform: uppercase;
       padding: 16px;
     }

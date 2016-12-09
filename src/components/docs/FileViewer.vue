@@ -40,6 +40,7 @@
   @import '../../styles/mq';
 
   #file-viewer {
+
     code {
       font-family: $font-monospace;
       font-size: 0.8rem;

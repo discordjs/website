@@ -106,8 +106,16 @@
       display: inline-block;
     }
 
+    h1 {
+      color: #333;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
     h2 {
       margin-top: 40px;
+      font-size: 22px;
+      font-weight: 600;
     }
 
     h3 {
@@ -128,7 +136,8 @@
     .class-name-extra {
       color: lighten($color-content-text, 40%);
       font-family: $font-header;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      margin-left: 4px;
     }
 
     #class-constructor {

@@ -1,10 +1,10 @@
 // Fonts
-$font-regular: 'Roboto', 'Source Sans Pro', Calibri, Arial, sans-serif;
+$font-regular: 'Source Sans Pro', sans-serif;
 $font-monospace: 'Roboto Mono', 'Source Code Pro', Consolas, monospace;
-$font-header: 'Roboto Condensed', 'Source Sans Pro', Calibri, Arial, sans-serif;
+$font-header: 'Source Sans Pro', sans-serif;
 
 // Colours
-$color-primary: #2196F3;
+$color-primary: #1565C0;
 $color-warn: lighten(red, 20%);
 $color-info: lighten($color-primary, 8%);
 $color-navbar-bg: #222;

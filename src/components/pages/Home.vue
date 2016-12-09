@@ -1,12 +1,12 @@
 <template>
   <div id="home" v-once>
     <slide id="jumbotron">
-      <h1><img src="../../assets/logo.png" alt="discord.js" id="logo" /></h1>
-      <code>npm install --save discord.js</code>
+      <h1>DISCORD.JS</h1>
+      <code>npm install --save discord.js</code><br />
     </slide>
 
     <slide id="about">
-      <h2>About</h2>
+      <h2>ABOUT</h2>
       <p>
         discord.js is a powerful <a href="https://nodejs.org/">node.js</a> module that allows you to interact with the
         <a href="https://discordapp.com/developers/docs/intro">Discord API</a> very easily.
@@ -16,20 +16,22 @@
     </slide>
 
     <slide id="example">
-      <h2>Example</h2>
+      <h2>EXAMPLE</h2>
       <pre><code class="javascript" v-hljs>
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
+  console.log(`Logged in as ${client.user.username}!`);
 });
 
 client.on('message', msg => {
-  if (msg.content === 'ping') msg.reply('Pong!');
+  if (msg.content === 'ping') {
+    msg.reply('Pong!');
+  }
 });
 
-client.login('some cool token');
+client.login('token');
       </code></pre>
     </slide>
   </div>
@@ -51,10 +53,12 @@ client.login('some cool token');
   	h2 {
   		font-size: 2rem;
   		margin: 0;
+      font-weight: 600;
+      letter-spacing: -1px;
   	}
 
   	p {
-  		font-size: 1.2rem;
+  		font-size: 1rem;
   		line-height: 2rem;
 
   		@include mq($until: desktop) {
@@ -83,8 +87,12 @@ client.login('some cool token');
 
       h1 {
         margin: 0;
-        font-size: 4rem;
-        text-shadow: 0 3px 0 #555, 0 0 1em black;
+        margin-bottom: 2rem;
+        font-size: 5rem;
+        letter-spacing: -2px;
+        text-shadow: 0 3px 4px #333;
+        color: white;
+        font-weight: bold;
 
         img {
           width: 95%;

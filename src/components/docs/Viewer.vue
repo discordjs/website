@@ -179,13 +179,16 @@
 
   .badge {
     margin-left: 2px;
-    padding: 3px 4px;
+    padding: 5px;
     color: white;
     background: lighten($color-primary, 10%);
     border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
 
     &:first-of-type {
-      margin-left: 12px;
+      margin-left: 8px;
     }
   }
 

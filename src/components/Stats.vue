@@ -2,7 +2,6 @@
   <ul class="stats">
     <li>{{ downloads }} downloads</li>
     <li>{{ stars }} stars</li>
-    <li>{{ contributors }} contributors</li>
   </ul>
 </template>
 
@@ -10,9 +9,8 @@
   const request = require('superagent');
 
   const data = {
-    downloads: '90,000+',
+    downloads: '95,000+',
     stars: '600+',
-    contributors: '30+',
   };
 
   export default {
@@ -27,9 +25,6 @@
       });
       request.get('https://api.github.com/repos/hydrabolt/discord.js').end((err, res) => {
         if (!err) data.stars = res.body.stargazers_count.toLocaleString();
-      });
-      request.get('https://api.github.com/repos/hydrabolt/discord.js/contributors').end((err, res) => {
-        if (!err) data.contributors = res.body.length.toLocaleString();
       });
       return data;
     },

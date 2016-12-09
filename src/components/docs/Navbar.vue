@@ -97,6 +97,7 @@
       color: white;
       font-size: 0.85rem;
       border: 1px solid #aaa;
+      font-family: $font-regular;
     }
 
     select {
@@ -105,8 +106,9 @@
 
     input {
       float: right;
-      padding: 2px;
-
+      padding: 3px 2px;
+      border: none;
+      border-bottom: 1px solid #aaa;
       @include mq($until: desktop) {
         display: none;
       }
