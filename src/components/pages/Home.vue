@@ -99,6 +99,10 @@ client.login('token');
           max-width: 700px;
           filter: drop-shadow(2px 2px 2px #222);
         }
+
+        @include mq($until: desktop) {
+          font-size: 3rem;
+        }
       }
     }
 
