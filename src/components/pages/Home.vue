@@ -1,7 +1,7 @@
 <template>
   <div id="home" v-once>
     <slide id="jumbotron">
-      <logo id="logo" />
+      <logo :light="true" id="logo" />
       <code>npm install --save discord.js</code><br />
     </slide>
 
@@ -136,18 +136,6 @@ client.login('token');
       width: 95%;
       max-width: 700px;
       filter: drop-shadow(0 3px 4px #333);
-
-      #logo-discord {
-        fill: white;
-      }
-
-      #logo-js {
-        fill: lighten(#33b5e5, 20%);
-      }
-
-      #logo-dot {
-        fill: lighten(#399967, 30%);
-      }
     }
 
     #info {
