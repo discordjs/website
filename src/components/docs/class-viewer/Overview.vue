@@ -72,6 +72,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 48px 0;
+    min-width: 0;
 
     .title {
       font-size: 16px;
@@ -80,26 +81,23 @@
     }
 
     ul {
-      list-style: none;
       margin: 0;
       padding: 0;
-      font-size: 14px;
+      font-size: 0.875rem;
       color: lighten($color-content-text, 35%);
 
       li {
+        display: block;
         margin: 0;
         padding: 0;
 
         a {
           display: block;
-          padding: 2px 0;
-          margin: 1px 0;
-          width: 100%;
-          height: 100%;
+          padding: 3px 0;
           color: inherit;
           text-decoration: inherit;
 
-          @include mq($from: desktop) {
+          @include mq($from: tablet) {
             padding-left: 6px;
             border-left: 2px solid $color-inactive-border;
           }
@@ -108,7 +106,7 @@
             color: $color-primary;
             background: darken($color-content-bg, 2%);
 
-            @include mq($from: desktop) {
+            @include mq($from: tablet) {
               border-left: 2px solid;
             }
           }
@@ -117,11 +115,11 @@
     }
 
     .col {
-      flex: 1;
+      flex: 1 1 auto;
       min-width: 100px;
     }
 
-    @include mq($until: desktop) {
+    @include mq($until: tablet) {
       flex-direction: column;
 
       li {

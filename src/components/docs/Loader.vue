@@ -75,6 +75,11 @@
           for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
           for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
+          // Workaround for the single use of inter-source see also linking
+          if (this.source.id === 'commando') {
+            docs.links.Message = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Message' } };
+          }
+
           docs.global = this.source.global;
           docs.source = this.source.source;
           docs.tag = this.tag;

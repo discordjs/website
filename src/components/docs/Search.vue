@@ -1,5 +1,5 @@
 <template>
-  <div id="docs-search">
+  <div id="docs-search" class="docs-page">
     <h1>Search</h1>
     <input v-model.trim="search" type="search" />
 
@@ -172,16 +172,19 @@
 
   #docs-search {
     padding: 16px 32px;
-    width: 100%;
+
+    input {
+      margin: 4px 2px;
+      width: 16rem;
+      max-width: 100%;
+
+      @include mq($from: tablet) {
+        display: none;
+      }
+    }
 
     ul {
       margin-bottom: 24px;
-    }
-
-    @include mq($from: desktop) {
-      input {
-        display: none;
-      }
     }
   }
 </style>

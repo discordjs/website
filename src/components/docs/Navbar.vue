@@ -95,9 +95,9 @@
       display: inline-block;
       background: lighten($color-navbar-bg, 6.5%);
       color: white;
+      font-family: $font-regular;
       font-size: 0.85rem;
       border: 1px solid #aaa;
-      font-family: $font-regular;
     }
 
     select {
@@ -105,11 +105,19 @@
     }
 
     input {
+      display: block;
       float: right;
       padding: 3px 2px;
       border: none;
       border-bottom: 1px solid #aaa;
-      @include mq($until: desktop) {
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: $color-primary;
+        outline: none;
+      }
+
+      @include mq($until: tablet) {
         display: none;
       }
     }
@@ -117,10 +125,8 @@
     a {
       float: right;
       color: white;
-    }
 
-    @include mq($from: desktop) {
-      a {
+      @include mq($from: tablet) {
         display: none;
       }
     }

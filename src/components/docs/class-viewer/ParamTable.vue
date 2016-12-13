@@ -69,7 +69,7 @@
     th {
       background: $color-primary;
       color: white;
-      font-weight: 600;
+      font-weight: bold;
       text-transform: uppercase;
       padding: 16px;
     }
@@ -93,9 +93,7 @@
     }
   }
 
-  @include mq($until: desktop) {
-    .param-table-wrapper {
-      overflow: auto;
-    }
+  .param-table-wrapper {
+    overflow: auto;
   }
 </style>

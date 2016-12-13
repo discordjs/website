@@ -40,14 +40,20 @@
   @import '../../styles/mq';
 
   #file-viewer {
-
     code {
       font-family: $font-monospace;
       font-size: 0.8rem;
     }
 
-    :not(pre) > code, .lang-bash {
-      background: #f5f5f5;
+    :not(pre) > code {
+      background: darken($color-content-bg, 3.5%);
+      border-radius: 2px;
+    }
+
+    table {
+      display: block;
+      max-width: 100%;
+      overflow: auto;
     }
   }
 </style>

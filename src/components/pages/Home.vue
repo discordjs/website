@@ -1,23 +1,27 @@
 <template>
   <div id="home" v-once>
     <slide id="jumbotron">
-      <h1>DISCORD.JS</h1>
+      <logo id="logo" />
       <code>npm install --save discord.js</code><br />
     </slide>
 
-    <slide id="about">
-      <h2>ABOUT</h2>
-      <p>
-        discord.js is a powerful <a href="https://nodejs.org/">node.js</a> module that allows you to interact with the
-        <a href="https://discordapp.com/developers/docs/intro">Discord API</a> very easily.
-        It takes a much more object-oriented approach than most other JS Discord libraries, making your bot's code significantly tidier and easier to comprehend.
-        Usability and performance are key focuses of discord.js, and it also has nearly 100% coverage of the Discord API.
-      </p>
-    </slide>
+    <section id="info">
+      <div class="info-item">
+        <h2>About</h2>
+        <p>
+          discord.js is a powerful <a href="https://nodejs.org/">node.js</a> module that allows you to interact with the
+          <a href="https://discordapp.com/developers/docs/intro">Discord API</a> very easily.
+          It takes a much more object-oriented approach than most other JS Discord libraries, making your bot's code significantly tidier and easier to comprehend.
+        </p>
+        <p>
+          Usability, consistency, and performance are key focuses of discord.js, and it also has nearly 100% coverage of the Discord API.
+          It receives new Discord features shortly after they arrive in the API.
+        </p>
+      </div>
 
-    <slide id="example">
-      <h2>EXAMPLE</h2>
-      <pre><code class="javascript" v-hljs>
+      <div class="info-item">
+        <h2>Example</h2>
+        <pre><code class="javascript" v-hljs>
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -32,13 +36,49 @@ client.on('message', msg => {
 });
 
 client.login('token');
-      </code></pre>
-    </slide>
+        </code></pre>
+      </div>
+
+      <div class="info-item">
+        <h2>Why?</h2>
+        <p>
+          <ul>
+            <li>Object-oriented</li>
+            <li>Speedy and efficient</li>
+            <li>Feature-rich</li>
+            <li>Flexible</li>
+            <li>100% Promise-based</li>
+          </ul>
+        </p>
+      </div>
+
+      <div class="info-item">
+        <h2>Statistics</h2>
+        <p>
+          <stats />
+        </p>
+        <p class="center">...and growing!</p>
+      </div>
+
+      <div class="full-info-item">
+        <router-link to="/docs" class="big-ass-btn">Get started</router-link>
+        <a href="https://discord.gg/bRCvFy9" class="big-ass-btn discord">Discord</a>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-  export default { name: 'home' };
+  import Logo from '../Logo.vue';
+  import Stats from '../Stats.vue';
+
+  export default {
+    name: 'home',
+    components: {
+      Logo,
+      Stats,
+    },
+  };
 </script>
 
 <style lang="scss">
@@ -46,9 +86,8 @@ client.login('token');
   @import '../../styles/mq';
 
   #home {
-  	.slide > .container {
-  		text-align: center;
-  	}
+    text-align: center;
+    background: #fefefe;
 
   	h2 {
   		font-size: 2rem;
@@ -60,73 +99,111 @@ client.login('token');
   	p {
   		font-size: 1rem;
   		line-height: 2rem;
+      text-align: left;
 
-  		@include mq($until: desktop) {
+  		@include mq($until: tablet) {
   			margin: 0 1rem;
   		}
 
   		& > a {
   			font-weight: bold;
   		}
+
+      &.center {
+        text-align: center;
+      }
   	}
 
   	code {
   		display: inline-block;
-  		margin: 16px;
   		padding: 16px;
   		border-radius: 5px;
-  		background: #fafafa;
+  		background: #f5f5f5;
   		font-family: $font-monospace;
   		color: black;
   	}
 
     #jumbotron {
-      padding: 100px 16px;
+      flex: 0 0 100%;
+      padding: 80px 16px;
       background-color: $color-primary;
       background-image: linear-gradient(top, $color-primary, darken($color-primary, 5%));
+    }
 
-      h1 {
-        margin: 0;
-        margin-bottom: 2rem;
-        font-size: 5rem;
-        letter-spacing: -2px;
-        text-shadow: 0 3px 4px #333;
-        color: white;
-        font-weight: bold;
+    #logo {
+      display: block;
+      margin: 16px auto;
+      width: 95%;
+      max-width: 700px;
+      filter: drop-shadow(0 3px 4px #333);
 
-        img {
-          width: 95%;
-          max-width: 700px;
-          filter: drop-shadow(2px 2px 2px #222);
-        }
+      #logo-discord {
+        fill: white;
+      }
 
-        @include mq($until: desktop) {
-          font-size: 3rem;
-        }
+      #logo-js {
+        fill: lighten(#33b5e5, 20%);
+      }
+
+      #logo-dot {
+        fill: lighten(#399967, 30%);
       }
     }
 
-    #about, #example {
-      @include mq($until: desktop) {
-        padding: 32px 0;
-      }
+    #info {
+      display: flex;
+      flex-flow: row wrap;
+      margin: 64px auto;
+      max-width: 1120px;
 
-      @include mq($from: desktop) {
-        padding: 64px 0;
+      @include mq($until: tablet) {
+        margin: 32px auto;
       }
     }
 
-    #about {
-      background: #fafafa;
-    }
+    .info-item {
+      flex: 1 1 45%;
+      padding: 24px;
 
-    #example {
-      background: #eee;
+      ul {
+        display: inline-block;
+        margin: 0 auto;
+        text-align: left;
+      }
 
       code {
         text-align: left;
-        font-size: 14px;
-        white-space: pre-wrap;
+        font-size: 0.875rem;
+      }
+    }
+
+    .full-info-item {
+      flex: 1 0 100%;
+      margin: 48px 0;
+    }
+
+    .big-ass-btn {
+      display: inline-block;
+      padding: 12px 10px;
+      border-radius: 4px;
+      background: $color-primary;
+      color: white;
+      font-size: 1.1rem;
+
+      &:hover {
+        background: lighten($color-primary, 10%);
+      }
+
+      &:not(:first-of-type) {
+        margin-left: 8px;
+      }
+
+      &.discord {
+        background-color: #7289da;
+
+        &:hover {
+          background: lighten(#7289da, 10%);
+        }
       }
     }
   }

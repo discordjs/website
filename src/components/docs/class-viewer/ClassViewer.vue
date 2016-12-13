@@ -7,9 +7,9 @@
       <span v-if="clarse.extends">extends <type-link :type="clarse.extends" :docs="docs" /></span>
       <span v-if="clarse.implements">implements <type-link :type="clarse.implements" :docs="docs" /></span>
     </p>
-    <span v-if="clarse.abstract" class="badge" title="This class is abstract, and may not be instantiated itself.">Abstract</span>
-    <span v-if="clarse.deprecated" class="badge" title="This class is deprecated, and may be removed in a future version.">Deprecated</span>
-    <span v-if="clarse.access === 'private'" class="badge" title="This class is private, and may change or be removed at any time.">Private</span>
+    <span v-if="clarse.abstract" class="badge class-badge" title="This class is abstract, and may not be instantiated itself.">Abstract</span>
+    <span v-if="clarse.deprecated" class="badge class-badge" title="This class is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="clarse.access === 'private'" class="badge class-badge" title="This class is private, and may change or be removed at any time.">Private</span>
 
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
     <see v-if="clarse.see" :see="clarse.see" :docs="docs" />
@@ -108,14 +108,10 @@
 
     h1 {
       color: #333;
-      font-size: 26px;
-      font-weight: 600;
     }
 
     h2 {
       margin-top: 40px;
-      font-size: 22px;
-      font-weight: 600;
     }
 
     h3 {
@@ -134,10 +130,17 @@
     }
 
     .class-name-extra {
+      position: relative;
+      top: -1px;
+      left: 0.2rem;
       color: lighten($color-content-text, 40%);
       font-family: $font-header;
-      font-size: 1rem;
-      margin-left: 4px;
+      font-size: 1.1rem;
+    }
+
+    .class-badge {
+      position: relative;
+      top: -4px;
     }
 
     #class-constructor {
@@ -156,15 +159,16 @@
       margin: 20px 2px;
       padding: 8px;
 
-      @include mq($from: desktop) {
-        .source-button {
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
+      .source-button {
+        transition: opacity 0.3s;
 
-        &:hover .source-button {
-          opacity: 1;
+        @include mq($from: desktop) {
+          opacity: 0;
         }
+      }
+
+      &:hover .source-button {
+        opacity: 1;
       }
     }
 
@@ -177,6 +181,11 @@
     code {
       font-family: $font-monospace;
       font-size: 0.8rem;
+    }
+
+    :not(pre) > code {
+      background: darken($color-content-bg, 3.5%);
+      border-radius: 2px;
     }
   }
 </style>

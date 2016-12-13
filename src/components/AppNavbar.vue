@@ -32,7 +32,7 @@
 
     & .container > a {
       background: $color-primary;
-      font-size: 18px;
+      font-size: 1.1rem;
 
       &:hover {
         color: white;

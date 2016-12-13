@@ -78,5 +78,15 @@
     .param-table-wrapper {
       border: 0;
     }
+
+    code {
+      font-family: $font-monospace;
+      font-size: 0.8rem;
+    }
+
+    :not(pre) > code {
+      background: darken($color-content-bg, 3.5%);
+      border-radius: 2px;
+    }
   }
 </style>

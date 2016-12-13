@@ -141,17 +141,17 @@
     & > .container {
       display: flex;
 
-      @include mq($until: desktop) {
+      @include mq($until: tablet) {
         flex-direction: column;
       }
     }
   }
 
   .docs-page {
-    width: 100%;
+    flex: 1 1 auto;
     padding: 16px 32px;
 
-    @include mq($until: desktop) {
+    @include mq($until: tablet) {
       padding: 16px 0;
     }
 
@@ -184,7 +184,7 @@
     background: lighten($color-primary, 10%);
     border-radius: 3px;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 0.85rem;
     font-weight: bold;
 
     &:first-of-type {

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700|Roboto+Mono:400,700|');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|Roboto+Mono:400,700|Roboto:400,400i,700');
+
 body {
   font-family: $font-regular;
   background: $color-navbar-bg;
@@ -21,6 +22,7 @@ a {
 
 pre {
   tab-size: 2;
+  white-space: pre-wrap
 }
 
 code {

@@ -89,9 +89,10 @@
   @import '../../styles/mq';
 
   #docs-sidebar {
+    flex: 0 1 auto;
     border-right: 1px solid $color-inactive-border;
 
-    @include mq($until: desktop) {
+    @include mq($until: tablet) {
       border-right: 0;
 
       #docs-sidebar-content {
@@ -127,7 +128,7 @@
       font-size: 1.1rem;
       cursor: pointer;
 
-      @include mq($from: desktop) {
+      @include mq($from: tablet) {
         display: none;
       }
     }
@@ -188,7 +189,7 @@
     padding: 5px;
     cursor: pointer;
 
-    @include mq($until: desktop) {
+    @include mq($until: tablet) {
       display: none;
     }
   }
