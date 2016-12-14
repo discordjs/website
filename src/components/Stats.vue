@@ -12,7 +12,7 @@
   const data = {
     downloads: '95,000+',
     stars: '600+',
-    contributors: '30+',
+    contributors: '55+',
     fetching: false,
   };
 
@@ -32,7 +32,7 @@
       request.get('https://api.github.com/repos/hydrabolt/discord.js').end((err, res) => {
         if (!err) data.stars = res.body.stargazers_count.toLocaleString();
       });
-      request.get('https://api.github.com/repos/hydrabolt/discord.js/contributors').end((err, res) => {
+      request.get('https://api.github.com/repos/hydrabolt/discord.js/stats/contributors').end((err, res) => {
         if (!err) data.contributors = res.body.length.toLocaleString();
       });
 
