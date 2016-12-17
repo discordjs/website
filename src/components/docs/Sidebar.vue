@@ -161,14 +161,13 @@
 
         a {
           display: block;
-          padding: 4px 32px 4px 6px;
+          padding: 4px 32px 4px 4px;
           color: inherit;
           text-decoration: none;
-          border-color: transparentize($color-primary, 1);
+          border-left: 2px solid transparentize($color-primary, 1);
 
           &:hover {
-            padding-left: 4px;
-            border-left: 2px solid $color-primary;
+            border-color: $color-primary;
             color: $color-primary;
             background: darken($color-content-bg, 2%);
           }
