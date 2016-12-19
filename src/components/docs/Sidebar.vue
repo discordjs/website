@@ -10,11 +10,11 @@
       <em id="docs-visibility" class="fa" :class="showPrivate ? 'fa-eye' : 'fa-eye-slash'" :title="showPrivate ? 'Hide private' : 'Show private'" @click="togglePrivate"></em>
 
       <ul>
-        <li v-for="(files, category) in docs.custom">
-          {{ category }}
+        <li v-for="(category, categoryID) in docs.custom">
+          {{ category.name }}
           <ul>
-            <li v-for="file in files">
-              <router-link :to="{ name: 'docs-file', params: { category, file: file.id } }">
+            <li v-for="(file, fileID) in category.files">
+              <router-link :to="{ name: 'docs-file', params: { category: categoryID, file: fileID } }">
                 {{ file.name }}
               </router-link>
             </li>

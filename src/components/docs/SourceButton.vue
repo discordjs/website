@@ -1,6 +1,6 @@
 <template>
   <div class="source-button">
-    <a :href="`${sourceURL(meta.path, meta.file, meta.line)}`" title="Source">
+    <a :href="`${meta ? sourceURL(meta.path, meta.file, meta.line) : sourceURL(path)}`" title="Source">
       <em class="fa fa-code"></em>
     </a>
   </div>
@@ -11,7 +11,7 @@
 
   export default {
     name: 'source-button',
-    props: ['meta', 'docs'],
+    props: ['meta', 'path', 'docs'],
 
     methods: {
       sourceURL(path, file, line) {

@@ -20,7 +20,7 @@ export function hljs(el) {
 
 // Creates a full URL for a GitHub source view
 export function sourceURL(url, tag, path, file, line) {
-  return resolveURL(url, `${tag}/${path}/${file}#L${line}`);
+  return resolveURL(url, `${tag}/${path}${file ? `/${file}` : ''}${line ? `#L${line}` : ''}`);
 }
 
 // Converts a JSDoc link value to an object of link information
