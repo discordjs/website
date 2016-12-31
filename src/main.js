@@ -20,7 +20,7 @@ import DocsSearchComponent from './components/docs/Search.vue';
 
 require('./styles/master.scss');
 
-// Set up the router
+// Set up the router!
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
