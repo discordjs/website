@@ -1,6 +1,6 @@
 <template>
   <div id="docs">
-    <docs-navbar :sources="sources" :source="source" @sourceChange="setSource" @tagChange="setTag" />
+    <docs-navbar :sources="sources" :source="source" />
     <router-view :source="source" :tag="tag" />
   </div>
 </template>
