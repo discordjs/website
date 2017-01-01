@@ -7,7 +7,7 @@ cache:
 install: npm install
 script:
   - npm run lint
-  - bash ./deploy.sh
+  - bash ./deploy/deploy.sh
 env:
   global:
     - ENCRYPTION_LABEL: "NEEDS CHANGING"
