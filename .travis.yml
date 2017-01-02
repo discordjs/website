@@ -9,7 +9,7 @@ script:
   - bash ./deploy/deploy.sh
 env:
   global:
-    - ENCRYPTION_LABEL: "NEEDS CHANGING"
+    - ENCRYPTION_LABEL: "583a5951da37"
     - COMMIT_AUTHOR_EMAIL: "amishshah.2k@gmail.com"
 dist: trusty
 sudo: false
