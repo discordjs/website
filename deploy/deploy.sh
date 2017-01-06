@@ -34,7 +34,7 @@ git clone $REPO dist -b $TARGET_BRANCH
 npm run build
 
 # Commit and push
-cd out
+cd dist
 git add .
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
