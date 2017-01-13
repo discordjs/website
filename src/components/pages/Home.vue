@@ -136,6 +136,7 @@ client.login('token');
       width: 95%;
       max-width: 700px;
       filter: drop-shadow(0 3px 4px #333);
+      animation: spin 0.5s infinite linear;
     }
 
     #info {
