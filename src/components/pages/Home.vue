@@ -71,12 +71,30 @@ client.login('token');
 <script>
   import Logo from '../Logo.vue';
   import Stats from '../Stats.vue';
+  import Konami from 'konami-code-js';
+
+  let konami = null;
 
   export default {
     name: 'home',
     components: {
       Logo,
       Stats,
+    },
+
+    mounted() {
+      if (!konami) {
+        konami = new Konami(() => {
+          document.getElementById('logo').style.animation = 'spin 0.5s infinite linear';
+          konami.disable();
+        });
+      } else {
+        konami.enable();
+      }
+    },
+
+    beforeDestroy() {
+      if (konami) konami.disable();
     },
   };
 </script>
@@ -136,7 +154,6 @@ client.login('token');
       width: 95%;
       max-width: 700px;
       filter: drop-shadow(0 3px 4px #333);
-      animation: spin 0.5s infinite linear;
     }
 
     #info {
