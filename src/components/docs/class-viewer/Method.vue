@@ -13,8 +13,8 @@
 		</h3>
     <span v-if="method.scope === 'static'" class="badge" title="This method is on the class constructor function, not instances.">Static</span>
     <span v-if="method.abstract" class="badge" title="This method is abstract, and must be implemented in a child class.">Abstract</span>
-    <span v-if="method.deprecated" class="badge" title="This method is deprecated, and may be removed in a future version.">Deprecated</span>
-    <span v-if="method.access === 'private'" class="badge" title="This method is private, and may change or be removed at any time.">Private</span>
+    <span v-if="method.deprecated" class="badge warn" title="This method is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="method.access === 'private'" class="badge warn" title="This method is private, and may change or be removed at any time.">Private</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>

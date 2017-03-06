@@ -113,7 +113,7 @@
       background: #F0F0F0;
     }
 
-    .info, .warn {
+    div.info, div.warn {
       display: inline-block;
       margin: 0;
       padding: 8px;
@@ -121,13 +121,13 @@
       border-left: 2px solid;
     }
 
-    .info {
+    div.info {
       background: lighten($color-info, 25%);
       border-color: lighten($color-info, 15%);
       border-left-color: $color-info;
     }
 
-    .warn {
+    div.warn {
       background: lighten($color-warn, 25%);
       border-color: lighten($color-warn, 15%);
       border-left-color: $color-warn;
@@ -189,6 +189,10 @@
 
     &:first-of-type {
       margin-left: 8px;
+    }
+
+    &.warn {
+      background: lighten($color-warn, 5%);
     }
   }
 

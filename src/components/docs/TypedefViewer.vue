@@ -3,7 +3,7 @@
     <source-button :meta="typedef.meta" :docs="docs" />
 
     <h1>{{ typedef.name }}</h1>
-    <span v-if="typedef.deprecated" class="badge" title="This typedef is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="typedef.deprecated" class="badge warn" title="This typedef is deprecated, and may be removed in a future version.">Deprecated</span>
     <p class="typedef-desc" v-html="description" v-if="typedef.description"></p>
     <see v-if="typedef.see" :see="typedef.see" :docs="docs" />
 
