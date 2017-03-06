@@ -1,4 +1,4 @@
-import request from 'superagent';
+import request from 'superagent/superagent';
 
 export default class DocsSource {
   constructor(options) {

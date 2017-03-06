@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import request from 'superagent';
+  import request from 'superagent/superagent';
 
   const data = {
     downloads: '95,000+',
