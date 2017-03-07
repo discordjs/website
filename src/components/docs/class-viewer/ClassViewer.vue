@@ -20,7 +20,7 @@
       <param-table :params="clarse.construct.params" :docs="docs" />
     </div>
 
-    <overview :clarse="clarse" :showPrivate="showPrivate" />
+    <overview :properties="properties" :methods="methods" :events="clarse.events" />
 
     <h2 v-if="properties && properties.length > 0">Properties</h2>
     <property v-for="prop in properties" :prop="prop" :docs="docs" />
@@ -73,15 +73,23 @@
       },
 
       properties() {
-        if (this.showPrivate) return this.clarse.props;
         if (!this.clarse.props) return null;
-        return this.clarse.props.filter(p => p.access !== 'private');
+        let props;
+        if (this.showPrivate) props = this.clarse.props;
+        else props = this.clarse.props.filter(p => p.access !== 'private');
+        return props.sort((a, b) =>
+          `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+        );
       },
 
       methods() {
-        if (this.showPrivate) return this.clarse.methods;
         if (!this.clarse.methods) return null;
-        return this.clarse.methods.filter(p => p.access !== 'private');
+        let methods;
+        if (this.showPrivate) methods = this.clarse.methods;
+        else methods = this.clarse.methods.filter(p => p.access !== 'private');
+        return methods.sort((a, b) =>
+          `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+        );
       },
 
       description() {
