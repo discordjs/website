@@ -35,7 +35,7 @@ npm run build
 
 # Commit and push
 cd dist
-git add .
+git add --all .
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 git commit -m "Site build: ${SHA}" || true
