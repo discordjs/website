@@ -12,6 +12,7 @@ export default class DocsSource {
     this.branchFilter = options.branchFilter || (branch => branch !== 'master');
     this.tagFilter = options.tagFilter || (() => true);
     this.tags = null;
+    this.recentTag = null;
   }
 
   fetchTags() {

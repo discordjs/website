@@ -34,6 +34,7 @@
 
       setTag(tag) {
         this.tag = tag;
+        this.source.recentTag = tag;
       },
 
       handleRoute(route) {
@@ -56,7 +57,7 @@
         } else {
           this.$router.replace({ name: 'docs-file', params: {
             source: this.source.id,
-            tag: this.source.defaultTag,
+            tag: this.source.recentTag || this.source.defaultTag,
             category: this.source.defaultFile.category,
             file: this.source.defaultFile.id,
           } });
