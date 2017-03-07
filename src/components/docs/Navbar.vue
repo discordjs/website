@@ -34,9 +34,8 @@
 
     methods: {
       loadTags() {
-        if (this.source.tags) {
-          this.tags = this.source.tags;
-        } else {
+        this.tags = this.source.tags;
+        if (!this.tags) {
           const startSource = this.source;
           this.source.fetchTags().then(tags => {
             if (this.source.id === startSource.id) this.tags = tags;
