@@ -53,6 +53,21 @@ code {
   transform: translateX(30px);
 }
 
+.animated-list-item {
+  transition: all 0.3s;
+}
+.animated-list-enter, .animated-list-leave-to {
+  opacity: 0;
+  transform: scale(0.4);
+}
+.animated-list-leave-active {
+  position: absolute;
+
+  .small-badge {
+    display: none;
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

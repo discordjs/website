@@ -23,13 +23,13 @@
 
         <li>
           Classes
-          <ul>
-            <li v-for="clarse in docs.classes" v-if="showPrivate || clarse.access !== 'private'">
+          <transition-group name="animated-list" tag="ul">
+            <li v-for="clarse in docs.classes" v-if="showPrivate || clarse.access !== 'private'" :key="clarse.name" class="animated-list-item">
               <router-link exact :to="{ name: 'docs-class', params: { class: clarse.name } }">
                 {{ clarse.name }}
               </router-link>
             </li>
-          </ul>
+          </transition-group>
         </li>
 
         <li>

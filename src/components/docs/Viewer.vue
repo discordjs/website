@@ -196,6 +196,26 @@
     }
   }
 
+  .small-badge {
+    float: right;
+    width: 1em;
+    margin-right: 8px;
+    padding: 2px 1px;
+    border-radius: 3px;
+    background: lighten($color-primary, 25%);
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s;
+
+    &.warn {
+      background: lighten($color-warn, 20%);
+    }
+
+    @include mq($until: tablet) {
+      margin-right: 0;
+    }
+  }
+
   #scroll-top {
     position: fixed;
     bottom: 20px;
