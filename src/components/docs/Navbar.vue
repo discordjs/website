@@ -7,10 +7,12 @@
         <option v-for="source in sources" :value="source.id">{{ source.name }}</option>
       </select>
 
-      <select v-model="tagChoice" v-if="tags">
-        <option v-for="tag in tags" :value="tag">{{ tag }}</option>
-      </select>
-      <loading v-else />
+      <transition name="fade" mode="out-in">
+        <select v-model="tagChoice" v-if="tags" :key="'tags-' + source.id">
+          <option v-for="tag in tags" :value="tag">{{ tag }}</option>
+        </select>
+        <loading v-else />
+      </transition>
 
       <input v-model.trim="search" type="search" placeholder="Search" />
       <router-link :to="{ name: 'docs-search' }"><em class="fa fa-search"></em></router-link>
