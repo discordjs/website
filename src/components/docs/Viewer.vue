@@ -166,13 +166,13 @@
     font-size: 0.8em;
 
     p {
-      display: inline;
+      display: inline-block;
       color: lighten($color-content-text, 60%);
       transition: all 0.3s;
 
       &:hover {
-        font-size: 0.9rem;
         color: lighten($color-content-text, 15%);
+        transform: scale(1.1);
       }
     }
   }
