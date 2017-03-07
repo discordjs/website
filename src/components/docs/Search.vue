@@ -3,63 +3,71 @@
     <h1>Search</h1>
     <input v-model.trim="search" type="search" />
 
-    <h2 v-if="search && search.length > 1">Results for "{{ search }}"</h2>
-    <div v-if="search && search.length > 1">
-      <ul v-if="results.count > 0">
-        <li v-if="results.classes.length > 0">
-          Classes
-          <ul>
-            <li v-for="clarse in results.classes">
-              <router-link :to="{ name: 'docs-class', params: { class: clarse } }">{{ clarse }}</router-link>
-            </li>
-          </ul>
-        </li>
 
-        <li v-if="results.typedefs.length > 0">
-          Typedefs
-          <ul>
-            <li v-for="typedef in results.typedefs">
-              <router-link :to="{ name: 'docs-typedef', params: { typedef } }">{{ typedef }}</router-link>
-            </li>
-          </ul>
-        </li>
+    <transition name="fade" mode="out-in">
+      <div v-if="search && search.length > 1">
+        <h2 v-if="search && search.length > 1">Results for "{{ search }}"</h2>
 
-        <li v-if="results.methods.length > 0">
-          Methods
-          <ul>
-            <li v-for="method in results.methods">
-              <router-link :to="{ name: 'docs-class', params: { class: method.class }, query: { scrollTo: scopedScrollTo(method) } }">
-                {{ method.class }}{{ method.scope === 'static' ? '.' : '#' }}{{ method.name }}
-              </router-link>
+        <transition name="fade" mode="out-in">
+          <transition-group name="animated-list" tag="ul" v-if="results.count > 0" key="results">
+            <li v-if="results.classes.length > 0" key="classes" class="animated-list-item">
+              Classes
+              <ul>
+                <li v-for="clarse in results.classes" :key="clarse">
+                  <router-link :to="{ name: 'docs-class', params: { class: clarse } }">{{ clarse }}</router-link>
+                </li>
+              </ul>
             </li>
-          </ul>
-        </li>
 
-        <li v-if="results.props.length > 0">
-          Properties
-          <ul>
-            <li v-for="prop in results.props">
-              <router-link :to="{ name: 'docs-class', params: { class: prop.class }, query: { scrollTo: scopedScrollTo(prop) } }">
-                {{ prop.class }}{{ prop.scope === 'static' ? '.' : '#' }}{{ prop.name }}
-              </router-link>
+            <li v-if="results.typedefs.length > 0" key="typedefs" class="animated-list-item">
+              Typedefs
+              <ul>
+                <li v-for="typedef in results.typedefs">
+                  <router-link :to="{ name: 'docs-typedef', params: { typedef } }">{{ typedef }}</router-link>
+                </li>
+              </ul>
             </li>
-          </ul>
-        </li>
 
-        <li v-if="results.events.length > 0">
-          Events
-          <ul>
-            <li v-for="event in results.events">
-              <router-link :to="{ name: 'docs-class', params: { class: event.class }, query: { scrollTo: event.name } }">
-                {{ event.class }}#{{ event.name }}
-              </router-link>
+            <li v-if="results.methods.length > 0"  key="methods" class="animated-list-item">
+              Methods
+              <ul>
+                <li v-for="method in results.methods">
+                  <router-link :to="{ name: 'docs-class', params: { class: method.class }, query: { scrollTo: scopedScrollTo(method) } }">
+                    {{ method.class }}{{ method.scope === 'static' ? '.' : '#' }}{{ method.name }}
+                  </router-link>
+                </li>
+              </ul>
             </li>
-          </ul>
-        </li>
-      </ul>
-      <p v-else>No results.</p>
-    </div>
-    <p v-else>Your search query must be at least two characters.</p>
+
+            <li v-if="results.props.length > 0" key="properties" class="animated-list-item">
+              Properties
+              <ul>
+                <li v-for="prop in results.props">
+                  <router-link :to="{ name: 'docs-class', params: { class: prop.class }, query: { scrollTo: scopedScrollTo(prop) } }">
+                    {{ prop.class }}{{ prop.scope === 'static' ? '.' : '#' }}{{ prop.name }}
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+
+            <li v-if="results.events.length > 0" key="events" class="animated-list-item">
+              Events
+              <ul>
+                <li v-for="event in results.events">
+                  <router-link :to="{ name: 'docs-class', params: { class: event.class }, query: { scrollTo: event.name } }">
+                    {{ event.class }}#{{ event.name }}
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+          </transition-group>
+
+          <p v-else key="empty">No results.</p>
+        </transition>
+      </div>
+
+      <p v-else key="short">Your search query must be at least two characters.</p>
+    </transition>
   </div>
 </template>
 
