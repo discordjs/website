@@ -32,7 +32,7 @@ code {
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-enter, .fade-leave-active {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
@@ -40,7 +40,7 @@ code {
   transition: opacity 0.3s, transform 0.3s;
   transform-origin: top;
 }
-.fade-resize-enter, .fade-resize-leave-active {
+.fade-resize-enter, .fade-resize-leave-to {
   opacity: 0;
   transform: scale(0.95);
 }
@@ -48,7 +48,7 @@ code {
 .fade-slide-enter-active, .fade-slide-leave-active {
   transition: opacity 0.15s, transform 0.15s;
 }
-.fade-slide-enter, .fade-slide-leave-active {
+.fade-slide-enter, .fade-slide-leave-to {
   opacity: 0;
   transform: translateX(30px);
 }
