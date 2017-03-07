@@ -13,7 +13,7 @@
       <param-table :params="prop.props" :docs="docs" v-if="prop.props && prop.props.length > 0" />
       <div class="prop-type">
         Type:
-        <types v-for="type in prop.type" :names="type" :nullable="prop.nullable" :docs="docs" />
+        <types v-for="type in prop.type" :names="type" :nullable="prop.nullable" :docs="docs" :key="type" />
       </div>
       <div v-if="prop.default" class="prop-default">
         Default: <code>{{ prop.default }}</code>

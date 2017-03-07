@@ -13,7 +13,7 @@
       <tbody>
         <tr v-for="param in params">
           <td>{{ param.name }}</td>
-          <td><types v-for="type in param.type" :names="type" :variable="param.variable" :nullable="param.nullable" :docs="docs" /></td>
+          <td><types v-for="type in param.type" :names="type" :variable="param.variable" :nullable="param.nullable" :docs="docs" :key="type" /></td>
           <td v-if="hasOptional">
             <em class="fa fa-check" v-if="param.optional"></em>
           </td>

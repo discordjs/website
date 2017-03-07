@@ -24,7 +24,7 @@
 			<div class="method-return">
         Returns:
         <span v-if="method.returns">
-  				<types v-for="rtrn in method.returns.types || method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" />
+  				<types v-for="rtrn in method.returns.types || method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" :key="rtrn" />
         </span>
         <type-link v-else :type="['void']" :docs="docs" class="docs-type" />
         <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
@@ -32,7 +32,7 @@
 
       <div v-if="method.throws" class="method-throws">
         Throws:
-        <types v-for="thrw in method.throws" :names="thrw" :docs="docs" />
+        <types v-for="thrw in method.throws" :names="thrw" :docs="docs" :key="thrw" />
       </div>
 
       <div v-if="emits" class="method-emits">

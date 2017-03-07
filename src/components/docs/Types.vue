@@ -1,7 +1,7 @@
 <template>
   <span class="docs-type">
     {{ nullable ? '?' : ''}}{{ variable ? '...' : '' }}<!--
-    --><type-link v-for="type in names" :type="type" :docs="docs" />
+    --><type-link v-for="type in names" :type="type" :docs="docs" :key="type" />
   </span>
 </template>
 

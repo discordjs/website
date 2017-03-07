@@ -23,13 +23,13 @@
     <overview :properties="properties" :methods="methods" :events="clarse.events" />
 
     <h2 v-if="properties && properties.length > 0">Properties</h2>
-    <property v-for="prop in properties" :prop="prop" :docs="docs" />
+    <property v-for="prop in properties" :prop="prop" :docs="docs" :key="prop" />
 
     <h2 v-if="methods && methods.length > 0">Methods</h2>
-    <method v-for="method in methods" :method="method" :docs="docs" />
+    <method v-for="method in methods" :method="method" :docs="docs" :key="method" />
 
     <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
-    <event v-for="event in clarse.events" :event="event" :docs="docs" />
+    <event v-for="event in clarse.events" :event="event" :docs="docs" :key="event" />
   </div>
   <unknown-page v-else class="docs-page" />
 </template>
