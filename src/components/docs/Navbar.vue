@@ -7,10 +7,12 @@
         <option v-for="source in sources" :value="source.id">{{ source.name }}</option>
       </select>
 
-      <select v-if="tags" v-model="tagChoice">
-        <option v-for="tag in tags" :value="tag">{{ tag }}</option>
-      </select>
-      <loading v-else />
+      <transition name="fade" mode="out-in" @enter="updateTagChoice">
+        <select v-if="tags" v-model="tagChoice" :key="source.id">
+          <option v-for="tag in tags" :value="tag">{{ tag }}</option>
+        </select>
+        <loading v-else />
+      </transition>
 
       <input v-model.trim="search" type="search" placeholder="Search" />
       <router-link :to="{ name: 'docs-search' }"><em class="fa fa-search"></em></router-link>
@@ -26,7 +28,7 @@
     data() {
       return {
         sourceChoice: this.source.id,
-        tagChoice: this.$route.params.tag || this.source.recentTag || this.source.defaultTag,
+        tagChoice: null,
         tags: null,
         search: this.$route.query.q,
       };
@@ -42,6 +44,10 @@
           });
         }
       },
+
+      updateTagChoice() {
+        if (this.tags) this.tagChoice = this.$route.params.tag || this.source.recentTag || this.source.defaultTag;
+      },
     },
 
     watch: {
@@ -56,9 +62,9 @@
       },
 
       source(source) {
-        this.loadTags();
         this.sourceChoice = source.id;
-        this.tagChoice = this.$route.params.tag || source.recentTag || source.defaultTag;
+        this.tagChoice = null;
+        this.loadTags();
       },
 
       search(q) {
@@ -67,7 +73,7 @@
       },
 
       $route(to) {
-        if (to.params.tag && this.tagChoice !== to.params.tag) this.tagChoice = to.params.tag;
+        if (this.tagChoice && to.params.tag && this.tagChoice !== to.params.tag) this.tagChoice = to.params.tag;
       },
     },
 

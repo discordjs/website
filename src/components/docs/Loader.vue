@@ -22,17 +22,23 @@
       return {
         docs: null,
         error: null,
+        loadingTag: null,
       };
     },
 
     methods: {
       loadDocs() {
+        if (this.loadingTag === this.tag) return;
         this.docs = null;
         this.error = null;
 
         const startSource = this.source;
+        const startTag = this.tag;
+        this.loadingTag = this.tag;
+
         this.source.fetchDocs(this.tag).then(docs => {
-          if (this.source !== startSource) return;
+          if (this.source !== startSource || this.tag !== startTag) return;
+          console.log('Loading', startSource, startTag);
 
           // Sort everything
           docs.classes.sort((a, b) => a.name.localeCompare(b.name));
@@ -84,9 +90,12 @@
           docs.source = this.source.source;
           docs.tag = this.tag;
           this.docs = docs;
+          this.loadingTag = null;
+          console.log('Finished loading', startSource, startTag);
         }).catch(err => {
-          console.error(err);
+          console.error('Error while loading', startSource, startTag, err);
           this.error = err;
+          this.loadingTag = null;
         });
       },
 
