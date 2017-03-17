@@ -153,6 +153,7 @@ client.login('token');
       margin: 16px auto;
       width: 95%;
       max-width: 700px;
+      overflow: visible;
       filter: drop-shadow(0 3px 4px #333);
     }
 
