@@ -19,9 +19,9 @@
           </td>
           <td v-if="hasOptional">
             <em v-if="param.optional && typeof param.default === 'undefined'">none</em>
-            <span v-else>{{ param.optional ? param.default : '' }}</span>
+            <span v-else v-html="paramDefault(param)"></span>
           </td>
-          <td v-html="description(param)"></td>
+          <td v-html="paramDescription(param)"></td>
         </tr>
       </tbody>
     </table>
@@ -47,8 +47,12 @@
     },
 
     methods: {
-      description(param) {
+      paramDescription(param) {
         return Vue.filter('marked')(convertLinks(param.description, this.docs, this.$router, this.$route));
+      },
+
+      paramDefault(param) {
+        return param.optional ? `<code>${param.default}</code>` : '';
       },
     },
   };
