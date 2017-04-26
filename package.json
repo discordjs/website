@@ -4,7 +4,8 @@
   "description": "The website housing documentation for discord.js",
   "author": "Amish Shah <amishshah.2k@gmail.com>",
   "contributors": [
-    "Schuyler Cebulskie <Gawdl3y@gawdl3y.com>"
+    "Schuyler Cebulskie <Gawdl3y@gawdl3y.com>",
+    "snek <me@gus.host>"
   ],
   "private": true,
   "scripts": {
@@ -15,8 +16,8 @@
   "dependencies": {
     "konami-code-js": "^0.8.0",
     "marked": "^0.3.6",
-    "superagent": "^3.5.0",
     "semver": "^5.3.0",
+    "snekfetch": "^3.1.5",
     "vue": "^2.2.1",
     "vue-router": "^2.2.0"
   },
@@ -58,7 +59,6 @@
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
     "webpack-merge": "^2.6.1",
-
     "node-sass": "^3.13.0",
     "sass-loader": "^4.0.0"
   },

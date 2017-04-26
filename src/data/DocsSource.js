@@ -1,4 +1,4 @@
-import request from 'superagent/superagent';
+import snekfetch from 'snekfetch';
 
 export default class DocsSource {
   constructor(options) {
@@ -18,8 +18,8 @@ export default class DocsSource {
   fetchTags() {
     if (this.tags) return Promise.resolve(this.tags);
     return Promise.all([
-      request.get(`https://api.github.com/repos/${this.repo}/branches`),
-      request.get(`https://api.github.com/repos/${this.repo}/tags`),
+      snekfetch.get(`https://api.github.com/repos/${this.repo}/branches`),
+      snekfetch.get(`https://api.github.com/repos/${this.repo}/tags`),
     ]).then(responses => [responses[0].body, responses[1].body], err => {
       if (localStorage[`source-${this.id}`]) {
         console.error(err);
@@ -45,8 +45,7 @@ export default class DocsSource {
   }
 
   fetchDocs(tag) {
-    return request.get(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`).then(res =>
-      JSON.parse(res.text)
-    );
+    return snekfetch.get(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`)
+      .then(res => JSON.parse(res.text));
   }
 }
