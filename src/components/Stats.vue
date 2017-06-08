@@ -10,9 +10,9 @@
   import request from 'superagent/superagent';
 
   const data = {
-    downloads: '130,000+',
-    stars: '900+',
-    contributors: '81+',
+    downloads: '175,000+',
+    stars: '1,200+',
+    contributors: '98+',
     fetching: false,
   };
 
