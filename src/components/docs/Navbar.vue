@@ -80,6 +80,10 @@
     created() {
       this.loadTags();
     },
+
+    mounted() {
+      this.updateTagChoice();
+    },
   };
 </script>
 
