@@ -26,7 +26,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.username}!`);
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('message', msg => {
@@ -160,11 +160,11 @@ client.login('token');
     #info {
       display: flex;
       flex-flow: row wrap;
-      margin: 64px auto;
+      margin: 64px auto 0 auto;
       max-width: 1120px;
 
       @include mq($until: tablet) {
-        margin: 32px auto;
+        margin: 32px auto 0 auto;
       }
     }
 

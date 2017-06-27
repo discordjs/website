@@ -80,6 +80,10 @@
     created() {
       this.loadTags();
     },
+
+    mounted() {
+      this.updateTagChoice();
+    },
   };
 </script>
 
@@ -87,7 +91,6 @@
   @import '../../styles/theming';
   @import '../../styles/mq';
 
-  $input-border: ;
   $bg: lighten($color-navbar-bg, 6.5%);
 
   #docs-navbar {
