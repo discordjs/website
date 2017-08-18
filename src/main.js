@@ -87,7 +87,7 @@ const router = new VueRouter({
       const link = to.params.link.toLowerCase();
       if (link in shortlinks) {
         const long = shortlinks[link];
-        if (long.startsWith('https') || long.startsWith('http')) {
+        if (long.startsWith('http')) {
           window.location.href = long;
           return null;
         }
