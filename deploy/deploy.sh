@@ -33,8 +33,12 @@ git clone $REPO dist -b $TARGET_BRANCH
 # Build the site
 npm run build
 
-# Commit and push
 cd dist
+
+# add webpack submodule
+git submodule add -b webpack https://github.com/hydrabolt/discord.js webpack
+
+# Commit and push
 git add --all .
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
