@@ -2,8 +2,8 @@ import semver from 'semver';
 import DocsSource from './DocsSource';
 
 export default new DocsSource({
-  id: 'extension-rpc',
-  name: 'RPC Extension',
+  id: 'rpc',
+  name: 'RPC',
   global: 'RPC',
   repo: 'devsnek/discord-rpc',
   defaultTag: 'master',
