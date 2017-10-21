@@ -20,11 +20,21 @@ import DocsSearchComponent from './components/docs/Search.vue';
 
 require('./styles/master.scss');
 
+import shortlinks from './shortlinks';
+
 // Set up the router!
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
     { path: '/', name: 'home', component: HomePageComponent },
+
+    // Short link to d.js docs
+    // Example: /#/stable/Client.ping
+    { path: '/:branch/:className\\.:method', redirect(to) {
+      const { branch, className, method } = to.params;
+      return `/docs/main/${branch}/class/${className}?scrollTo=${method}`;
+    } },
+
     { path: '/docs', name: 'docs', component: DocumentationPageComponent, children: [
       { path: ':source', name: 'docs-source', component: DocsLoaderComponent, children: [
         { path: ':tag', name: 'docs-tag', component: DocsViewerComponent, children: [
@@ -71,8 +81,22 @@ const router = new VueRouter({
       ] },
     ] },
 
-    // Catch-all
-    { path: '*', component: UnknownRoutePageComponent },
+    { path: '/404', component: UnknownRoutePageComponent },
+
+    { path: '/:link', redirect(to) {
+      const link = to.params.link.toLowerCase();
+      if (link in shortlinks) {
+        const long = shortlinks[link];
+        if (long.startsWith('http')) {
+          window.location.href = long;
+          return null;
+        }
+        return long;
+      }
+      return '/404';
+    } },
+
+    { path: '*', redirect: '/404' },
   ],
   scrollBehavior(to, from, saved) {
     if (saved) return saved;

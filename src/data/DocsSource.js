@@ -45,8 +45,7 @@ export default class DocsSource {
   }
 
   fetchDocs(tag) {
-    return request.get(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`).then(res =>
-      JSON.parse(res.text)
-    );
+    return request.get(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`)
+      .then(res => res.body);
   }
 }
