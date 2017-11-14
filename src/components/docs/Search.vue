@@ -173,6 +173,12 @@
         margin: 4px;
       }
 
+      input {
+        position: relative;
+        top: 2px;
+        margin-right: 2px;
+      }
+
       @include mq($until: desktop) {
         flex-direction: column;
       }
