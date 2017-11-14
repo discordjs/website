@@ -1,8 +1,8 @@
 <template>
-  <div class="class-event class-item" :id="`doc-for-${event.name}`">
+  <div class="class-event class-item" :id="`doc-for-e-${event.name}`">
     <source-button :meta="event.meta" :docs="docs" />
 
-    <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: event.name } }">{{ event.name }}</router-link></h3>
+    <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: `e-${event.name}` } }">{{ event.name }}</router-link></h3>
     <span v-if="event.deprecated" class="badge warn" title="This event is deprecated, and may be removed in a future version.">Deprecated</span>
 
     <div class="class-item-details">

@@ -84,7 +84,11 @@
               results.push({
                 score,
                 name,
-                route: { name: 'docs-class', params: { class: clarse.name }, query: { scrollTo: this.scopedName(item) } },
+                route: {
+                  name: 'docs-class',
+                  params: { class: clarse.name },
+                  query: { scrollTo: `${group === 'events' ? 'e-' : ''}${this.scopedName(item)}` },
+                },
                 badge: groupName,
                 key: group === 'events' ? `e-${name}` : null,
               });

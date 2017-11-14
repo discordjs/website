@@ -33,8 +33,8 @@
     <div class="col" v-if="events && events.length > 0">
       <div class="title">Events</div>
       <ul>
-        <li v-for="event in events" @click="scroll(event.name)">
-          <router-link :to="{ name: 'docs-class', query: { scrollTo: event.name } }">
+        <li v-for="event in events" @click="scroll(`e-${event.name}`)">
+          <router-link :to="{ name: 'docs-class', query: { scrollTo: `e-${event.name}` } }">
             {{ event.name }}
             <span v-if="event.deprecated" class="small-badge warn">D</span>
           </router-link>
