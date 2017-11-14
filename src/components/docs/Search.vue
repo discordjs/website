@@ -61,8 +61,9 @@
         for (const clarse of this.docs.classes) {
           if (!this.showPrivate && clarse.access === 'private') continue;
 
+          let cScore = 0;
           if (this.toggles.classes) {
-            const cScore = searchScore(q, clarse.name.toLowerCase(), null, 1) * 1.05;
+            cScore = searchScore(q, clarse.name.toLowerCase(), null, 1) * 1.05;
             if (cScore >= scoreThreshold) {
               results.push({
                 score: cScore,
@@ -147,7 +148,7 @@
 
     const longerLength = longer.length;
     if (longerLength === 0) return 1;
-    const score = (longerLength - levenshtein(longer, shorter)) / longerLength
+    const score = (longerLength - levenshtein(longer, shorter)) / longerLength;
     return shortName.includes(q) ? Math.min(score, scoreThreshold) : score;
   }
 
