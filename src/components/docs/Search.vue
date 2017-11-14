@@ -58,10 +58,10 @@
           if (!this.showPrivate && clarse.access === 'private') continue;
 
           if (this.toggles.classes) {
-            const clarseScore = score(q, clarse.name, 1);
+            const clarseScore = score(q, clarse.name.toLowerCase(), 1);
             if (clarseScore >= scoreThreshold) {
               results.push({
-                score: clarseScore + 0.1,
+                score: clarseScore * 1.1,
                 name: clarse.name,
                 route: { name: 'docs-class', params: { class: clarse.name } },
                 badge: 'C',
@@ -73,7 +73,7 @@
             if (!clarse[group] || !this.toggles[group]) continue;
             for (const item of clarse[group]) {
               if (!this.showPrivate && item.access === 'private') continue;
-              const theScore = score(q, item.name);
+              const theScore = score(q, item.name.toLowerCase());
               if (theScore < scoreThreshold) continue;
               const name = fullName(item, clarse, group);
               results.push({
@@ -90,10 +90,10 @@
         if (this.toggles.typedefs) {
           for (const typedef of this.docs.typedefs) {
             if (!this.showPrivate && typedef.access === 'private') continue;
-            const typedefScore = score(q, typedef.name, 1);
+            const typedefScore = score(q, typedef.name.toLowerCase(), 1);
             if (typedefScore < scoreThreshold) continue;
             results.push({
-              score: typedefScore + 0.1,
+              score: typedefScore * 1.1,
               name: typedef.name,
               route: { name: 'docs-typedef', params: { typedef: typedef.name } },
               badge: 'T',
@@ -102,6 +102,7 @@
         }
 
         sort(results, (a, b) => b.score - a.score);
+        console.log(results);
         return results;
       },
     },
@@ -128,7 +129,7 @@
   const scoreThreshold = 0.5;
 
   function score(s1, s2, identicalWeight) {
-    let longer = s1, shorter = s2.toLowerCase();
+    let longer = s1, shorter = s2;
     if (longer === shorter) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
     if (s1.length < s2.length) {
       longer = s2;
