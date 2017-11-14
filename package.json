@@ -14,10 +14,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "js-levenshtein": "^1.1.3",
     "konami-code-js": "^0.8.0",
     "marked": "^0.3.6",
     "semver": "^5.4.1",
     "superagent": "^3.8.1",
+    "timsort": "^0.3.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
