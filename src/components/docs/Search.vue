@@ -1,5 +1,7 @@
 <template>
   <div id="docs-search" class="docs-page">
+    <em id="show-scores" :class="`fa fa-bar-chart ${!showScores ? 'disabled' : ''}`" :title="showScores ? 'Hide scores' : 'Show scores'" @click="toggleScores"></em>
+
     <h1>Search</h1>
     <input v-model.trim="search" type="search" />
 
@@ -18,9 +20,10 @@
         <transition name="fade" mode="out-in">
           <transition-group name="animated-list" tag="ul" v-if="results.length > 0" key="results">
             <li v-for="result in results" :key="`${result.key || result.name}`" class="animated-list-item">
+              <span v-if="showScores" class="score">{{ Math.round(result.score * 100) }}%</span>
               <router-link :to="result.route">
-                <span class="badge">{{ result.badge }}</span>
-                {{ result.name }}
+                <span class="badge" :title="result.badge">{{ result.badge[0] }}</span>
+                {{ result.name }}{{ result.badge === 'Method' ? '()' : '' }}
               </router-link>
             </li>
           </transition-group>
@@ -46,6 +49,7 @@
       return {
         search: this.$route.query.q,
         toggles: { classes: true, props: true, methods: true, events: true, typedefs: true },
+        showScores: false,
       };
     },
 
@@ -58,29 +62,30 @@
           if (!this.showPrivate && clarse.access === 'private') continue;
 
           if (this.toggles.classes) {
-            const clarseScore = score(q, clarse.name.toLowerCase(), 1);
-            if (clarseScore >= scoreThreshold) {
+            const cScore = searchScore(q, clarse.name.toLowerCase(), null, 1) * 1.05;
+            if (cScore >= scoreThreshold) {
               results.push({
-                score: clarseScore * 1.1,
+                score: cScore,
                 name: clarse.name,
                 route: { name: 'docs-class', params: { class: clarse.name } },
-                badge: 'C',
+                badge: 'Class',
               });
+              continue;
             }
           }
 
-          for (const group of ['props', 'methods', 'events']) {
+          for (const [group, groupName] of [['props', 'Property'], ['methods', 'Method'], ['events', 'Event']]) {
             if (!clarse[group] || !this.toggles[group]) continue;
             for (const item of clarse[group]) {
               if (!this.showPrivate && item.access === 'private') continue;
-              const theScore = score(q, item.name.toLowerCase());
-              if (theScore < scoreThreshold) continue;
               const name = fullName(item, clarse, group);
+              const score = searchScore(q, item.name.toLowerCase(), name.toLowerCase());
+              if (score < scoreThreshold) continue;
               results.push({
-                score: theScore,
+                score,
                 name,
                 route: { name: 'docs-class', params: { class: clarse.name }, query: { scrollTo: this.scopedName(item) } },
-                badge: group[0].toUpperCase(),
+                badge: groupName,
                 key: group === 'events' ? `e-${name}` : null,
               });
             }
@@ -90,13 +95,13 @@
         if (this.toggles.typedefs) {
           for (const typedef of this.docs.typedefs) {
             if (!this.showPrivate && typedef.access === 'private') continue;
-            const typedefScore = score(q, typedef.name.toLowerCase(), 1);
-            if (typedefScore < scoreThreshold) continue;
+            const tScore = searchScore(q, typedef.name.toLowerCase(), null, 1) * 1.05;
+            if (tScore < scoreThreshold) continue;
             results.push({
-              score: typedefScore * 1.1,
+              score: tScore,
               name: typedef.name,
               route: { name: 'docs-typedef', params: { typedef: typedef.name } },
-              badge: 'T',
+              badge: 'Typedef',
             });
           }
         }
@@ -107,6 +112,10 @@
     },
 
     methods: {
+      toggleScores() {
+        this.showScores = !this.showScores;
+      },
+
       scopedName(item) {
         return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
       },
@@ -125,22 +134,25 @@
     },
   };
 
-  const scoreThreshold = 0.5;
+  const scoreThreshold = 0.45;
 
-  function score(s1, s2, identicalWeight) {
-    let longer = s1, shorter = s2;
-    if (longer === shorter) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
-    if (s1.length < s2.length) {
-      longer = s2;
-      shorter = s1;
+  function searchScore(q, shortName, longName, identicalWeight) {
+    if (q === shortName || q === longName) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
+    const name = shortName || longName;
+
+    let longer = q, shorter = name;
+    if (q.length < name.length) {
+      longer = name;
+      shorter = q;
     }
+
     const longerLength = longer.length;
     if (longerLength === 0) return 1;
-    return (longerLength - levenshtein(longer, shorter)) / longerLength;
+    return ((longerLength - levenshtein(longer, shorter)) / longerLength) + (shortName.includes(q) ? 0.5 : 0);
   }
 
-  function fullName(child, parent, group) {
-    return `${parent.name + (child.scope === 'static' ? '.' : '#')}${child.name}${group === 'methods' ? '()' : ''}`;
+  function fullName(child, parent) {
+    return `${parent.name + (child.scope === 'static' ? '.' : '#')}${child.name}`;
   }
 </script>
 
@@ -158,6 +170,26 @@
 
       @include mq($from: tablet) {
         display: none;
+      }
+    }
+
+    #show-scores {
+      display: block;
+      float: right;
+      cursor: pointer;
+      color: $color-primary;
+      transition: color 0.3s;
+
+      &.disabled {
+        color: $color-content-text;
+
+        &:hover {
+          color: lighten($color-content-text, 50%);
+        }
+      }
+
+      &:hover {
+        color: lighten($color-primary, 20%);
       }
     }
 
@@ -201,6 +233,17 @@
       text-align: center;
       font-size: 0.9rem;
       transition: background-color 0.3s;
+    }
+
+    .score {
+      display: inline-block;
+      position: relative;
+      right: 1.7rem;
+      width: 0;
+      margin: 0;
+      font-size: 0.7rem;
+      overflow: visible;
+      color: lighten($color-content-text, 40%);
     }
 
     a {
