@@ -57,7 +57,7 @@
 
       tagChoice(tag) {
         if (tag && this.$route.params.tag !== tag) {
-          this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: tag } });
+          this.$router.push({ name: this.$route.name, params: Object.assign(this.$route.params, { tag: tag }) });
         }
       },
 
