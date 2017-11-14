@@ -147,7 +147,8 @@
 
     const longerLength = longer.length;
     if (longerLength === 0) return 1;
-    return ((longerLength - levenshtein(longer, shorter)) / longerLength) + (shortName.includes(q) ? 0.5 : 0);
+    const score = (longerLength - levenshtein(longer, shorter)) / longerLength
+    return shortName.includes(q) ? Math.min(score, scoreThreshold) : score;
   }
 
   function fullName(child, parent) {
