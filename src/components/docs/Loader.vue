@@ -103,7 +103,7 @@
         if (this.$route.query.scrollTo && this.docs) {
           const scroll = () => {
             let el = document.getElementById(`doc-for-${this.$route.query.scrollTo}`);
-            if (!el) el = document.getElementById(`doc-for-e-${this.$route.query.scrollTo}`); // backwards compat
+            if (!el) el = document.getElementById(`doc-for-e-${this.$route.query.scrollTo}`);
             if (!el) el = document.getElementById(this.$route.query.scrollTo);
             if (!el) return;
             el.setAttribute('data-scrolled', true);
