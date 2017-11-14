@@ -47,6 +47,7 @@ input[type="checkbox"] {
     background-color: $color-primary;
 
     &:focus, &:hover {
+      border-color: $color-primary;
       background-color: lighten($color-primary, 20%);
     }
   }
