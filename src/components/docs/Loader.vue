@@ -103,6 +103,7 @@
         if (this.$route.query.scrollTo && this.docs) {
           const scroll = () => {
             let el = document.getElementById(`doc-for-${this.$route.query.scrollTo}`);
+            // For backwards-compatibility of old event URLs
             if (!el) el = document.getElementById(`doc-for-e-${this.$route.query.scrollTo}`);
             if (!el) el = document.getElementById(this.$route.query.scrollTo);
             if (!el) return;
