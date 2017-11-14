@@ -175,8 +175,14 @@
         }
       }
 
-      &:hover .source-button {
-        opacity: 1;
+      &:hover {
+        .class-item-details {
+          border-left-color: $color-primary;
+        }
+
+        .source-button {
+          opacity: 1;
+        }
       }
     }
 
@@ -184,6 +190,7 @@
       margin-top: 8px;
       padding: 6px 0 6px 8px;
       border-left: 2px solid darken($color-content-bg, 15%);
+      transition: border-color 0.3s;
     }
 
     code {
