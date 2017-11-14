@@ -70,7 +70,6 @@
                 route: { name: 'docs-class', params: { class: clarse.name } },
                 badge: 'Class',
               });
-              continue;
             }
           }
 
@@ -79,7 +78,7 @@
             for (const item of clarse[group]) {
               if (!this.showPrivate && item.access === 'private') continue;
               const name = fullName(item, clarse, group);
-              const score = searchScore(q, item.name.toLowerCase(), name.toLowerCase());
+              const score = searchScore(q, item.name.toLowerCase(), cScore <= 0.9 ? name.toLowerCase() : null);
               if (score < scoreThreshold) continue;
               results.push({
                 score,
