@@ -138,18 +138,17 @@
 
   function searchScore(q, shortName, longName, identicalWeight) {
     if (q === shortName || q === longName) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
-    const name = shortName || longName;
 
-    let longer = q, shorter = name;
-    if (q.length < name.length) {
-      longer = name;
-      shorter = q;
+    const name = longName || shortName;
+    let shorter = q, longer = name;
+    if (q.length > name.length) {
+      longer = q;
+      shorter = name;
     }
+    if (longer.length === 0) return 1;
+    const score = (longer.length - levenshtein(longer, shorter)) / longer.length;
 
-    const longerLength = longer.length;
-    if (longerLength === 0) return 1;
-    const score = (longerLength - levenshtein(longer, shorter)) / longerLength;
-    return shortName.includes(q) ? Math.min(score, scoreThreshold) : score;
+    return shortName.includes(q) ? Math.max(score, scoreThreshold) : score;
   }
 
   function fullName(child, parent) {
