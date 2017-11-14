@@ -64,9 +64,4 @@ export default new Router({
     // Catch-all
     { path: '*', component: UnknownRoutePageComponent },
   ],
-
-  scrollBehavior(to, from, saved) {
-    if (saved) return saved;
-    return { x: 0, y: 0 };
-  },
 });

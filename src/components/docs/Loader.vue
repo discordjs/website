@@ -108,7 +108,7 @@
             if (!el) return;
             el.setAttribute('data-scrolled', true);
             setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
-            el.scrollIntoView(true);
+            el.scrollIntoView();
             window.scrollBy(0, -50);
           };
 
