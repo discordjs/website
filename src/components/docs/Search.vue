@@ -102,7 +102,6 @@
         }
 
         sort(results, (a, b) => b.score - a.score);
-        console.log(results);
         return results;
       },
     },
