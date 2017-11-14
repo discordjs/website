@@ -39,18 +39,19 @@ input[type="checkbox"] {
   background-clip: content-box;
   border: 1px solid darken($color-inactive-border, 15%);
   border-radius: 4px;
+  cursor: pointer;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 
   &:checked {
     border-color: $color-primary;
     background-color: $color-primary;
 
-    &:focus {
+    &:focus, &:hover {
       background-color: lighten($color-primary, 20%);
     }
   }
 
-  &:focus {
+  &:focus, &:hover {
     border-color: lighten($color-primary, 20%);
   }
 }
