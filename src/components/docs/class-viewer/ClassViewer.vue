@@ -184,9 +184,25 @@
           opacity: 1;
         }
       }
+
+      &[data-scrolled] .class-item-details {
+        transition: border-color 0.6s, border-width 0.6s, left 0.6s;
+      }
+
+      &[data-scrolled=true] {
+        background: none;
+
+        .class-item-details {
+          border-left-color: $color-primary;
+          border-left-width: 8px;
+          left: -6px;
+        }
+      }
     }
 
     .class-item-details {
+      position: relative;
+      left: 0;
       margin-top: 8px;
       padding: 6px 0 6px 8px;
       border-left: 2px solid darken($color-content-bg, 15%);
