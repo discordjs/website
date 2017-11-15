@@ -93,6 +93,16 @@ export function convertLinks(text, docs, router, route) {
   return text;
 }
 
+// Prefixes a doc item's name with "s-" if static
+export function scopedName(item) {
+  return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
+}
+
+// Makes a key for a types array/string
+export function typeKey(type) {
+  return typeof type === 'string' ? type : type.join('-');
+}
+
 // Stupid Holder to Improve Tag Switching
 export const SHITS = new class SHITS {
   constructor() {

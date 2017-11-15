@@ -13,7 +13,7 @@
       <param-table :params="prop.props" :docs="docs" v-if="prop.props && prop.props.length > 0" />
       <div class="prop-type">
         Type:
-        <types v-for="type in prop.type" :names="type" :nullable="prop.nullable" :docs="docs" :key="type" />
+        <types v-for="type in prop.type" :names="type" :nullable="prop.nullable" :docs="docs" :key="typeKey(type)" />
       </div>
       <div v-if="prop.default" class="prop-default">
         Default: <code>{{ prop.default }}</code>
@@ -29,7 +29,7 @@
   import ParamTable from './ParamTable.vue';
   import SourceButton from '../SourceButton.vue';
   import See from '../See.vue';
-  import { convertLinks } from '../../../util';
+  import { convertLinks, typeKey } from '../../../util';
 
   export default {
     name: 'class-property',
@@ -49,6 +49,10 @@
       scrollTo() {
         return `${this.prop.scope === 'static' ? 's-' : ''}${this.prop.name}`;
       },
+    },
+
+    methods: {
+      typeKey,
     },
   };
 </script>

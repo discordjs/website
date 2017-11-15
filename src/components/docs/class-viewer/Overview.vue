@@ -45,14 +45,14 @@
 </template>
 
 <script>
+  import { scopedName } from '../../../util';
+
   export default {
     name: 'class-overview',
     props: ['properties', 'methods', 'events'],
 
     methods: {
-      scopedName(item) {
-        return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
-      },
+      scopedName,
 
       scroll(to) {
         const el = document.getElementById(`doc-for-${to}`);

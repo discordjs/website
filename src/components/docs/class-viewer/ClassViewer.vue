@@ -23,13 +23,13 @@
     <overview :properties="properties" :methods="methods" :events="clarse.events" />
 
     <h2 v-if="properties && properties.length > 0">Properties</h2>
-    <property v-for="prop in properties" :prop="prop" :docs="docs" :key="prop" />
+    <property v-for="prop in properties" :prop="prop" :docs="docs" :key="scopedName(prop)" />
 
     <h2 v-if="methods && methods.length > 0">Methods</h2>
-    <method v-for="method in methods" :method="method" :docs="docs" :key="method" />
+    <method v-for="method in methods" :method="method" :docs="docs" :key="scopedName(method)" />
 
     <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
-    <event v-for="event in clarse.events" :event="event" :docs="docs" :key="event" />
+    <event v-for="event in clarse.events" :event="event" :docs="docs" :key="`e-${event.name}`" />
   </div>
   <unknown-page v-else class="docs-page" />
 </template>
@@ -44,7 +44,7 @@
   import Event from './Event';
   import SourceButton from '../SourceButton.vue';
   import See from '../See';
-  import { hljs, convertLinks } from '../../../util';
+  import { hljs, convertLinks, scopedName } from '../../../util';
 
   export default {
     name: 'class-viewer',
@@ -95,6 +95,10 @@
       description() {
         return Vue.filter('marked')(convertLinks(this.clarse.description, this.docs, this.$router, this.$route));
       },
+    },
+
+    methods: {
+      scopedName,
     },
 
     mounted() {

@@ -13,7 +13,7 @@
       <tbody>
         <tr v-for="param in params">
           <td>{{ param.name }}</td>
-          <td><types v-for="type in param.type" :names="type" :variable="param.variable" :nullable="param.nullable" :docs="docs" :key="type" /></td>
+          <td><types v-for="type in param.type" :names="type" :variable="param.variable" :nullable="param.nullable" :docs="docs" :key="typeKey(type)" /></td>
           <td v-if="hasOptional">
             <em class="fa fa-check" v-if="param.optional"></em>
           </td>
@@ -31,7 +31,7 @@
 <script>
   import Vue from 'vue';
   import Types from '../Types.vue';
-  import { convertLinks } from '../../../util';
+  import { convertLinks, typeKey } from '../../../util';
 
   export default {
     name: 'param-table',
@@ -47,6 +47,8 @@
     },
 
     methods: {
+      typeKey,
+
       paramDescription(param) {
         return Vue.filter('marked')(convertLinks(param.description, this.docs, this.$router, this.$route));
       },

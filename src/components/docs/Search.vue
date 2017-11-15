@@ -40,6 +40,7 @@
 <script>
   import levenshtein from 'js-levenshtein';
   import { sort } from 'timsort';
+  import { scopedName } from '../../util';
 
   export default {
     name: 'docs-search',
@@ -87,7 +88,7 @@
                 route: {
                   name: 'docs-class',
                   params: { class: clarse.name },
-                  query: { scrollTo: `${group === 'events' ? 'e-' : ''}${this.scopedName(item)}` },
+                  query: { scrollTo: `${group === 'events' ? 'e-' : ''}${scopedName(item)}` },
                 },
                 badge: groupName,
                 key: group === 'events' ? `e-${name}` : null,
@@ -118,10 +119,6 @@
     methods: {
       toggleScores() {
         this.showScores = !this.showScores;
-      },
-
-      scopedName(item) {
-        return `${item.scope === 'static' ? 's-' : ''}${item.name}`;
       },
     },
 
