@@ -92,3 +92,10 @@ export function convertLinks(text, docs, router, route) {
 
   return text;
 }
+
+// Stupid Holder to Improve Tag Switching
+export const SHITS = new class SHITS {
+  constructor() {
+    this.switching = false;
+  }
+};

@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import { SHITS } from '../../util';
+
   export default {
     name: 'docs-loader',
     props: ['source', 'tag'],
@@ -36,7 +38,7 @@
         const startTag = this.tag;
         this.loadingTag = this.tag;
 
-        this.source.fetchDocs(this.tag).then(docs => {
+        this.source.fetchDocs(this.tag).then(docs => { // eslint-disable-line complexity
           if (this.source !== startSource || this.tag !== startTag) return;
           console.log('Loading', startSource, startTag);
 
@@ -92,6 +94,21 @@
           this.docs = docs;
           this.loadingTag = null;
           console.log('Finished loading', startSource, startTag);
+
+          // Verify the destination item exists when switching tags
+          if (SHITS.switching) {
+            const route = this.$route;
+            SHITS.switching = false;
+            if (route.name === 'docs-class') {
+              if (!docs.classes.some(c => c.name === route.params.class)) this.goHome();
+            } else if (route.name === 'docs-typedef') {
+              if (!docs.typedefs.some(t => t.name === route.params.typedef)) this.goHome();
+            } else if (route.name === 'docs-file') {
+              if (!docs.custom[route.params.category] || !docs.custom[route.params.category].files[route.params.file]) {
+                this.goHome();
+              }
+            }
+          }
         }).catch(err => {
           console.error('Error while loading', startSource, startTag, err);
           this.error = err;
@@ -122,6 +139,16 @@
           if (delayScroll) setTimeout(scroll, 400);
           else scroll();
         }
+      },
+
+      goHome() {
+        console.log('Redirecting to default file due to the current page not existing in the newly-loaded tag\'s docs.');
+        this.$router.replace({ name: 'docs-file', params: {
+          source: this.source.id,
+          tag: this.tag,
+          category: this.source.defaultFile.category,
+          file: this.source.defaultFile.id,
+        } });
       },
     },
 

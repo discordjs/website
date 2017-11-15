@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import { SHITS } from '../../util';
+
   export default {
     name: 'docs-navbar',
     props: ['sources', 'source'],
@@ -57,7 +59,8 @@
 
       tagChoice(tag) {
         if (tag && this.$route.params.tag !== tag) {
-          this.$router.push({ name: 'docs-tag', params: { source: this.sourceChoice, tag: tag } });
+          SHITS.switching = true;
+          this.$router.push({ name: this.$route.name, params: { ...this.$route.params, tag } });
         }
       },
 
