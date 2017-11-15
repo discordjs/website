@@ -136,7 +136,7 @@
             this.$route.params.typedef !== fromRoute.params.typedef ||
             this.$route.params.file !== fromRoute.params.file
           );
-          if (delayScroll) setTimeout(scroll, 400);
+          if (delayScroll) setTimeout(scroll, 600);
           else scroll();
         }
       },
