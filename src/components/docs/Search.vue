@@ -64,7 +64,7 @@
           let cScore = 0;
           if (this.toggles.classes) {
             cScore = searchScore(q, clarse.name.toLowerCase(), null, 1) * 1.05;
-            if (cScore >= scoreThreshold) {
+            if (cScore >= threshold) {
               results.push({
                 score: cScore,
                 name: clarse.name,
@@ -79,8 +79,8 @@
             for (const item of clarse[group]) {
               if (!this.showPrivate && item.access === 'private') continue;
               const name = fullName(item, clarse, group);
-              const score = searchScore(q, item.name.toLowerCase(), cScore <= 0.9 ? name.toLowerCase() : null);
-              if (score < scoreThreshold) continue;
+              const score = searchScore(q, item.name.toLowerCase(), cScore < threshold ? name.toLowerCase() : null);
+              if (score < threshold) continue;
               results.push({
                 score,
                 name,
@@ -100,7 +100,7 @@
           for (const typedef of this.docs.typedefs) {
             if (!this.showPrivate && typedef.access === 'private') continue;
             const tScore = searchScore(q, typedef.name.toLowerCase(), null, 1) * 1.05;
-            if (tScore < scoreThreshold) continue;
+            if (tScore < threshold) continue;
             results.push({
               score: tScore,
               name: typedef.name,
@@ -138,7 +138,7 @@
     },
   };
 
-  const scoreThreshold = 0.45;
+  const threshold = 0.5;
 
   function searchScore(q, shortName, longName, identicalWeight) {
     if (q === shortName || q === longName) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
@@ -150,9 +150,12 @@
       shorter = name;
     }
     if (longer.length === 0) return 1;
-    const score = (longer.length - levenshtein(longer, shorter)) / longer.length;
 
-    return shortName.includes(q) ? Math.max(score, scoreThreshold) : score;
+    let score = (longer.length - levenshtein(longer, shorter)) / longer.length;
+    if (shortName.includes(q)) score = Math.max(score, threshold + (q.length / shortName.length * 0.4));
+    else if (longName && longName.includes(q)) score = Math.max(score, threshold + (q.length / longName.length * 0.2));
+
+    return score;
   }
 
   function fullName(child, parent) {
