@@ -14,7 +14,7 @@
         <loading v-else />
       </transition>
 
-      <input v-model.trim="search" type="search" placeholder="Search" />
+      <input v-model.trim="search" type="search" placeholder="Search" @keypress.enter="goToSearch" />
       <router-link :to="{ name: 'docs-search' }"><em class="fa fa-search"></em></router-link>
     </container>
   </div>
@@ -49,6 +49,10 @@
 
       updateTagChoice() {
         if (this.tags) this.tagChoice = this.$route.params.tag || this.source.recentTag || this.source.defaultTag;
+      },
+
+      goToSearch() {
+        if (this.$route.name !== 'docs-search') this.$router.push({ name: 'docs-search' });
       },
     },
 
