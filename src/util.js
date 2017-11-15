@@ -104,8 +104,4 @@ export function typeKey(type) {
 }
 
 // Stupid Holder to Improve Tag Switching
-export const SHITS = new class SHITS {
-  constructor() {
-    this.switching = false;
-  }
-};
+export const SHITS = { switching: false };
