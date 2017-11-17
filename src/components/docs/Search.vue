@@ -19,11 +19,11 @@
 
         <transition name="fade" mode="out-in">
           <transition-group name="animated-list" tag="ul" v-if="results.length > 0" key="results">
-            <li v-for="result in results" :key="`${result.key || result.name}`" class="animated-list-item">
-              <span v-if="showScores" class="score">{{ Math.round(result.score * 100) }}%</span>
-              <router-link :to="result.route">
-                <span class="badge" :title="result.badge">{{ result.badge[0] }}</span>
-                {{ result.name }}{{ result.badge === 'Method' ? '()' : '' }}
+            <li v-for="result in results" :key="result.item.key || result.item.fullName || result.item.name" class="animated-list-item">
+              <span v-if="showScores" class="score">{{ Math.round((1 - result.score) * 100) }}%</span>
+              <router-link :to="result.item.route">
+                <span class="badge" :title="result.item.type">{{ result.item.type[0] }}</span>
+                {{ result.item.fullName || result.item.name }}{{ result.item.type === 'Method' ? '()' : '' }}
               </router-link>
             </li>
           </transition-group>
@@ -38,8 +38,7 @@
 </template>
 
 <script>
-  import levenshtein from 'js-levenshtein';
-  import { sort } from 'timsort';
+  import Fuse from 'fuse.js';
   import { scopedName } from '../../util';
 
   export default {
@@ -47,71 +46,75 @@
     props: ['docs', 'showPrivate'],
 
     data() {
+      const toggles = { classes: true, props: true, methods: true, events: true, typedefs: true };
       return {
+        toggles,
         search: this.$route.query.q,
-        toggles: { classes: true, props: true, methods: true, events: true, typedefs: true },
         showScores: false,
+        fuse: this.buildFuse(toggles),
       };
     },
 
     computed: {
       results() {
-        const q = this.search.toLowerCase();
-        const results = [];
+        const results = this.fuse.search(this.search);
 
-        for (const clarse of this.docs.classes) {
-          if (!this.showPrivate && clarse.access === 'private') continue;
-
-          let cScore = 0;
-          if (this.toggles.classes) {
-            cScore = searchScore(q, clarse.name.toLowerCase(), null, 1) * 1.05;
-            if (cScore >= threshold) {
-              results.push({
-                score: cScore,
-                name: clarse.name,
-                route: { name: 'docs-class', params: { class: clarse.name } },
-                badge: 'Class',
-              });
-            }
+        // Add routes and other necessary info to all results
+        for (const result of results) {
+          if (result.item.type === 'Class') {
+            result.item.route = {
+              name: 'docs-class',
+              params: { class: result.item.name },
+            };
+            continue;
           }
-
-          for (const [group, groupName] of [['props', 'Property'], ['methods', 'Method'], ['events', 'Event']]) {
-            if (!clarse[group] || !this.toggles[group]) continue;
-            for (const item of clarse[group]) {
-              if (!this.showPrivate && item.access === 'private') continue;
-              const name = fullName(item, clarse, group);
-              const score = searchScore(q, item.name.toLowerCase(), cScore < threshold ? name.toLowerCase() : null);
-              if (score < threshold) continue;
-              results.push({
-                score,
-                name,
-                route: {
-                  name: 'docs-class',
-                  params: { class: clarse.name },
-                  query: { scrollTo: `${group === 'events' ? 'e-' : ''}${scopedName(item)}` },
-                },
-                badge: groupName,
-                key: group === 'events' ? `e-${name}` : null,
-              });
-            }
+          if (result.item.type === 'Property' || result.item.type === 'Method') {
+            result.item.fullName = fullName(result.item, result.item.parent);
+            result.item.route = {
+              name: 'docs-class',
+              params: { class: result.item.parent },
+              query: { scrollTo: scopedName(result.item) },
+            };
+            continue;
+          }
+          if (result.item.type === 'Event') {
+            result.item.key = `e-${result.item.parent}#${result.item.name}`;
+            result.item.fullName = fullName(result.item, result.item.parent);
+            result.item.route = {
+              name: 'docs-class',
+              params: { class: result.item.parent },
+              query: { scrollTo: `e-${result.item.name}` },
+            };
+            continue;
+          }
+          if (result.item.type === 'Typedef') {
+            result.item.route = {
+              name: 'docs-typedef',
+              params: { typedef: result.item.name },
+            };
+            continue;
           }
         }
 
-        if (this.toggles.typedefs) {
-          for (const typedef of this.docs.typedefs) {
-            if (!this.showPrivate && typedef.access === 'private') continue;
-            const tScore = searchScore(q, typedef.name.toLowerCase(), null, 1) * 1.05;
-            if (tScore < threshold) continue;
-            results.push({
-              score: tScore,
-              name: typedef.name,
-              route: { name: 'docs-typedef', params: { typedef: typedef.name } },
-              badge: 'Typedef',
-            });
+        // Remove class members where the class name is the only place a match is found
+        // This avoids listing every member of a class just because the class name matched
+        let r = 0;
+        while (r < results.length) {
+          const result = results[r];
+          if (result.item.type === 'Property' || result.item.type === 'Method' || result.item.type === 'Event') {
+            // Get a list of the keys that matched
+            const keys = [];
+            for (const match of result.matches) keys.push(match.key);
+
+            // Remove the item if only the class name matched
+            if (keys.length === 2 && keys.includes('parent') && keys.includes('fullName')) {
+              results.splice(r, 1);
+              continue;
+            }
           }
+          r++;
         }
 
-        sort(results, (a, b) => b.score - a.score);
         return results;
       },
     },
@@ -119,6 +122,101 @@
     methods: {
       toggleScores() {
         this.showScores = !this.showScores;
+      },
+
+      // Build an array of all doc items with minimal data
+      buildFuse(toggles) {
+        const items = [];
+
+        for (const c of this.docs.classes) {
+          if (!this.showPrivate && c.access === 'private') continue;
+
+          if (toggles.classes) {
+            items.push({
+              type: 'Class',
+              parent: c.name,
+              name: c.name,
+              fullName: c.name,
+              scope: c.scope,
+              access: c.access,
+              route: null,
+            });
+          }
+
+          if (c.props && toggles.props) {
+            for (const p of c.props) {
+              if (!this.showPrivate && p.access === 'private') continue;
+              items.push({
+                type: 'Property',
+                parent: c.name,
+                name: p.name,
+                fullName: fullName(p, c.name),
+                scope: p.scope,
+                access: p.access,
+                route: null,
+              });
+            }
+          }
+
+          if (c.methods && toggles.methods) {
+            for (const m of c.methods) {
+              if (!this.showPrivate && m.access === 'private') continue;
+              items.push({
+                type: 'Method',
+                parent: c.name,
+                name: m.name,
+                fullName: fullName(m, c.name),
+                scope: m.scope,
+                access: m.access,
+                route: null,
+              });
+            }
+          }
+
+          if (c.events && toggles.events) {
+            for (const e of c.events) {
+              if (!this.showPrivate && e.access === 'private') continue;
+              items.push({
+                type: 'Event',
+                parent: c.name,
+                name: e.name,
+                fullName: `${c.name}#${e.name}`,
+                scope: e.scope,
+                access: e.access,
+                key: null,
+                route: null,
+              });
+            }
+          }
+        }
+
+        if (toggles.typedefs) {
+          for (const t of this.docs.typedefs) {
+            if (!this.showPrivate && t.access === 'private') continue;
+            items.push({
+              type: 'Typedef',
+              parent: t.name,
+              name: t.name,
+              fullName: t.name,
+              scope: t.scope,
+              access: t.access,
+              route: null,
+            });
+          }
+        }
+
+        return new Fuse(items, {
+          keys: [
+            { name: 'name', weight: 0.5 },
+            { name: 'parent', weight: 0.2 },
+            { name: 'fullName', weight: 0.3 },
+          ],
+          shouldSort: true,
+          includeScore: true,
+          includeMatches: true,
+          threshold: 0.4,
+          minMatchCharLength: 3,
+        });
       },
     },
 
@@ -132,31 +230,22 @@
         if (this.$route.query.q) this.$router.replace({ name: 'docs-search', query: { q } });
         else this.$router.push({ name: 'docs-search', query: { q } });
       },
+
+      toggles: {
+        deep: true,
+        handler() {
+          this.fuse = this.buildFuse(this.toggles);
+        },
+      },
+
+      showPrivate() {
+        this.fuse = this.buildFuse(this.toggles);
+      },
     },
   };
 
-  const threshold = 0.5;
-
-  function searchScore(q, shortName, longName, identicalWeight) {
-    if (q === shortName || q === longName) return 1 + (identicalWeight === undefined ? 0.5 : identicalWeight);
-
-    const name = longName || shortName;
-    let shorter = q, longer = name;
-    if (q.length > name.length) {
-      longer = q;
-      shorter = name;
-    }
-    if (longer.length === 0) return 1;
-
-    let score = (longer.length - levenshtein(longer, shorter)) / longer.length;
-    if (shortName.includes(q)) score = Math.max(score, threshold + (q.length / shortName.length * 0.4));
-    else if (longName && longName.includes(q)) score = Math.max(score, threshold + (q.length / longName.length * 0.2));
-
-    return score;
-  }
-
-  function fullName(child, parent) {
-    return `${parent.name + (child.scope === 'static' ? '.' : '#')}${child.name}`;
+  function fullName(child, parentName) {
+    return `${parentName + (child.scope === 'static' ? '.' : '#')}${child.name}`;
   }
 </script>
 
