@@ -14,8 +14,8 @@
     </div>
 
     <transition name="fade" mode="out-in">
-      <div v-if="search && search.length > 2">
-        <h2 v-if="search && search.length > 2">Results for "{{ search }}"</h2>
+      <div v-if="search && search.length >= 2">
+        <h2 v-if="search && search.length >= 2">Results for "{{ search }}"</h2>
 
         <transition name="fade" mode="out-in">
           <transition-group name="animated-list" tag="ul" v-if="results.length > 0" key="results">
