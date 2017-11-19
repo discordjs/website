@@ -2,7 +2,7 @@
   <div id="app">
     <app-navbar />
     <router-view :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
-    <app-footer />
+    <app-footer :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
   </div>
 </template>
 
