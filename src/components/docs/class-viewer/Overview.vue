@@ -58,6 +58,7 @@
         const el = document.getElementById(`doc-for-${to}`);
         el.setAttribute('data-scrolled', true);
         setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
+        setTimeout(() => el.removeAttribute('data-scrolled'), 2000);
         el.scrollIntoView();
         window.scrollBy(0, -50);
       },
