@@ -63,4 +63,8 @@
       overflow: auto;
     }
   }
+
+  #app.dark #file-viewer :not(pre) > code {
+    background: lighten($color-content-bg-dark, 3.5%);
+  }
 </style>

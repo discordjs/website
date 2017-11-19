@@ -139,7 +139,7 @@
 	.method-return {
 		margin-top: 20px;
 		color: lighten($color-content-text, 35%);
-		font-weight: bold;
+    font-weight: bold;
 
 		.docs-type {
 			font-family: $font-monospace;
@@ -154,10 +154,28 @@
 	.method-throws, .method-emits, .method-examples {
 		margin-top: 16px;
 		color: lighten($color-content-text, 35%);
-		font-weight: bold;
+    font-weight: bold;
 
 		pre {
 			font-weight: normal;
 		}
-	}
+  }
+
+  #app.dark {
+    .method-param {
+      color: darken($color-content-text-dark, 20%);
+    }
+
+    .method-return {
+      color: darken($color-content-text-dark, 35%);
+
+      p {
+        color: darken($color-content-text-dark, 10%);
+      }
+    }
+
+    .method-throws, .method-emits, .method-examples {
+      color: darken($color-content-text-dark, 35%);
+    }
+  }
 </style>

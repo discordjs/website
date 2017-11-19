@@ -119,7 +119,7 @@
     }
 
     h1 {
-      color: #333;
+      color: lighten($color-content-text, 13%);
     }
 
     h2 {
@@ -181,10 +181,10 @@
 
       &:hover {
         .class-item-details {
-          border-left-color: $color-primary;
+          border-left-color: $color-primary !important;
         }
 
-        .source-button {
+        .source-button, .badge {
           opacity: 1;
         }
       }
@@ -197,7 +197,7 @@
         background: none;
 
         .class-item-details {
-          border-left-color: $color-primary;
+          border-left-color: $color-primary !important;
           border-left-width: 8px;
           left: -6px;
         }
@@ -210,7 +210,7 @@
       margin-top: 8px;
       padding: 6px 0 6px 8px;
       border-left: 2px solid darken($color-content-bg, 15%);
-      transition: border-color 0.3s;
+      transition: border-left-color 0.3s;
     }
 
     code {
@@ -221,6 +221,24 @@
     :not(pre) > code {
       background: darken($color-content-bg, 3.5%);
       border-radius: 2px;
+    }
+  }
+
+  #app.dark #class-viewer {
+    h1 {
+      color: darken($color-content-text-dark, 13%);
+    }
+
+    .class-name-extra {
+      color: darken($color-content-text-dark, 40%);
+    }
+
+    .class-item-details {
+      border-left-color: lighten($color-content-bg-dark, 15%);
+    }
+
+    :not(pre) > code {
+      background: lighten($color-content-bg-dark, 3.5%);
     }
   }
 </style>

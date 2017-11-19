@@ -89,4 +89,8 @@
       border-radius: 2px;
     }
   }
+
+  #app.dark #typedef-viewer :not(pre) > code {
+    background: lighten($color-content-bg-dark, 3.5%);
+  }
 </style>

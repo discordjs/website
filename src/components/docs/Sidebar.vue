@@ -7,13 +7,14 @@
         <em class="fa fa-arrow-left" aria-hidden="true"></em>
       </div>
 
-      <em id="docs-visibility" class="fa" :class="showPrivate ? 'fa-eye' : 'fa-eye-slash'" :title="showPrivate ? 'Hide private' : 'Show private'" @click="togglePrivate"></em>
+      <em id="docs-visibility" class="fa toggle" :class="showPrivate ? 'fa-eye' : 'fa-eye-slash'" :title="showPrivate ? 'Hide private' : 'Show private'" @click="togglePrivate"></em>
+      <em id="docs-brightness" class="fa toggle" :class="darkMode ? 'fa-moon-o' : 'fa-sun-o'" :title="darkMode ? 'Turn on the lights' : 'Turn off the lights'" @click="toggleDarkMode"></em>
 
       <ul>
-        <li v-for="(category, categoryID) in docs.custom">
+        <li v-for="(category, categoryID) in docs.custom" :key="categoryID">
           {{ category.name }}
           <ul>
-            <li v-for="(file, fileID) in category.files">
+            <li v-for="(file, fileID) in category.files" :key="fileID">
               <router-link :to="{ name: 'docs-file', params: { category: categoryID, file: fileID } }">
                 {{ file.name }}
               </router-link>
@@ -35,7 +36,7 @@
         <li>
           Typedefs
           <ul>
-            <li v-for="typedef in docs.typedefs" v-if="showPrivate || typedef.access !== 'private'">
+            <li v-for="typedef in docs.typedefs" v-if="showPrivate || typedef.access !== 'private'" :key="typedef.name">
               <router-link exact :to="{ name: 'docs-typedef', params: { typedef: typedef.name } }">
                 {{ typedef.name }}
               </router-link>
@@ -50,7 +51,7 @@
 <script>
   export default {
     name: 'docs-sidebar',
-    props: ['docs'],
+    props: ['docs', 'darkMode'],
 
     data() {
       return {
@@ -66,6 +67,10 @@
 
       togglePrivate() {
         this.showPrivate = !this.showPrivate;
+      },
+
+      toggleDarkMode() {
+        this.$emit('toggleDarkMode');
       },
     },
 
@@ -108,7 +113,7 @@
         overflow: auto;
         background: darken($color-content-bg, 2%);
         box-shadow: 0 0 160px black;
-        transition: 300ms right, 300ms width, 300ms left;
+        transition: 0.3s right, 0.3s width, 0.3s left;
 
         li {
           font-size: 1.25rem !important;
@@ -149,7 +154,7 @@
         text-transform: uppercase;
         font-size: 1rem;
         font-weight: bold;
-        color: black;
+        color: darken($color-content-text, 6%);
       }
 
       ul li {
@@ -180,6 +185,19 @@
     }
   }
 
+  .toggle {
+    float: right;
+    position: relative;
+    right: 10px;
+    bottom: 8px;
+    padding: 5px;
+    cursor: pointer;
+
+    @include mq($until: tablet) {
+      display: none;
+    }
+  }
+
   #docs-visibility {
     float: right;
     position: relative;
@@ -190,6 +208,34 @@
 
     @include mq($until: tablet) {
       display: none;
+    }
+  }
+
+  #app.dark #docs-sidebar {
+    border-right-color: $color-inactive-border-dark;
+
+    @include mq($until: tablet) {
+      #docs-sidebar-content {
+        background: lighten($color-content-bg-dark, 2%);
+      }
+    }
+
+    ul {
+      li {
+        color: lighten($color-content-text-dark, 6%);
+      }
+
+      ul li {
+        color: darken($color-content-text-dark, 20%);
+
+        a:hover {
+          background: lighten($color-content-bg-dark, 2%);
+        }
+      }
+    }
+
+    .router-link-active {
+      background: lighten($color-content-bg-dark, 4%);
     }
   }
 </style>

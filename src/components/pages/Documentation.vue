@@ -1,7 +1,7 @@
 <template>
   <div id="docs">
     <docs-navbar :sources="sources" :source="source" />
-    <router-view :source="source" :tag="tag" />
+    <router-view :source="source" :tag="tag" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
   </div>
 </template>
 
@@ -13,6 +13,7 @@
 
   export default {
     name: 'documentation',
+    props: ['darkMode'],
     components: {
       DocsNavbar,
     },
@@ -75,6 +76,10 @@
             file: this.source.defaultFile.id,
           } });
         }
+      },
+
+      toggleDarkMode() {
+        this.$emit('toggleDarkMode');
       },
     },
 

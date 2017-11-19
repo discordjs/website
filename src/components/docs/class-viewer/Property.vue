@@ -78,4 +78,8 @@
   .prop-default {
     margin-top: 8px;
   }
+
+  #app.dark .prop-type, .prop-default {
+    color: darken($color-content-text-dark, 35%);
+  }
 </style>

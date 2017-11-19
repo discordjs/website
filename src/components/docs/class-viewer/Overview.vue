@@ -109,15 +109,11 @@
             background: darken($color-content-bg, 2%);
 
             .small-badge {
-              background: lighten($color-primary, 10%);
-
-              &.warn {
-                background: lighten($color-warn, 5%);
-              }
+              opacity: 1;
             }
 
             @include mq($from: tablet) {
-              border-left: 2px solid;
+              border-left: 2px solid !important;
             }
           }
         }
@@ -140,6 +136,28 @@
         margin: 1rem 0;
         padding: 1rem;
         border: 1px solid $color-inactive-border;
+      }
+    }
+  }
+
+  #app.dark #class-overview {
+    .title {
+      color: darken($color-content-text-dark, 25%);
+    }
+
+    ul {
+      color: darken($color-content-text-dark, 35%);
+
+      li {
+        a {
+          @include mq($from: tablet) {
+            border-left-color: $color-inactive-border-dark;
+          }
+
+          &:hover {
+            background: lighten($color-content-bg-dark, 2%);
+          }
+        }
       }
     }
   }

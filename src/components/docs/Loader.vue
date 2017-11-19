@@ -1,7 +1,7 @@
 <template>
   <div id="docs-body">
     <transition name="fade-resize" mode="out-in">
-      <router-view v-if="docs" :docs="docs" />
+      <router-view v-if="docs" :docs="docs" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
       <slide v-else>
         <loading v-if="!error" />
         <p v-else id="docs-error">
@@ -18,7 +18,7 @@
 
   export default {
     name: 'docs-loader',
-    props: ['source', 'tag'],
+    props: ['source', 'tag', 'darkMode'],
 
     data() {
       return {
@@ -151,6 +151,10 @@
           file: this.source.defaultFile.id,
         } });
       },
+
+      toggleDarkMode() {
+        this.$emit('toggleDarkMode');
+      },
     },
 
     watch: {
@@ -203,6 +207,14 @@
 
     pre {
       font-size: 1.0rem;
+    }
+  }
+
+  #app.dark #docs-body {
+    background: $color-content-bg-dark;
+
+    .sk-cube:before {
+      background: $color-content-bg-dark;
     }
   }
 

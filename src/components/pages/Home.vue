@@ -105,7 +105,8 @@ client.login('token');
 
   #home {
     text-align: center;
-    background: #fefefe;
+    background: $color-content-bg;
+    color: $color-content-text;
 
   	h2 {
   		font-size: 2rem;
@@ -213,5 +214,10 @@ client.login('token');
         }
       }
     }
+  }
+
+  #app.dark #home {
+    background: $color-content-bg-dark;
+    color: $color-content-text-dark;
   }
 </style>

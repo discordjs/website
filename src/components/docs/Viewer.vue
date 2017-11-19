@@ -1,7 +1,7 @@
 <template>
   <div id="docs-viewer">
     <container>
-      <sidebar :docs="docs" @showPrivate="setShowPrivate" />
+      <sidebar :docs="docs" @showPrivate="setShowPrivate" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
       <transition name="fade-slide" mode="out-in">
         <router-view :docs="docs" :key="key" :showPrivate="showPrivate" />
       </transition>
@@ -23,7 +23,7 @@
 
   export default {
     name: 'docs-viewer',
-    props: ['docs'],
+    props: ['docs', 'darkMode'],
     components: {
       Sidebar,
     },
@@ -50,6 +50,10 @@
 
       scrollTop() {
         window.scrollTo(0, 0);
+      },
+
+      toggleDarkMode() {
+        this.$emit('toggleDarkMode');
       },
     },
 
@@ -109,8 +113,8 @@
     pre {
       margin: 16px;
       padding: 8px;
-      color: lighten($color-content-text, 20%);
       background: #F0F0F0;
+      color: lighten($color-content-text, 20%);
     }
 
     div.info, div.warn {
@@ -180,19 +184,26 @@
   .badge {
     margin-left: 2px;
     padding: 5px;
+    opacity: 0.75;
+    background: $color-primary;
     color: white;
-    background: lighten($color-primary, 10%);
     border-radius: 3px;
     text-transform: uppercase;
     font-size: 0.85rem;
     font-weight: bold;
+    transition: opacity 0.3s;
 
     &:first-of-type {
       margin-left: 8px;
     }
 
     &.warn {
-      background: lighten($color-warn, 5%);
+      background: $color-warn;
+    }
+
+    &:hover {
+      opacity: 1;
+      cursor: help;
     }
   }
 
@@ -202,13 +213,14 @@
     margin-right: 8px;
     padding: 2px 1px;
     border-radius: 3px;
-    background: lighten($color-primary, 25%);
+    opacity: 0.6;
+    background: $color-primary;
     color: white;
     text-align: center;
-    transition: background-color 0.3s;
+    transition: opacity 0.3s;
 
     &.warn {
-      background: lighten($color-warn, 20%);
+      background: $color-warn;
     }
 
     @include mq($until: tablet) {
@@ -232,6 +244,42 @@
 
     &:hover {
       background: lighten($color-primary, 15%);
+    }
+  }
+
+  #app.dark {
+    #docs-viewer {
+      background: $color-content-bg-dark;
+      color: $color-content-text-dark;
+
+      pre {
+        background: lighten($color-content-bg-dark, 4%);
+        color: darken($color-content-text-dark, 20%);
+      }
+
+      div.info {
+        color: $color-content-text;
+      }
+
+      div.warn {
+        color: $color-content-text;
+      }
+    }
+
+    #docs-meta p {
+      color: darken($color-content-text-dark, 40%);
+
+      &:hover {
+        color: darken($color-content-text-dark, 15%);
+      }
+    }
+
+    .badge {
+      background: darken($color-primary, 10%);
+
+      &.warn {
+        background: darken($color-warn, 5%);
+      }
     }
   }
 </style>

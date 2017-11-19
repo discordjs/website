@@ -87,10 +87,10 @@
 
     tr {
       background: darken($color-content-bg, 2%);
-    }
 
-    tr:nth-child(odd) {
-      background: darken($color-content-bg, 3%);
+      &:nth-child(even) {
+        background: darken($color-content-bg, 4%);
+      }
     }
 
     @include mq($until: desktop) {
@@ -101,5 +101,17 @@
 
   .param-table-wrapper {
     overflow: auto;
+  }
+
+  #app.dark .param-table {
+    border-color: lighten($color-inactive-border-dark, 5%);
+
+    tr {
+      background: lighten($color-content-bg-dark, 4%);
+
+      &:nth-child(even) {
+        background: lighten($color-content-bg-dark, 6%);
+      }
+    }
   }
 </style>
