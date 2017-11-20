@@ -18,7 +18,8 @@
     },
 
     data() {
-      return { darkMode: localStorage.getItem('dark-mode') !== 'false' };
+      const darkMode = localStorage.getItem('dark-mode');
+      return { darkMode: darkMode !== 'false' && darkMode !== null };
     },
 
     methods: {
