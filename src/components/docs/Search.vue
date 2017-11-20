@@ -1,6 +1,6 @@
 <template>
   <div id="docs-search" class="docs-page">
-    <em id="show-scores" :class="`fa fa-bar-chart ${!showScores ? 'disabled' : ''}`" :title="showScores ? 'Hide scores' : 'Show scores'" @click="toggleScores"></em>
+    <em id="show-scores" :class="`fa fa-bar-chart ${!showScores ? 'disabled' : ''}`" :title="toggleScoresLabel" @click="toggleScores"></em>
 
     <h1>Search</h1>
     <input v-model.trim="search" type="search" />
@@ -116,6 +116,10 @@
         }
 
         return results;
+      },
+
+      toggleScoresLabel() {
+        return `Scores are ${this.showScores ? 'shown' : 'hidden'}. Click to toggle.`;
       },
     },
 

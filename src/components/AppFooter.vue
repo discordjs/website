@@ -4,7 +4,10 @@
       <strong><router-link to="/">discord.js</router-link></strong>
       <p>A powerful library for interacting with the Discord API</p>
       <stats />
-      <a href="" id="dark-mode-link" @click="toggleDarkMode">{{ darkMode ? 'Turn on the lights' : 'Turn off the lights' }}</a>
+      <a href="" id="dark-mode-link" @click="toggleDarkMode">
+        <em class="fa" :class="darkMode ? 'fa-sun-o' : 'fa-moon-o'"></em>
+        Turn {{ darkMode ? 'on' : 'off' }} the lights
+      </a>
     </container>
   </footer>
 </template>
