@@ -110,7 +110,7 @@
 		}
 
 		h3 a:hover .method-param {
-			color: $color-primary;
+			color: $color-primary !important;
 		}
 	}
 
