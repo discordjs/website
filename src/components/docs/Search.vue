@@ -329,6 +329,7 @@
       padding: 3px 4px;
       text-align: center;
       font-size: 0.9rem;
+      opacity: 1;
       transition: background-color 0.3s;
     }
 
@@ -350,6 +351,26 @@
       &:hover .badge {
         background: lighten($color-primary, 20%);
       }
+    }
+  }
+
+  #app.dark #docs-search {
+    #show-scores {
+      &.disabled {
+        color: darken($color-content-text-dark, 5%);
+
+        &:hover {
+          color: lighten($color-content-text-dark, 20%);
+        }
+      }
+
+      &:hover {
+        color: lighten($color-primary, 20%);
+      }
+    }
+
+    .score {
+      color: darken($color-content-text-dark, 40%);
     }
   }
 </style>
