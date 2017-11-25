@@ -237,7 +237,7 @@
       border-left-color: lighten($color-content-bg-dark, 15%);
     }
 
-    :not(pre) > code {
+    :not(pre):not(.info):not(.warn) > code {
       background: lighten($color-content-bg-dark, 3.5%);
     }
   }

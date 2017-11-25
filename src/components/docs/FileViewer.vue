@@ -64,7 +64,7 @@
     }
   }
 
-  #app.dark #file-viewer :not(pre) > code {
+  #app.dark #file-viewer :not(pre):not(.info):not(.warn) > code {
     background: lighten($color-content-bg-dark, 3.5%);
   }
 </style>
