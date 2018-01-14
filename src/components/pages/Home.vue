@@ -21,8 +21,7 @@
 
       <div class="info-item">
         <h2>Example</h2>
-        <pre><code class="javascript" v-hljs>
-const Discord = require("discord.js");
+        <pre><code class="javascript" v-hljs>const Discord = require("discord.js");
 const client = new Discord.Client();
 
 client.on('ready', () => {
@@ -35,8 +34,7 @@ client.on('message', msg => {
   }
 });
 
-client.login('token');
-        </code></pre>
+client.login('token');</code></pre>
       </div>
 
       <div class="info-item">
@@ -133,20 +131,20 @@ client.login('token');
       }
   	}
 
-  	code {
-  		display: inline-block;
-  		padding: 16px;
-  		border-radius: 5px;
-  		background: #f5f5f5;
-  		font-family: $font-monospace;
-  		color: black;
-  	}
-
     #jumbotron {
       flex: 0 0 100%;
       padding: 80px 16px;
       background-color: $color-primary;
       background-image: linear-gradient(top, $color-primary, darken($color-primary, 5%));
+
+      code {
+        display: inline-block;
+        padding: 16px;
+        border-radius: 5px;
+        background: #f5f5f5;
+        color: $color-content-text;
+        font-family: $font-monospace;
+      }
     }
 
     #logo {
@@ -179,9 +177,12 @@ client.login('token');
         text-align: left;
       }
 
-      code {
+      pre {
+        padding: 8px;
+        border-radius: 4px;
         text-align: left;
         font-size: 0.875rem;
+        background: #F0F0F0;
       }
     }
 
@@ -219,5 +220,10 @@ client.login('token');
   #app.dark #home {
     background: $color-content-bg-dark;
     color: $color-content-text-dark;
+
+    pre {
+      background: lighten($color-content-bg-dark, 4%);
+      color: darken($color-content-text-dark, 20%);
+    }
   }
 </style>
