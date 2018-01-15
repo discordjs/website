@@ -1,7 +1,7 @@
 import semver from 'semver';
 import DocsSource from './DocsSource';
 
-const branchBlacklist = new Set(['gh-pages', 'gh-pages-dev', 'docs', 'webpack', 'indev-old', 'v8']);
+const branchBlacklist = new Set(['docs', 'webpack', 'v8']);
 export default new DocsSource({
   id: 'main',
   name: 'Main library',
@@ -9,5 +9,5 @@ export default new DocsSource({
   repo: 'hydrabolt/discord.js',
   defaultTag: 'stable',
   branchFilter: branch => !branchBlacklist.has(branch),
-  tagFilter: tag => semver.gte(tag.replace(/^v/, ''), '9.0.0'),
+  tagFilter: tag => semver.gte(tag, '9.0.0'),
 });

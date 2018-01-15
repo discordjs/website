@@ -1,3 +1,4 @@
+import semver from 'semver';
 import request from 'superagent/superagent';
 
 export default class DocsSource {
@@ -36,8 +37,31 @@ export default class DocsSource {
       for (const branch of branches) {
         if (branch.name !== this.defaultTag && this.branchFilter(branch.name)) this.tags.push(branch.name);
       }
+
+      // Build a list of the latest patch versions
+      const latestPatches = {};
       for (const tag of tags) {
-        if (tag.name !== this.defaultTag && this.tagFilter(tag.name)) this.tags.push(tag.name);
+        if (semver.valid(tag.name)) {
+          const majorMinor = `${semver.major(tag.name)}.${semver.minor(tag.name)}`;
+          const patch = semver.patch(tag.name);
+          if (patch < latestPatches[majorMinor]) continue;
+          latestPatches[majorMinor] = patch;
+        }
+      }
+
+      // Build the list of tags
+      for (const tag of tags) {
+        if (tag.name === this.defaultTag) continue;
+        if (!this.tagFilter(tag.name)) continue;
+
+        // Make sure the tag is the latest patch version
+        if (semver.valid(tag.name)) {
+          const majorMinor = `${semver.major(tag.name)}.${semver.minor(tag.name)}`;
+          const patch = semver.patch(tag.name);
+          if (patch < latestPatches[majorMinor]) continue;
+        }
+
+        this.tags.push(tag.name);
       }
 
       return this.tags;
