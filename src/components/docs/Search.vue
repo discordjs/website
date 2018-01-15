@@ -32,7 +32,7 @@
         </transition>
       </div>
 
-      <p v-else key="short">Your search query must be at least three characters.</p>
+      <p v-else key="short">Your search query must be at least two characters.</p>
     </transition>
   </div>
 </template>
