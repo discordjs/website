@@ -69,6 +69,7 @@ client.login('token');</code></pre>
 <script>
   import Logo from '../Logo.vue';
   import Stats from '../Stats.vue';
+  import MainSource from '../../data/MainSource';
   import Konami from 'konami-code-js';
 
   let konami = null;
@@ -89,6 +90,8 @@ client.login('token');</code></pre>
       } else {
         konami.enable();
       }
+
+      this.$emit('setRepository', MainSource.repo);
     },
 
     beforeDestroy() {

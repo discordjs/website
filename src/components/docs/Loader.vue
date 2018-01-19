@@ -1,7 +1,7 @@
 <template>
   <div id="docs-body">
     <transition name="fade-resize" mode="out-in">
-      <router-view v-if="docs" :docs="docs" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
+      <router-view v-if="docs" :docs="docs" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" @setRepository="setRepository" />
       <slide v-else>
         <loading v-if="!error" />
         <p v-else id="docs-error">
@@ -37,6 +37,7 @@
         const startSource = this.source;
         const startTag = this.tag;
         this.loadingTag = this.tag;
+        this.setRepository(this.source.repo);
 
         this.source.fetchDocs(this.tag).then(docs => { // eslint-disable-line complexity
           if (this.source !== startSource || this.tag !== startTag) return;
@@ -154,6 +155,10 @@
 
       toggleDarkMode() {
         this.$emit('toggleDarkMode');
+      },
+
+      setRepository(repo) {
+        this.$emit('setRepository', repo);
       },
     },
 

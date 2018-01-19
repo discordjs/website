@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <app-navbar />
-    <router-view :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
+    <app-navbar :repository="repository" />
+    <router-view :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" @setRepository="setRepository" />
     <app-footer :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
   import AppNavbar from './components/AppNavbar.vue';
   import AppFooter from './components/AppFooter.vue';
+  import MainSource from './data/MainSource';
 
   export default {
     name: 'app',
@@ -19,7 +20,10 @@
 
     data() {
       const darkMode = localStorage.getItem('dark-mode');
-      return { darkMode: darkMode !== 'false' && darkMode !== null };
+      return {
+        darkMode: darkMode !== 'false' && darkMode !== null,
+        repository: MainSource.repo,
+      };
     },
 
     methods: {
@@ -27,6 +31,10 @@
         this.darkMode = !this.darkMode;
         localStorage.setItem('dark-mode', this.darkMode);
         if (this.darkMode) this.$el.classList.add('dark'); else this.$el.classList.remove('dark');
+      },
+
+      setRepository(repo) {
+        this.repository = repo;
       },
     },
 

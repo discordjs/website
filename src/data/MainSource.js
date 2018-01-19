@@ -6,7 +6,7 @@ export default new DocsSource({
   id: 'main',
   name: 'Main library',
   global: 'Discord',
-  repo: 'hydrabolt/discord.js',
+  repo: 'discordjs/discord.js',
   defaultTag: 'stable',
   branchFilter: branch => !branchBlacklist.has(branch),
   tagFilter: tag => semver.gte(tag, '9.0.0'),

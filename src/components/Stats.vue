@@ -29,10 +29,10 @@
         for (const item of res.body.downloads) data.downloads += item.downloads;
         data.downloads = data.downloads.toLocaleString();
       });
-      request.get('https://api.github.com/repos/hydrabolt/discord.js').end((err, res) => {
+      request.get('https://api.github.com/repos/discordjs/discord.js').end((err, res) => {
         if (!err) data.stars = res.body.stargazers_count.toLocaleString();
       });
-      request.get('https://api.github.com/repos/hydrabolt/discord.js/stats/contributors').end((err, res) => {
+      request.get('https://api.github.com/repos/discordjs/discord.js/stats/contributors').end((err, res) => {
         if (!err) data.contributors = res.body.length.toLocaleString();
       });
 
