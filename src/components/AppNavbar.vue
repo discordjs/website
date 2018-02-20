@@ -4,8 +4,9 @@
       <router-link to="/">discord.js</router-link>
 
       <nav>
-        <router-link to="/docs">Documentation</router-link><!--
-        --><a :href="`https://github.com/${repository}`">GitHub</a>
+        <router-link to="/docs">Documentation</router-link>
+        <a href="https://discordjs.guide/">Guide</a>
+        <a :href="`https://github.com/${repository}`">GitHub</a>
       </nav>
     </container>
   </header>
