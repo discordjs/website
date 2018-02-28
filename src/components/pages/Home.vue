@@ -2,7 +2,7 @@
   <div id="home" v-once>
     <slide id="jumbotron">
       <logo :light="true" id="logo" />
-      <code>npm install --save discord.js</code><br />
+      <code>npm install discord.js</code><br />
     </slide>
 
     <section id="info">
