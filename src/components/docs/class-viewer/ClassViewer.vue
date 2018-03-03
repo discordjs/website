@@ -31,7 +31,7 @@
     <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
     <event v-for="event in clarse.events" :event="event" :docs="docs" :key="`e-${event.name}`" />
   </div>
-  <unknown-page v-else class="docs-page" />
+  <unknown-page v-else class="docs-page" :darkMode="darkMode" />
 </template>
 
 <script>
@@ -48,7 +48,7 @@
 
   export default {
     name: 'class-viewer',
-    props: ['docs', 'showPrivate'],
+    props: ['docs', 'showPrivate', 'darkMode'],
     components: {
       TypeLink,
       ParamTable,

@@ -3,7 +3,7 @@
     <source-button :path="file.path" :docs="docs" />
     <div v-html="html"></div>
   </div>
-  <unknown-page v-else class="docs-page" />
+  <unknown-page v-else class="docs-page" :darkMode="darkMode" />
 </template>
 
 <script>
@@ -13,7 +13,7 @@
 
   export default {
     name: 'file-viewer',
-    props: ['docs'],
+    props: ['docs', 'darkMode'],
     components: {
       SourceButton,
     },

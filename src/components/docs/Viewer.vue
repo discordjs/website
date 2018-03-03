@@ -3,7 +3,7 @@
     <container>
       <sidebar :docs="docs" @showPrivate="setShowPrivate" :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
       <transition name="fade-slide" mode="out-in">
-        <router-view :docs="docs" :key="key" :showPrivate="showPrivate" />
+        <router-view :docs="docs" :key="key" :showPrivate="showPrivate" :darkMode="darkMode" />
       </transition>
     </container>
 
