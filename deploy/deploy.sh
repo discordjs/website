@@ -5,7 +5,7 @@ set -e
 
 if [ "$TRAVIS_BRANCH" != "stable" -o -n "$TRAVIS_TAG" -o "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo -e "\e[36m\e[1mNot building for a stable branch push - building without deploying."
-  npm run build
+  yarn run build
   exit 0
 fi
 
@@ -31,7 +31,7 @@ TARGET_BRANCH="gh-pages"
 git clone $REPO dist -b $TARGET_BRANCH
 
 # Build the site
-npm run build
+yarn run build
 
 # Commit and push
 cd dist

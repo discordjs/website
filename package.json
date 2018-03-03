@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "yarn run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
@@ -41,30 +41,31 @@
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^3.0.0",
+    "fast-sass-loader": "^1.4.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
-    "webpack-bundle-analyzer": "^2.9.0",
     "node-notifier": "^5.1.2",
-    "postcss-loader": "^2.0.8",
-    "shelljs": "^0.7.6",
+    "node-sass": "^4.6.1",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
+    "portfinder": "^1.0.13",
+    "postcss-loader": "^2.0.8",
     "rimraf": "^2.6.0",
+    "shelljs": "^0.7.6",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
-    "portfinder": "^1.0.13",
     "webpack": "^3.6.0",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0",
-    "node-sass": "^4.6.1",
-    "fast-sass-loader": "^1.4.0"
+    "webpack-merge": "^4.1.0"
   },
   "engines": {
     "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "npm": ">= 3.0.0",
+    "yarn": ">= 1.0.0"
   },
   "browserslist": [
     "> 1%",

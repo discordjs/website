@@ -2,9 +2,10 @@ language: node_js
 node_js:
   - "9"
 cache:
+  yarn: true
   directories:
     - node_modules
-install: npm install
+install: yarn
 script:
   - bash ./deploy/deploy.sh
 env:
