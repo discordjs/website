@@ -217,6 +217,7 @@
 
   #app.dark #docs-body {
     background: $color-content-bg-dark;
+    color: $color-content-text-dark;
 
     .sk-cube:before {
       background: $color-content-bg-dark;
