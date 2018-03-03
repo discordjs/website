@@ -16,7 +16,7 @@
   "dependencies": {
     "fuse.js": "^3.2.0",
     "konami-code-js": "^0.8.0",
-    "marked": "^0.3.6",
+    "marked": "^0.3.17",
     "semver": "^5.4.1",
     "superagent": "^3.8.1",
     "vue": "^2.5.2",
