@@ -12,9 +12,14 @@
       <li v-for="type in typedef.type" :key="typeKey(type)"><types :names="type" :docs="docs" /></li>
     </ul>
 
-    <div v-if="typedef.props && typedef.props.length > 0" id="typedef-params">
+    <div v-if="typedef.props && typedef.props.length > 0" id="typedef-props">
       <h2>Properties</h2>
       <param-table :params="typedef.props" :docs="docs" />
+    </div>
+
+    <div v-if="typedef.params && typedef.params.length > 0" id="typedef-params">
+      <h2>Parameters</h2>
+      <param-table :params="typedef.params" :docs="docs" />
     </div>
   </div>
   <unknown-page v-else class="docs-page" :darkMode="darkMode" />
