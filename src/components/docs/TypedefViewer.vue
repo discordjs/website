@@ -21,6 +21,14 @@
       <h2>Parameters</h2>
       <param-table :params="typedef.params" :docs="docs" />
     </div>
+
+    <div v-if="typedef.returns" id="typedef-returns">
+      <h2>Returns</h2>
+      <p id="typedef-returns-types">
+        <types v-for="rtrn in typedef.returns.types || typedef.returns" :names="rtrn" :variable="typedef.returns.variable" :nullable="typedef.returns.nullable" :docs="docs" :key="typeKey(rtrn)" />
+      </p>
+      <p v-if="typedef.returns.description" v-html="returnsDescription"></p>
+    </div>
   </div>
   <unknown-page v-else class="docs-page" :darkMode="darkMode" />
 </template>
@@ -52,6 +60,12 @@
     computed: {
       description() {
         return Vue.filter('marked')(convertLinks(this.typedef.description, this.docs, this.$router, this.$route));
+      },
+
+      returnsDescription() {
+        const returns = this.typedef.returns;
+        if (returns) return Vue.filter('marked')(convertLinks(returns.description, this.docs, this.$router, this.$route));
+        return '';
       },
     },
 
