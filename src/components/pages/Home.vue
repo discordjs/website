@@ -21,7 +21,7 @@
 
       <div class="info-item">
         <h2>Example</h2>
-        <pre><code class="javascript" v-hljs>const Discord = require("discord.js");
+        <pre><code class="javascript" v-hljs>const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
