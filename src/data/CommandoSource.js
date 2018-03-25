@@ -7,6 +7,6 @@ export default new DocsSource({
   name: 'Commando',
   global: 'Commando',
   repo: 'discordjs/Commando',
-  branchFilter: branch => !branchBlacklist.has(branch),
+  branchFilter: branch => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
   tagFilter: tag => semver.gt(tag.replace(/^v/, ''), '0.4.1'),
 });
