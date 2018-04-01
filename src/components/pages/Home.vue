@@ -157,6 +157,7 @@ client.login('token');</code></pre>
       max-width: 700px;
       overflow: visible;
       filter: drop-shadow(0 3px 4px #333);
+      animation: spin 0.5s infinite linear;
     }
 
     #info {

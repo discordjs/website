@@ -1,18 +1,18 @@
 // Fonts
-$font-regular: Roboto, 'Source Sans Pro', Calibri, Arial, sans-serif;
+$font-regular: 'Comic Sans MS', cursive, 'Source Sans Pro', Calibri, Arial, sans-serif;
 $font-monospace: 'Roboto Mono', 'Source Code Pro', Consolas, monospace;
-$font-header: 'Roboto Condensed', 'Source Sans Pro', Calibri, Arial, sans-serif;
+$font-header: fantasy, cursive, 'Roboto Condensed', 'Source Sans Pro', Calibri, Arial, sans-serif;
 
 // Colours
-$color-primary: #2196F3;
-$color-warn: lighten(red, 20%);
+$color-primary: #00f729;
+$color-warn: #bfd100;
 $color-info: lighten($color-primary, 8%);
-$color-navbar-bg: #222;
-$color-footer-text: #888;
-$color-content-bg: #fefefe;
-$color-content-bg-dark: #111;
-$color-content-text: #111;
-$color-content-text-dark: #ccc;
+$color-navbar-bg: #87007b;
+$color-footer-text: #ff7f00;
+$color-content-bg: #ff9393;
+$color-content-bg-dark: #00014f;
+$color-content-text: #540028;
+$color-content-text-dark: #ff84ff;
 $color-scrolled-bg: lighten(#F3F321, 10%);
 $color-inactive-border: darken($color-content-bg, 6%);
 $color-inactive-border-dark: lighten($color-content-bg-dark, 6%);
