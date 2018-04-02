@@ -1,7 +1,7 @@
 <template>
-  <div id="home" v-once>
+  <div id="home">
     <slide id="jumbotron">
-      <logo :light="true" id="logo" />
+      <logo :light="true" :konami="konami" id="logo" />
       <code>npm install discord.js</code><br />
     </slide>
 
@@ -70,32 +70,17 @@ client.login('token');</code></pre>
   import Logo from '../Logo.vue';
   import Stats from '../Stats.vue';
   import MainSource from '../../data/MainSource';
-  import Konami from 'konami-code-js';
-
-  let konami = null;
 
   export default {
     name: 'home',
+    props: ['konami'],
     components: {
       Logo,
       Stats,
     },
 
     mounted() {
-      if (!konami) {
-        konami = new Konami(() => {
-          document.getElementById('logo').style.animation = 'spin 0.5s infinite linear';
-          konami.disable();
-        });
-      } else {
-        konami.enable();
-      }
-
       this.$emit('setRepository', MainSource.repo);
-    },
-
-    beforeDestroy() {
-      if (konami) konami.disable();
     },
   };
 </script>
