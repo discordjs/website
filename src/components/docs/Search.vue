@@ -15,20 +15,20 @@
 
     <transition name="fade" mode="out-in">
       <div v-if="search && search.length >= 2">
-        <h2 v-if="search && search.length >= 2">Results for "{{ search }}"</h2>
-
         <transition name="fade" mode="out-in">
-          <transition-group name="animated-list" tag="ul" v-if="results.length > 0" key="results">
-            <li v-for="result in results" :key="result.item.key || result.item.fullName || result.item.name" class="animated-list-item">
-              <span v-if="showScores" class="score">{{ Math.round((1 - result.score) * 100) }}%</span>
-              <router-link :to="result.item.route">
-                <span class="badge" :title="result.item.type">{{ result.item.type[0] }}</span>
-                {{ result.item.fullName || result.item.name }}{{ result.item.type === 'Method' ? '()' : '' }}
-              </router-link>
-            </li>
+          <transition-group name="fade" v-if="results.length">
+            <div v-if="fullMatches.length" :class="{ 'results-separator': fullMatches.length && partialMatches.length }" key="fullMatches">
+                <h2>Results for "{{ search }}"</h2>
+                <search-results :results="fullMatches" :showScores="showScores"></search-results>
+            </div>
+
+            <div v-if="partialMatches.length" key="partialMatches">
+              <h2>Similar results for "{{ search }}"</h2>
+              <search-results :results="partialMatches" :showScores="showScores"></search-results>
+            </div>
           </transition-group>
 
-          <p v-else key="empty">No results.</p>
+          <p v-else>No results.</p>
         </transition>
       </div>
 
@@ -40,10 +40,14 @@
 <script>
   import Fuse from 'fuse.js';
   import { scopedName } from '../../util';
+  import SearchResults from './SearchResults.vue';
 
   export default {
     name: 'docs-search',
     props: ['docs', 'showPrivate'],
+    components: {
+      SearchResults,
+    },
 
     data() {
       const toggles = { classes: true, props: true, methods: true, events: true, typedefs: true };
@@ -116,6 +120,14 @@
         }
 
         return results;
+      },
+
+      fullMatches() {
+        return this.results.filter(result => Math.round((1 - result.score) * 100) === 100);
+      },
+
+      partialMatches() {
+        return this.results.filter(result => Math.round((1 - result.score) * 100) !== 100);
       },
 
       toggleScoresLabel() {
@@ -312,38 +324,6 @@
       }
     }
 
-    ul {
-      padding-left: 24px;
-      list-style: none;
-    }
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    .badge {
-      display: inline-block;
-      width: 0.8rem;
-      margin-left: 0;
-      margin-right: 8px;
-      padding: 3px 4px;
-      text-align: center;
-      font-size: 0.9rem;
-      opacity: 1;
-      transition: background-color 0.3s;
-    }
-
-    .score {
-      display: inline-block;
-      position: relative;
-      right: 1.7rem;
-      width: 0;
-      margin: 0;
-      font-size: 0.7rem;
-      overflow: visible;
-      color: lighten($color-content-text, 40%);
-    }
-
     a {
       display: inline-block;
       height: 100%;
@@ -351,6 +331,11 @@
       &:hover .badge {
         background: lighten($color-primary, 20%);
       }
+    }
+
+    .results-separator {
+      padding-bottom: 10px;
+      border-bottom: 1px solid darken($color-inactive-border, 5%);
     }
   }
 
@@ -369,8 +354,8 @@
       }
     }
 
-    .score {
-      color: darken($color-content-text-dark, 40%);
+    .results-separator {
+      border-color: $color-inactive-border-dark;
     }
   }
 </style>
