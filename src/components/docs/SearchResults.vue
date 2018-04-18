@@ -4,7 +4,7 @@
       <span v-if="showScores" class="score">{{ Math.round((1 - result.score) * 100) }}%</span>
       <router-link :to="result.item.route">
         <span class="badge" :title="result.item.type">{{ result.item.type[0] }}</span>
-        {{ result.item.fullName || result.item.name }}{{ result.item.type === 'Method' ? '()' : '' }}
+        <span v-html="highlightName(result.item.fullName || result.item.name)"></span>{{ result.item.type === 'Method' ? '()' : '' }}
       </router-link>
     </li>
   </transition-group>
@@ -12,7 +12,13 @@
 
 <script>
   export default {
-    props: ['results', 'showScores'],
+    props: ['results', 'showScores', 'searchTerm'],
+
+    methods: {
+      highlightName(name) {
+        return name.replace(new RegExp(this.searchTerm, 'i'), match => `<strong>${match}</strong>`);
+      },
+    },
   };
 </script>
 
