@@ -16,7 +16,13 @@
 
     methods: {
       highlightName(name) {
-        return name.replace(new RegExp(this.searchTerm, 'i'), match => `<strong>${match}</strong>`);
+        return name.replace(this.searchRegex, match => `<strong>${match}</strong>`);
+      },
+    },
+
+    computed: {
+      searchRegex() {
+        return new RegExp(this.searchTerm, 'i');
       },
     },
   };
