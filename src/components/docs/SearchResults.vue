@@ -22,7 +22,7 @@
 
     computed: {
       searchRegex() {
-        return new RegExp(this.searchTerm, 'i');
+        return new RegExp(this.searchTerm, 'ig');
       },
     },
   };
