@@ -52,7 +52,7 @@
       },
 
       goToSearch() {
-        if (this.$route.name !== 'docs-search') this.$router.push({ name: 'docs-search' });
+        if (this.$route.name !== 'docs-search') this.$router.push({ name: 'docs-search', query: { q: this.search } });
       },
     },
 
