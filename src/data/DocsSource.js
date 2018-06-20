@@ -1,5 +1,10 @@
 import semver from 'semver';
 
+const json = res => {
+  if (!res.ok) throw new Error('Failed to fetch github data');
+  return res.json();
+};
+
 export default class DocsSource {
   constructor(options) {
     this.id = options.id;
@@ -18,8 +23,8 @@ export default class DocsSource {
   fetchTags() {
     if (this.tags) return Promise.resolve(this.tags);
     return Promise.all([
-      fetch(`https://api.github.com/repos/${this.repo}/branches`).then(res => res.json()),
-      fetch(`https://api.github.com/repos/${this.repo}/tags`).then(res => res.json()),
+      fetch(`https://api.github.com/repos/${this.repo}/branches`).then(json),
+      fetch(`https://api.github.com/repos/${this.repo}/tags`).then(json),
     ]).catch(err => {
       if (localStorage[`source-${this.id}`]) {
         console.error(err);
