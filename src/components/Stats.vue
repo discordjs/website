@@ -32,9 +32,9 @@
         this.fetching = true;
 
         const [downloads, stars, contributors] = await Promise.all([
-          fetch('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').then(json).catch(noop),
-          fetch('https://api.github.com/repos/discordjs/discord.js').then(json).catch(noop),
-          fetch('https://api.github.com/repos/discordjs/discord.js/stats/contributors').then(json).catch(noop),
+          fetch('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').then(json, noop),
+          fetch('https://api.github.com/repos/discordjs/discord.js').then(json, noop),
+          fetch('https://api.github.com/repos/discordjs/discord.js/stats/contributors').then(json, noop),
         ]);
 
         if (downloads) {
