@@ -144,7 +144,6 @@
 
     .class-name-extra .docs-type:not(:last-child):after {
       content: ' and ';
-      font-weight: normal;
 
     }
 
