@@ -9,17 +9,18 @@
 <script>
   const json = res => res.json();
   const noop = () => { /* do nothing. */ };
+  const data = {
+    downloads: '1,300,000+',
+    stars: '2,700+',
+    contributors: '100+',
+    fetching: false,
+  };
 
   export default {
     name: 'stats',
 
     data() {
-      return {
-        downloads: '1,300,000+',
-        stars: '2,700+',
-        contributors: '100+',
-        fetching: false,
-      };
+      return data;
     },
 
     beforeMount() {
