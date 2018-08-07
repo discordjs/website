@@ -8,7 +8,7 @@
   <meta property="og:title" content="Discord.js" />
   <meta property="og:description" content="Discord.js is a powerful node.js module that allows you to interact with the Discord API very easily. It takes a much more object-oriented approach than most other JS Discord libraries, making your bot's code significantly tidier and easier to comprehend." />
   <meta property="og:image" content="https://discord.js.org/static/logo-square.png" />
-
+  <link rel="manifest" href="/static/manifest.json">
   <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" async></script>
@@ -16,5 +16,14 @@
 <body>
   <div id="app"></div>
   <!-- built files will be auto injected -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      try {
+        navigator.serviceWorker.register('/sw.js');
+      } catch(e) {
+        console.log(e);
+      }
+    }
+  </script>
 </body>
 </html>
