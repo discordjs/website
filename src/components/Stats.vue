@@ -7,25 +7,25 @@
 </template>
 
 <script>
-  const noop = () => {
-    // Noop
-  };
   const json = res => res.json();
+  const noop = () => { /* do nothing. */ };
 
   export default {
     name: 'stats',
 
     data() {
       return {
-        downloads: '1,150,000+',
-        stars: '2,100+',
+        downloads: '1,300,000+',
+        stars: '2,700+',
         contributors: '100+',
         fetching: false,
       };
     },
+
     beforeMount() {
       this.fetch();
     },
+
     methods: {
       async fetch() {
         if (this.fetching) return;
