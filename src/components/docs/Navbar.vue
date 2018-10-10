@@ -64,7 +64,7 @@
       tagChoice(tag) {
         if (tag && this.$route.params.tag !== tag) {
           SHITS.switching = true;
-          this.$router.push({ name: this.$route.name, params: { ...this.$route.params, tag } });
+          this.$router.push({ name: this.$route.name, params: { ...this.$route.params, tag }, query: this.$route.query });
         }
       },
 
