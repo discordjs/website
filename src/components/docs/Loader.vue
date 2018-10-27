@@ -74,6 +74,8 @@
             Buffer: 'https://nodejs.org/dist/latest/docs/api/buffer.html#buffer_class_buffer',
             ReadableStream: 'https://nodejs.org/dist/latest/docs/api/stream.html#stream_class_stream_readable',
             ChildProcess: 'https://nodejs.org/dist/latest/docs/api/child_process.html#child_process_class_childprocess',
+            Worker: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_worker',
+            MessagePort: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_messageport',
           };
 
           // Add links for everything
