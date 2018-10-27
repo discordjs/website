@@ -8,7 +8,9 @@
 
 <script>
   const json = res => res.json();
-  const noop = () => { /* do nothing. */ };
+  const noop = () => {
+    // Do nothing.
+  };
   const data = {
     downloads: '1,300,000+',
     stars: '2,700+',
