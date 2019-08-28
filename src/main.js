@@ -29,9 +29,7 @@ Vue.filter('marked', text => {
   return marked(text);
 });
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   render: h => h(App),
-});
+}).$mount('#app');

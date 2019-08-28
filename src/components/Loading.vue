@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  export default { name: 'loading' };
+export default { name: 'loading' };
 </script>
 
 <style lang="scss">

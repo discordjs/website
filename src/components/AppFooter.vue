@@ -13,30 +13,30 @@
 </template>
 
 <script>
-  import Stats from './Stats.vue';
+import Stats from './Stats.vue';
 
-  export default {
-    name: 'footer',
-    props: ['darkMode'],
-    components: {
-      Stats,
-    },
+export default {
+  name: 'footer',
+  props: ['darkMode'],
+  components: {
+    Stats,
+  },
 
-    methods: {
-      toggleDarkMode(event) {
-        this.$emit('toggleDarkMode');
-        event.preventDefault();
-      },
+  methods: {
+    toggleDarkMode(event) {
+      this.$emit('toggleDarkMode');
+      event.preventDefault();
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">
   @import '../styles/theming';
 
   footer {
-  	padding: 3rem;
-  	background: $color-navbar-bg;
+    padding: 3rem;
+    background: $color-navbar-bg;
     color: $color-footer-text;
 
     a {
@@ -53,7 +53,7 @@
     }
 
     .stats {
-  		padding: 0;
+      padding: 0;
       list-style: none;
 
       li {

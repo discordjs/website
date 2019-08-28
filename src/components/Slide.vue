@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  export default { name: 'slide' };
+export default { name: 'slide' };
 </script>
 
 <style>

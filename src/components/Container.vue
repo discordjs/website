@@ -12,5 +12,5 @@
 </style>
 
 <script>
-  export default { name: 'container' };
+export default { name: 'container' };
 </script>

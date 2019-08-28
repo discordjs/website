@@ -16,7 +16,7 @@
 
     <div id="class-constructor" v-if="clarse.construct && (showPrivate || clarse.construct.access !== 'private')">
       <h2>Constructor</h2>
-      <pre><code class="js">new {{ docs.global }}.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams">{{ param.name }}</span>);</code></pre>
+      <pre><code class="js">new {{ docs.global }}.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams" :key="param.name">{{ param.name }}</span>);</code></pre>
       <param-table :params="clarse.construct.params" :docs="docs" />
     </div>
 
@@ -35,78 +35,78 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import TypeLink from '../TypeLink.vue';
-  import ParamTable from './ParamTable.vue';
-  import Overview from './Overview';
-  import Property from './Property';
-  import Method from './Method';
-  import Event from './Event';
-  import SourceButton from '../SourceButton.vue';
-  import See from '../See';
-  import { hljs, convertLinks, scopedName } from '../../../util';
+import Vue from 'vue';
+import TypeLink from '../TypeLink.vue';
+import ParamTable from './ParamTable.vue';
+import Overview from './Overview';
+import Property from './Property';
+import Method from './Method';
+import Event from './Event';
+import SourceButton from '../SourceButton.vue';
+import See from '../See';
+import { hljs, convertLinks, scopedName } from '../../../util';
 
-  export default {
-    name: 'class-viewer',
-    props: ['docs', 'showPrivate', 'darkMode'],
-    components: {
-      TypeLink,
-      ParamTable,
-      Overview,
-      Property,
-      Method,
-      Event,
-      SourceButton,
-      See,
+export default {
+  name: 'class-viewer',
+  props: ['docs', 'showPrivate', 'darkMode'],
+  components: {
+    TypeLink,
+    ParamTable,
+    Overview,
+    Property,
+    Method,
+    Event,
+    SourceButton,
+    See,
+  },
+
+  data() {
+    return {
+      clarse: this.docs.classes.find(c => c.name === this.$route.params.class),
+    };
+  },
+
+  computed: {
+    constructorParams() {
+      if (!this.clarse.construct || !this.clarse.construct.params) return null;
+      return this.clarse.construct.params.filter(p => !p.name.includes('.'));
     },
 
-    data() {
-      return {
-        clarse: this.docs.classes.find(c => c.name === this.$route.params.class),
-      };
+    properties() {
+      if (!this.clarse.props) return null;
+      let props;
+      if (this.showPrivate) props = this.clarse.props;
+      else props = this.clarse.props.filter(p => p.access !== 'private');
+      return props.sort((a, b) =>
+        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+      );
     },
 
-    computed: {
-      constructorParams() {
-        if (!this.clarse.construct || !this.clarse.construct.params) return null;
-        return this.clarse.construct.params.filter(p => !p.name.includes('.'));
-      },
-
-      properties() {
-        if (!this.clarse.props) return null;
-        let props;
-        if (this.showPrivate) props = this.clarse.props;
-        else props = this.clarse.props.filter(p => p.access !== 'private');
-        return props.sort((a, b) =>
-          `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
-        );
-      },
-
-      methods() {
-        if (!this.clarse.methods) return null;
-        let methods;
-        if (this.showPrivate) methods = this.clarse.methods;
-        else methods = this.clarse.methods.filter(p => p.access !== 'private');
-        return methods.sort((a, b) =>
-          `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
-        );
-      },
-
-      description() {
-        return Vue.filter('marked')(convertLinks(this.clarse.description, this.docs, this.$router, this.$route));
-      },
+    methods() {
+      if (!this.clarse.methods) return null;
+      let methods;
+      if (this.showPrivate) methods = this.clarse.methods;
+      else methods = this.clarse.methods.filter(p => p.access !== 'private');
+      return methods.sort((a, b) =>
+        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+      );
     },
 
-    methods: {
-      scopedName,
+    description() {
+      return Vue.filter('marked')(convertLinks(this.clarse.description, this.docs, this.$router, this.$route));
     },
+  },
 
-    mounted() {
-      this.$nextTick(() => {
-        for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
-      });
-    },
-  };
+  methods: {
+    scopedName,
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
+    });
+  },
+};
 </script>
 
 <style lang="scss">

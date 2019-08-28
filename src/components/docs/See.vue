@@ -3,7 +3,7 @@
     See also:
 
     <ul v-if="see.length > 1">
-      <li v-for="s in parsed">
+      <li v-for="s in parsed" :key="s.text">
         <router-link v-if="typeof s.link === 'object'" :to="s.link" class="docs-type">{{ s.text }}</router-link>
         <a v-else-if="typeof s.link === 'string'" :href="s.link">{{ s.text }}</a>
         <span v-else>{{ s.text }}</span>
@@ -19,20 +19,20 @@
 </template>
 
 <script>
-  import { parseLink } from '../../util';
+import { parseLink } from '../../util';
 
-  export default {
-    name: 'docs-see',
-    props: ['see', 'docs'],
+export default {
+  name: 'docs-see',
+  props: ['see', 'docs'],
 
-    computed: {
-      parsed() {
-        const parsed = new Array(this.see.length);
-        for (let s = 0; s < this.see.length; s++) parsed[s] = parseLink(this.see[s], this.docs);
-        return parsed;
-      },
+  computed: {
+    parsed() {
+      const parsed = new Array(this.see.length);
+      for (let s = 0; s < this.see.length; s++) parsed[s] = parseLink(this.see[s], this.docs);
+      return parsed;
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

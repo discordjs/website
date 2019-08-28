@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  export default {
-    name: 'awesome',
-    props: ['light'],
-  };
+export default {
+  name: 'awesome',
+  props: ['light'],
+};
 </script>

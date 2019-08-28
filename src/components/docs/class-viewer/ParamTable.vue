@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="param in params">
+        <tr v-for="param in params" :key="param.name">
           <td>{{ param.name }}</td>
           <td><types v-for="type in param.type" :names="type" :variable="param.variable" :nullable="param.nullable" :docs="docs" :key="typeKey(type)" /></td>
           <td v-if="hasOptional">
@@ -29,35 +29,35 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import Types from '../Types.vue';
-  import { convertLinks, typeKey } from '../../../util';
+import Vue from 'vue';
+import Types from '../Types.vue';
+import { convertLinks, typeKey } from '../../../util';
 
-  export default {
-    name: 'param-table',
-    props: ['params', 'docs'],
-    components: {
-      Types,
+export default {
+  name: 'param-table',
+  props: ['params', 'docs'],
+  components: {
+    Types,
+  },
+
+  computed: {
+    hasOptional() {
+      return this.params.some(p => p.optional);
+    },
+  },
+
+  methods: {
+    typeKey,
+
+    paramDescription(param) {
+      return Vue.filter('marked')(convertLinks(param.description, this.docs, this.$router, this.$route));
     },
 
-    computed: {
-      hasOptional() {
-        return this.params.some(p => p.optional);
-      },
+    paramDefault(param) {
+      return param.optional ? `<code>${param.default}</code>` : '';
     },
-
-    methods: {
-      typeKey,
-
-      paramDescription(param) {
-        return Vue.filter('marked')(convertLinks(param.description, this.docs, this.$router, this.$route));
-      },
-
-      paramDefault(param) {
-        return param.optional ? `<code>${param.default}</code>` : '';
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss">
