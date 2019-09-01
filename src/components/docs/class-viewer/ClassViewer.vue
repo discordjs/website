@@ -57,6 +57,7 @@ export default {
   name: 'class-viewer',
   props: ['docs', 'showPrivate', 'darkMode'],
   components: {
+    Types,
     TypeLink,
     ParamTable,
     Overview,
@@ -106,7 +107,7 @@ export default {
 
   methods: {
     scopedName,
-    typedKey,
+    typeKey,
   },
 
   mounted() {
