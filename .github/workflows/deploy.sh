@@ -7,13 +7,14 @@ REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.gi
 TARGET_BRANCH="gh-pages"
 
 echo -e "\n# Checkout the repo in the target branch"
-git clone $REPO dist -b $TARGET_BRANCH
+git clone $REPO out -b $TARGET_BRANCH
 
-echo -e "\n# Build the site"
-yarn build
+echo -e "\n# Copy built site over"
+rm -rf out/*
+cp -r dist/* out
 
 echo -e "\n# Commit and push"
-cd dist
+cd out
 git pull
 git add --all .
 git config user.name "${GITHUB_ACTOR}"
