@@ -4,12 +4,12 @@
       View docs for
 
       <select v-model="sourceChoice">
-        <option v-for="source in sources" :value="source.id">{{ source.name }}</option>
+        <option v-for="source in sources" :value="source.id" :key="source.id">{{ source.name }}</option>
       </select>
 
       <transition name="fade" mode="out-in" @enter="updateTagChoice">
         <select v-if="tags" v-model="tagChoice" :key="source.id">
-          <option v-for="tag in tags" :value="tag">{{ tag }}</option>
+          <option v-for="tag in tags" :value="tag" :key="tag">{{ tag }}</option>
         </select>
         <loading v-else />
       </transition>
@@ -21,77 +21,77 @@
 </template>
 
 <script>
-  import { SHITS } from '../../util';
+import { SHITS } from '../../util';
 
-  export default {
-    name: 'docs-navbar',
-    props: ['sources', 'source'],
+export default {
+  name: 'docs-navbar',
+  props: ['sources', 'source'],
 
-    data() {
-      return {
-        sourceChoice: this.source.id,
-        tagChoice: null,
-        tags: null,
-        search: this.$route.query.q,
-      };
+  data() {
+    return {
+      sourceChoice: this.source.id,
+      tagChoice: null,
+      tags: null,
+      search: this.$route.query.q,
+    };
+  },
+
+  methods: {
+    loadTags() {
+      this.tags = this.source.tags;
+      if (!this.tags) {
+        const startSource = this.source;
+        this.source.fetchTags().then(tags => {
+          if (this.source.id === startSource.id) this.tags = tags;
+        });
+      }
     },
 
-    methods: {
-      loadTags() {
-        this.tags = this.source.tags;
-        if (!this.tags) {
-          const startSource = this.source;
-          this.source.fetchTags().then(tags => {
-            if (this.source.id === startSource.id) this.tags = tags;
-          });
-        }
-      },
-
-      updateTagChoice() {
-        if (this.tags) this.tagChoice = this.$route.params.tag || this.source.recentTag || this.source.defaultTag;
-      },
-
-      goToSearch() {
-        if (this.$route.name !== 'docs-search') this.$router.push({ name: 'docs-search', query: { q: this.search } });
-      },
+    updateTagChoice() {
+      if (this.tags) this.tagChoice = this.$route.params.tag || this.source.recentTag || this.source.defaultTag;
     },
 
-    watch: {
-      sourceChoice(src) {
-        if (this.$route.params.source !== src) this.$router.push({ name: 'docs-source', params: { source: src } });
-      },
+    goToSearch() {
+      if (this.$route.name !== 'docs-search') this.$router.push({ name: 'docs-search', query: { q: this.search } });
+    },
+  },
 
-      tagChoice(tag) {
-        if (tag && this.$route.params.tag !== tag) {
-          SHITS.switching = true;
-          this.$router.push({ name: this.$route.name, params: { ...this.$route.params, tag } });
-        }
-      },
-
-      source(source) {
-        this.sourceChoice = source.id;
-        this.tagChoice = null;
-        this.loadTags();
-      },
-
-      search(q) {
-        if (this.$route.query.q) this.$router.replace({ name: 'docs-search', query: { q } });
-        else this.$router.push({ name: 'docs-search', query: { q } });
-      },
-
-      $route(to) {
-        if (this.tagChoice && to.params.tag && this.tagChoice !== to.params.tag) this.tagChoice = to.params.tag;
-      },
+  watch: {
+    sourceChoice(src) {
+      if (this.$route.params.source !== src) this.$router.push({ name: 'docs-source', params: { source: src } });
     },
 
-    created() {
+    tagChoice(tag) {
+      if (tag && this.$route.params.tag !== tag) {
+        SHITS.switching = true;
+        this.$router.push({ name: this.$route.name, params: { ...this.$route.params, tag }, query: this.$route.query });
+      }
+    },
+
+    source(source) {
+      this.sourceChoice = source.id;
+      this.tagChoice = null;
       this.loadTags();
     },
 
-    mounted() {
-      this.updateTagChoice();
+    search(q) {
+      if (this.$route.query.q) this.$router.replace({ name: 'docs-search', query: { q } });
+      else this.$router.push({ name: 'docs-search', query: { q } });
     },
-  };
+
+    $route(to) {
+      if (this.tagChoice && to.params.tag && this.tagChoice !== to.params.tag) this.tagChoice = to.params.tag;
+    },
+  },
+
+  created() {
+    this.loadTags();
+  },
+
+  mounted() {
+    this.updateTagChoice();
+  },
+};
 </script>
 
 <style lang="scss">

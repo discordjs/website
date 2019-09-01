@@ -12,10 +12,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'navbar',
-    props: ['repository'],
-  };
+export default {
+  name: 'navbar',
+  props: ['repository'],
+};
 </script>
 
 <style lang="scss">

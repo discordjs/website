@@ -7,36 +7,47 @@
 </template>
 
 <script>
-  import request from 'superagent/superagent';
+const json = res => res.json();
+const noop = () => {
+  // Do nothing.
+};
+const data = {
+  downloads: '1,300,000+',
+  stars: '2,700+',
+  contributors: '100+',
+  fetching: false,
+};
 
-  const data = {
-    downloads: '1,150,000+',
-    stars: '2,100+',
-    contributors: '100+',
-    fetching: false,
-  };
+export default {
+  name: 'stats',
 
-  export default {
-    name: 'stats',
+  data() {
+    return data;
+  },
 
-    data() {
-      if (data.fetching) return data;
-      data.fetching = true;
+  beforeMount() {
+    this.fetch();
+  },
 
-      request.get('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').end((err, res) => {
-        if (err) return;
-        data.downloads = 0;
-        for (const item of res.body.downloads) data.downloads += item.downloads;
-        data.downloads = data.downloads.toLocaleString();
-      });
-      request.get('https://api.github.com/repos/discordjs/discord.js').end((err, res) => {
-        if (!err) data.stars = res.body.stargazers_count.toLocaleString();
-      });
-      request.get('https://api.github.com/repos/discordjs/discord.js/stats/contributors').end((err, res) => {
-        if (!err) data.contributors = res.body.length.toLocaleString();
-      });
+  methods: {
+    async fetch() {
+      if (this.fetching) return;
+      this.fetching = true;
 
-      return data;
+      const [downloads, stars, contributors] = await Promise.all([
+        fetch('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').then(json, noop),
+        fetch('https://api.github.com/repos/discordjs/discord.js').then(json, noop),
+        fetch('https://api.github.com/repos/discordjs/discord.js/stats/contributors').then(json, noop),
+      ]);
+
+      if (downloads) {
+        this.downloads = 0;
+        for (const item of downloads.downloads) this.downloads += item.downloads;
+        this.downloads = this.downloads.toLocaleString();
+      }
+      if (stars) this.stars = stars.stargazers_count.toLocaleString();
+      if (contributors) this.contributors = contributors.length.toLocaleString();
     },
-  };
+  },
+};
 </script>

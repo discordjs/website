@@ -33,7 +33,7 @@
     <div class="col" v-if="events && events.length > 0">
       <div class="title">Events</div>
       <ul>
-        <li v-for="event in events" @click="scroll(`e-${event.name}`)">
+        <li v-for="event in events" :key="event.name" @click="scroll(`e-${event.name}`)">
           <router-link :to="{ name: 'docs-class', query: { scrollTo: `e-${event.name}` } }">
             {{ event.name }}
             <span v-if="event.deprecated" class="small-badge warn">D</span>
@@ -45,25 +45,25 @@
 </template>
 
 <script>
-  import { scopedName } from '../../../util';
+import { scopedName } from '../../../util';
 
-  export default {
-    name: 'class-overview',
-    props: ['properties', 'methods', 'events'],
+export default {
+  name: 'class-overview',
+  props: ['properties', 'methods', 'events'],
 
-    methods: {
-      scopedName,
+  methods: {
+    scopedName,
 
-      scroll(to) {
-        const el = document.getElementById(`doc-for-${to}`);
-        el.setAttribute('data-scrolled', true);
-        setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
-        setTimeout(() => el.removeAttribute('data-scrolled'), 2000);
-        el.scrollIntoView();
-        window.scrollBy(0, -50);
-      },
+    scroll(to) {
+      const el = document.getElementById(`doc-for-${to}`);
+      el.setAttribute('data-scrolled', true);
+      setTimeout(() => el.setAttribute('data-scrolled', false), 1000);
+      setTimeout(() => el.removeAttribute('data-scrolled'), 2000);
+      el.scrollIntoView();
+      window.scrollBy(0, -50);
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

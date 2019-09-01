@@ -67,22 +67,22 @@ client.login('token');</code></pre>
 </template>
 
 <script>
-  import Logo from '../Logo.vue';
-  import Stats from '../Stats.vue';
-  import MainSource from '../../data/MainSource';
+import Logo from '../Logo.vue';
+import Stats from '../Stats.vue';
+import MainSource from '../../data/MainSource';
 
-  export default {
-    name: 'home',
-    props: ['konami'],
-    components: {
-      Logo,
-      Stats,
-    },
+export default {
+  name: 'home',
+  props: ['konami'],
+  components: {
+    Logo,
+    Stats,
+  },
 
-    mounted() {
-      this.$emit('setRepository', MainSource.repo);
-    },
-  };
+  mounted() {
+    this.$emit('setRepository', MainSource.repo);
+  },
+};
 </script>
 
 <style lang="scss">
@@ -94,30 +94,30 @@ client.login('token');</code></pre>
     background: $color-content-bg;
     color: $color-content-text;
 
-  	h2 {
-  		font-size: 2rem;
-  		margin: 0;
+    h2 {
+      font-size: 2rem;
+      margin: 0;
       font-weight: 600;
       letter-spacing: -1px;
-  	}
+    }
 
-  	p {
-  		font-size: 1rem;
-  		line-height: 2rem;
+    p {
+      font-size: 1rem;
+      line-height: 2rem;
       text-align: left;
 
-  		@include mq($until: tablet) {
-  			margin: 0 1rem;
-  		}
+      @include mq($until: tablet) {
+        margin: 0 1rem;
+      }
 
-  		& > a {
-  			font-weight: bold;
-  		}
+      & > a {
+        font-weight: bold;
+      }
 
       &.center {
         text-align: center;
       }
-  	}
+    }
 
     #jumbotron {
       flex: 0 0 100%;

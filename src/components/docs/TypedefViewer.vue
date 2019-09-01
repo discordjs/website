@@ -34,51 +34,51 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import { hljs, convertLinks, typeKey } from '../../util';
-  import Types from './Types.vue';
-  import ParamTable from './class-viewer/ParamTable.vue';
-  import SourceButton from './SourceButton.vue';
-  import See from './See.vue';
+import Vue from 'vue';
+import { hljs, convertLinks, typeKey } from '../../util';
+import Types from './Types.vue';
+import ParamTable from './class-viewer/ParamTable.vue';
+import SourceButton from './SourceButton.vue';
+import See from './See.vue';
 
-  export default {
-    name: 'typedef-viewer',
-    props: ['docs', 'darkMode'],
-    components: {
-      Types,
-      ParamTable,
-      SourceButton,
-      See,
+export default {
+  name: 'typedef-viewer',
+  props: ['docs', 'darkMode'],
+  components: {
+    Types,
+    ParamTable,
+    SourceButton,
+    See,
+  },
+
+  data() {
+    return {
+      typedef: this.docs.typedefs.find(t => t.name === this.$route.params.typedef),
+    };
+  },
+
+  computed: {
+    description() {
+      return Vue.filter('marked')(convertLinks(this.typedef.description, this.docs, this.$router, this.$route));
     },
 
-    data() {
-      return {
-        typedef: this.docs.typedefs.find(t => t.name === this.$route.params.typedef),
-      };
+    returnsDescription() {
+      const returns = this.typedef.returns;
+      if (returns) return Vue.filter('marked')(convertLinks(returns.description, this.docs, this.$router, this.$route));
+      return '';
     },
+  },
 
-    computed: {
-      description() {
-        return Vue.filter('marked')(convertLinks(this.typedef.description, this.docs, this.$router, this.$route));
-      },
+  methods: {
+    typeKey,
+  },
 
-      returnsDescription() {
-        const returns = this.typedef.returns;
-        if (returns) return Vue.filter('marked')(convertLinks(returns.description, this.docs, this.$router, this.$route));
-        return '';
-      },
-    },
-
-    methods: {
-      typeKey,
-    },
-
-    mounted() {
-      this.$nextTick(() => {
-        for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
-      });
-    },
-  };
+  mounted() {
+    this.$nextTick(() => {
+      for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
+    });
+  },
+};
 </script>
 
 <style lang="scss">

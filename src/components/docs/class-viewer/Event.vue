@@ -14,27 +14,27 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import ParamTable from './ParamTable.vue';
-  import SourceButton from '../SourceButton.vue';
-  import See from '../See';
-  import { convertLinks } from '../../../util';
+import Vue from 'vue';
+import ParamTable from './ParamTable.vue';
+import SourceButton from '../SourceButton.vue';
+import See from '../See';
+import { convertLinks } from '../../../util';
 
-  export default {
-    name: 'class-event',
-    props: ['event', 'docs'],
-    components: {
-      ParamTable,
-      SourceButton,
-      See,
-    },
+export default {
+  name: 'class-event',
+  props: ['event', 'docs'],
+  components: {
+    ParamTable,
+    SourceButton,
+    See,
+  },
 
-    computed: {
-      description() {
-        return Vue.filter('marked')(convertLinks(this.event.description, this.docs, this.$router, this.$route));
-      },
+  computed: {
+    description() {
+      return Vue.filter('marked')(convertLinks(this.event.description, this.docs, this.$router, this.$route));
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

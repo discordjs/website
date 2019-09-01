@@ -25,7 +25,7 @@
         <li>
           Classes
           <transition-group name="animated-list" tag="ul">
-            <li v-for="clarse in docs.classes" v-if="showPrivate || clarse.access !== 'private'" :key="clarse.name" class="animated-list-item">
+            <li v-for="clarse in visibleClasses" :key="clarse.name" class="animated-list-item">
               <router-link exact :to="{ name: 'docs-class', params: { class: clarse.name } }">
                 {{ clarse.name }}
               </router-link>
@@ -36,7 +36,7 @@
         <li>
           Typedefs
           <ul>
-            <li v-for="typedef in docs.typedefs" v-if="showPrivate || typedef.access !== 'private'" :key="typedef.name">
+            <li v-for="typedef in visibleTypedefs" :key="typedef.name">
               <router-link exact :to="{ name: 'docs-typedef', params: { typedef: typedef.name } }">
                 {{ typedef.name }}
               </router-link>
@@ -49,54 +49,62 @@
 </template>
 
 <script>
-  export default {
-    name: 'docs-sidebar',
-    props: ['docs', 'darkMode'],
+export default {
+  name: 'docs-sidebar',
+  props: ['docs', 'darkMode'],
 
-    data() {
-      return {
-        visible: false,
-        showPrivate: false,
-      };
+  data() {
+    return {
+      visible: false,
+      showPrivate: false,
+    };
+  },
+
+  computed: {
+    visibleClasses() {
+      return this.showPrivate ? this.docs.classes : this.docs.classes.filter(c => c.access !== 'private');
     },
 
-    computed: {
-      togglePrivateLabel() {
-        return `Private items are ${this.showPrivate ? 'shown' : 'hidden'}. Click to toggle.`;
-      },
-
-      toggleDarkModeLabel() {
-        return `The lights are ${this.darkMode ? 'off' : 'on'}. Click to toggle.`;
-      },
+    visibleTypedefs() {
+      return this.showPrivate ? this.docs.typedefs : this.docs.typedefs.filter(t => t.access !== 'private');
     },
 
-    methods: {
-      toggle() {
-        this.visible = !this.visible;
-      },
-
-      togglePrivate() {
-        this.showPrivate = !this.showPrivate;
-      },
-
-      toggleDarkMode() {
-        this.$emit('toggleDarkMode');
-      },
+    togglePrivateLabel() {
+      return `Private items are ${this.showPrivate ? 'shown' : 'hidden'}. Click to toggle.`;
     },
 
-    watch: {
-      showPrivate(to) {
-        this.$emit('showPrivate', to);
-      },
-
-      $route(to) {
-        if (this.visible) this.visible = false;
-        if (!to.query.scrollTo && (window.pageYOffset || document.documentElement.scrollTop) > 300) {
-          window.scrollTo(0, 90);
-        }
-      },
+    toggleDarkModeLabel() {
+      return `The lights are ${this.darkMode ? 'off' : 'on'}. Click to toggle.`;
     },
-  };
+  },
+
+  methods: {
+    toggle() {
+      this.visible = !this.visible;
+    },
+
+    togglePrivate() {
+      this.showPrivate = !this.showPrivate;
+    },
+
+    toggleDarkMode() {
+      this.$emit('toggleDarkMode');
+    },
+  },
+
+  watch: {
+    showPrivate(to) {
+      this.$emit('showPrivate', to);
+    },
+
+    $route(to) {
+      if (this.visible) this.visible = false;
+      if (!to.query.scrollTo && (window.pageYOffset || document.documentElement.scrollTop) > 300) {
+        window.scrollTo(0, 90);
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss">

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'unknown-route',
-    props: ['darkMode'],
-  };
+export default {
+  name: 'unknown-route',
+  props: ['darkMode'],
+};
 </script>
 
 <style lang="scss">

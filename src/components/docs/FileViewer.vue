@@ -7,39 +7,39 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-  import { hljs } from '../../util';
-  import SourceButton from './SourceButton.vue';
+import Vue from 'vue';
+import { hljs } from '../../util';
+import SourceButton from './SourceButton.vue';
 
-  export default {
-    name: 'file-viewer',
-    props: ['docs', 'darkMode'],
-    components: {
-      SourceButton,
-    },
+export default {
+  name: 'file-viewer',
+  props: ['docs', 'darkMode'],
+  components: {
+    SourceButton,
+  },
 
-    data() {
-      if (!this.docs.custom[this.$route.params.category]) return { file: null };
-      return {
-        file: this.docs.custom[this.$route.params.category].files[this.$route.params.file],
-      };
-    },
+  data() {
+    if (!this.docs.custom[this.$route.params.category]) return { file: null };
+    return {
+      file: this.docs.custom[this.$route.params.category].files[this.$route.params.file],
+    };
+  },
 
-    computed: {
-      html() {
-        let content;
-        if (this.file.type === 'md') content = this.file.content;
-        else content = `# ${this.file.name}\n\`\`\`${this.file.type}\n${this.file.content}\n\`\`\``;
-        return Vue.filter('marked')(content);
-      },
+  computed: {
+    html() {
+      let content;
+      if (this.file.type === 'md') content = this.file.content;
+      else content = `# ${this.file.name}\n\`\`\`${this.file.type}\n${this.file.content}\n\`\`\``;
+      return Vue.filter('marked')(content);
     },
+  },
 
-    mounted() {
-      this.$nextTick(() => {
-        for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
-      });
-    },
-  };
+  mounted() {
+    this.$nextTick(() => {
+      for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
+    });
+  },
+};
 </script>
 
 <style lang="scss">

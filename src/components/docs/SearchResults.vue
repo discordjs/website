@@ -11,21 +11,21 @@
 </template>
 
 <script>
-  export default {
-    props: ['results', 'showScores', 'searchTerm'],
+export default {
+  props: ['results', 'showScores', 'searchTerm'],
 
-    methods: {
-      highlightName(name) {
-        return name.replace(this.searchRegex, match => `<strong>${match}</strong>`);
-      },
+  methods: {
+    highlightName(name) {
+      return name.replace(this.searchRegex, match => `<strong>${match}</strong>`);
     },
+  },
 
-    computed: {
-      searchRegex() {
-        return new RegExp(this.searchTerm, 'ig');
-      },
+  computed: {
+    searchRegex() {
+      return new RegExp(this.searchTerm, 'ig');
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

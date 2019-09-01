@@ -1,5 +1,9 @@
 import semver from 'semver';
-import request from 'superagent/superagent';
+
+const json = res => {
+  if (!res.ok) throw new Error('Failed to fetch github data');
+  return res.json();
+};
 
 export default class DocsSource {
   constructor(options) {
@@ -19,9 +23,9 @@ export default class DocsSource {
   fetchTags() {
     if (this.tags) return Promise.resolve(this.tags);
     return Promise.all([
-      request.get(`https://api.github.com/repos/${this.repo}/branches`),
-      request.get(`https://api.github.com/repos/${this.repo}/tags`),
-    ]).then(responses => [responses[0].body, responses[1].body], err => {
+      fetch(`https://api.github.com/repos/${this.repo}/branches`).then(json),
+      fetch(`https://api.github.com/repos/${this.repo}/tags`).then(json),
+    ]).catch(err => {
       if (localStorage[`source-${this.id}`]) {
         console.error(err);
         const cache = JSON.parse(localStorage[`source-${this.id}`]);
@@ -29,8 +33,7 @@ export default class DocsSource {
       }
       throw err;
     }).then(data => {
-      const branches = data[0];
-      const tags = data[1];
+      const [branches, tags] = data;
       this.tags = [this.defaultTag];
       localStorage[`source-${this.id}`] = JSON.stringify({ branches, tags });
 
@@ -69,8 +72,6 @@ export default class DocsSource {
   }
 
   fetchDocs(tag) {
-    return request.get(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`).then(res =>
-      JSON.parse(res.text)
-    );
+    return fetch(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`).then(json);
   }
 }

@@ -8,13 +8,13 @@
 </template>
 
 <script>
-  import Awesome from './Awesome.vue';
+import Awesome from './Awesome.vue';
 
-  export default {
-    name: 'unknown-page',
-    props: ['type', 'darkMode'],
-    components: { Awesome },
-  };
+export default {
+  name: 'unknown-page',
+  props: ['type', 'darkMode'],
+  components: { Awesome },
+};
 </script>
 
 <style>
