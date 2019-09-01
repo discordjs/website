@@ -25,6 +25,6 @@ jobs:
           args: build
 
       - name: Deploy site
-        run: ./.github/workflows/deploy.sh
+        run: bash ./.github/workflows/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
