@@ -142,6 +142,10 @@ export default {
       font-weight: normal;
     }
 
+    .class-name-extra .docs-type:not(:last-child):after {
+      content: ' and ';
+    }
+
     & > .container {
       display: flex;
 
