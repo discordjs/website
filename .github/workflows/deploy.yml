@@ -16,14 +16,10 @@ jobs:
           node-version: 12
 
       - name: Install dependencies
-        uses: Borales/actions-yarn@1.1.0
-        with:
-          args: install
+        run: yarn
 
       - name: Build site
-        uses: Borales/actions-yarn@1.1.0
-        with:
-          args: build
+        run: yarn build
 
       - name: Deploy site
         run: bash ./.github/workflows/deploy.sh
