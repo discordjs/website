@@ -1,0 +1,28 @@
+name: Deploy
+on:
+  push:
+    branches: [stable]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        uses: Borales/actions-yarn@1.1.0
+        with:
+          args: install
+
+      - name: Build site
+        uses: Borales/actions-yarn@1.1.0
+        with:
+          args: build
+
+      - name: Deploy site
+        run: bash ./.github/workflows/deploy.sh
