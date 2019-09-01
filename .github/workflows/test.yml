@@ -18,11 +18,9 @@ jobs:
           args: install
 
       - name: Run ESLint
-        uses: discordjs/action-eslint@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: Borales/actions-yarn@1.1.0
         with:
-          job-name: ESLint
+          args: lint
 
   test-build:
     name: Test build
