@@ -1,10 +1,10 @@
-name: Deploy
+name: Deployment
 on:
   push:
     branches: [stable]
 jobs:
-  deploy:
-    name: Deploy
+  website:
+    name: Website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
