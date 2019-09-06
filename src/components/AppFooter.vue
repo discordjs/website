@@ -9,6 +9,12 @@
         Turn {{ darkMode ? 'on' : 'off' }} the lights
       </a>
     </container>
+
+    <div id="site-meta">
+      <div id="site-meta-label">&pi;</div>
+      commit: {{ hash }}<br />
+      built at: {{ builtAt.toUTCString() }}
+    </div>
   </footer>
 </template>
 
@@ -20,6 +26,13 @@ export default {
   props: ['darkMode'],
   components: {
     Stats,
+  },
+
+  data() {
+    return {
+      hash: GIT_COMMIT_HASH, // eslint-disable-line no-undef
+      builtAt: new Date(BUILT_AT), // eslint-disable-line no-undef
+    };
   },
 
   methods: {
@@ -77,6 +90,23 @@ export default {
 
     &:hover {
       background: lighten($color-primary, 10%);
+    }
+  }
+
+  #site-meta {
+    float: left;
+    width: 0.9em;
+    height: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.7em;
+    color: darken($color-footer-text, 35%);
+    transition: all 0.6s;
+
+    &:hover {
+      width: 32em;
+      height: 3.2em;
+      color: darken($color-footer-text, 10%);
     }
   }
 </style>
