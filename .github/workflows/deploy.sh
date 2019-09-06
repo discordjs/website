@@ -9,6 +9,7 @@ TARGET_BRANCH="gh-pages"
 echo -e "\n# Load SSH key for Git"
 mkdir ~/.ssh
 echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
+eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
 
 echo -e "\n# Checkout the repo in the target branch"
