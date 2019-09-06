@@ -58,6 +58,7 @@ export default {
 
       li {
         display: inline-block;
+        padding-left: 0.3em;
 
         &:not(:last-child):after {
           content: ','
