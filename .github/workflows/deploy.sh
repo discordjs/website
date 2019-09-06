@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 echo -e "\n# Prepare to do work"
+mkdir ~/.ssh
 echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
 cd $GITHUB_WORKSPACE
 REPO="git@github.com:discordjs/website.git"
