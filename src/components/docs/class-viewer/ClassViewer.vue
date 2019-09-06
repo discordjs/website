@@ -157,6 +157,12 @@ export default {
       color: lighten($color-content-text, 40%);
       font-family: $font-header;
       font-size: 1.1rem;
+
+      .docs-type-link {
+        font-family: $font-header;
+        font-size: 1.1rem;
+        font-weight: normal;
+      }
     }
 
     .class-badge {
