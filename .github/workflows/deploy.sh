@@ -2,8 +2,9 @@
 set -euxo pipefail
 
 echo -e "\n# Prepare to do work"
+echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
 cd $GITHUB_WORKSPACE
-REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+REPO="git@github.com:discordjs/website.git"
 TARGET_BRANCH="gh-pages"
 
 echo -e "\n# Checkout the repo in the target branch"

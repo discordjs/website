@@ -25,3 +25,4 @@ jobs:
         run: bash ./.github/workflows/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
