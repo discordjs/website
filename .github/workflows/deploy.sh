@@ -2,11 +2,14 @@
 set -euxo pipefail
 
 echo -e "\n# Prepare to do work"
-mkdir ~/.ssh
-echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
 cd $GITHUB_WORKSPACE
 REPO="git@github.com:discordjs/website.git"
 TARGET_BRANCH="gh-pages"
+
+echo -e "\n# Load SSH key for Git"
+mkdir ~/.ssh
+echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa
 
 echo -e "\n# Checkout the repo in the target branch"
 git clone $REPO out -b $TARGET_BRANCH
