@@ -11,6 +11,7 @@ mkdir ~/.ssh
 echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 eval $(ssh-agent -s)
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 ssh-add ~/.ssh/id_rsa
 
 echo -e "\n# Checkout the repo in the target branch"
