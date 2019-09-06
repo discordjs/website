@@ -1,4 +1,3 @@
-import semver from 'semver';
 import DocsSource from './DocsSource';
 
 const branchBlacklist = new Set(['docs']);
