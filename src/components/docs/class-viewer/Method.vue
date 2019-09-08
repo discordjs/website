@@ -27,7 +27,7 @@
           <types v-for="rtrn in method.returns.types || method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" :key="typeKey(rtrn)" />
         </span>
         <type-link v-else :type="['void']" :docs="docs" class="docs-type" />
-        <p v-if="method.returns && method.returns.description">{{ method.returns.description }}</p>
+        <p v-if="method.returns && method.returns.description" v-html="returnDescription"></p>
       </div>
 
       <div v-if="method.throws" class="method-throws">
@@ -83,6 +83,10 @@ export default {
 
     description() {
       return Vue.filter('marked')(convertLinks(this.method.description, this.docs, this.$router, this.$route));
+    },
+
+    returnDescription() {
+      return Vue.filter('marked')(convertLinks(this.method.returns.description, this.docs, this.$router, this.$route));
     },
 
     emits() {
