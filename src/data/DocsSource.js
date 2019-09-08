@@ -1,7 +1,7 @@
 import semver from 'semver';
 
 const json = res => {
-  if (!res.ok) throw new Error('Failed to fetch github data');
+  if (!res.ok) throw new Error('Failed to fetch docs data file from GitHub');
   return res.json();
 };
 
