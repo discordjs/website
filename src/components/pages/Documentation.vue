@@ -7,9 +7,9 @@
 
 <script>
 import MainSource from '../../data/MainSource';
+import CollectionSource from '../../data/CollectionSource';
 import CommandoSource from '../../data/CommandoSource';
 import RPCSource from '../../data/RPCSource';
-import CollectionSource from '../../data/CollectionSource';
 import DocsNavbar from '../docs/Navbar.vue';
 
 export default {
@@ -23,9 +23,9 @@ export default {
     return {
       sources: {
         [MainSource.id]: MainSource,
+        [CollectionSource.id]: CollectionSource,
         [CommandoSource.id]: CommandoSource,
         [RPCSource.id]: RPCSource,
-        [CollectionSource.id]: CollectionSource
       },
       source: MainSource,
       tag: MainSource.defaultTag,
