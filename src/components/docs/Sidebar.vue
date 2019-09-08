@@ -22,7 +22,7 @@
           </ul>
         </li>
 
-        <li>
+        <li v-if="visibleClasses.length > 0">
           Classes
           <transition-group name="animated-list" tag="ul">
             <li v-for="clarse in visibleClasses" :key="clarse.name" class="animated-list-item">
@@ -33,7 +33,7 @@
           </transition-group>
         </li>
 
-        <li>
+        <li v-if="visibleTypedefs.length > 0">
           Typedefs
           <ul>
             <li v-for="typedef in visibleTypedefs" :key="typedef.name">
