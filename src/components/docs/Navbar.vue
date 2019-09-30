@@ -127,6 +127,10 @@ export default {
       border-bottom: 1px solid #aaa;
       transition: border-color 0.3s;
 
+      &::placeholder, &:-ms-input-placeholder {
+        color: #aaa;
+      }
+
       &:focus {
         border-color: $color-primary;
         outline: none;
