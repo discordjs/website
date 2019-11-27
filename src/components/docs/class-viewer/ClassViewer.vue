@@ -8,9 +8,9 @@
         <type-link v-if="typeof clarse.extends[0] === 'string'" :type="clarse.extends" :docs="docs" />
         <types v-else v-for="type in clarse.extends" :names="type" :docs="docs" :key="typeKey(type)" />
       </span>
-      <span v-if="clarse.implements">implements
+      <span v-if="clarse.implements"> implements
         <type-link v-if="typeof clarse.implements[0] === 'string'" :type="clarse.implements" :docs="docs" />
-        <types v-for="type in clarse.implements" :names="type" :docs="docs" :key="typeKey(type)" />
+        <types v-else v-for="type in clarse.implements" :names="type" :docs="docs" :key="typeKey(type)" />
       </span>
     </p>
     <span v-if="clarse.abstract" class="badge class-badge" title="This class is abstract, and may not be instantiated itself.">Abstract</span>
