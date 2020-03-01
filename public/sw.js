@@ -2,8 +2,7 @@ const GITHUB_ORG = 'https://raw.githubusercontent.com/discordjs/';
 
 self.addEventListener('fetch', event => {
   const req = event.request;
-  const url = new URL(req.url);
-  event.respondWith(url.origin === location.origin ? cacheFirst(req) : networkFirst(req));
+  event.respondWith(networkFirst(req));
 });
 
 async function fetchAndCache(req, cacheName) {
@@ -13,7 +12,7 @@ async function fetchAndCache(req, cacheName) {
   return res;
 }
 
-async function cacheFirst(req) {
+async function cacheFirst(req) { // eslint-disable-line no-unused-vars
   return await caches.match(req) || fetchAndCache(req, 'site');
 }
 
