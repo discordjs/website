@@ -1,11 +1,7 @@
 <template>
   <div id="class-overview">
     <div class="col" v-if="properties && properties.length > 0">
-<<<<<<< HEAD
-      <div class="title">Properties</div>
-=======
       <div class="title">항목 (Properties)</div>
->>>>>>> Added ALL
       <transition-group name="animated-list" tag="ul">
         <li v-for="property in properties" :key="scopedName(property)" @click="scroll(scopedName(property))" class="animated-list-item">
           <router-link :to="{ name: 'docs-class', query: { scrollTo: scopedName(property) } }">
@@ -20,11 +16,7 @@
     </div>
 
     <div class="col" v-if="methods && methods.length > 0">
-<<<<<<< HEAD
-      <div class="title">Methods</div>
-=======
       <div class="title">메서드 (Method)</div>
->>>>>>> Added ALL
       <transition-group name="animated-list" tag="ul">
         <li v-for="method in methods" :key="scopedName(method)" @click="scroll(scopedName(method))" class="animated-list-item">
           <router-link :to="{ name: 'docs-class', query: { scrollTo: scopedName(method) } }">
@@ -39,11 +31,7 @@
     </div>
 
     <div class="col" v-if="events && events.length > 0">
-<<<<<<< HEAD
-      <div class="title">Events</div>
-=======
       <div class="title">이벤트 (Events)</div>
->>>>>>> Added ALL
       <ul>
         <li v-for="event in events" :key="event.name" @click="scroll(`e-${event.name}`)">
           <router-link :to="{ name: 'docs-class', query: { scrollTo: `e-${event.name}` } }">

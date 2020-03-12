@@ -5,11 +5,7 @@
       <slide v-else>
         <loading v-if="!error" />
         <p v-else id="docs-error">
-<<<<<<< HEAD
-          Couldn't load the documentation data.
-=======
           문서 데이터를 로드할 수 없습니다.
->>>>>>> Added ALL
           <pre>{{ error.toString() }}</pre>
         </p>
       </slide>

@@ -3,19 +3,11 @@
     <table class="param-table">
       <thead>
         <tr>
-<<<<<<< HEAD
-          <th>Parameter</th>
-          <th>Type</th>
-          <th v-if="hasOptional">Optional</th>
-          <th v-if="hasOptional">Default</th>
-          <th>Description</th>
-=======
           <th>매개 변수</th>
           <th>타입</th>
           <th v-if="hasOptional">선택적</th>
           <th v-if="hasOptional">기본값</th>
           <th>설명</th>
->>>>>>> Added ALL
         </tr>
       </thead>
       <tbody>

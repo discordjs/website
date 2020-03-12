@@ -7,17 +7,6 @@
 
     <section id="info">
       <div class="info-item">
-<<<<<<< HEAD
-        <h2>About</h2>
-        <p>
-          discord.js is a powerful <a href="https://nodejs.org/">node.js</a> module that allows you to interact with the
-          <a href="https://discordapp.com/developers/docs/intro">Discord API</a> very easily.
-          It takes a much more object-oriented approach than most other JS Discord libraries, making your bot's code significantly tidier and easier to comprehend.
-        </p>
-        <p>
-          Usability, consistency, and performance are key focuses of discord.js, and it also has nearly 100% coverage of the Discord API.
-          It receives new Discord features shortly after they arrive in the API.
-=======
         <h2>대하여</h2>
         <p>
           discord.js 는 강력한 <a href="https://nodejs.org/">node.js</a> 모듈로써 <a href="https://discordapp.com/developers/docs/intro">디스코드 API</a>와 쉽게 상호작용하게 해줍니다.
@@ -26,43 +15,15 @@
         <p>
           유용함, 일관성, 성능은 discord.js 의 주요 초점이며, Discord API를 거의 100% 다룰 수 있습니다.
           또한, 새로운 디스코드 기능은 디스코드 API에 적용되면, 빠르게 업데이트됩니다.
->>>>>>> Added ALL
         </p>
       </div>
 
       <div class="info-item">
-<<<<<<< HEAD
-        <h2>Example</h2>
-=======
         <h2>예시</h2>
->>>>>>> Added ALL
         <pre><code class="javascript" v-hljs>const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-<<<<<<< HEAD
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
-  }
-});
-
-client.login('token');</code></pre>
-      </div>
-
-      <div class="info-item">
-        <h2>Why?</h2>
-        <p>
-          <ul>
-            <li>Object-oriented</li>
-            <li>Speedy and efficient</li>
-            <li>Feature-rich</li>
-            <li>Flexible</li>
-            <li>100% Promise-based</li>
-=======
   console.log(`${client.user.tag}에 로그인하였습니다!`);
 });
 
@@ -84,24 +45,11 @@ client.login('토큰');</code></pre>
             <li>풍푸한 기능</li>
             <li>유연한</li>
             <li>100% 프로미스 기반</li>
->>>>>>> Added ALL
           </ul>
         </p>
       </div>
 
       <div class="info-item">
-<<<<<<< HEAD
-        <h2>Statistics</h2>
-        <p>
-          <stats />
-        </p>
-        <p class="center">...and growing!</p>
-      </div>
-
-      <div class="full-info-item">
-        <router-link to="/docs" class="big-ass-btn">Get started</router-link>
-        <a href="https://discord.gg/bRCvFy9" class="big-ass-btn discord">Discord</a>
-=======
         <h2>통계</h2>
         <p>
           <stats />
@@ -112,7 +60,6 @@ client.login('토큰');</code></pre>
       <div class="full-info-item">
         <router-link to="/docs" class="big-ass-btn">시작하기</router-link>
         <a href="https://discord.gg/bRCvFy9" class="big-ass-btn discord">디스코드(영어)</a>
->>>>>>> Added ALL
       </div>
     </section>
   </div>
