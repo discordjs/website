@@ -3,7 +3,7 @@
     <source-button :meta="event.meta" :docs="docs" />
 
     <h3><router-link :to="{ name: 'docs-class', query: { scrollTo: `e-${event.name}` } }">{{ event.name }}</router-link></h3>
-    <span v-if="event.deprecated" class="badge warn" title="This event is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="event.deprecated" class="badge warn" title="이 클래스는 사용이 중지되었으며, 다음 버전에서 변경되거나 삭제될 수 있습니다.">사용 중지됨</span>
 
     <div class="class-item-details">
       <p v-html="description"></p>

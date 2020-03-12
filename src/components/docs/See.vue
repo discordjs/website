@@ -1,6 +1,6 @@
 <template>
   <p class="docs-see">
-    See also:
+    참고:
 
     <ul v-if="see.length > 1">
       <li v-for="s in parsed" :key="s.text">

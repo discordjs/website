@@ -3,7 +3,7 @@ set -euxo pipefail
 
 echo -e "\n# Prepare to do work"
 cd $GITHUB_WORKSPACE
-REPO="git@github.com:discordjs/website.git"
+REPO="git@github.com:discordjs-kr/website.git"
 TARGET_BRANCH="gh-pages"
 
 echo -e "\n# Load SSH key for Git"

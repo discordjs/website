@@ -6,11 +6,11 @@
     <input v-model.trim="search" type="search" />
 
     <div id="toggles">
-      <label><input type="checkbox" v-model="toggles['classes']" /> Classes</label>
-      <label><input type="checkbox" v-model="toggles['props']" /> Properties</label>
-      <label><input type="checkbox" v-model="toggles['methods']" /> Methods</label>
-      <label><input type="checkbox" v-model="toggles['events']" /> Events</label>
-      <label><input type="checkbox" v-model="toggles['typedefs']" /> Typedefs</label>
+      <label><input type="checkbox" v-model="toggles['classes']" /> 클래스</label>
+      <label><input type="checkbox" v-model="toggles['props']" /> 항목</label>
+      <label><input type="checkbox" v-model="toggles['methods']" /> 메서드</label>
+      <label><input type="checkbox" v-model="toggles['events']" /> 이벤트</label>
+      <label><input type="checkbox" v-model="toggles['typedefs']" /> 정의된 타입</label>
     </div>
 
     <transition name="fade" mode="out-in">
@@ -18,21 +18,21 @@
         <transition name="fade" mode="out-in">
           <transition-group name="fade" v-if="results.length">
             <div v-if="fullMatches.length" :class="{ 'results-separator': fullMatches.length && partialMatches.length }" key="fullMatches">
-              <h2>Results for "{{ search }}"</h2>
+              <h2>"{{ search }}" 에 관한 검색결과</h2>
               <search-results :results="fullMatches" :showScores="showScores" :searchTerm="search"></search-results>
             </div>
 
             <div v-if="partialMatches.length" key="partialMatches">
-              <h2>Similar results for "{{ search }}"</h2>
+              <h2>"{{ search }}" 와 비슷한 검색결과</h2>
               <search-results :results="partialMatches" :showScores="showScores" :searchTerm="search"></search-results>
             </div>
           </transition-group>
 
-          <p v-else>No results.</p>
+          <p v-else>검색 결과가 없습니다.</p>
         </transition>
       </div>
 
-      <p v-else key="short">Your search query must be at least two characters.</p>
+      <p v-else key="short">적어도 2글자 이상 적어주세요</p>
     </transition>
   </div>
 </template>

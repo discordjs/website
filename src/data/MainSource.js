@@ -4,9 +4,9 @@ import DocsSource from './DocsSource';
 const branchBlacklist = new Set(['docs', 'webpack', 'v8']);
 export default new DocsSource({
   id: 'main',
-  name: 'Main library',
+  name: '메인 라이브러리',
   global: 'Discord',
-  repo: 'discordjs/discord.js',
+  repo: 'discordjs-kr/discord.js',
   defaultTag: 'stable',
   branchFilter: branch => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
   tagFilter: tag => semver.gte(tag, '9.0.0'),

@@ -9,7 +9,7 @@
 
     <div id="docs-meta">
       <p>
-        Documentation built at {{ new Date(docs.meta.date).toUTCString() }}.<br />
+        {{ new Date(docs.meta.date).toUTCString() }} 에 작성된 문서<br />
         Generator: v{{ docs.meta.generator }} &nbsp; Format: {{ docs.meta.format }}
       </p>
     </div>

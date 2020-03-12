@@ -23,7 +23,7 @@
         </li>
 
         <li v-if="visibleClasses.length > 0">
-          Classes
+          클래스
           <transition-group name="animated-list" tag="ul">
             <li v-for="clarse in visibleClasses" :key="clarse.name" class="animated-list-item">
               <router-link exact :to="{ name: 'docs-class', params: { class: clarse.name } }">
@@ -34,7 +34,7 @@
         </li>
 
         <li v-if="visibleTypedefs.length > 0">
-          Typedefs
+          정의된 타입
           <ul>
             <li v-for="typedef in visibleTypedefs" :key="typedef.name">
               <router-link exact :to="{ name: 'docs-typedef', params: { typedef: typedef.name } }">

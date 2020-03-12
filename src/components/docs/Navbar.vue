@@ -1,7 +1,7 @@
 <template>
   <div id="docs-navbar">
     <container>
-      View docs for
+      문서:
 
       <select v-model="sourceChoice">
         <option v-for="source in sources" :value="source.id" :key="source.id">{{ source.name }}</option>
@@ -14,7 +14,7 @@
         <loading v-else />
       </transition>
 
-      <input v-model.trim="search" type="search" placeholder="Search" @keypress.enter="goToSearch" />
+      <input v-model.trim="search" type="search" placeholder="검색" @keypress.enter="goToSearch" />
       <router-link :to="{ name: 'docs-search' }"><em class="fa fa-search"></em></router-link>
     </container>
   </div>

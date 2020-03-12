@@ -1,8 +1,8 @@
 <template>
   <ul class="stats">
-    <li>{{ downloads }} downloads</li>
-    <li>{{ stars }} stars</li>
-    <li>{{ contributors }} contributors</li>
+    <li>{{ downloads }} 다운로드</li>
+    <li>{{ stars }} 스타</li>
+    <li>{{ contributors }} 기여자</li>
   </ul>
 </template>
 

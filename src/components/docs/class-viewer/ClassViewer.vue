@@ -13,28 +13,28 @@
         <types v-else v-for="type in clarse.implements" :names="type" :docs="docs" :key="typeKey(type)" />
       </span>
     </p>
-    <span v-if="clarse.abstract" class="badge class-badge" title="This class is abstract, and may not be instantiated itself.">Abstract</span>
-    <span v-if="clarse.deprecated" class="badge class-badge warn" title="This class is deprecated, and may be removed in a future version.">Deprecated</span>
-    <span v-if="clarse.access === 'private'" class="badge class-badge warn" title="This class is private, and may change or be removed at any time.">Private</span>
+    <span v-if="clarse.abstract" class="badge class-badge" title="이 클래스는 추상적이며, 그 자체를 인스턴트화 할 수 없습니다.">추상적</span>
+    <span v-if="clarse.deprecated" class="badge class-badge warn" title="이 클래스는 사용이 중지되었으며, 다음 버전에서 변경되거나 삭제될 수 있습니다.">사용 중지됨</span>
+    <span v-if="clarse.access === 'private'" class="badge class-badge warn" title="이 클래스는 내부에서만 사용되며, 언제든지 삭제되거나 변경될 수 있습니다.">내부 클래스</span>
 
     <p class="class-desc" v-html="description" v-if="clarse.description"></p>
     <see v-if="clarse.see" :see="clarse.see" :docs="docs" />
 
     <div id="class-constructor" v-if="clarse.construct && (showPrivate || clarse.construct.access !== 'private')">
-      <h2>Constructor</h2>
+      <h2>생성자 (Constructor)</h2>
       <pre><code class="js">new {{ docs.global }}.{{ clarse.name }}(<span class="constructor-param" v-for="param in constructorParams" :key="param.name">{{ param.name }}</span>);</code></pre>
       <param-table :params="clarse.construct.params" :docs="docs" />
     </div>
 
     <overview :properties="properties" :methods="methods" :events="clarse.events" />
 
-    <h2 v-if="properties && properties.length > 0">Properties</h2>
+    <h2 v-if="properties && properties.length > 0">항목 (Properties)</h2>
     <property v-for="prop in properties" :prop="prop" :docs="docs" :key="scopedName(prop)" />
 
-    <h2 v-if="methods && methods.length > 0">Methods</h2>
+    <h2 v-if="methods && methods.length > 0">메서드 (Method)</h2>
     <method v-for="method in methods" :method="method" :docs="docs" :key="scopedName(method)" />
 
-    <h2 v-if="clarse.events && clarse.events.length > 0">Events</h2>
+    <h2 v-if="clarse.events && clarse.events.length > 0">이벤트 (Events)</h2>
     <event v-for="event in clarse.events" :event="event" :docs="docs" :key="`e-${event.name}`" />
   </div>
   <unknown-page v-else class="docs-page" :darkMode="darkMode" />

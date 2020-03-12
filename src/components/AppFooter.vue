@@ -2,11 +2,11 @@
   <footer>
     <container>
       <strong><router-link to="/">discord.js</router-link></strong>
-      <p>A powerful library for interacting with the Discord API</p>
+      <p>디스코드 API와 상호작용하기 위한 강력한 라이브러리</p>
       <stats />
       <a href="" id="dark-mode-link" @click="toggleDarkMode">
         <em class="fa" :class="darkMode ? 'fa-sun-o' : 'fa-moon-o'"></em>
-        Turn {{ darkMode ? 'on' : 'off' }} the lights
+        다크모드 {{ darkMode ? '끄기' : '켜기' }}
       </a>
     </container>
 
