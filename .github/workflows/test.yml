@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-        - name: Run ESLint
-          run: yarn lint
+      - name: Run ESLint
+        run: yarn lint
 
   build:
     name: Website build

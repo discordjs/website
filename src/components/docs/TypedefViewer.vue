@@ -7,39 +7,23 @@
     <p v-if="typedef.description" v-html="description" class="typedef-desc"></p>
     <see v-if="typedef.see" :see="typedef.see" :docs="docs" />
 
-<<<<<<< HEAD
-    <h2>Types</h2>
-=======
     <h2>타입 (Types)</h2>
->>>>>>> Added ALL
     <ul id="typedef-types">
       <li v-for="type in typedef.type" :key="typeKey(type)"><types :names="type" :docs="docs" /></li>
     </ul>
 
     <div v-if="typedef.props && typedef.props.length > 0" id="typedef-props">
-<<<<<<< HEAD
-      <h2>Properties</h2>
-=======
       <h2>항목 (Properties)</h2>
->>>>>>> Added ALL
       <param-table :params="typedef.props" :docs="docs" />
     </div>
 
     <div v-if="typedef.params && typedef.params.length > 0" id="typedef-params">
-<<<<<<< HEAD
-      <h2>Parameters</h2>
-=======
       <h2>매개 변수 (Parameters)</h2>
->>>>>>> Added ALL
       <param-table :params="typedef.params" :docs="docs" />
     </div>
 
     <div v-if="typedef.returns" id="typedef-returns">
-<<<<<<< HEAD
-      <h2>Returns</h2>
-=======
       <h2>결과 (Returns)</h2>
->>>>>>> Added ALL
       <p id="typedef-returns-types">
         <types v-for="rtrn in typedef.returns.types || typedef.returns" :names="rtrn" :variable="typedef.returns.variable" :nullable="typedef.returns.nullable" :docs="docs" :key="typeKey(rtrn)" />
       </p>
