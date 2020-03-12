@@ -11,10 +11,17 @@
 				-->)
       </router-link>
     </h3>
+<<<<<<< HEAD
     <span v-if="method.scope === 'static'" class="badge" title="This method is on the class constructor function, not instances.">Static</span>
     <span v-if="method.abstract" class="badge" title="This method is abstract, and must be implemented in a child class.">Abstract</span>
     <span v-if="method.deprecated" class="badge warn" title="This method is deprecated, and may be removed in a future version.">Deprecated</span>
     <span v-if="method.access === 'private'" class="badge warn" title="This method is private, and may change or be removed at any time.">Private</span>
+=======
+    <span v-if="method.scope === 'static'" class="badge" title="이 클래스는 추상적이며, 그 자체를 인스턴트화 할 수 없습니다.">추상적</span>
+    <span v-if="method.abstract" class="badge" title="이 클래스는 사용이 중지되었으며, 다음 버전에서 변경되거나 삭제될 수 있습니다.">사용 중지됨</span>
+    <span v-if="method.deprecated" class="badge warn" title="This method is deprecated, and may be removed in a future version.">Deprecated</span>
+    <span v-if="method.access === 'private'" class="badge warn" title="이 클래스는 내부에서만 사용되며, 언제든지 삭제되거나 변경될 수 있습니다.">내부 클래스</span>
+>>>>>>> Added ALL
 
     <div class="class-item-details">
       <p v-html="description"></p>
@@ -22,7 +29,11 @@
       <param-table v-if="method.params" :params="method.params" :docs="docs" />
 
       <div class="method-return">
+<<<<<<< HEAD
         Returns:
+=======
+        결과 (Returns):
+>>>>>>> Added ALL
         <span v-if="method.returns">
           <types v-for="rtrn in method.returns.types || method.returns" :names="rtrn" :variable="method.returns.variable" :nullable="method.returns.nullable" :docs="docs" :key="typeKey(rtrn)" />
         </span>
@@ -31,12 +42,20 @@
       </div>
 
       <div v-if="method.throws" class="method-throws">
+<<<<<<< HEAD
         Throws:
+=======
+        예외 (Throws):
+>>>>>>> Added ALL
         <types v-for="thrw in method.throws" :names="thrw" :docs="docs" :key="thrw" />
       </div>
 
       <div v-if="emits" class="method-emits">
+<<<<<<< HEAD
         Emits:
+=======
+        에밋 (Emits):
+>>>>>>> Added ALL
         <ul v-if="emits.length > 1">
           <li v-for="event in emits" :key="event.text">
             <router-link :to="event.link" class="docs-type">{{ event.text }}</router-link>
@@ -46,7 +65,11 @@
       </div>
 
       <div v-if="method.examples" class="method-examples">
+<<<<<<< HEAD
         Examples:
+=======
+        예시 (Examples):
+>>>>>>> Added ALL
         <pre v-for="example in method.examples" :key="example"><code class="javascript">{{ example }}</code></pre>
       </div>
 

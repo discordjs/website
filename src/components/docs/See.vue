@@ -1,6 +1,10 @@
 <template>
   <p class="docs-see">
+<<<<<<< HEAD
     See also:
+=======
+    참고:
+>>>>>>> Added ALL
 
     <ul v-if="see.length > 1">
       <li v-for="s in parsed" :key="s.text">
