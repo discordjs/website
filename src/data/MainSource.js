@@ -9,5 +9,5 @@ export default new DocsSource({
   repo: 'discordjs-kr/discord.js',
   defaultTag: 'stable',
   branchFilter: branch => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
-  tagFilter: tag => semver.gte(tag, '9.0.0'),
+  tagFilter: tag => semver.gte(tag, '10.0.0'),
 });

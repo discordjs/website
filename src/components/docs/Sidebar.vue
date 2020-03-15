@@ -33,7 +33,7 @@
           </transition-group>
         </li>
 
-        <li v-if="visibleTypedefs.length > 0">
+        <li v-if="visibleTypedefs .length > 0">
           정의된 타입
           <ul>
             <li v-for="typedef in visibleTypedefs" :key="typedef.name">
