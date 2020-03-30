@@ -1,6 +1,6 @@
 {
-    "name": "Discord.js Documentation",
-    "short_name": "Discord.js Docs",
+    "name": "Discord.js 문서",
+    "short_name": "Discord.js 문서",
     "theme_color": "#00b2e8",
     "background_color": "#2f3236",
     "display": "browser",
@@ -13,13 +13,8 @@
         "type": "image/png"
       },
       {
-        "src": "/static/icons/icon-96x96.png",
-        "sizes": "96x96",
-        "type": "image/png"
-      },
-      {
-        "src": "/static/icons/icon-128x128.png",
-        "sizes": "128x128",
+        "src": "/static/icons/icon-100x100.png",
+        "sizes": "100x100",
         "type": "image/png"
       },
       {
@@ -28,18 +23,8 @@
         "type": "image/png"
       },
       {
-        "src": "/static/icons/icon-152x152.png",
-        "sizes": "152x152",
-        "type": "image/png"
-      },
-      {
-        "src": "/static/icons/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/static/icons/icon-384x384.png",
-        "sizes": "384x384",
+        "src": "/static/icons/icon-196x196.png",
+        "sizes": "196x196",
         "type": "image/png"
       },
       {
