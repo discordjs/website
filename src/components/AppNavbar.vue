@@ -21,6 +21,7 @@ export default {
 
 <style lang="scss">
   @import '../styles/theming';
+  @import '../styles/mq';
 
   header {
     height: 3rem;
@@ -32,6 +33,12 @@ export default {
       padding: 0 16px;
       text-decoration: none;
       color: white;
+    }
+
+    @include mq($until: tablet) {
+      a {
+        padding: 0 7px;
+      }
     }
 
     & .container > a {
