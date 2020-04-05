@@ -5,7 +5,8 @@
 
       <nav>
         <router-link to="/docs">Documentation</router-link><!--
-        --><a :href="`https://github.com/${repository}`">GitHub</a>
+        --><a :href="`https://github.com/${repository}`">GitHub</a><!--
+        --><a href="https://discordjs.guide/">Guide</a>
       </nav>
     </container>
   </header>
@@ -20,6 +21,7 @@ export default {
 
 <style lang="scss">
   @import '../styles/theming';
+  @import '../styles/mq';
 
   header {
     height: 3rem;
@@ -31,6 +33,12 @@ export default {
       padding: 0 16px;
       text-decoration: none;
       color: white;
+    }
+
+    @include mq($until: tablet) {
+      a {
+        padding: 0 7px;
+      }
     }
 
     & .container > a {
