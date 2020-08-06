@@ -82,8 +82,7 @@ const router = new Router({
   ],
 });
 
-// eslint-disable-next-line no-unused-vars
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   const parent = to.matched.find(r => r.name === 'docs-tag');
   document.title = parent ? parent.meta.title(to) : 'discord.js';
 
