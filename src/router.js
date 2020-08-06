@@ -26,9 +26,7 @@ const router = new Router({
               rest = `: ${route.params.q || ''}`;
             } else if (clarse) {
               const param = route.query.scrollTo;
-              if (param) {
-                rest = `${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param}`}`;
-              }
+              if (param) rest = `${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param}`}`;
             }
             return `${name}${rest} | discord.js`;
           },
