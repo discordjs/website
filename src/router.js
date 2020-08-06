@@ -23,7 +23,8 @@ const router = new Router({
             const name = clarse || typedef || file || 'Search';
             let rest = '';
             if (name === 'Search') {
-              rest = `: ${route.params.q || ''}`;
+              const query = route.query.q;
+              if (query) rest = `: ${query}`;
             } else if (clarse) {
               const param = route.query.scrollTo;
               if (param) rest = `${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param}`}`;
