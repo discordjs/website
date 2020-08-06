@@ -30,7 +30,7 @@ const router = new Router({
                 rest = `${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param}`}`;
               }
             }
-            return `discord.js | ${name}${rest}`;
+            return `${name}${rest} | discord.js`;
           },
         },
         children: [
