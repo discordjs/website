@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
 
-      - name: Install Node v12
+      - name: Install Node v14
         uses: actions/setup-node@v1
         with:
           node-version: 14
