@@ -11,7 +11,7 @@ jobs:
       - name: Install Node v12
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
 
       - name: Install dependencies
         run: yarn
@@ -29,7 +29,7 @@ jobs:
       - name: Install Node v12
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
 
       - name: Install dependencies
         run: yarn
