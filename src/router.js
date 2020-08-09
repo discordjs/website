@@ -12,12 +12,27 @@ import DocsSearch from './components/docs/Search.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     { path: '/', name: 'home', component: HomePage },
     { path: '/docs', name: 'docs', component: DocumentationPage, children: [
       { path: ':source', name: 'docs-source', component: DocsLoader, children: [
-        { path: ':tag', name: 'docs-tag', component: DocsViewer, children: [
+        { path: ':tag', name: 'docs-tag', component: DocsViewer, meta: {
+          title: route => {
+            const { class: clarse, typedef, file } = route.params;
+            const name = clarse || typedef || file || 'Search';
+            let rest = '';
+            if (name === 'Search') {
+              const query = route.query.q;
+              if (query) rest = `: ${query}`;
+            } else if (clarse) {
+              const param = route.query.scrollTo;
+              if (param) rest = `${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param}`}`;
+            }
+            return `${name}${rest} | discord.js`;
+          },
+        },
+        children: [
           { path: 'search', name: 'docs-search', component: DocsSearch },
           { path: 'class/:class', name: 'docs-class', component: ClassViewer },
           { path: 'typedef/:typedef', name: 'docs-typedef', component: TypedefViewer },
@@ -65,3 +80,12 @@ export default new Router({
     { path: '*', component: UnknownRoutePage },
   ],
 });
+
+router.beforeEach((to, _, next) => {
+  const parent = to.matched.find(r => r.name === 'docs-tag');
+  document.title = parent ? parent.meta.title(to) : 'discord.js';
+
+  next();
+});
+
+export default router;
