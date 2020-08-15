@@ -86,7 +86,7 @@ export default {
       if (this.showPrivate) props = this.clarse.props;
       else props = this.clarse.props.filter(p => p.access !== 'private');
       return props.sort((a, b) =>
-        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`),
       );
     },
 
@@ -96,7 +96,7 @@ export default {
       if (this.showPrivate) methods = this.clarse.methods;
       else methods = this.clarse.methods.filter(p => p.access !== 'private');
       return methods.sort((a, b) =>
-        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`)
+        `${a.scope === 'static' ? 'ZZZ' : ''}${a.name}`.localeCompare(`${b.scope === 'static' ? 'ZZZ' : ''}${b.name}`),
       );
     },
 

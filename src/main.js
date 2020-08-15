@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import marked from 'marked';
 
-import App from './App';
+import App from './App.vue';
+import './registerServiceWorker';
 import router from './router';
 import { hljs } from './util';
 import ContainerComponent from './components/Container.vue';

@@ -12,8 +12,8 @@ const noop = () => {
   // Do nothing.
 };
 const data = {
-  downloads: `${(2800000).toLocaleString()}+`,
-  stars: `${(4300).toLocaleString()}+`,
+  downloads: `${(6500000).toLocaleString()}+`,
+  stars: `${(6500).toLocaleString()}+`,
   contributors: '100+',
   fetching: false,
 };

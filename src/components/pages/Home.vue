@@ -123,7 +123,7 @@ export default {
       flex: 0 0 100%;
       padding: 80px 16px;
       background-color: $color-primary;
-      background-image: linear-gradient(top, $color-primary, darken($color-primary, 5%));
+      background-image: linear-gradient(to bottom, $color-primary, darken($color-primary, 5%));
 
       code {
         display: inline-block;
