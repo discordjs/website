@@ -1,3 +1,5 @@
+/* global workbox */
+
 const GITHUB_ORG = 'https://raw.githubusercontent.com/discordjs/';
 
 // Set some basic config
