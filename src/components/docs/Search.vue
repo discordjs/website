@@ -119,7 +119,6 @@ export default {
         r++;
       }
 
-      console.log(results);
       return results;
     },
 
