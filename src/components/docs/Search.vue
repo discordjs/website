@@ -3,7 +3,7 @@
     <em id="show-scores" :class="`fa fa-bar-chart ${!showScores ? 'disabled' : ''}`" :title="toggleScoresLabel" @click="toggleScores"></em>
 
     <h1>Search</h1>
-    <input v-model.trim="search" type="search" />
+    <input v-model.lazy.trim="search" v-debounce="200" type="search" />
 
     <div id="toggles">
       <label><input type="checkbox" v-model="toggles['classes']" /> Classes</label>
@@ -28,7 +28,7 @@
             </div>
           </transition-group>
 
-          <p v-else>No results.</p>
+          <p v-else>No results for "{{ search}}".</p>
         </transition>
       </div>
 
@@ -40,6 +40,7 @@
 <script>
 import Fuse from 'fuse.js';
 import { scopedName } from '../../util';
+import debounce from '../../debounce';
 import SearchResults from './SearchResults.vue';
 
 export default {
@@ -47,6 +48,9 @@ export default {
   props: ['docs', 'showPrivate'],
   components: {
     SearchResults,
+  },
+  directives: {
+    debounce,
   },
 
   data() {

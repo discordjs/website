@@ -14,18 +14,22 @@
         <loading v-else />
       </transition>
 
-      <input v-model.trim="search" type="search" placeholder="Search" @keypress.enter="goToSearch" />
+      <input v-model.lazy.trim="search" v-debounce="200" type="search" placeholder="Search" @keypress.enter="goToSearch" />
       <router-link :to="{ name: 'docs-search' }"><em class="fa fa-search"></em></router-link>
     </container>
   </div>
 </template>
 
 <script>
+import debounce from '../../debounce';
 import { SHITS } from '../../util';
 
 export default {
   name: 'docs-navbar',
   props: ['sources', 'source'],
+  directives: {
+    debounce,
+  },
 
   data() {
     return {
