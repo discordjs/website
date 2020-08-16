@@ -45,7 +45,10 @@ workbox.routing.registerRoute(
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
   /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
-  workbox.strategies.cacheFirst({ cacheName: 'djs-external-v1' }),
+  workbox.strategies.cacheFirst({
+    cacheName: 'djs-external-v1',
+    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })],
+  }),
 );
 
 // Cache-first for images on the website itself
