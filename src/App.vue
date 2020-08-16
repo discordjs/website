@@ -55,7 +55,6 @@ export default {
     },
 
     refresh() {
-      console.log('clicked');
       if (!this.updateExists) return;
       this.updateExists = false;
       if (!this.registration || !this.registration.waiting) return;
