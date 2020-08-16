@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.ac25f35580473ac538a0b4eb20b69c09.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.3fa395ab49cbb41a04b5a498b988f639.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /* global workbox */
 
@@ -58,7 +58,7 @@ workbox.routing.registerRoute(
 
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
-  /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
+  /^https:\/\/(?:cdnjs\.cloudflare\.com|fonts\.googleapis\.com|fonts\.gstatic\.com).*/i,
   workbox.strategies.cacheFirst({
     cacheName: 'djs-cdn-v1',
     plugins: [
