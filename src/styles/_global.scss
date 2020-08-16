@@ -145,6 +145,14 @@ input[type="checkbox"] {
   transform: translateX(30px);
 }
 
+.fade-slide-vertical-enter-active, .fade-slide-vertical-leave-active {
+  transition: opacity 0.3s, bottom 0.3s, top 0.3s;
+}
+.fade-slide-vertical-enter, .fade-slide-vertical-leave-to {
+  opacity: 0;
+  bottom: -1px;
+}
+
 .animated-list-item {
   transition: all 0.3s;
 }

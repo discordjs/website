@@ -3,12 +3,17 @@
     <app-navbar :repository="repository" />
     <router-view :darkMode="darkMode" :konami="konami" @toggleDarkMode="toggleDarkMode" @setRepository="setRepository" />
     <app-footer :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
+
+    <transition name="fade-slide-vertical">
+      <snackbar action="Reload" @actionTrigger="refresh" v-if="updateExists">An updated version of the site is available.</snackbar>
+    </transition>
   </div>
 </template>
 
 <script>
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
+import Snackbar from './components/Snackbar.vue';
 import MainSource from './data/MainSource';
 import Konami from 'konami-code-js';
 
@@ -19,6 +24,7 @@ export default {
   components: {
     AppNavbar,
     AppFooter,
+    Snackbar,
   },
 
   data() {
@@ -26,6 +32,8 @@ export default {
     return {
       darkMode: darkMode !== 'false' && darkMode !== null,
       repository: MainSource.repo,
+      updateExists: false,
+      refreshing: false,
       konami: false,
     };
   },
@@ -39,6 +47,18 @@ export default {
 
     setRepository(repo) {
       this.repository = repo;
+    },
+
+    swUpdated(event) {
+      this.registration = event.detail;
+      this.updateExists = true;
+    },
+
+    refresh() {
+      if (!this.updateExists) return;
+      this.updateExists = false;
+      if (!this.registration || !this.registration.waiting) return;
+      this.registration.waiting.postMessage({ type: 'SKIP_WAITING' });
     },
 
     poop() {
@@ -78,6 +98,15 @@ export default {
       // Take another dump
       window.setTimeout(() => this.poop(), (Math.random() * 10000) + 1000);
     },
+  },
+
+  created() {
+    document.addEventListener('swUpdated', this.swUpdated, { once: true });
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (this.refreshing) return;
+      this.refreshing = true;
+      window.location.reload();
+    });
   },
 
   mounted() {
