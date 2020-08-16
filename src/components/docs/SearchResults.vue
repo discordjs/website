@@ -4,7 +4,7 @@
       <span v-if="showScores" class="score">{{ Math.round((1 - result.score) * 100) }}%</span>
       <router-link :to="result.item.route">
         <span class="badge" :class="typeClass(result.item.type)" :title="result.item.type">{{ result.item.type[0] }}</span>
-        <span v-html="highlightName(result.item.fullName || result.item.name)"></span>{{ result.item.type === 'Method' ? '()' : '' }}
+        <span v-html="highlightName(result)"></span>{{ result.item.type === 'Method' ? '()' : '' }}
       </router-link>
     </li>
   </transition-group>
@@ -15,8 +15,22 @@ export default {
   props: ['results', 'showScores', 'searchTerm'],
 
   methods: {
-    highlightName(name) {
-      return name.replace(this.searchRegex, match => `<strong>${match}</strong>`);
+    highlightName(result) {
+      // Get the match for the fullName
+      const match = result.matches.find(m => m.key === 'fullName');
+      if (!match) return result.item.fullName || result.item.name;
+
+      // Highlight all matches
+      let name = match.value;
+      for (let i = match.indices.length - 1; i >= 0; i--) {
+        const matchStr = name.slice(match.indices[i][0], match.indices[i][1] + 1);
+        const start = name.slice(0, match.indices[i][0]);
+        const end = name.slice(match.indices[i][1] + 1);
+        const exact = matchStr.toLowerCase() === this.searchTerm.toLowerCase();
+        name = `${start}${exact ? '<strong>' : ''}<em>${matchStr}</em>${exact ? '</strong>' : ''}${end}`;
+      }
+
+      return name;
     },
 
     typeClass(type) {
@@ -69,7 +83,8 @@ export default {
         color: lighten($color-content-text, 40%);
       }
 
-      strong {
+      em {
+        font-style: normal;
         text-decoration: underline;
       }
     }

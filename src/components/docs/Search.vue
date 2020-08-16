@@ -119,6 +119,7 @@ export default {
         r++;
       }
 
+      console.log(results);
       return results;
     },
 
@@ -230,6 +231,7 @@ export default {
         shouldSort: true,
         includeScore: true,
         includeMatches: true,
+        ignoreLocation: true,
         threshold: 0.4,
         minMatchCharLength: 3,
       });
