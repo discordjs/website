@@ -5,7 +5,7 @@
     <app-footer :darkMode="darkMode" @toggleDarkMode="toggleDarkMode" />
 
     <transition name="fade-slide-vertical">
-      <snackbar action="Reload" @actionTrigger="refresh" v-if="updateExists">An updated version of the site is available.</snackbar>
+      <snackbar action="Reload" @click="refresh" v-if="updateExists">An updated version of the site is available.</snackbar>
     </transition>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
     return {
       darkMode: darkMode !== 'false' && darkMode !== null,
       repository: MainSource.repo,
-      updateExists: false,
+      updateExists: true,
       refreshing: false,
       konami: false,
     };
@@ -55,6 +55,7 @@ export default {
     },
 
     refresh() {
+      console.log('clicked');
       if (!this.updateExists) return;
       this.updateExists = false;
       if (!this.registration || !this.registration.waiting) return;

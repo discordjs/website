@@ -1,7 +1,7 @@
 <template>
   <div class="snackbar">
     <p><slot /></p>
-    <button v-if="action" @click="actionTrigger">{{ action }}</button>
+    <button v-if="action" @click="click">{{ action }}</button>
   </div>
 </template>
 
@@ -11,8 +11,8 @@ export default {
   props: ['action'],
 
   methods: {
-    actionTrigger() {
-      this.$emit('actionTrigger');
+    click() {
+      this.$emit('click');
     },
   },
 };
