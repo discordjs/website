@@ -4347,7 +4347,7 @@ __metadata:
     core-js: ^3.6.5
     eslint: ^6.7.2
     eslint-plugin-vue: ^6.2.2
-    fuse.js: ^3.4.5
+    fuse.js: ^6.4.1
     konami-code-js: ^0.8.1
     marked: ^1.1.1
     node-sass: ^4.12.0
@@ -5507,10 +5507,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^3.4.5":
-  version: 3.6.1
-  resolution: "fuse.js@npm:3.6.1"
-  checksum: 2eebc6f8f74abdbf65557f2fe81679ddfb20890482343892bfef43742ad3b7146cc9b89f5b12a40b35ecdfb1d8401848d567fc727261fa90fa87e899e8ec6112
+"fuse.js@npm:^6.4.1":
+  version: 6.4.1
+  resolution: "fuse.js@npm:6.4.1"
+  checksum: 825596f9697a5b9d4b80d1529e1ca164e7d9865c6ed7546e141b06ee38fda6b691a754c8a93b798fde25e896f46b159d0670c9eaf8c25d2a4d3c2a9b3e93f829
   languageName: node
   linkType: hard
 
