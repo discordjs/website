@@ -1,8 +1,6 @@
-importScripts("/precache-manifest.030078f7d9f7a5159be3f3188029c450.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.5a61b2beba60b19425d20c3e27c2669f.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /* global workbox */
-
-const GITHUB_ORG = 'https://raw.githubusercontent.com/discordjs/';
 
 // Set some basic config
 workbox.setConfig({ debug: false });
@@ -22,7 +20,7 @@ const defaultStrategy = workbox.strategies.staleWhileRevalidate({
   cacheName: 'djs-external-v1',
   plugins: [
     new workbox.expiration.Plugin({
-      maxEntries: 128,
+      maxEntries: 50,
       maxAgeSeconds: 60 * 60 * 24,
       purgeOnQuotaError: true,
     }),
@@ -40,16 +38,34 @@ workbox.routing.setDefaultHandler(
 
 // Network-first for docs data pulled from GitHub
 workbox.routing.registerRoute(
-  new RegExp(`^${escapeURLChars(GITHUB_ORG)}.*\\.json`, 'i'),
-  workbox.strategies.networkFirst({ cacheName: 'djs-docs-v1' }),
+  /^https:\/\/raw\.githubusercontent\.com\/discordjs\/.*\.json/i,
+  workbox.strategies.networkFirst({
+    cacheName: 'djs-docs-v1',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 20,
+        maxAgeSeconds: 60 * 60 * 24 * 7,
+        purgeOnQuotaError: true,
+      }),
+    ],
+  }),
 );
 
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
   /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
   workbox.strategies.cacheFirst({
-    cacheName: 'djs-external-v1',
-    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })],
+    cacheName: 'djs-cdn-v1',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 10,
+        maxAgeSeconds: 60 * 60 * 24 * 7,
+        purgeOnQuotaError: true,
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+      }),
+    ],
   }),
 );
 
@@ -58,7 +74,13 @@ workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(self.location.origin)}.*\\.(png|jpg|jpeg|gif|svg|ico)`, 'i'),
   workbox.strategies.cacheFirst({
     cacheName: 'djs-site-v1',
-    plugins: [new workbox.expiration.Plugin({ maxAgeSeconds: 60 * 60 * 24 })],
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24,
+        purgeOnQuotaError: true,
+      }),
+    ],
   }),
 );
 
@@ -69,11 +91,9 @@ workbox.routing.registerRoute(
     cacheName: 'djs-site-v1',
     plugins: [
       new workbox.expiration.Plugin({
-        maxEntries: 128,
+        maxEntries: 50,
         maxAgeSeconds: 60 * 60 * 24,
-      }),
-      new workbox.cacheableResponse.Plugin({
-        statuses: [0, 200],
+        purgeOnQuotaError: true,
       }),
     ],
   }),
