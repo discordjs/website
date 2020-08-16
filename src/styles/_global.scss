@@ -42,6 +42,10 @@ input[type="checkbox"] {
   cursor: pointer;
   transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 
+  &:focus, &:hover {
+    border-color: lighten($color-primary, 20%);
+  }
+
   &:checked {
     border-color: $color-primary;
     background-color: $color-primary;
@@ -52,8 +56,68 @@ input[type="checkbox"] {
     }
   }
 
-  &:focus, &:hover {
-    border-color: lighten($color-primary, 20%);
+  &.secondary {
+    &:focus, &:hover {
+      border-color: lighten($color-secondary, 20%);
+    }
+
+    &:checked {
+      border-color: $color-secondary;
+      background-color: $color-secondary;
+
+      &:focus, &:hover {
+        border-color: $color-secondary;
+        background-color: lighten($color-secondary, 20%);
+      }
+    }
+  }
+
+  &.tertiary {
+    &:focus, &:hover {
+      border-color: lighten($color-tertiary, 20%);
+    }
+
+    &:checked {
+      border-color: $color-tertiary;
+      background-color: $color-tertiary;
+
+      &:focus, &:hover {
+        border-color: $color-tertiary;
+        background-color: lighten($color-tertiary, 20%);
+      }
+    }
+  }
+
+  &.quaternary {
+    &:focus, &:hover {
+      border-color: lighten($color-quaternary, 20%);
+    }
+
+    &:checked {
+      border-color: $color-quaternary;
+      background-color: $color-quaternary;
+
+      &:focus, &:hover {
+        border-color: $color-quaternary;
+        background-color: lighten($color-quaternary, 20%);
+      }
+    }
+  }
+
+  &.quinary {
+    &:focus, &:hover {
+      border-color: lighten($color-quinary, 20%);
+    }
+
+    &:checked {
+      border-color: $color-quinary;
+      background-color: $color-quinary;
+
+      &:focus, &:hover {
+        border-color: $color-quinary;
+        background-color: lighten($color-quinary, 20%);
+      }
+    }
   }
 }
 

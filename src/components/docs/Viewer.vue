@@ -205,6 +205,22 @@ export default {
       background: $color-warn;
     }
 
+    &.secondary {
+      background: $color-secondary !important;
+    }
+
+    &.tertiary {
+      background: $color-tertiary !important;
+    }
+
+    &.quaternary {
+      background: $color-quaternary !important;
+    }
+
+    &.quinary {
+      background: $color-quinary !important;
+    }
+
     &:hover {
       opacity: 1;
       cursor: help;

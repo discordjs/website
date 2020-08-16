@@ -3,7 +3,7 @@
     <li v-for="result in results" :key="result.item.key || result.item.fullName || result.item.name" class="animated-list-item">
       <span v-if="showScores" class="score">{{ Math.round((1 - result.score) * 100) }}%</span>
       <router-link :to="result.item.route">
-        <span class="badge" :title="result.item.type">{{ result.item.type[0] }}</span>
+        <span class="badge" :class="typeClass(result.item.type)" :title="result.item.type">{{ result.item.type[0] }}</span>
         <span v-html="highlightName(result.item.fullName || result.item.name)"></span>{{ result.item.type === 'Method' ? '()' : '' }}
       </router-link>
     </li>
@@ -17,6 +17,14 @@ export default {
   methods: {
     highlightName(name) {
       return name.replace(this.searchRegex, match => `<strong>${match}</strong>`);
+    },
+
+    typeClass(type) {
+      if (type === 'Property') return 'secondary';
+      if (type === 'Method') return 'tertiary';
+      if (type === 'Event') return 'quaternary';
+      if (type === 'Typedef') return 'quinary';
+      return '';
     },
   },
 
@@ -59,6 +67,10 @@ export default {
         font-size: 0.7rem;
         overflow: visible;
         color: lighten($color-content-text, 40%);
+      }
+
+      strong {
+        text-decoration: underline;
       }
     }
   }

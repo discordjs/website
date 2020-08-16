@@ -7,10 +7,10 @@
 
     <div id="toggles">
       <label><input type="checkbox" v-model="toggles['classes']" /> Classes</label>
-      <label><input type="checkbox" v-model="toggles['props']" /> Properties</label>
-      <label><input type="checkbox" v-model="toggles['methods']" /> Methods</label>
-      <label><input type="checkbox" v-model="toggles['events']" /> Events</label>
-      <label><input type="checkbox" v-model="toggles['typedefs']" /> Typedefs</label>
+      <label><input type="checkbox" class="secondary" v-model="toggles['props']" /> Properties</label>
+      <label><input type="checkbox" class="tertiary" v-model="toggles['methods']" /> Methods</label>
+      <label><input type="checkbox" class="quaternary" v-model="toggles['events']" /> Events</label>
+      <label><input type="checkbox" class="quinary" v-model="toggles['typedefs']" /> Typedefs</label>
     </div>
 
     <transition name="fade" mode="out-in">
@@ -220,6 +220,8 @@ export default {
           });
         }
       }
+
+      console.log(`Building Fuse engine for ${items.length} documentation items`);
 
       return new Fuse(items, {
         keys: [
