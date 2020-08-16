@@ -34,7 +34,7 @@ module.exports = {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
-      exclude: ['CNAME'],
+      exclude: ['CNAME', /\.map$/],
     },
   },
   configureWebpack: () => ({
