@@ -18,12 +18,12 @@
         <transition name="fade" mode="out-in">
           <transition-group name="fade" v-if="results.length">
             <div v-if="fullMatches.length" :class="{ 'results-separator': fullMatches.length && partialMatches.length }" key="fullMatches">
-              <h2>Results for "{{ search }}"</h2>
+              <h2>Results for "{{ search }}" ({{ fullMatches.length }})</h2>
               <search-results :results="fullMatches" :showScores="showScores" :searchTerm="search"></search-results>
             </div>
 
             <div v-if="partialMatches.length" key="partialMatches">
-              <h2>Similar results for "{{ search }}"</h2>
+              <h2>Similar results for "{{ search }}" ({{ partialMatches.length }})</h2>
               <search-results :results="partialMatches" :showScores="showScores" :searchTerm="search"></search-results>
             </div>
           </transition-group>
