@@ -20,7 +20,7 @@ const defaultStrategy = workbox.strategies.staleWhileRevalidate({
   cacheName: 'djs-external-v1',
   plugins: [
     new workbox.expiration.Plugin({
-      maxEntries: 128,
+      maxEntries: 50,
       maxAgeSeconds: 60 * 60 * 24,
       purgeOnQuotaError: true,
     }),
@@ -39,15 +39,33 @@ workbox.routing.setDefaultHandler(
 // Network-first for docs data pulled from GitHub
 workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(GITHUB_ORG)}.*\\.json`, 'i'),
-  workbox.strategies.networkFirst({ cacheName: 'djs-docs-v1' }),
+  workbox.strategies.networkFirst({
+    cacheName: 'djs-docs-v1',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 20,
+        maxAgeSeconds: 60 * 60 * 24 * 7,
+        purgeOnQuotaError: true,
+      }),
+    ],
+  }),
 );
 
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
   /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
   workbox.strategies.cacheFirst({
-    cacheName: 'djs-external-v1',
-    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })],
+    cacheName: 'djs-cdn-v1',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 10,
+        maxAgeSeconds: 60 * 60 * 24 * 7,
+        purgeOnQuotaError: true,
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200],
+      }),
+    ],
   }),
 );
 
@@ -56,7 +74,13 @@ workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(self.location.origin)}.*\\.(png|jpg|jpeg|gif|svg|ico)`, 'i'),
   workbox.strategies.cacheFirst({
     cacheName: 'djs-site-v1',
-    plugins: [new workbox.expiration.Plugin({ maxAgeSeconds: 60 * 60 * 24 })],
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 50,
+        maxAgeSeconds: 60 * 60 * 24,
+        purgeOnQuotaError: true,
+      }),
+    ],
   }),
 );
 
@@ -67,11 +91,9 @@ workbox.routing.registerRoute(
     cacheName: 'djs-site-v1',
     plugins: [
       new workbox.expiration.Plugin({
-        maxEntries: 128,
+        maxEntries: 50,
         maxAgeSeconds: 60 * 60 * 24,
-      }),
-      new workbox.cacheableResponse.Plugin({
-        statuses: [0, 200],
+        purgeOnQuotaError: true,
       }),
     ],
   }),
