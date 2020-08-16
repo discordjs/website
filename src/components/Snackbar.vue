@@ -31,6 +31,9 @@ export default {
     border-radius: 3px;
     background: lighten($color-navbar-bg, 8%);
     color: #eee;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0 6px 10px 0 rgba(0, 0, 0, 0.14),
+      0 1px 18px 0 rgba(0, 0, 0, 0.12);
 
     p {
       margin: 0 6px 0 8px;
