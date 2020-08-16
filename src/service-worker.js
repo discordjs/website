@@ -56,7 +56,7 @@ workbox.routing.registerRoute(
 
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
-  /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
+  /^https:\/\/(?:cdnjs\.cloudflare\.com|fonts\.googleapis\.com|fonts\.gstatic\.com).*/i,
   workbox.strategies.cacheFirst({
     cacheName: 'djs-cdn-v1',
     plugins: [
