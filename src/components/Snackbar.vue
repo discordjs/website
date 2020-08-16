@@ -1,7 +1,11 @@
 <template>
   <div class="snackbar">
-    <p><slot /></p>
-    <button v-if="action" @click="click">{{ action }}</button>
+    <div class="snackbar-text">
+      <slot />
+    </div>
+    <div class="snackbar-action" v-if="action">
+      <button @click="click">{{ action }}</button>
+    </div>
   </div>
 </template>
 
@@ -20,6 +24,7 @@ export default {
 
 <style lang="scss">
   @import '../styles/theming';
+  @import '../styles/mq';
 
   .snackbar {
     display: flex;
@@ -35,13 +40,25 @@ export default {
       0 6px 10px 0 rgba(0, 0, 0, 0.14),
       0 1px 18px 0 rgba(0, 0, 0, 0.12);
 
-    p {
-      margin: 0 6px 0 8px;
-      margin-left: 8px;
+    @include mq($until: tablet) {
+      width: 95%;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .snackbar-text {
+      padding: 0 4px  0 8px;
+    }
+
+    .snackbar-action {
+      flex-grow: 1;
+      padding-left: 4px;
+      text-align: right;
     }
 
     button {
-      margin: 2px 2px 2px 6px;
+      margin: 2px;
       padding: 8px 4px;
       border: 0;
       border-radius: 3px;
