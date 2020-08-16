@@ -22,7 +22,7 @@
 import Stats from './Stats.vue';
 
 export default {
-  name: 'footer',
+  name: 'djs-footer',
   props: ['darkMode'],
   components: {
     Stats,
