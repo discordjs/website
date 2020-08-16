@@ -1,7 +1,7 @@
 <template>
   <div class="snackbar">
     <p><slot /></p>
-    <button v-if="action">{{ action }}</button>
+    <button v-if="action" @click="actionTrigger">{{ action }}</button>
   </div>
 </template>
 
@@ -9,6 +9,12 @@
 export default {
   name: 'snackbar',
   props: ['action'],
+
+  methods: {
+    actionTrigger() {
+      this.$emit('actionTrigger');
+    },
+  },
 };
 </script>
 
