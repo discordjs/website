@@ -32,7 +32,7 @@ export default {
     return {
       darkMode: darkMode !== 'false' && darkMode !== null,
       repository: MainSource.repo,
-      updateExists: true,
+      updateExists: false,
       refreshing: false,
       konami: false,
     };
