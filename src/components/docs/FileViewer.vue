@@ -37,7 +37,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       for (const el of this.$el.querySelectorAll('pre code')) hljs(el);
-      document.title = `${this.file.name} | discord.js`;
     });
   },
 };

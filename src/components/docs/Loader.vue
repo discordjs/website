@@ -25,6 +25,7 @@ export default {
       docs: null,
       error: null,
       loadingTag: null,
+      routeHook: null,
     };
   },
 
@@ -96,6 +97,7 @@ export default {
         docs.tag = this.tag;
         this.docs = docs;
         this.loadingTag = null;
+        this.updatePageTitle(this.$route);
         console.log('Finished loading', startSource, startTag);
 
         // Verify the destination item exists when switching tags
@@ -145,6 +147,33 @@ export default {
       }
     },
 
+    updatePageTitle(route) {
+      const parent = route.matched.find(r => r.name === 'docs-tag');
+      if (!parent) {
+        document.title = 'discord.js';
+        return;
+      }
+
+      let name;
+      if (route.params.file) {
+        const category = this.docs.custom[route.params.category];
+        name = category && category.files[route.params.file] ? category.files[route.params.file].name : 'Unknown file';
+      } else {
+        const { class: clarse, typedef } = route.params;
+        name = clarse || typedef || 'Search';
+
+        if (name === 'Search') {
+          const query = route.query.q;
+          if (query) name = `${name}: ${query}`;
+        } else if (clarse) {
+          const param = route.query.scrollTo;
+          if (param) name = `${name}${param.startsWith('s-') ? `.${param.slice(2)}` : `#${param.startsWith('e-') ? param.slice(2) : param}`}`;
+        }
+      }
+
+      document.title = `${name} | discord.js`;
+    },
+
     goHome() {
       console.log('Redirecting to default file due to the current page not existing in the newly-loaded tag\'s docs.');
       this.$router.replace({ name: 'docs-file', params: {
@@ -182,12 +211,24 @@ export default {
     },
   },
 
+  beforeCreate() {
+    this.routerHook = this.$router.beforeEach((to, _, next) => {
+      this.updatePageTitle(to);
+      next();
+    });
+  },
+
   created() {
     this.loadDocs();
   },
 
   mounted() {
     this.$nextTick(this.scroll);
+  },
+
+  beforeDestroy() {
+    this.routerHook();
+    this.routerHook = null;
   },
 };
 </script>
