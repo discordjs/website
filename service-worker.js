@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.0a493c46c251b03465fd1bf98b22239c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.030078f7d9f7a5159be3f3188029c450.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /* global workbox */
 
@@ -19,7 +19,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 // Use the staleWhileRevalidate strategy by default
 const defaultStrategy = workbox.strategies.staleWhileRevalidate({
-  cacheName: 'external',
+  cacheName: 'djs-external-v1',
   plugins: [
     new workbox.expiration.Plugin({
       maxEntries: 128,
@@ -41,20 +41,23 @@ workbox.routing.setDefaultHandler(
 // Network-first for docs data pulled from GitHub
 workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(GITHUB_ORG)}.*\\.json`, 'i'),
-  workbox.strategies.networkFirst({ cacheName: 'docs' }),
+  workbox.strategies.networkFirst({ cacheName: 'djs-docs-v1' }),
 );
 
 // Cache-first for CDNJS and Google Fonts files
 workbox.routing.registerRoute(
   /^https:\/\/(?:fonts\.googleapis\.com|cdnjs\.cloudflare\.com).*/i,
-  workbox.strategies.cacheFirst({ cacheName: 'external' }),
+  workbox.strategies.cacheFirst({
+    cacheName: 'djs-external-v1',
+    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })],
+  }),
 );
 
 // Cache-first for images on the website itself
 workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(self.location.origin)}.*\\.(png|jpg|jpeg|gif|svg|ico)`, 'i'),
   workbox.strategies.cacheFirst({
-    cacheName: 'site',
+    cacheName: 'djs-site-v1',
     plugins: [new workbox.expiration.Plugin({ maxAgeSeconds: 60 * 60 * 24 })],
   }),
 );
@@ -63,7 +66,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp(`^${escapeURLChars(self.location.origin)}.*`, 'i'),
   workbox.strategies.staleWhileRevalidate({
-    cacheName: 'site',
+    cacheName: 'djs-site-v1',
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 128,
