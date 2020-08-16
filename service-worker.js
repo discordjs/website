@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.9e33e1edb6327338306da6e0ed976887.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.ac25f35580473ac538a0b4eb20b69c09.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /* global workbox */
 
@@ -14,6 +14,11 @@ workbox.core.setCacheNameDetails({
 // Precache files
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
+// Delete old caches
+caches.delete('site');
+caches.delete('data');
+caches.delete('external');
 
 // Use the staleWhileRevalidate strategy by default
 const defaultStrategy = workbox.strategies.staleWhileRevalidate({
