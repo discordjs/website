@@ -13,6 +13,11 @@ workbox.core.setCacheNameDetails({
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
+// Delete old caches
+caches.delete('site');
+caches.delete('data');
+caches.delete('external');
+
 // Use the staleWhileRevalidate strategy by default
 const defaultStrategy = workbox.strategies.staleWhileRevalidate({
   cacheName: 'djs-external-v1',
