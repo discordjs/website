@@ -1,7 +1,5 @@
 /* global workbox */
 
-const GITHUB_ORG = 'https://raw.githubusercontent.com/discordjs/';
-
 // Set some basic config
 workbox.setConfig({ debug: false });
 workbox.core.setCacheNameDetails({
@@ -38,7 +36,7 @@ workbox.routing.setDefaultHandler(
 
 // Network-first for docs data pulled from GitHub
 workbox.routing.registerRoute(
-  new RegExp(`^${escapeURLChars(GITHUB_ORG)}.*\\.json`, 'i'),
+  /^https:\/\/raw\.githubusercontent\.com\/discordjs\/.*\.json/i,
   workbox.strategies.networkFirst({
     cacheName: 'djs-docs-v1',
     plugins: [
