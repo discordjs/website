@@ -141,7 +141,7 @@ export default {
     },
 
     // Build an array of all doc items with minimal data
-    buildFuse(toggles) {
+    buildFuse(toggles) { // eslint-disable-line complexity
       const items = [];
 
       for (const c of this.docs.classes) {
@@ -220,8 +220,6 @@ export default {
           });
         }
       }
-
-      console.log(`Building Fuse engine for ${items.length} documentation items`);
 
       return new Fuse(items, {
         keys: [
