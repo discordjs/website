@@ -1,4 +1,4 @@
-# discord.js website
+# discord.js website as amazing website
 
 > The website housing documentation for discord.js
 
