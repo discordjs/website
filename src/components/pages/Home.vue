@@ -142,10 +142,10 @@ export default {
         background: #f5f5f5;
         color: $color-content-text;
         font-family: $font-monospace;
-      }
 
-      code:hover {
-        background-color: #ddf;
+        &:hover {
+          background-color: #ddf;
+        }
       }
     }
 
@@ -234,10 +234,10 @@ export default {
     padding: 0;
     border: 0;
     border-radius: 5px;
-  }
 
-  #code-button:active {
-    transform: translateY(4px);
+    &:active {
+      transform: translateY(4px);
+    }
   }
 
 </style>
