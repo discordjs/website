@@ -2,7 +2,9 @@
   <div id="home">
     <slide id="jumbotron">
       <logo :light="true" :konami="konami" id="logo" />
-      <code>npm install discord.js</code><br />
+      <button v-on:click="copyCode" ref="code" id="code-button" title="Copy Command to Clipboard">
+        <code>npm install discord.js</code>
+      </button>
     </slide>
 
     <section id="info">
@@ -79,6 +81,14 @@ export default {
     Stats,
   },
 
+  methods: {
+    copyCode() {
+      const code = this.$refs.code.textContent;
+      navigator.clipboard.writeText(code)
+        .catch(e => console.log(e));
+    },
+  },
+
   mounted() {
     this.$emit('setRepository', MainSource.repo);
   },
@@ -132,6 +142,10 @@ export default {
         background: #f5f5f5;
         color: $color-content-text;
         font-family: $font-monospace;
+      }
+
+      code:hover {
+        background-color: #ddf;
       }
     }
 
@@ -214,4 +228,16 @@ export default {
       color: darken($color-content-text-dark, 20%);
     }
   }
+
+  #code-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+  }
+
+  #code-button:active {
+    transform: translateY(4px);
+  }
+
 </style>
