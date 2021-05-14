@@ -1,26 +1,25 @@
-# discord.js website
+<div align="center">
+  <br />
+  <p>
+    <a href="https://discord.js.org"><img src="https://discord.js.org/static/logo.svg" width="546" alt="discord.js" /></a>
+  </p>
+  <br />
+  <p>
+    <a href="https://discord.gg/djs"><img src="https://img.shields.io/discord/222078108977594368?color=5865F2&logo=discord&logoColor=white" alt="Discord server" /></a>
+    <a href="https://github.com/discordjs/website/actions"><img src="https://github.com/discordjs/website/workflows/Testing/badge.svg" alt="Build status" /></a>
+    <a href="https://david-dm.org/discordjs/website"><img src="https://img.shields.io/david/discordjs/website.svg?maxAge=3600" alt="Dependencies" /></a>
+    <a href="https://www.patreon.com/discordjs"><img src="https://img.shields.io/badge/donate-patreon-F96854.svg" alt="Patreon" /></a>
+  </p>
+</div>
 
-> The website housing documentation for discord.js
+## Vue 3 + Typescript + Vite
 
-## Project setup
-```
-yarn install
-```
+This template should help get you started developing with Vue 3 and Typescript in Vite.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Recommended IDE Setup
 
-### Compiles and minifies for production
-```
-yarn build
-```
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar).
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Using Volar
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Run `Volar: Switch TS Plugin on/off` from VSCode command palette.

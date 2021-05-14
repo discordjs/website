@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"bradlc.vscode-tailwindcss",
+		"antfu.vite",
+		"johnsoncodehk.volar",
+		"antfu.iconify",
+		"csstools.postcss"
+	]
+}

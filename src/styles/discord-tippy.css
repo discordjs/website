@@ -1,0 +1,23 @@
+.tippy-box[data-theme~='discord'] {
+	@apply text-gray-200 bg-discord-green-600 px-2 py-1 rounded;
+}
+
+.tippy-box[data-theme~='discord'] > .tippy-content {
+	@apply font-semibold;
+}
+
+.tippy-box[data-theme~='discord'][data-placement^='top'] > .tippy-arrow::before {
+	border-top-color: rgba(59, 165, 92, 1);
+}
+
+.tippy-box[data-theme~='discord'][data-placement^='bottom'] > .tippy-arrow::before {
+	border-top-color: rgba(59, 165, 92, 1);
+}
+
+.tippy-box[data-theme~='discord'][data-placement^='left'] > .tippy-arrow::before {
+	border-top-color: rgba(59, 165, 92, 1);
+}
+
+.tippy-box[data-theme~='discord'][data-placement^='right'] > .tippy-arrow::before {
+	border-top-color: rgba(59, 165, 92, 1);
+}
