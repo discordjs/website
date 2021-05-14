@@ -1,0 +1,89 @@
+@tailwind base;
+
+html,
+body {
+	overscroll-behavior-y: none;
+	@apply h-full w-full bg-discord-blurple-560;
+}
+
+body {
+	scrollbar-color: theme('colors.discord.blurple.460') #ffffff;
+}
+
+.dark body {
+	scrollbar-color: theme('colors.discord.blurple.460') #1d1d1d;
+}
+
+body::-webkit-scrollbar {
+	height: 14px;
+	width: 14px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: theme('colors.discord.blurple.460');
+}
+
+body::-webkit-scrollbar-thumb:hover {
+	background: theme('colors.discord.blurple.430');
+}
+
+body::-webkit-scrollbar-track {
+	background: #ffffff;
+}
+
+.dark body::-webkit-scrollbar-track {
+	background: #1d1d1d;
+}
+
+img {
+	@apply inline-block !m-0;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.noprose {
+	@apply !m-0;
+}
+
+.noprose p {
+	@apply !m-0;
+}
+
+.noprose li {
+	@apply !m-0;
+}
+
+.no-list li {
+	padding-left: 0.25rem !important;
+}
+
+.no-list li::before {
+	content: none !important;
+}
+
+.custom-scroll {
+	scrollbar-width: thin;
+	scrollbar-color: theme('colors.discord.blurple.460') rgba(0, 0, 0, 0.07);
+}
+
+.custom-scroll::-webkit-scrollbar {
+	height: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+	width: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+	background: theme('colors.discord.blurple.460');
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+	background: theme('colors.discord.blurple.430');
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.07);
+}
+
+.scroll-to {
+	scroll-margin-top: theme('spacing.16');
+}

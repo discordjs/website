@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"target": "ES2018",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"strict": true,
+		"alwaysStrict": true,
+		"jsx": "preserve",
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"removeComments": true,
+		"lib": ["ESNext", "DOM", "WebWorker"],
+		"plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+		"paths": {
+			"~/*": ["src/*"]
+		},
+		"types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-pwa/client"],
+		"skipLibCheck": true,
+		"noUnusedLocals": true
+	},
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

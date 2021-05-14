@@ -6,33 +6,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Install Node v14
-        uses: actions/setup-node@v1
+      - name: Install Node v16
+        uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install dependencies
-        run: yarn
+        run: npm i
 
       - name: Run ESLint
-        run: yarn lint
+        run: npm run lint
 
   build:
     name: Website build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Install Node v14
-        uses: actions/setup-node@v1
+      - name: Install Node v16
+        uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install dependencies
-        run: yarn
+        run: npm i
 
       - name: Test site build
-        run: yarn build
+        run: npm run build
