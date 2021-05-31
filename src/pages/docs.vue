@@ -35,8 +35,123 @@ const source = computed(() => store.state.source);
 const tag = computed(() => store.state.tag);
 const docs = computed(() => store.state.docs);
 
+/*
+Idea: inverted index based on the understanding that all the names here are some sort of concatenated string
+Generate a graph of words that are related
+e.g. indexing on [PermissionOverwriteOptions, PermissionResolvable, setPermissions] generates something like this
+Original reference: [
+	PermissionOverwriteOptions,
+	PermissionResolvable,
+	setPermissions,
+]
+Index: [
+	{name: permission, related: [1, 2]},
+	{name: overwrite, related: [1]},
+	{name: options, related: [1]},
+	{name: permissions, related: [3]},
+	{name: set, related: [3]},
+]
+
+Iterate through the list seeing if any of the terms are in the search query, then sum the counts of each related index
+The higher the count the more close of a match it should be
+If all else is equal, sort based on how closely it matches the original input
+
+Should the initial search return nothing, that might mean the length is too short
+So we'll do the opposite, see if the query is in any of the terms. e.g. mission should find permission
+This can be a shallow scan which should be fairly fast.
+*/
+
+// split names into 3 types of words, using userGroupDMChannel as fictional example
+// acronyms, e.g. DM
+// capital, e.g. Group, Channel
+// lowercase, e.g. user
+const splitName = function (name: string): Array<string> {
+	return name.match(/(([A-Z]{2,})(?=[A-Z]))|[A-Z][a-z]+|[a-z]+/g) ?? [];
+};
+
+import { SearchTerm, DocumentType, DocumentLink } from '~/util/search';
+
 const fetchDocs = async (inputSource: DocsSource, inputTag: string) => {
 	const documentation = await inputSource.fetchDocs(inputTag);
+	console.log({ documentation });
+	const originalRef: Array<DocumentLink> = [];
+	const searchIndex: Array<SearchTerm> = [];
+
+	let linkPosition = 0; // this is for class refs adding refs to their methods and props
+	function addLink(
+		name: string,
+		linkType: DocumentType,
+		parentName?: string,
+		parentType?: DocumentType,
+		access?: string,
+		scope?: string,
+	): Array<number> {
+		const words = splitName(name);
+		const docLink = new DocumentLink(name, linkType, parentName, parentType, access, scope);
+		originalRef.push(docLink);
+
+		const addedRefs = [];
+		for (const w of words) {
+			const word = w.toLowerCase();
+			let refIndex = searchIndex.findIndex((s) => s.name === word);
+			if (refIndex > -1) {
+				searchIndex[refIndex].addRelated(linkPosition);
+			} else {
+				refIndex = searchIndex.push(new SearchTerm(word, linkPosition)) - 1;
+			}
+			addedRefs.push(refIndex);
+		}
+		linkPosition += 1;
+		return addedRefs;
+	}
+
+	for (const item of documentation.classes) {
+		const classref = addLink(item.name, DocumentType.Class, undefined, undefined, item.access, item.scope);
+
+		const subRefs: Array<number> = [];
+		for (const m of item.methods ?? []) {
+			addLink(m.name as string, DocumentType.Method, item.name, DocumentType.Class, m.access, m.scope);
+			subRefs.push(linkPosition - 1);
+		}
+
+		for (const p of item.props ?? []) {
+			addLink(p.name, DocumentType.Property, item.name, DocumentType.Class, p.access, p.scope);
+			subRefs.push(linkPosition - 1);
+		}
+
+		for (const e of item.events ?? []) {
+			addLink(e.name, DocumentType.Events, item.name, DocumentType.Class, e.access, e.scope);
+			subRefs.push(linkPosition - 1);
+		}
+		for (const ref of classref) {
+			for (const r of subRefs) {
+				searchIndex[ref].related.add(r);
+			}
+		}
+	}
+
+	for (const item of documentation.typedefs) {
+		const classref = addLink(item.name, DocumentType.Typedefs, undefined, undefined, item.access, item.scope);
+
+		const subRefs: Array<number> = [];
+		for (const p of item.props ?? []) {
+			addLink(p.name, DocumentType.Property, item.name, DocumentType.Typedefs, p.access, p.scope);
+			subRefs.push(linkPosition - 1);
+		}
+		for (const ref of classref) {
+			for (const r of subRefs) {
+				searchIndex[ref].related.add(r);
+			}
+		}
+	}
+
+	console.log({ searchIndex });
+	console.log({ originalRef });
+	store.commit({
+		type: 'setSearchIndex',
+		searchIndex,
+		searchRef: originalRef,
+	});
 
 	// Sort everything
 	documentation.classes.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
@@ -173,7 +288,7 @@ const watchRoute = async () => {
 	}
 
 	// Redirect to a default route
-	if (!route.params.file && !route.params.class && !route.params.typedef && route.name !== 'docs-search') {
+	if (!route.params.file && !route.params.class && !route.params.typedef && route.name !== 'docs-source-tag-search') {
 		return router.replace({
 			name: 'docs-source-tag-category-file',
 			params: {

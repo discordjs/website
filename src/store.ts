@@ -5,6 +5,7 @@ import DocsSource from './data/DocsSource';
 import MainSource from './data/MainSource';
 
 import { Documentation, DocumentationCustomFile } from './interfaces/Documentation';
+import { DocumentLink, SearchTerm } from './util/search';
 
 export interface State {
 	source: DocsSource | null;
@@ -16,6 +17,8 @@ export interface State {
 		stars: string;
 		contributors: string;
 	};
+	searchIndex: Array<SearchTerm>;
+	searchRef: Array<DocumentLink>;
 }
 
 export const key: InjectionKey<Store<State>> = Symbol('docs');
@@ -31,6 +34,8 @@ export const store = createStore<State>({
 			stars: `${(11_000).toLocaleString()}+`,
 			contributors: `${(100).toLocaleString()}+`,
 		},
+		searchIndex: [],
+		searchRef: [],
 	},
 	mutations: {
 		setSource(state, { source }: { source: DocsSource }) {
@@ -47,6 +52,13 @@ export const store = createStore<State>({
 		},
 		setStats(state, { stats }: { stats: { downloads: string; stars: string; contributors: string } }) {
 			state.stats = stats;
+		},
+		setSearchIndex(
+			state,
+			{ searchIndex, searchRef }: { searchIndex: Array<SearchTerm>; searchRef: Array<DocumentLink> },
+		) {
+			state.searchIndex = searchIndex;
+			state.searchRef = searchRef;
 		},
 	},
 	actions: {

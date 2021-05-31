@@ -152,6 +152,7 @@
 								</div>
 								<input
 									id="search"
+									v-model="searchInput"
 									name="search"
 									class="
 										block
@@ -173,7 +174,24 @@
 									"
 									placeholder="Search"
 									type="search"
+									autocomplete="off"
+									@focus="searchFocus = true"
+									@focusout="unfocus()"
+									@keyup.enter="gotoSearch"
 								/>
+								<div class="absolute w-full">
+									<ul v-if="searchFocus">
+										<li
+											v-for="result in searchResults"
+											:key="result"
+											class="py-2 pl-5 pr-3 bg-discord-blurple-600 text-white hover:bg-discord-blurple-760"
+										>
+											<router-link exact :to="result.getLinkPath()">
+												{{ result.computedName }}
+											</router-link>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -291,10 +309,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { onClickOutside, useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
 
 import { useStore } from '~/store';
 import { isDarkMode, toggleDarkMode } from '~/util/darkMode';
+import { search } from '~/util/search';
 
 const store = useStore();
 const breakpoints = useBreakpoints(breakpointsTailwind);
@@ -308,4 +328,23 @@ const repository = computed(() => store.state.source?.repo);
 onClickOutside(navbarElement, () => (isOpen.value = false));
 
 whenever(lgAndLarger, () => (isOpen.value = false));
+const router = useRouter();
+
+const searchInput = ref('');
+const searchResults = computed(() => search(searchInput.value).slice(0, 6));
+
+const searchFocus = ref(false);
+function unfocus() {
+	// timeout is needed because element gets unmounted before the link can finish resolving
+	setTimeout(() => (searchFocus.value = false), 300);
+}
+
+function gotoSearch() {
+	return router.push({
+		name: 'docs-source-tag-search',
+		query: {
+			query: searchInput.value,
+		},
+	});
+}
 </script>
