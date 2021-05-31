@@ -35,7 +35,7 @@ watch(
 		query.value = route.query.query;
 	},
 );
-const results = computed(() => search(query.value));
+const results = computed(() => search(query.value as string));
 
 function getColourFromType(type: DocumentType) {
 	switch (type) {

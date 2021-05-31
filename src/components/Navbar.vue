@@ -183,7 +183,7 @@
 									<ul v-if="searchFocus">
 										<li
 											v-for="result in searchResults"
-											:key="result"
+											:key="result.computedName"
 											class="py-2 pl-5 pr-3 bg-discord-blurple-600 text-white hover:bg-discord-blurple-760"
 										>
 											<router-link exact :to="result.getLinkPath()">
