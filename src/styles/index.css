@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html,
+	body {
+		@apply h-full w-full bg-discord-blurple-560;
+	}
+
+	body {
+		overscroll-behavior-y: none;
+		@apply h-full w-full fixed;
+	}
+
+	#container {
+		overscroll-behavior-y: none;
+		@apply overflow-auto h-[calc(100vh-64px)];
+	}
+
+	img {
+		@apply inline-block !m-0;
+	}
+}
+
+@layer components {
+	.noprose {
+		@apply !m-0;
+	}
+
+	.noprose p {
+		@apply !m-0;
+	}
+
+	.noprose > div.info,
+	.noprose > div.warn {
+		@apply !mt-4;
+	}
+
+	.noprose li {
+		@apply !m-0;
+	}
+
+	.no-list li {
+		padding-left: 0.25rem !important;
+	}
+
+	.no-list li::before {
+		content: none !important;
+	}
+
+	.custom-scroll {
+		scrollbar-width: thin;
+		scrollbar-color: theme('colors.discord.blurple.460') rgba(0, 0, 0, 0.07);
+	}
+
+	.custom-scroll::-webkit-scrollbar {
+		height: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+		width: 8px; /* Manually measured based on the original thin scrollbar on Firefox */
+	}
+
+	.custom-scroll::-webkit-scrollbar-thumb {
+		background: theme('colors.discord.blurple.460');
+	}
+
+	.custom-scroll::-webkit-scrollbar-thumb:hover {
+		background: theme('colors.discord.blurple.430');
+	}
+
+	.custom-scroll::-webkit-scrollbar-track {
+		background: rgba(0, 0, 0, 0.07);
+	}
+
+	#container.custom-scroll::-webkit-scrollbar-track {
+		background: #ffffff;
+	}
+
+	.dark #container.custom-scroll::-webkit-scrollbar-track {
+		background: #1d1d1d;
+	}
+}
+
+@layer utilities {
+	.break-words-legacy {
+		word-break: break-word;
+	}
+
+	.scroll-to {
+		scroll-margin-top: theme('spacing.16');
+	}
+}
+
+.info {
+	@apply dark:text-gray-200 p-2 border-l-4 border-discord-blurple-500;
+	/* prettier-ignore */
+	background: theme('colors.discord.blurple.400')50;
+}
+
+.warn {
+	@apply dark:text-gray-200 p-2 border-l-4 border-discord-red-500;
+	/* prettier-ignore */
+	background: theme('colors.discord.red.400')50;
+}

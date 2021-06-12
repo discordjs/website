@@ -1,28 +1,28 @@
 name: Deployment
 on:
   push:
-    branches: [stable]
+    branches: [main]
 jobs:
   website:
     name: Website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Install Node v14
-        uses: actions/setup-node@v1
+      - name: Install Node v16
+        uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Install dependencies
-        run: yarn
+        run: npm ci
 
       - name: Build site
-        run: yarn build
+        run: npm run build
 
       - name: Deploy site
-        run: bash ./.github/workflows/deploy.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist
