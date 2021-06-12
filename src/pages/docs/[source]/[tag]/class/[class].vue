@@ -25,7 +25,8 @@
 				<h2 class="!mt-2">Constructor</h2>
 				<pre
 					ref="codeblock"
-				><code class="javascript">new {{ docs?.global }}.{{ cls?.name }}(<span v-for="param in constructorParameters" :key="param.name" class="constructor-parameter">{{ param.name }}</span>);</code></pre>
+					class="javascript"
+				><code>new {{ docs?.global }}.{{ cls?.name }}(<span v-for="(param, idx) in constructorParameters" :key="param.name">{{ param.name }}{{ (constructorParameters?.length ?? 1) - 1 !== idx ? ', ' : '' }}</span>);</code></pre>
 				<ParameterTable v-if="cls.construct.params" :parameters="cls.construct.params" />
 			</div>
 
@@ -47,6 +48,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import highlight from 'highlight.js';
+highlight.configure({ ignoreUnescapedHTML: true });
 
 import { useStore } from '~/store';
 import { markdown } from '~/util/markdown';
@@ -135,9 +137,3 @@ watch(
 	},
 );
 </script>
-
-<style>
-.constructor-parameter:not(:nth-last-child(2)):after {
-	content: ', ';
-}
-</style>

@@ -3,8 +3,8 @@
 		<div class="overflow-x-auto lg:custom-scroll">
 			<div class="relative">
 				<pre
-					class="my-0"
-				><code class="javascript" v-html="highlight.highlight(code, { language: 'javascript' }).value"></code></pre>
+					class="my-0 javascript"
+				><code v-html="highlight.highlight(code, { language: 'javascript' }).value"></code></pre>
 				<button
 					ref="copyButton"
 					class="
