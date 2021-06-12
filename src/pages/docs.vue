@@ -79,7 +79,6 @@ const watchRoute = async () => {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		(docs.value?.id !== sources[route.params.source].id || docs.value?.tag !== route.params.tag)
 	) {
-		console.log(docs.value?.id, route.params.source, docs.value?.tag, route.params.tag);
 		await store.dispatch({
 			type: 'fetchDocs',
 			// @ts-expect-error
