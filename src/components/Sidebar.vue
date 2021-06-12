@@ -98,7 +98,7 @@
 													border
 													dark:border-[#101010]
 													focus:outline-none
-													z-20
+													z-40
 													lg:custom-scroll
 												"
 											>
@@ -158,7 +158,7 @@
 													border
 													dark:border-[#101010]
 													focus:outline-none
-													z-20
+													z-40
 													lg:custom-scroll
 												"
 											>
@@ -187,7 +187,7 @@
 												:class="isShowPrivates ? 'bg-discord-red-500' : 'bg-discord-blurple-500'"
 											>
 												<span
-													class="inline-block w-4 h-4 bg-white rounded-full transition transform-gpu"
+													class="inline-block w-4 h-4 bg-white rounded-full transition transform-gpu z-20"
 													:class="isShowPrivates ? 'translate-x-6' : 'translate-x-1'"
 												></span>
 											</Switch>

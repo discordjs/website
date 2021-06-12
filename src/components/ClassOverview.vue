@@ -1,7 +1,7 @@
 <template>
 	<div class="grid sm:grid-cols-2 mb-10" :class="events && events.length ? 'md:grid-cols-3' : null">
 		<div v-if="visibleProperties && visibleProperties.length">
-			<Disclosure v-slot="{ open }">
+			<Disclosure v-slot="{ open }" :default-open="isOpen">
 				<DisclosureButton class="focus:outline-none" tabindex="-1">
 					<div class="text-gray-800 dark:text-gray-100 py-2 text-md font-bold uppercase flex gap-1 items-center">
 						<button
@@ -56,7 +56,7 @@
 		</div>
 
 		<div v-if="visibleMethods && visibleMethods.length">
-			<Disclosure v-slot="{ open }">
+			<Disclosure v-slot="{ open }" :default-open="isOpen">
 				<DisclosureButton class="focus:outline-none" tabindex="-1">
 					<div class="text-gray-800 dark:text-gray-100 py-2 text-md font-bold uppercase flex gap-1 items-center">
 						<button
@@ -111,7 +111,7 @@
 		</div>
 
 		<div v-if="visibleEvents && visibleEvents.length">
-			<Disclosure v-slot="{ open }">
+			<Disclosure v-slot="{ open }" :default-open="isOpen">
 				<DisclosureButton class="focus:outline-none" tabindex="-1">
 					<div class="text-gray-800 dark:text-gray-100 py-2 text-md font-bold uppercase flex gap-1 items-center">
 						<button
@@ -162,7 +162,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { defineProps, ref, computed } from 'vue';
+import { useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
 
 import { scopedName } from '~/util/scopedName';
 import { isShowPrivates } from '~/util/showPrivates';
@@ -181,6 +182,11 @@ const props = defineProps<{
 	events?: DocumentationClassEvent[];
 }>();
 
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const lgAndLarger = breakpoints.greater('lg');
+
+const isOpen = ref(false);
+
 const visibleProperties = computed(() =>
 	isShowPrivates.value ? props.properties : props.properties?.filter((prop) => prop.access !== 'private'),
 );
@@ -195,4 +201,6 @@ const scrollTo = (elementName: string) => {
 	const element = document.getElementById(`doc-for-${elementName}`);
 	element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
+
+whenever(lgAndLarger, () => (isOpen.value = true), { immediate: true });
 </script>
