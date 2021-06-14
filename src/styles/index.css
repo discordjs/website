@@ -6,7 +6,9 @@
 	html,
 	body {
 		@apply h-full w-full bg-discord-blurple-560;
+		animation-timing-function: cubic-bezier(0.311, 0.441, 0.444, 1.649);
 	}
+	
 
 	body {
 		overscroll-behavior-y: none;
