@@ -281,6 +281,33 @@ export const store = createStore<State>({
 				ChildProcess: 'https://nodejs.org/dist/latest/docs/api/child_process.html#child_process_class_childprocess',
 				Worker: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_worker',
 				MessagePort: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_messageport',
+				APIAttachment: 'https://discord.com/developers/docs/resources/channel#attachment-object',
+				APIMessageRaw: 'https://discord.com/developers/docs/resources/channel#message-object',
+				APIReaction: 'https://discord.com/developers/docs/resources/channel#reaction-object',
+				APIEmbed: 'https://discord.com/developers/docs/resources/channel#embed-object',
+				APIUser: 'https://discord.com/developers/docs/resources/user#user-object',
+				APIModifyClientData: 'https://discord.com/developers/docs/resources/user#modify-current-user-json-params',
+				APIGuildMember: 'https://discord.com/developers/docs/resources/guild#guild-member-object',
+				APIVoiceState: 'https://discord.com/developers/docs/resources/voice#voice-state-object',
+				APIBanData: 'https://discord.com/developers/docs/resources/guild#create-guild-ban-json-params',
+				APIChannel: 'https://discord.com/developers/docs/resources/channel#channel-object',
+				APIGuild: 'https://discord.com/developers/docs/resources/guild#guild-object',
+				APIGuildTemplate:
+					'https://discord.com/developers/docs/resources/guild-template#guild-template-object-guild-template-structure',
+				APIRole: 'https://discord.com/developers/docs/topics/permissions#role-object',
+				APIEmoji: 'https://discord.com/developers/docs/resources/emoji#emoji-object',
+				APIOverwrite: 'https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure',
+				APIApplicationCommand: 'https://discord.com/developers/docs/interactions/slash-commands#applicationcommand',
+				APIApplicationCommandOption:
+					'https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption',
+				APIApplicationCommandOptionResolved:
+					'https://discord.com/developers/docs/interactions/slash-commands#interaction-applicationcommandinteractiondataresolved',
+				APIApplicationCommandPermissions:
+					'https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissions',
+				APIComponent: 'https://discord.com/developers/docs/interactions/message-components#component-object',
+				APIError: 'https://discord.com/developers/docs/reference#error-messages',
+				APIPresence:
+					'https://discord.com/developers/docs/rich-presence/how-to#updating-presence-update-presence-payload-fields',
 			};
 
 			// Add links for everything
