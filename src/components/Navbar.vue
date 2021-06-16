@@ -209,9 +209,7 @@
 												text-gray-200
 											"
 											:class="
-												parseInt(index, 10) === searchScrollPosition
-													? 'even:bg-discord-blurple-630 bg-discord-blurple-660'
-													: ''
+												index === searchScrollPosition ? 'even:bg-discord-blurple-630 bg-discord-blurple-660' : ''
 											"
 										>
 											<router-link
@@ -399,7 +397,7 @@ const handleSearch = () => {
 	});
 };
 
-const searchScrollDown = (e: MouseEvent) => {
+const searchScrollDown = (e: KeyboardEvent) => {
 	searchScrollPosition.value += 1;
 	if (searchScrollPosition.value > Math.min(6, searchResults.value.length - 1)) {
 		searchScrollPosition.value = 0;
@@ -407,7 +405,7 @@ const searchScrollDown = (e: MouseEvent) => {
 	e.preventDefault();
 };
 
-const searchScrollUp = (e: MouseEvent) => {
+const searchScrollUp = (e: KeyboardEvent) => {
 	searchScrollPosition.value -= 1;
 	if (searchScrollPosition.value < 0) {
 		searchScrollPosition.value = Math.min(6, searchResults.value.length - 1);
