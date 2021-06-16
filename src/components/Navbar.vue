@@ -174,23 +174,26 @@
 									autocorrect="off"
 									@focus="isSearchOpen = true"
 									@input="isSearchOpen = true"
-									@keyup.enter="gotoSearch"
+									@keyup.enter="handleSearch"
+									@keydown.up="searchScrollUp"
+									@keydown.down="searchScrollDown"
 								/>
 								<div
 									v-if="isSearchOpen && searchInput && searchResults.length"
 									class="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center"
 									aria-hidden="true"
-									@click="gotoSearch"
+									@click="handleSearch"
 								>
 									<heroicons-outline-arrow-right class="h-5 w-5 text-gray-200" />
 								</div>
 								<div
 									v-if="isSearchOpen && searchInput && searchResults.length"
 									class="absolute mt-1 w-full break-words-legacy border bg-discord-blurple-600 rounded-md"
+									@mouseover="searchMouseMove"
 								>
 									<ul>
 										<li
-											v-for="result in searchResults"
+											v-for="(result, index) in searchResults"
 											:key="result.computedName"
 											class="
 												even:bg-discord-blurple-560
@@ -200,6 +203,10 @@
 												rounded-md
 												text-gray-200
 											"
+											:class="{
+												'ring-1 ring-gray-200 even:bg-discord-blurple-630 dark:even:bg-discord-blurple-660 bg-discord-blurple-630 dark:bg-discord-blurple-660':
+													index === searchScrollPosition,
+											}"
 										>
 											<router-link
 												class="
@@ -215,6 +222,7 @@
 												"
 												exact
 												:to="result.getLinkPath()"
+												:data-index="index"
 												@click="isSearchOpen = false"
 											>
 												{{ result.computedName }}
@@ -350,16 +358,26 @@ const isOpen = ref(false);
 const searchElement = ref();
 const searchInput = ref('');
 const isSearchOpen = ref(false);
+const searchScrollPosition = ref(-1);
 
 const repository = computed(() => store.state.source?.repo);
-const searchResults = computed(() => search(searchInput.value).slice(0, 7));
+const searchResults = computed(() => {
+	searchScrollPosition.value = -1;
+	return search(searchInput.value).slice(0, 7);
+});
 
-const gotoSearch = () => {
+const handleSearch = () => {
 	if (!searchResults.value.length) {
 		return;
 	}
 
 	isSearchOpen.value = false;
+
+	if (searchScrollPosition.value >= 0) {
+		void router.push(searchResults.value[searchScrollPosition.value].getLinkPath());
+		searchScrollPosition.value = -1;
+		return;
+	}
 
 	return router.push({
 		name: 'docs-source-tag-search',
@@ -369,8 +387,35 @@ const gotoSearch = () => {
 	});
 };
 
+const searchScrollDown = (e: KeyboardEvent) => {
+	searchScrollPosition.value += 1;
+	if (searchScrollPosition.value > Math.min(6, searchResults.value.length - 1)) {
+		searchScrollPosition.value = 0;
+	}
+	e.preventDefault();
+};
+
+const searchScrollUp = (e: KeyboardEvent) => {
+	searchScrollPosition.value -= 1;
+	if (searchScrollPosition.value < 0) {
+		searchScrollPosition.value = Math.min(6, searchResults.value.length - 1);
+	}
+	e.preventDefault();
+};
+
+const searchMouseMove = (e: MouseEvent) => {
+	if (!e.target) return;
+	const index = (e.target as HTMLAnchorElement).getAttribute('data-index');
+	if (index) {
+		searchScrollPosition.value = parseInt(index, 10);
+	}
+};
+
 whenever(lgAndLarger, () => (isOpen.value = false));
-onClickOutside(searchElement, () => (isSearchOpen.value = false));
+onClickOutside(searchElement, () => {
+	isSearchOpen.value = false;
+	searchScrollPosition.value = -1;
+});
 </script>
 
 <style>
