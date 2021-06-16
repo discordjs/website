@@ -204,7 +204,16 @@
 												text-gray-200
 											"
 											:class="
-												index === searchScrollPosition ? 'even:bg-discord-blurple-630 bg-discord-blurple-660' : ''
+												index === searchScrollPosition
+													? `
+													ring-1
+													ring-gray-200
+													even:bg-discord-blurple-630
+													dark:even:bg-discord-blurple-660
+													bg-discord-blurple-630
+													dark:bg-discord-blurple-660
+													`
+													: ''
 											"
 										>
 											<router-link
