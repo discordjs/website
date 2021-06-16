@@ -7,8 +7,7 @@
 						to="/"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630
-							hover:text-white
+							hover:bg-discord-blurple-630 hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -28,8 +27,7 @@
 						to="/docs"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630
-							hover:text-white
+							hover:bg-discord-blurple-630 hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -49,8 +47,7 @@
 						:href="`https://github.com/${repository}`"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630
-							hover:text-white
+							hover:bg-discord-blurple-630 hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -71,8 +68,7 @@
 						href="https://discordjs.guide"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630
-							hover:text-white
+							hover:bg-discord-blurple-630 hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -100,9 +96,7 @@
 								items-center
 								justify-center
 								hover:bg-discord-blurple-630
-								focus:outline-none
-								focus:ring-2 focus:ring-inset focus:ring-white
-								focus:bg-discord-blurple-630
+								focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white focus:bg-discord-blurple-630
 							"
 							:aria-label="`Switch to ${isDarkMode ? 'light theme' : 'dark theme'}`"
 							@click="toggleDarkMode()"
@@ -127,8 +121,7 @@
 								rounded-md
 								p-2
 								hover:bg-discord-blurple-630
-								focus:outline-none
-								focus:ring-1 focus:ring-inset focus:ring-white
+								focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white
 							"
 							:aria-label="`Switch to ${isDarkMode ? 'light theme' : 'dark theme'}`"
 							@click="toggleDarkMode()"
@@ -169,7 +162,9 @@
 										focus:bg-discord-blurple-630
 										focus:text-gray-200
 										focus:placeholder-gray-200
-										focus:ring-2 focus:ring-inset focus:ring-white
+										focus:ring-2
+										focus:ring-inset
+										focus:ring-white
 										lg:focus:ring-1
 									"
 									placeholder="Search"
@@ -247,10 +242,8 @@
 								items-center
 								justify-center
 								text-gray-200
-								hover:bg-discord-blurple-630
-								hover:text-white
-								focus:outline-none
-								focus:ring-2 focus:ring-inset focus:ring-white
+								hover:bg-discord-blurple-630 hover:text-white
+								focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
 							"
 							aria-controls="mobile-menu"
 							:aria-expanded="isOpen"
@@ -275,8 +268,7 @@
 							to="/"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630
-								hover:text-white
+								hover:bg-discord-blurple-630 hover:text-white
 								block
 								rounded-md
 								py-2
@@ -292,8 +284,7 @@
 							to="/docs"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630
-								hover:text-white
+								hover:bg-discord-blurple-630 hover:text-white
 								block
 								rounded-md
 								py-2
@@ -309,8 +300,7 @@
 							:href="`https://github.com/${repository}`"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630
-								hover:text-white
+								hover:bg-discord-blurple-630 hover:text-white
 								block
 								rounded-md
 								py-2
@@ -328,8 +318,7 @@
 							href="https://discordjs.guide"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630
-								hover:text-white
+								hover:bg-discord-blurple-630 hover:text-white
 								block
 								rounded-md
 								py-2
