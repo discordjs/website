@@ -203,18 +203,10 @@
 												rounded-md
 												text-gray-200
 											"
-											:class="
-												index === searchScrollPosition
-													? `
-													ring-1
-													ring-gray-200
-													even:bg-discord-blurple-630
-													dark:even:bg-discord-blurple-660
-													bg-discord-blurple-630
-													dark:bg-discord-blurple-660
-													`
-													: ''
-											"
+											:class="{
+												'ring-1 ring-gray-200 even:bg-discord-blurple-630 dark:even:bg-discord-blurple-660 bg-discord-blurple-630 dark:bg-discord-blurple-660':
+													index === searchScrollPosition,
+											}"
 										>
 											<router-link
 												class="
