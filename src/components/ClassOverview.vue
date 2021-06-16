@@ -19,7 +19,13 @@
 					<li
 						v-for="property in visibleProperties"
 						:key="scopedName(property)"
-						class="cursor-pointer mb-14 border-l-4 border-transparent hover:border-l-4 hover:border-discord-blurple-500"
+						class="
+							cursor-pointer
+							mb-14
+							border-l-4 border-transparent
+							rounded-sm
+							hover:border-l-4 hover:border-discord-blurple-500
+						"
 						@click="scrollTo(scopedName(property))"
 					>
 						<router-link
@@ -74,7 +80,12 @@
 					<li
 						v-for="method in visibleMethods"
 						:key="scopedName(method)"
-						class="cursor-pointer border-l-4 border-transparent hover:border-l-4 hover:border-discord-blurple-500"
+						class="
+							cursor-pointer
+							border-l-4 border-transparent
+							rounded-sm
+							hover:border-l-4 hover:border-discord-blurple-500
+						"
 						@click="scrollTo(scopedName(method))"
 					>
 						<router-link
@@ -129,7 +140,12 @@
 					<li
 						v-for="event in visibleEvents"
 						:key="event.name"
-						class="cursor-pointer border-l-4 border-transparent hover:border-l-4 hover:border-discord-blurple-500"
+						class="
+							cursor-pointer
+							border-l-4 border-transparent
+							rounded-sm
+							hover:border-l-4 hover:border-discord-blurple-500
+						"
 						@click="scrollTo(`e-${event.name}`)"
 					>
 						<router-link
