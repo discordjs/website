@@ -161,6 +161,13 @@ export function search(input: string): DocumentLink[] {
 				if (bref.isPriority) {
 					weight += 5;
 				}
+
+				// in the case that there are more than two index matches, sort them by how close their length is to the input
+				if (a > 1) {
+					weight +=
+						Math.abs(formattedInput.length - aref.computedName.length) -
+						Math.abs(formattedInput.length - bref.computedName.length);
+				}
 			}
 
 			return b - a + weight;

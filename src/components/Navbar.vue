@@ -7,7 +7,8 @@
 						to="/"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630 hover:text-white
+							hover:bg-discord-blurple-630
+							hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -27,7 +28,8 @@
 						to="/docs"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630 hover:text-white
+							hover:bg-discord-blurple-630
+							hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -47,7 +49,8 @@
 						:href="`https://github.com/${repository}`"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630 hover:text-white
+							hover:bg-discord-blurple-630
+							hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -68,7 +71,8 @@
 						href="https://discordjs.guide"
 						class="
 							text-gray-200
-							hover:bg-discord-blurple-630 hover:text-white
+							hover:bg-discord-blurple-630
+							hover:text-white
 							rounded-md
 							py-2
 							px-3
@@ -96,7 +100,9 @@
 								items-center
 								justify-center
 								hover:bg-discord-blurple-630
-								focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white focus:bg-discord-blurple-630
+								focus:outline-none
+								focus:ring-2 focus:ring-inset focus:ring-white
+								focus:bg-discord-blurple-630
 							"
 							:aria-label="`Switch to ${isDarkMode ? 'light theme' : 'dark theme'}`"
 							@click="toggleDarkMode()"
@@ -121,7 +127,8 @@
 								rounded-md
 								p-2
 								hover:bg-discord-blurple-630
-								focus:outline-none focus:ring-1 focus:ring-inset focus:ring-white
+								focus:outline-none
+								focus:ring-1 focus:ring-inset focus:ring-white
 							"
 							:aria-label="`Switch to ${isDarkMode ? 'light theme' : 'dark theme'}`"
 							@click="toggleDarkMode()"
@@ -162,9 +169,7 @@
 										focus:bg-discord-blurple-630
 										focus:text-gray-200
 										focus:placeholder-gray-200
-										focus:ring-2
-										focus:ring-inset
-										focus:ring-white
+										focus:ring-2 focus:ring-inset focus:ring-white
 										lg:focus:ring-1
 									"
 									placeholder="Search"
@@ -174,23 +179,26 @@
 									autocorrect="off"
 									@focus="isSearchOpen = true"
 									@input="isSearchOpen = true"
-									@keyup.enter="gotoSearch"
+									@keyup.enter="handleSearch"
+									@keydown.up="searchScrollUp"
+									@keydown.down="searchScrollDown"
 								/>
 								<div
 									v-if="isSearchOpen && searchInput && searchResults.length"
 									class="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center"
 									aria-hidden="true"
-									@click="gotoSearch"
+									@click="handleSearch"
 								>
 									<heroicons-outline-arrow-right class="h-5 w-5 text-gray-200" />
 								</div>
 								<div
 									v-if="isSearchOpen && searchInput && searchResults.length"
 									class="absolute mt-1 w-full break-words-legacy border bg-discord-blurple-600 rounded-md"
+									@mouseover="searchMouseMove"
 								>
 									<ul>
 										<li
-											v-for="result in searchResults"
+											v-for="(result, index) in searchResults"
 											:key="result.computedName"
 											class="
 												even:bg-discord-blurple-560
@@ -199,6 +207,11 @@
 												dark:hover:bg-discord-blurple-660
 												rounded-md
 												text-gray-200
+											"
+											:class="
+												parseInt(index, 10) === searchScrollPosition
+													? 'even:bg-discord-blurple-630 bg-discord-blurple-660'
+													: ''
 											"
 										>
 											<router-link
@@ -215,6 +228,7 @@
 												"
 												exact
 												:to="result.getLinkPath()"
+												:data-index="index"
 												@click="isSearchOpen = false"
 											>
 												{{ result.computedName }}
@@ -235,8 +249,10 @@
 								items-center
 								justify-center
 								text-gray-200
-								hover:bg-discord-blurple-630 hover:text-white
-								focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
+								hover:bg-discord-blurple-630
+								hover:text-white
+								focus:outline-none
+								focus:ring-2 focus:ring-inset focus:ring-white
 							"
 							aria-controls="mobile-menu"
 							:aria-expanded="isOpen"
@@ -261,7 +277,8 @@
 							to="/"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630 hover:text-white
+								hover:bg-discord-blurple-630
+								hover:text-white
 								block
 								rounded-md
 								py-2
@@ -277,7 +294,8 @@
 							to="/docs"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630 hover:text-white
+								hover:bg-discord-blurple-630
+								hover:text-white
 								block
 								rounded-md
 								py-2
@@ -293,7 +311,8 @@
 							:href="`https://github.com/${repository}`"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630 hover:text-white
+								hover:bg-discord-blurple-630
+								hover:text-white
 								block
 								rounded-md
 								py-2
@@ -311,7 +330,8 @@
 							href="https://discordjs.guide"
 							class="
 								text-gray-200
-								hover:bg-discord-blurple-630 hover:text-white
+								hover:bg-discord-blurple-630
+								hover:text-white
 								block
 								rounded-md
 								py-2
@@ -350,16 +370,26 @@ const isOpen = ref(false);
 const searchElement = ref();
 const searchInput = ref('');
 const isSearchOpen = ref(false);
+const searchScrollPosition = ref(-1);
 
 const repository = computed(() => store.state.source?.repo);
-const searchResults = computed(() => search(searchInput.value).slice(0, 7));
+const searchResults = computed(() => {
+	searchScrollPosition.value = -1;
+	return search(searchInput.value).slice(0, 7);
+});
 
-const gotoSearch = () => {
+const handleSearch = () => {
 	if (!searchResults.value.length) {
 		return;
 	}
 
 	isSearchOpen.value = false;
+
+	if (searchScrollPosition.value >= 0) {
+		void router.push(searchResults.value[searchScrollPosition.value].getLinkPath());
+		searchScrollPosition.value = -1;
+		return;
+	}
 
 	return router.push({
 		name: 'docs-source-tag-search',
@@ -369,8 +399,35 @@ const gotoSearch = () => {
 	});
 };
 
+const searchScrollDown = (e: MouseEvent) => {
+	searchScrollPosition.value += 1;
+	if (searchScrollPosition.value > Math.min(6, searchResults.value.length - 1)) {
+		searchScrollPosition.value = 0;
+	}
+	e.preventDefault();
+};
+
+const searchScrollUp = (e: MouseEvent) => {
+	searchScrollPosition.value -= 1;
+	if (searchScrollPosition.value < 0) {
+		searchScrollPosition.value = Math.min(6, searchResults.value.length - 1);
+	}
+	e.preventDefault();
+};
+
+const searchMouseMove = (e: MouseEvent) => {
+	if (!e.target) return;
+	const index = (e.target as HTMLAnchorElement).getAttribute('data-index');
+	if (index) {
+		searchScrollPosition.value = parseInt(index, 10);
+	}
+};
+
 whenever(lgAndLarger, () => (isOpen.value = false));
-onClickOutside(searchElement, () => (isSearchOpen.value = false));
+onClickOutside(searchElement, () => {
+	isSearchOpen.value = false;
+	searchScrollPosition.value = -1;
+});
 </script>
 
 <style>
