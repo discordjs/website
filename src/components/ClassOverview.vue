@@ -30,7 +30,7 @@
 					>
 						<router-link
 							:to="{ name: 'docs-source-tag-class-class', query: { scrollTo: scopedName(property) } }"
-							class="mx-2 mr-2"
+							class="mx-2"
 						>
 							{{ property.name }}
 						</router-link>
@@ -90,7 +90,7 @@
 					>
 						<router-link
 							:to="{ name: 'docs-source-tag-class-class', query: { scrollTo: scopedName(method) } }"
-							class="mx-2 mr-2"
+							class="mx-2"
 						>
 							{{ method.name }}
 						</router-link>
@@ -150,7 +150,7 @@
 					>
 						<router-link
 							:to="{ name: 'docs-source-tag-class-class', query: { scrollTo: `e-${event.name}` } }"
-							class="mx-2 mr-2"
+							class="mx-2"
 						>
 							{{ event.name }}
 						</router-link>
