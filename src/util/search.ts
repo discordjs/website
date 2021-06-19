@@ -148,18 +148,18 @@ export function search(input: string): DocumentLink[] {
 			// Give extra weight when an exact match is found
 			// if it is a class or typedef, give it even higher priority
 			if (aref.nameLowerCase === formattedInput) {
-				weight += aref.isPriority ? -10 : -5;
+				weight += aref.isPriority ? -10 : -4;
 			} else if (bref.nameLowerCase === formattedInput) {
-				weight += bref.isPriority ? 10 : 5;
+				weight += bref.isPriority ? 10 : 4;
 			}
 
 			if (a === b) {
 				// if the counter is the same but not the names, then give extra weight to ones that are classes and typedefs
 				if (aref.isPriority) {
-					weight -= 5;
+					weight -= 6;
 				}
 				if (bref.isPriority) {
-					weight += 5;
+					weight += 6;
 				}
 
 				// in the case that there are more than two index matches, sort them by how close their length is to the input
