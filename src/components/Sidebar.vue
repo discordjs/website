@@ -410,10 +410,6 @@ const visibleTypedefs = computed(() =>
 
 onClickOutside(sidebarElement, () => (isOpen.value = false));
 whenever(lgAndLarger, () => (isOpen.value = false), { immediate: true });
-watch(
-	() => route.params,
-	(params) => (selectedBranch.value = params.tag),
-);
 watch([selectedSource, selectedBranch], async ([currentSource, currentBranch], [prevSource, prevBranch]) => {
 	if (currentSource !== prevSource) {
 		selectedBranch.value = currentSource.source.defaultTag;
