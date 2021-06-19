@@ -356,7 +356,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, reactive } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { onClickOutside, useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
 
@@ -394,7 +394,7 @@ const branches = computed(() => store.state.branches);
 
 const routeSource = computed(() => sources.value.find((source) => route.params.source === source.id));
 
-const selectedSource = reactive({
+const selectedSource = ref({
 	source: routeSource.value?.source ?? MainSource,
 	name: routeSource.value?.name ?? MainSource.name,
 });
