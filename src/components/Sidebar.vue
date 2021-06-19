@@ -356,7 +356,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { onClickOutside, useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
 
@@ -394,7 +394,7 @@ const branches = computed(() => store.state.branches);
 
 const routeSource = computed(() => sources.value.find((source) => route.params.source === source.id));
 
-const selectedSource = ref({
+const selectedSource = reactive({
 	source: routeSource.value?.source ?? MainSource,
 	name: routeSource.value?.name ?? MainSource.name,
 });
@@ -410,6 +410,10 @@ const visibleTypedefs = computed(() =>
 
 onClickOutside(sidebarElement, () => (isOpen.value = false));
 whenever(lgAndLarger, () => (isOpen.value = false), { immediate: true });
+watch(
+	() => route.params,
+	(params) => (selectedBranch.value = params.tag),
+);
 watch([selectedSource, selectedBranch], async ([currentSource, currentBranch], [prevSource, prevBranch]) => {
 	if (currentSource !== prevSource) {
 		selectedBranch.value = currentSource.source.defaultTag;
