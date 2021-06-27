@@ -2,6 +2,53 @@
 	<div class="mx-auto py-16 px-4 sm:px-8 lg:py-8 w-full">
 		<div class="prose prose-discord dark:prose-light mx-auto max-w-4xl lg:max-w-full">
 			<h1>Search Results</h1>
+			<div class="flex flex-col md:flex-row">
+				<div class="flex-auto">
+					<input
+						v-model="filter"
+						:value="DocumentType.Class"
+						type="checkbox"
+						class="form-checkbox rounded-sm h-5 w-5 text-discord-blurple-500"
+					/>
+					Classes
+				</div>
+				<div class="flex-auto">
+					<input
+						v-model="filter"
+						:value="DocumentType.Method"
+						type="checkbox"
+						class="form-checkbox rounded-sm h-5 w-5 text-yellow-500"
+					/>
+					Methods
+				</div>
+				<div class="flex-auto">
+					<input
+						v-model="filter"
+						:value="DocumentType.Property"
+						type="checkbox"
+						class="form-checkbox rounded-sm h-5 w-5 text-green-400"
+					/>
+					Properties
+				</div>
+				<div class="flex-auto">
+					<input
+						v-model="filter"
+						:value="DocumentType.Typedefs"
+						type="checkbox"
+						class="form-checkbox rounded-sm h-5 w-5 text-purple-800"
+					/>
+					Typedefs
+				</div>
+				<div class="flex-auto">
+					<input
+						v-model="filter"
+						:value="DocumentType.Events"
+						type="checkbox"
+						class="form-checkbox rounded-sm h-5 w-5 text-yellow-900"
+					/>
+					Events
+				</div>
+			</div>
 			<div>
 				<ul class="no-list">
 					<li
@@ -32,11 +79,21 @@ import { useRoute } from 'vue-router';
 
 import { search, DocumentType } from '~/util/search';
 
+const filter = ref([
+	DocumentType.Class,
+	DocumentType.Method,
+	DocumentType.Property,
+	DocumentType.Events,
+	DocumentType.Typedefs,
+]);
+
 const route = useRoute();
 
 const query = ref(route.query.query);
 
-const results = computed(() => search(query.value as string));
+const results = computed(() => {
+	return search(query.value as string).filter((r) => filter.value.includes(r.type));
+});
 
 const getColourFromType = (type: DocumentType) => {
 	switch (type) {
