@@ -32,8 +32,8 @@ export enum DocumentType {
 
 export class DocumentLink {
 	public computedName: string;
-
 	public nameLowerCase: string;
+	public cleanedComputedName: string;
 
 	public constructor(
 		public name: string,
@@ -67,6 +67,7 @@ export class DocumentLink {
 		}
 
 		this.nameLowerCase = name.toLowerCase();
+		this.cleanedComputedName = this.computedName.replace(/[().#]/, '').toLowerCase();
 	}
 
 	public get isPriority() {
@@ -103,7 +104,7 @@ const searchIndex = computed(() => store.state.searchIndex);
 const searchRef = computed(() => store.state.searchRef);
 
 export function search(input: string): DocumentLink[] {
-	const formattedInput = input.trim().toLowerCase();
+	const formattedInput = input.replace(/[\s().#]/g, '').toLowerCase();
 
 	if (formattedInput === '') {
 		return [];
@@ -151,6 +152,18 @@ export function search(input: string): DocumentLink[] {
 				weight += aref.isPriority ? -10 : -4;
 			} else if (bref.nameLowerCase === formattedInput) {
 				weight += bref.isPriority ? 10 : 4;
+			}
+
+			// if your input is this long and it is a substring match of the name,
+			// we can assume you know precisely what you're looking for, so weigh these very heavily.
+			if (formattedInput.length > 7) {
+				if (aref.cleanedComputedName.includes(formattedInput)) {
+					weight -= 30;
+				}
+
+				if (bref.cleanedComputedName.includes(formattedInput)) {
+					weight += 30;
+				}
 			}
 
 			if (a === b) {
