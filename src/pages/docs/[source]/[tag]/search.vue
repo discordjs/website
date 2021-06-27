@@ -2,7 +2,7 @@
 	<div class="mx-auto py-16 px-4 sm:px-8 lg:py-8 w-full">
 		<div class="prose prose-discord dark:prose-light mx-auto max-w-4xl lg:max-w-full">
 			<h1>Search Results</h1>
-			<div class="prose dark:prose-light flex flex-col md:flex-row">
+			<div class="flex flex-col md:flex-row">
 				<div class="flex-auto">
 					<input
 						v-model="filter"
