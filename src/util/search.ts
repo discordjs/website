@@ -32,8 +32,8 @@ export enum DocumentType {
 
 export class DocumentLink {
 	public computedName: string;
-
 	public nameLowerCase: string;
+	public cleanedComputedName: string;
 
 	public constructor(
 		public name: string,
@@ -67,6 +67,7 @@ export class DocumentLink {
 		}
 
 		this.nameLowerCase = name.toLowerCase();
+		this.cleanedComputedName = this.computedName.replace(/[().#]/, '').toLowerCase();
 	}
 
 	public get isPriority() {
@@ -103,67 +104,98 @@ const searchIndex = computed(() => store.state.searchIndex);
 const searchRef = computed(() => store.state.searchRef);
 
 export function search(input: string): DocumentLink[] {
-	const formattedInput = input.trim().toLowerCase();
+	const formattedInput = input.replace(/[\s().#]/g, '').toLowerCase();
 
 	if (formattedInput === '') {
 		return [];
 	}
 
+	interface MatchContext {
+		numMatches: number;
+		lengthMatches: number;
+	}
+
 	// Build scores based on index matching
-	let result = searchIndex.value.reduce((acc: { [index: number]: number }, s) => {
+	let result = searchIndex.value.reduce((acc: Map<number, MatchContext>, s) => {
 		if (formattedInput.includes(s.name)) {
 			for (const r of s.related) {
-				if (acc[r]) {
-					acc[r]++;
+				const obj = acc.get(r);
+				if (obj) {
+					obj.numMatches += 1;
+					obj.lengthMatches += s.name.length;
 				} else {
-					acc[r] = 1;
+					acc.set(r, { numMatches: 1, lengthMatches: s.name.length });
 				}
 			}
 		}
 		return acc;
-	}, {});
+	}, new Map());
 
 	// Fallback if input is too short for matches
-	if (Object.keys(result).length === 0 && formattedInput.length < 10) {
-		result = searchIndex.value.reduce((acc: { [index: number]: number }, s) => {
+	if (result.size === 0 && formattedInput.length < 10) {
+		result = searchIndex.value.reduce((acc: Map<number, MatchContext>, s) => {
 			if (s.name.includes(formattedInput)) {
 				for (const r of s.related) {
-					if (acc[r]) {
-						acc[r]++;
+					const obj = acc.get(r);
+					if (obj) {
+						obj.numMatches += 1;
+						obj.lengthMatches += s.name.length;
 					} else {
-						acc[r] = 1;
+						acc.set(r, { numMatches: 1, lengthMatches: s.name.length });
 					}
 				}
 			}
 			return acc;
-		}, {});
+		}, new Map());
 	}
 
-	const sortedResults = Object.entries(result)
-		.map(([ref, counter]): [DocumentLink, number] => [searchRef.value[parseInt(ref, 10)], counter])
+	const sortedResults = Array.from(result.entries())
+		.map(([ref, ctx]): [DocumentLink, MatchContext] => [searchRef.value[ref], ctx])
 		.filter(([ref]) => (ref.access === 'private' ? isShowPrivates.value : true))
-		.sort(([aref, a], [bref, b]) => {
+		.sort(([aRef, aCtx], [bRef, bCtx]) => {
 			let weight = 0;
 
 			// Give extra weight when an exact match is found
-			// if it is a class or typedef, give it even higher priority
-			if (aref.nameLowerCase === formattedInput) {
-				weight += aref.isPriority ? -10 : -5;
-			} else if (bref.nameLowerCase === formattedInput) {
-				weight += bref.isPriority ? 10 : 5;
+			// If it is a class or typedef, give it even higher priority
+			if (aRef.nameLowerCase === formattedInput) {
+				weight += aRef.isPriority ? -10 : -4;
+			} else if (bRef.nameLowerCase === formattedInput) {
+				weight += bRef.isPriority ? 10 : 4;
 			}
 
-			if (a === b) {
+			// If your input is this long and it is a substring match of the name,
+			// we can assume you know precisely what you're looking for, so weigh these very heavily.
+			if (formattedInput.length >= 7) {
+				if (aRef.cleanedComputedName.includes(formattedInput)) {
+					weight -= 30;
+				}
+
+				if (bRef.cleanedComputedName.includes(formattedInput)) {
+					weight += 30;
+				}
+			}
+
+			if (aCtx.numMatches === bCtx.numMatches) {
 				// if the counter is the same but not the names, then give extra weight to ones that are classes and typedefs
-				if (aref.isPriority) {
-					weight -= 5;
+				if (aRef.isPriority) {
+					weight -= 6;
 				}
-				if (bref.isPriority) {
-					weight += 5;
+				if (bRef.isPriority) {
+					weight += 6;
 				}
-			}
 
-			return b - a + weight;
+				// In the case that there are more than two index matches, sort them by how close their length is to the input
+				if (aCtx.numMatches > 1) {
+					weight +=
+						Math.abs(formattedInput.length - aRef.computedName.length) -
+						Math.abs(formattedInput.length - bRef.computedName.length);
+				}
+
+				// Factor in the length of the match so that longer matches get a bit of priority.
+				// This prevents short words matches like 'at' or 'id' from being too high up in a search when a better match could be found
+				weight += bCtx.lengthMatches - aCtx.lengthMatches;
+			}
+			return bCtx.numMatches - aCtx.numMatches + weight;
 		});
 
 	return sortedResults.map(([ref, _]) => ref);

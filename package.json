@@ -33,6 +33,7 @@
 	},
 	"devDependencies": {
 		"@iconify/json": "^1.1.355",
+		"@tailwindcss/forms": "^0.3.3",
 		"@tailwindcss/typography": "^0.4.1",
 		"@types/common-tags": "^1.8.0",
 		"@types/lodash": "^4.14.170",
