@@ -82,7 +82,7 @@ const exampleCode = ref(stripIndent`
 		console.log(\`Logged in as \${client.user.tag}!\`);
 	});
 
-	client.on('interaction', async interaction => {
+	client.on('interactionCreate', async interaction => {
 		if (!interaction.isCommand()) return;
 		if (interaction.commandName === 'ping') {
 			await interaction.reply('Pong!');
