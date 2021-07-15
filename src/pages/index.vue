@@ -43,7 +43,7 @@
 			<Codeblock :code="exampleCode" />
 		</div>
 		<div>
-			<h2>Why?</h2>
+			<h2>Why DiscordJS?</h2>
 			<ul>
 				<li>Object-oriented</li>
 				<li>Speedy and efficient</li>
