@@ -27,7 +27,7 @@
 					>Node.js <heroicons-outline-external-link class="h-5 w-5 inline-block mb-1" aria-hidden="true"
 				/></a>
 				module that allows you to interact with the
-				<a href="https://discordapp.com/developers/docs/intro" target="_blank" rel="noopener"
+				<a href="https://discord.com/developers/docs/intro" target="_blank" rel="noopener"
 					>Discord API <heroicons-outline-external-link class="h-5 w-5 inline-block mb-1" aria-hidden="true"
 				/></a>
 				very easily. It takes a much more object-oriented approach than most other JS Discord libraries, making your
