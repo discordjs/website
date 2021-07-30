@@ -1,7 +1,7 @@
 <template>
 	<div class="grid">
 		<div class="overflow-x-auto lg:custom-scroll border dark:border-gray-600 rounded-md mt-2 mb-8">
-			<table class="!text-base !text-center !my-0 min-w-max lg:min-w-0">
+			<table class="!text-base !text-center !my-0 min-w-max lg:min-w-0 !table-fixed">
 				<thead class="bg-discord-blurple-500 !text-gray-200">
 					<tr class="!uppercase">
 						<th class="!p-4 w-2/12">Parameter</th>
@@ -27,7 +27,7 @@
 						</td>
 						<td v-if="optional" class="!py-5">
 							<span class="sr-only">True</span>
-							<heroicons-outline-badge-check v-if="parameter.optional" class="h-5 w-5 mx-auto" aria-hidden="true" />
+							<heroicons-outline-check v-if="parameter.optional" class="h-5 w-5 mx-auto" aria-hidden="true" />
 						</td>
 						<td v-if="optional" class="!py-5">
 							<em v-if="parameter.optional && typeof parameter.default === 'undefined'">none</em>

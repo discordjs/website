@@ -30,7 +30,18 @@
 			<div v-if="typedef?.returns">
 				<h2>Returns</h2>
 				<p>
-					<Types v-for="rtrn in typedef.returns" :key="typeKey(rtrn)" :names="rtrn" />
+					<span v-if="typedef.returns && Array.isArray(typedef.returns)">
+						<Types v-for="rtrn in typedef.returns" :key="typeKey(rtrn)" :names="rtrn" />
+					</span>
+					<span v-else-if="typedef.returns && !Array.isArray(typedef.returns)">
+						<Types
+							v-for="rtrn in typedef.returns.types || typedef.returns"
+							:key="typeKey(rtrn)"
+							:names="rtrn"
+							:variable="typedef.returns.variable"
+							:nullable="typedef.returns.nullable"
+						/>
+					</span>
 				</p>
 			</div>
 		</div>

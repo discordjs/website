@@ -1,7 +1,9 @@
 <template>
 	<div class="docs-type inline-block whitespace-pre-wrap">
-		<span class="font-semibold">{{ nullable ? '?' : '' }}{{ variable ? '...' : '' }}</span
-		><span v-if="Array.isArray(names)"><TypeLink v-for="type in names" :key="typeKey(type)" :type="type" /></span>
+		<span class="font-semibold">{{ nullable ? '?' : '' }}{{ variable ? '...' : '' }}</span>
+		<span v-if="Array.isArray(names)">
+			<TypeLink v-for="type in names" :key="typeKey(type)" :type="type" />
+		</span>
 	</div>
 </template>
 

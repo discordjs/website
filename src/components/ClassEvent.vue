@@ -8,23 +8,11 @@
 					event.name
 				}}</router-link>
 			</h3>
-			<span
-				v-if="event.deprecated"
-				class="
-					inline-flex
-					items-center
-					px-2.5
-					py-0.5
-					rounded-md
-					text-sm
-					font-medium
-					bg-discord-red-500
-					text-gray-200
-					uppercase
-					pt-6
-				"
-				>Deprecated</span
-			>
+			<span class="text-gray-200 text-sm font-semibold uppercase pt-6">
+				<span v-if="event.deprecated" class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-discord-red-500"
+					>Deprecated</span
+				>
+			</span>
 		</div>
 
 		<div class="grid pl-2.5">
