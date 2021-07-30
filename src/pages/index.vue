@@ -18,7 +18,7 @@
 			xl:grid xl:grid-cols-2 xl:gap-x-12 xl:max-w-7xl
 		"
 	>
-		<div>
+		<div class="col-span-full">
 			<h2>About</h2>
 			<h3>Imagine a bot</h3>
 			<p>
@@ -39,10 +39,6 @@
 			</p>
 		</div>
 		<div>
-			<h2>Example</h2>
-			<Codeblock :code="exampleCode" />
-		</div>
-		<div>
 			<h2>Why?</h2>
 			<ul>
 				<li>Object-oriented</li>
@@ -61,35 +57,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { stripIndent } from 'common-tags';
+import { computed } from 'vue';
 
 import { useStore } from '~/store';
 import MainSource from '~/data/MainSource';
 
 import Logo from '~/components/Logo.vue';
 import InstallButton from '~/components/InstallButton.vue';
-import Codeblock from '~/components/Codeblock.vue';
 import Stats from '~/components/Stats.vue';
 
 const store = useStore();
-
-const exampleCode = ref(stripIndent`
-	const { Client, Intents } = require('discord.js');
-	const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
-	client.on('ready', () => {
-		console.log(\`Logged in as \${client.user.tag}!\`);
-	});
-
-	client.on('interactionCreate', async interaction => {
-		if (!interaction.isCommand()) return;
-		if (interaction.commandName === 'ping') {
-			await interaction.reply('Pong!');
-		}
-	});
-
-	client.login('token');`);
 
 const docs = computed(() => store.state.docs);
 
