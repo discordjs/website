@@ -1,14 +1,14 @@
 <template>
 	<div class="grid">
 		<div class="overflow-x-auto lg:custom-scroll border dark:border-gray-600 rounded-md mt-2 mb-8">
-			<table class="!text-base !text-center !my-0 min-w-max lg:min-w-0 !table-fixed">
+			<table class="!text-base !text-center !my-0 min-w-max lg:min-w-0">
 				<thead class="bg-discord-blurple-500 !text-gray-200">
 					<tr class="!uppercase">
-						<th class="!p-4 w-2/12">Parameter</th>
-						<th class="!p-4 w-2/12">Type</th>
-						<th v-if="optional" class="!p-4 w-2/12">Optional</th>
-						<th v-if="optional" class="!p-4 w-2/12">Default</th>
-						<th class="!p-4 lg:w-4/12">Description</th>
+						<th class="!p-4">Parameter</th>
+						<th class="!p-4 w-60">Type</th>
+						<th v-if="optional" class="!p-4 w-32">Optional</th>
+						<th v-if="optional" class="!p-4 w-32">Default</th>
+						<th class="!p-4 w-96">Description</th>
 					</tr>
 				</thead>
 				<tbody>
