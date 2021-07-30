@@ -5,12 +5,12 @@
 @layer base {
 	html,
 	body {
-		@apply h-full w-full bg-discord-blurple-560;
+		@apply bg-discord-blurple-560;
 	}
 
 	body {
 		overscroll-behavior-y: none;
-		@apply h-full w-full fixed;
+		@apply min-h-screen min-w-full fixed;
 	}
 
 	#container {

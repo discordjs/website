@@ -34,7 +34,7 @@
 			<nav class="my-5 px-2 space-y-1 z-10">
 				<ul>
 					<li class="pb-1">
-						<Disclosure v-slot="{ open }">
+						<Disclosure v-slot="{ open }" :default-open="true">
 							<DisclosureButton class="w-full focus:outline-none" tabindex="-1">
 								<div class="text-gray-800 dark:text-gray-100 py-2 text-md font-bold uppercase flex gap-1 items-center">
 									<button
@@ -79,7 +79,7 @@
 													cursor-pointer
 												"
 											>
-												<span>{{ selectedSource.name }}</span>
+												<span class="truncate">{{ selectedSource.name }}</span>
 												<heroicons-outline-chevron-down v-if="!openSource" />
 												<heroicons-outline-chevron-up v-if="openSource" />
 											</ListboxButton>
@@ -110,7 +110,7 @@
 													:value="source"
 												>
 													<li class="px-3 py-1" :class="{ 'bg-discord-blurple-500 text-gray-200': active }">
-														{{ source.name }}
+														<span class="truncate">{{ source.name }}</span>
 													</li>
 												</ListboxOption>
 											</ListboxOptions>
@@ -139,7 +139,7 @@
 													cursor-pointer
 												"
 											>
-												<span>{{ selectedBranch }}</span>
+												<span class="truncate">{{ selectedBranch }}</span>
 												<heroicons-outline-chevron-down v-if="!openBranch" />
 												<heroicons-outline-chevron-up v-if="openBranch" />
 											</ListboxButton>
@@ -170,7 +170,7 @@
 													:value="branch"
 												>
 													<li class="px-3 py-1" :class="{ 'bg-discord-blurple-500 text-gray-200': active }">
-														{{ branch }}
+														<span class="truncate">{{ branch }}</span>
 													</li>
 												</ListboxOption>
 											</ListboxOptions>
@@ -217,7 +217,7 @@
 											aria-hidden="true"
 										/>
 									</button>
-									{{ category.name }}
+									<span class="truncate">{{ category.name }}</span>
 								</div>
 							</DisclosureButton>
 							<DisclosurePanel as="ul">
@@ -247,7 +247,7 @@
 										exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 										@click="isOpen = false"
 									>
-										{{ typeof file === 'object' ? file.name : file }}
+										<span class="truncate">{{ typeof file === 'object' ? file.name : file }}</span>
 									</router-link>
 								</li>
 							</DisclosurePanel>
@@ -296,7 +296,7 @@
 									exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 									@click="isOpen = false"
 								>
-									{{ cls.name }}
+									<span class="truncate">{{ cls.name }}</span>
 								</router-link>
 							</li>
 						</DisclosurePanel>
@@ -344,7 +344,7 @@
 									exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 									@click="isOpen = false"
 								>
-									{{ typedef.name }}
+									<span class="truncate">{{ typedef.name }}</span>
 								</router-link>
 							</li>
 						</DisclosurePanel>
