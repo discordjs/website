@@ -362,6 +362,7 @@ const searchScrollPosition = ref(-1);
 
 const repository = computed(() => store.state.source?.repo);
 const searchResults = computed(() => {
+	// eslint-disable-next-line vue/no-side-effects-in-computed-properties
 	searchScrollPosition.value = -1;
 	return search(searchInput.value).slice(0, 7);
 });

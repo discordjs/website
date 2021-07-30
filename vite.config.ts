@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
 import Pages from 'vite-plugin-pages';
 import ViteComponents from 'vite-plugin-components';
@@ -20,7 +20,7 @@ export default defineConfig({
 		BUILT_AT: JSON.stringify(Date.now()),
 	},
 	plugins: [
-		vue(),
+		Vue(),
 		Pages(),
 		VitePWA({
 			srcDir: 'src',
