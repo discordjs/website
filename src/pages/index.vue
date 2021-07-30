@@ -75,8 +75,8 @@ import Stats from '~/components/Stats.vue';
 const store = useStore();
 
 const exampleCode = ref(stripIndent`
-	const Discord = require('discord.js');
-	const client = new Discord.Client();
+	const { Client, Intents } = require('discord.js');
+	const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 	client.on('ready', () => {
 		console.log(\`Logged in as \${client.user.tag}!\`);
