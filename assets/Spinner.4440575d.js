@@ -1,0 +1,1 @@
+import{o as s,b as e,e as l}from"./vendor.35ad4842.js";const r={},a={class:"relative h-10 w-10 my-60 mx-auto"},o=l("div",{class:"cube1 bg-discord-blurple-560 h-4 w-4 absolute"},null,-1),u=l("div",{class:"cube2 bg-discord-blurple-560 h-4 w-4 absolute"},null,-1);r.render=function(l,r){return s(),e("div",a,[o,u])};var d=r;export{d as S};
