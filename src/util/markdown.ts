@@ -28,5 +28,5 @@ marked.use({
 
 export function markdown(input: string) {
 	const content = marked(input);
-	return content.replace(/<(info|warn)>([\s\S]+)<\/\1>/gi, '<div class="$1">$2</div>');
+	return content.replace(/<(info|warn)>([\s\S].+)<\/\1>/gi, '<div class="$1">$2</div>');
 }
