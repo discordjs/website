@@ -91,13 +91,13 @@
 }
 
 .info {
-	@apply dark:text-gray-200 p-2 border-l-4 border-discord-blurple-500;
+	@apply dark:text-gray-200 p-2 border-l-4 border-discord-blurple-500 mt-4;
 	/* prettier-ignore */
 	background: theme('colors.discord.blurple.400')50;
 }
 
 .warn {
-	@apply dark:text-gray-200 p-2 border-l-4 border-discord-red-500;
+	@apply dark:text-gray-200 p-2 border-l-4 border-discord-red-500 mt-4;
 	/* prettier-ignore */
 	background: theme('colors.discord.red.400')50;
 }
