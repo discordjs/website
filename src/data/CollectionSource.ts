@@ -6,6 +6,6 @@ export default new DocsSource({
 	name: 'Collection',
 	global: 'Collection',
 	repo: 'discordjs/collection',
-	defaultTag: 'master',
+	defaultTag: 'main',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
 });
