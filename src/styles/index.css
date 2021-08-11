@@ -6,6 +6,8 @@
 	html,
 	body {
 		@apply bg-discord-blurple-560;
+		@apply --tw-text-opacity: 1;
+		color: rgba(110, 231, 183, var(--tw-text-opacity));
 	}
 
 	body {
