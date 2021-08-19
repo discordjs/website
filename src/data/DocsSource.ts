@@ -106,7 +106,7 @@ export default class DocsSource {
 	}
 
 	public async fetchDocs(tag: string) {
-		const res = await fetch(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`);
+		const res = await fetch(`https://cdn.jsdelivr.net/gh/${this.repo}@docs/${tag}.json`);
 		return json(res);
 	}
 }
