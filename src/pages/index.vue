@@ -18,7 +18,7 @@
 			xl:grid xl:grid-cols-2 xl:gap-x-12 xl:max-w-7xl
 		"
 	>
-		<div class="col-span-full">
+		<div class="col-span-full max-w-prose">
 			<h2>About</h2>
 			<h3>Imagine a bot</h3>
 			<p>
