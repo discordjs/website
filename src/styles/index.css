@@ -51,7 +51,7 @@
 
 	.custom-scroll {
 		scrollbar-width: thin;
-		scrollbar-color: theme('colors.discord.blurple.460') #1d1d1d;
+		scrollbar-color: theme('colors.discord.blurple.460') transparent;
 	}
 
 	.custom-scroll::-webkit-scrollbar {
