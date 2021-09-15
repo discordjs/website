@@ -123,7 +123,7 @@ const returnDescription = computed(() =>
 const params = computed(() => (props.method.params ? props.method.params.filter((p) => !p.name.includes('.')) : null));
 const emits = computed(() =>
 	// @ts-expect-error
-	props.method.emits ? props.method.emits.map((e) => parseLink(e.replace('event:', 'e-'), docs.value)) : null,
+	props.method.emits ? props.method.emits.map((e) => parseLink(e, docs.value)) : null,
 );
 const scrollTo = computed(() => `${props.method.scope === 'static' ? 's-' : ''}${props.method.name}`);
 </script>
