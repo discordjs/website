@@ -15,7 +15,6 @@ export function parseLink(link: string, docs: Documentation) {
 			link = link.replace("event:", "");
 		}
 
-		console.log(text, link)
 		return {
 			text: text ?? link,
 			link:
