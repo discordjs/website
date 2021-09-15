@@ -9,10 +9,9 @@ export function parseLink(link: string, docs: Documentation) {
 	// Type link
 	const split = link.split(/(\.|#)/);
 	if (docs.links[split[0] as any]) {
-		if (split[2]?.startsWith("event")) {
+		if (split[2]?.startsWith('e-')) {
 			// Emits tag
-			split[2] = split[2].replace("event:", "e-");
-			link = link.replace("event:", "");
+			link = link.replace('e-', '');
 		}
 
 		return {
