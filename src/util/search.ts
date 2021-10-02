@@ -89,7 +89,7 @@ export class DocumentLink {
 		};
 
 		if (this.type === DocumentType.Method || this.type === DocumentType.Property) {
-			linkPath.query = { scrollTo: this.name };
+			linkPath.query = { scrollTo: `${this.scope === 'static' ? 's-' : ''}${this.name}` };
 		}
 
 		if (this.type === DocumentType.Events) {
