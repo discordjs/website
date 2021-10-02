@@ -9,6 +9,11 @@ export function parseLink(link: string, docs: Documentation) {
 	// Type link
 	const split = link.split(/(\.|#)/);
 	if (docs.links[split[0] as any]) {
+		if (split[2]?.startsWith('event:')) {
+			split[2] = split[2].replace('event:', 'e-');
+			link = link.replace('event:', '');
+		}
+
 		return {
 			text: text ?? link,
 			link:
