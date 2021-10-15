@@ -34,6 +34,8 @@
 			</span>
 		</div>
 
+		<p v-if="method.deprecated" class="noprose warn" v-html="deprecatedDescription"></p>
+
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="method.params" :parameters="method.params" />
@@ -116,6 +118,8 @@ const store = useStore();
 const docs = computed(() => store.state.docs);
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(props.method.description, docs.value, router, route)));
+// @ts-expect-error
+const deprecatedDescription = computed(() => markdown(convertLinks(props.method.deprecated, docs.value, router, route)));
 const returnDescription = computed(() =>
 	// @ts-expect-error
 	markdown(convertLinks(props.method.returns.description, docs.value, router, route)),
