@@ -15,7 +15,7 @@
 			</span>
 		</div>
 
-		<p v-if="event.deprecated && deprecatedDescription" class="noprose warn" v-html="deprecatedDescription"></p>
+		<p v-if="event.deprecated && deprecatedDescription" class="noprose warn !mt-1.5 !mb-2.5" v-html="deprecatedDescription"></p>
 
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
