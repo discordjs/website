@@ -67,6 +67,7 @@ const props = defineProps<{ prop: DocumentationClassProperty }>();
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
+
 const docs = computed(() => store.state.docs);
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(props.prop.description, docs.value, router, route)));
