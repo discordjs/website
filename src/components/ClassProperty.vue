@@ -26,6 +26,12 @@
 			</span>
 		</div>
 
+		<p
+			v-if="prop.deprecated && deprecatedDescription"
+			class="noprose warn !mt-1.5 !mb-2.5"
+			v-html="deprecatedDescription"
+		></p>
+
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="prop.props && prop.props.length > 0" :parameters="prop.props" />
@@ -69,5 +75,11 @@ const store = useStore();
 const docs = computed(() => store.state.docs);
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(props.prop.description, docs.value, router, route)));
+const deprecatedDescription = computed(() =>
+	typeof props.prop.deprecated === 'string'
+		? // @ts-expect-error
+		  markdown(convertLinks(props.prop.deprecated, docs.value, router, route))
+		: '',
+);
 const scrollTo = computed(() => `${props.prop.scope === 'static' ? 's-' : ''}${props.prop.name}`);
 </script>

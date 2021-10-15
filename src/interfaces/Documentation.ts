@@ -22,7 +22,7 @@ interface DocumentationParameter {
 	description: string;
 	default: string;
 	abstract?: boolean;
-	deprecated?: boolean;
+	deprecated?: boolean | string;
 	access?: string;
 	readonly?: boolean;
 	optional?: boolean;
@@ -63,7 +63,7 @@ export interface DocumentationClassMethod {
 	access?: string;
 	async?: boolean;
 	abstract?: boolean;
-	deprecated?: boolean;
+	deprecated?: boolean | string;
 	inherited?: boolean;
 	scope?: string;
 	params?: DocumentationClassMethodParameter[];
@@ -78,7 +78,7 @@ export interface DocumentationClassEvent {
 	name: string;
 	description: string;
 	access?: string;
-	deprecated?: boolean;
+	deprecated?: boolean | string;
 	params: DocumentationClassEventParameter[];
 	see?: string[];
 	meta: DocumentationClassEventMeta;
