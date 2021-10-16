@@ -73,10 +73,8 @@ const route = useRoute();
 const store = useStore();
 
 const docs = computed(() => store.state.docs);
-const description = computed(() => {
-	// @ts-expect-error
-	return markdown(convertLinks(props.prop.description, docs.value, router, route) ?? '');
-});
+// @ts-expect-error
+const description = computed(() => markdown(convertLinks(props.prop.description, docs.value, router, route) ?? ''));
 const deprecatedDescription = computed(() =>
 	typeof props.prop.deprecated === 'string'
 		? // @ts-expect-error
