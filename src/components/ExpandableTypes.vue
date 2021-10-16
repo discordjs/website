@@ -12,8 +12,8 @@
 			</div>
 		</DisclosureButton>
 		<DisclosurePanel>
+			<div v-if="description" v-html="description"></div>
 			<ParameterTable v-if="typedef?.props" :parameters="typedef?.props" />
-			<div v-else v-html="description"></div>
 		</DisclosurePanel>
 	</Disclosure>
 	<Types v-else :names="names" />
@@ -45,5 +45,5 @@ const docs = computed(() => store.state.docs);
 const typedef = ref(docs.value?.typedefs.find((typedef) => typedef.name === props.names[0][0]));
 
 // @ts-expect-error
-const description = computed(() => markdown(convertLinks(typedef.value?.description, docs.value, router, route)));
+const description = computed(() => markdown(convertLinks(typedef.value?.description, docs.value, router, route) ?? ''));
 </script>
