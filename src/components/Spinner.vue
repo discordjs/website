@@ -1,9 +1,19 @@
 <template>
-	<div class="relative h-10 w-10 my-60 mx-auto">
+	<div v-if="!isReducedMotion" class="relative h-10 w-10 my-60 mx-auto">
 		<div class="cube1 bg-discord-blurple-560 h-4 w-4 absolute"></div>
 		<div class="cube2 bg-discord-blurple-560 h-4 w-4 absolute"></div>
 	</div>
 </template>
+
+<script>
+import { isReducedMotion } from '~/util/ReducedMotion';
+
+export default {
+	data() {
+		return { isReducedMotion };
+	},
+};
+</script>
 
 <style>
 .cube1,
