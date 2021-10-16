@@ -151,9 +151,14 @@
 </template>
 
 <script setup lang="ts">
+import { defineProps, ref, computed } from 'vue';
+
+import { scopedName } from '~/util/scopedName';
+import { isReducedMotion } from '~/util/ReducedMotion';
+import { isShowPrivates } from '~/util/showPrivates';
+
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
-import { ref, computed } from 'vue';
 import type {
 	DocumentationClassEvent,
 	DocumentationClassMethod,
@@ -185,7 +190,7 @@ const visibleEvents = computed(() =>
 
 const scrollTo = (elementName: string) => {
 	const element = document.getElementById(`doc-for-${elementName}`);
-	element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	element?.scrollIntoView({ behavior: isReducedMotion.value ? undefined : 'smooth', block: 'start' });
 };
 
 whenever(lgAndLarger, () => (isOpen.value = true), { immediate: true });

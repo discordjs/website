@@ -61,7 +61,8 @@ import { useStore } from '~/store';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
 import { scopedName } from '~/util/scopedName';
-import { isShowPrivates } from '~/util/showPrivates';
+import { isShowPrivates } from '~/util/showPrivates'
+import { isReducedMotion } from '~/util/ReducedMotion';;
 import { typeKey } from '~/util/typeKey';
 
 highlight.configure({ ignoreUnescapedHTML: true });
@@ -122,11 +123,11 @@ useHead({
 
 onMounted(() => {
 	const element = document.getElementById(`doc-for-${route.query.scrollTo as string}`);
-	element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	element?.scrollIntoView({ behavior: isReducedMotion.value ? undefined : 'smooth', block: 'start' });
 
 	const containerElement = document.getElementById('container');
 	if (!route.query.scrollTo && containerElement && containerElement.scrollTop > 200) {
-		containerElement.scrollTo({ top: 0, behavior: 'smooth' });
+		containerElement.scrollTo({ top: 0, behavior: isReducedMotion.value ? undefined : 'smooth' });
 	}
 
 	if (codeblock.value) {
@@ -138,7 +139,7 @@ watch(
 	() => route.query.scrollTo,
 	() => {
 		const element = document.getElementById(`doc-for-${route.query.scrollTo as string}`);
-		element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element?.scrollIntoView({ behavior: isReducedMotion.value ? undefined : 'smooth', block: 'start' });
 	},
 );
 </script>

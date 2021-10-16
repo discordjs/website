@@ -12,5 +12,7 @@
 </template>
 
 <script setup lang="ts">
-const scrollTo = () => document.getElementById('container')?.scrollTo({ top: 0, behavior: 'smooth' });
+import { isReducedMotion } from '~/util/ReducedMotion';
+const scrollTo = () =>
+	document.getElementById('container')?.scrollTo({ top: 0, behavior: isReducedMotion.value ? undefined : 'smooth' });
 </script>

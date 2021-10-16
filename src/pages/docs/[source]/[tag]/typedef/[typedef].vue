@@ -60,6 +60,7 @@ import Types from '~/components/Types.vue';
 import { useStore } from '~/store';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
+import { isReducedMotion } from '~/util/ReducedMotion';
 import { typeKey } from '~/util/typeKey';
 
 const router = useRouter();
@@ -80,7 +81,7 @@ useHead({
 onMounted(() => {
 	const containerElement = document.getElementById('container');
 	if (containerElement && containerElement.scrollTop > 200) {
-		containerElement.scrollTo({ top: 0, behavior: 'smooth' });
+		containerElement.scrollTo({ top: 0, behavior: isReducedMotion.value ? undefined : 'smooth' });
 	}
 });
 </script>
