@@ -8,6 +8,16 @@ localStorage.setItem(keyName, String(reducedMotionValue));
 
 export const isReducedMotion = ref(reducedMotionValue);
 
+if (reducedMotionValue) {
+	document.documentElement.classList.add('reduce-motion');
+	document.documentElement.classList.remove('full-motion');
+} else {
+	document.documentElement.classList.add('full-motion');
+	document.documentElement.classList.remove('reduce-motion');
+}
+
 export const toggleReducedMotion = (value: boolean): void => {
 	localStorage.setItem(keyName, String(value));
+	document.documentElement.classList.toggle('full-motion');
+	document.documentElement.classList.toggle('reduce-motion');
 };
