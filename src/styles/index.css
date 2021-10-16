@@ -22,8 +22,7 @@
 		@apply inline-block !m-0;
 	}
 
-	.reduce-motion,
-	* > * {
+	.reduce-motion * > * {
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
