@@ -6,14 +6,8 @@
 	<div v-else class="my-60 mx-auto text-2xl">Loading...</div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { isReducedMotion } from '~/util/ReducedMotion';
-
-export default {
-	data() {
-		return { isReducedMotion };
-	},
-};
 </script>
 
 <style>
