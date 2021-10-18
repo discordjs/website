@@ -108,14 +108,14 @@
 										<div class="flex justify-between px-2">
 											<SwitchLabel class="mr-4 dark:text-gray-200">Reduced Motion</SwitchLabel>
 											<Switch
-												v-model="isReducedMotion"
+												v-model="usePreferredReducedMotion"
 												class="relative inline-flex h-6 items-center rounded-full w-11 focus:outline-none"
-												:class="isReducedMotion ? 'bg-discord-blurple-500' : 'bg-gray-500'"
-												@click="toggleReducedMotion(isReducedMotion)"
+												:class="usePreferredReducedMotion ? 'bg-discord-blurple-500' : 'bg-gray-500'"
+												@click="toggleReducedMotion(usePreferredReducedMotion)"
 											>
 												<span
 													class="inline-block w-4 h-4 bg-white rounded-full transition transform-gpu z-20"
-													:class="isReducedMotion ? 'translate-x-6' : 'translate-x-1'"
+													:class="usePreferredReducedMotion ? 'translate-x-6' : 'translate-x-1'"
 												></span>
 											</Switch>
 										</div>

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { isReducedMotion } from '~/util/ReducedMotion';
+import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 const scrollTo = () =>
-	document.getElementById('container')?.scrollTo({ top: 0, behavior: isReducedMotion.value ? undefined : 'smooth' });
+	document.getElementById('container')?.scrollTo({ top: 0, behavior: usePreferredReducedMotion.value ? undefined : 'smooth' });
 </script>

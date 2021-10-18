@@ -1,14 +1,12 @@
-import { ref } from 'vue';
+import { useMediaQuery, useStorage } from '@vueuse/core';
 
 const keyName = 'reduced-motion';
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion)').matches;
-const reducedMotionCacheValue = localStorage.getItem(keyName);
-const reducedMotionValue = reducedMotionCacheValue === null ? prefersReducedMotion : reducedMotionCacheValue === 'true';
-localStorage.setItem(keyName, String(reducedMotionValue));
+const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion)');
+const state = useStorage(keyName, prefersReducedMotion.value);
 
-export const isReducedMotion = ref(reducedMotionValue);
+export const usePreferredReducedMotion = prefersReducedMotion.value ? prefersReducedMotion : state;
 
-if (reducedMotionValue) {
+if (usePreferredReducedMotion.value) {
 	document.documentElement.classList.add('reduce-motion');
 	document.documentElement.classList.remove('full-motion');
 } else {
@@ -17,7 +15,7 @@ if (reducedMotionValue) {
 }
 
 export const toggleReducedMotion = (value: boolean): void => {
-	localStorage.setItem(keyName, String(value));
+	state.value = value;
 	document.documentElement.classList.toggle('full-motion');
 	document.documentElement.classList.toggle('reduce-motion');
 };
