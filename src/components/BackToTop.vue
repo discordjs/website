@@ -14,5 +14,7 @@
 <script setup lang="ts">
 import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 const scrollTo = () =>
-	document.getElementById('container')?.scrollTo({ top: 0, behavior: usePreferredReducedMotion.value ? undefined : 'smooth' });
+	document
+		.getElementById('container')
+		?.scrollTo({ top: 0, behavior: usePreferredReducedMotion.value ? undefined : 'smooth' });
 </script>
