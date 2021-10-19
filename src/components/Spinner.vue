@@ -3,7 +3,9 @@
 		<div class="cube1 bg-discord-blurple-560 h-4 w-4 absolute"></div>
 		<div class="cube2 bg-discord-blurple-560 h-4 w-4 absolute"></div>
 	</div>
-	<div v-else class="my-60 mx-auto text-2xl">Loading...</div>
+	<div v-else class="dark:prose-light my-60 mx-auto text-2xl">
+		<h1>Loading...</h1>
+	</div>
 </template>
 
 <script setup lang="ts">
