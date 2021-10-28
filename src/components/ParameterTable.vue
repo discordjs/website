@@ -65,7 +65,7 @@ const optional = computed(() => props.parameters.some((parameter) => parameter.o
 
 const parameterDescription = (parameter: any) =>
 	// @ts-expect-error
-	markdown(convertLinks(parameter.description, docs.value, router, route));
+	markdown(convertLinks(parameter.description ?? 'No description.', docs.value, router, route));
 const parameterDefault = (parameter: ParameterUnion) => (parameter.optional ? `<code>${parameter.default}</code>` : '');
 </script>
 

@@ -19,7 +19,7 @@ type DocumentationTypeDefinitionParameterMeta = DocumentationClassMeta;
 
 interface DocumentationParameter {
 	name: string;
-	description: string;
+	description?: string;
 	default: string;
 	abstract?: boolean;
 	deprecated?: boolean | string;
@@ -59,7 +59,7 @@ interface DocumentationClassConstructor {
 
 export interface DocumentationClassMethod {
 	name: string;
-	description: string;
+	description?: string;
 	access?: string;
 	async?: boolean;
 	abstract?: boolean;

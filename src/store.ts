@@ -143,7 +143,7 @@ export const store = createStore<State>({
 			{ commit },
 			{ inputSource, inputTag = inputSource.defaultTag }: { inputSource: DocsSource; inputTag?: string },
 		) => {
-			let documentation;
+			let documentation: any;
 			try {
 				documentation = await inputSource.fetchDocs(inputTag);
 			} catch (error) {
@@ -157,6 +157,7 @@ export const store = createStore<State>({
 					docs: null,
 				});
 
+				// @ts-ignore
 				fetchError.value = error;
 
 				return;
@@ -261,9 +262,15 @@ export const store = createStore<State>({
 				number: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number',
 				bigint: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt',
 				boolean: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean',
+				true: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean',
+				false: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean',
 				symbol: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol',
 				void: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined',
+				undefined: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined',
+				null: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null',
+				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
 				Object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
+				object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
 				Function: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function',
 				function: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function',
 				Array: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array',
@@ -281,6 +288,7 @@ export const store = createStore<State>({
 				ChildProcess: 'https://nodejs.org/dist/latest/docs/api/child_process.html#child_process_class_childprocess',
 				Worker: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_worker',
 				MessagePort: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_messageport',
+				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
 			};
 
 			// Add links for everything

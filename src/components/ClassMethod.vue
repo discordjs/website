@@ -70,7 +70,7 @@
 				<Types v-for="thrw in method.throws" :key="thrw" :names="thrw" />
 			</div>
 
-			<div v-if="emits" class="font-semibold">
+			<div v-if="emits && emits.length" class="font-semibold">
 				Emits:
 				<ul v-if="emits.length > 1">
 					<li v-for="event in emits" :key="event.text">
@@ -80,12 +80,12 @@
 				<router-link v-else :to="emits[0].link">{{ emits[0].text }}</router-link>
 			</div>
 
-			<div v-if="method.examples" class="font-semibold mt-3">
+			<div v-if="method.examples && method.examples.length" class="font-semibold mt-3">
 				Examples:
 				<Codeblock v-for="example in method.examples" :key="example" class="mt-3" :code="example" />
 			</div>
 
-			<See v-if="method.see" :see="method.see" />
+			<See v-if="method.see && method.see.length" :see="method.see" />
 		</div>
 	</div>
 
@@ -120,8 +120,10 @@ const route = useRoute();
 const store = useStore();
 
 const docs = computed(() => store.state.docs);
-// @ts-expect-error
-const description = computed(() => markdown(convertLinks(props.method.description, docs.value, router, route)));
+const description = computed(() =>
+	// @ts-expect-error
+	markdown(convertLinks(props.method.description ?? 'No description.', docs.value, router, route)),
+);
 const deprecatedDescription = computed(() =>
 	typeof props.method.deprecated === 'string'
 		? // @ts-expect-error
