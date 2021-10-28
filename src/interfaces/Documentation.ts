@@ -69,6 +69,7 @@ export interface DocumentationClassMethod {
 	params?: DocumentationClassMethodParameter[];
 	examples?: string[];
 	returns?: string[][][] | { description: string; types: string[][][]; variable: boolean; nullable: boolean };
+	returnsDescription?: string;
 	throws?: string[];
 	see?: string[];
 	meta: DocumentationClassMethodMeta;

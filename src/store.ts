@@ -289,6 +289,8 @@ export const store = createStore<State>({
 				Worker: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_worker',
 				MessagePort: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_messageport',
 				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
+				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
+				IterableIterator: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols',
 			};
 
 			// Add links for everything

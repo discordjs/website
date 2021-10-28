@@ -59,7 +59,10 @@
 				</span>
 				<TypeLink v-else :type="['void']" />
 				<p
-					v-if="method.returns && !Array.isArray(method.returns) && method.returns.description"
+					v-if="
+						(method.returns && !Array.isArray(method.returns) && method.returns.description) ||
+						method.returnsDescription
+					"
 					class="noprose"
 					v-html="returnDescription"
 				></p>
@@ -82,7 +85,7 @@
 
 			<div v-if="method.examples && method.examples.length" class="font-semibold mt-3">
 				Examples:
-				<Codeblock v-for="example in method.examples" :key="example" class="mt-3" :code="example" />
+				<Codeblock v-for="example in method.examples" :key="example" class="mt-3" :code="example.trim()" />
 			</div>
 
 			<See v-if="method.see && method.see.length" :see="method.see" />
@@ -131,8 +134,10 @@ const deprecatedDescription = computed(() =>
 		: '',
 );
 const returnDescription = computed(() =>
-	// @ts-expect-error
-	markdown(convertLinks(props.method.returns.description, docs.value, router, route)),
+	markdown(
+		// @ts-expect-error
+		convertLinks(props.method.returns.description ?? props.method.returnsDescription, docs.value, router, route),
+	),
 );
 const params = computed(() => (props.method.params ? props.method.params.filter((p) => !p.name.includes('.')) : null));
 const emits = computed(() =>
