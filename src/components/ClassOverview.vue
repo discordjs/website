@@ -34,7 +34,7 @@
 						>
 							{{ property.name }}
 						</router-link>
-						<span class="text-gray-200 text-sm font-semibold uppercase">
+						<span class="space-x-1 text-gray-200 text-sm font-semibold uppercase">
 							<span
 								v-if="property.scope === 'static'"
 								class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-discord-blurple-500"
@@ -94,7 +94,7 @@
 						>
 							{{ method.name }}
 						</router-link>
-						<span class="text-gray-200 text-sm font-semibold uppercase">
+						<span class="space-x-1 text-gray-200 text-sm font-semibold uppercase">
 							<span
 								v-if="method.scope === 'static'"
 								class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-discord-blurple-500"

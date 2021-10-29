@@ -38,7 +38,7 @@
 			<div class="font-semibold">
 				Type: <Types v-for="type in prop.type" :key="typeKey(type)" :names="type" :nullable="prop.nullable" />
 			</div>
-			<div v-if="prop.default">
+			<div v-if="prop.default" class="mt-3">
 				Default: <code>{{ prop.default }}</code>
 			</div>
 			<See v-if="prop.see" :see="prop.see" />

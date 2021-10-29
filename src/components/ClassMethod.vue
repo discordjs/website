@@ -43,7 +43,7 @@
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="method.params" :parameters="method.params" />
-			<div class="font-semibold">
+			<div class="font-semibold mt-3">
 				Returns:
 				<span v-if="method.returns && Array.isArray(method.returns)">
 					<Types v-for="rtrn in method.returns" :key="typeKey(rtrn)" :names="rtrn" />
@@ -58,14 +58,16 @@
 					/>
 				</span>
 				<TypeLink v-else :type="['void']" />
-				<p
-					v-if="
-						(method.returns && !Array.isArray(method.returns) && method.returns.description) ||
-						method.returnsDescription
-					"
-					class="noprose"
-					v-html="returnDescription"
-				></p>
+				<div class="mt-3">
+					<p
+						v-if="
+							(method.returns && !Array.isArray(method.returns) && method.returns.description) ||
+							method.returnsDescription
+						"
+						class="noprose"
+						v-html="returnDescription"
+					></p>
+				</div>
 			</div>
 
 			<div v-if="method.throws" class="font-semibold">
@@ -85,7 +87,7 @@
 
 			<div v-if="method.examples && method.examples.length" class="font-semibold mt-3">
 				Examples:
-				<Codeblock v-for="example in method.examples" :key="example" class="mt-3" :code="example.trim()" />
+				<Codeblock v-for="example in method.examples" :key="example" :code="example.trim()" />
 			</div>
 
 			<See v-if="method.see && method.see.length" :see="method.see" />

@@ -22,7 +22,7 @@
 			<p v-if="cls?.description" class="!mb-2" v-html="description"></p>
 
 			<div v-if="cls?.construct" class="grid">
-				<h2 class="!mt-2">Constructor</h2>
+				<h2 class="!mt-3">Constructor</h2>
 				<pre
 					ref="codeblock"
 					class="javascript"
@@ -30,7 +30,7 @@
 				<ParameterTable v-if="cls.construct.params" :parameters="cls.construct.params" />
 			</div>
 
-			<ClassOverview :properties="cls?.props" :methods="cls?.methods" :events="cls?.events" />
+			<ClassOverview class="mt-3" :properties="cls?.props" :methods="cls?.methods" :events="cls?.events" />
 
 			<h2 v-if="properties && properties.length" class="!mt-4">Properties</h2>
 			<ClassProperty v-for="property in properties" :key="scopedName(property)" :prop="property" />
