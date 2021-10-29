@@ -85,12 +85,12 @@
 				<router-link v-else :to="emits[0].link">{{ emits[0].text }}</router-link>
 			</div>
 
-			<div v-if="method.examples && method.examples.length" class="font-semibold mt-3">
+			<div v-if="method.examples?.length" class="font-semibold mt-3">
 				Examples:
 				<Codeblock v-for="example in method.examples" :key="example" :code="example.trim()" />
 			</div>
 
-			<See v-if="method.see && method.see.length" :see="method.see" />
+			<See v-if="method.see?.length" :see="method.see" />
 		</div>
 	</div>
 

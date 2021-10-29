@@ -8,7 +8,7 @@
 			</h1>
 
 			<p v-if="typedef?.description" v-html="description"></p>
-			<See v-if="typedef?.see" :see="typedef?.see" />
+			<See v-if="typedef?.see?.length" :see="typedef?.see" />
 
 			<h2>Types</h2>
 			<ul id="typedef-types">

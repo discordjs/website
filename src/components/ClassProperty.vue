@@ -35,13 +35,13 @@
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="prop.props && prop.props.length > 0" :parameters="prop.props" />
-			<div class="font-semibold">
+			<div class="font-semibold mt-3">
 				Type: <Types v-for="type in prop.type" :key="typeKey(type)" :names="type" :nullable="prop.nullable" />
 			</div>
 			<div v-if="prop.default" class="mt-3">
 				Default: <code>{{ prop.default }}</code>
 			</div>
-			<See v-if="prop.see" :see="prop.see" />
+			<See v-if="prop.see?.length" :see="prop.see" />
 		</div>
 	</div>
 

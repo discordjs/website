@@ -4,6 +4,7 @@ import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import DocsSource from './data/DocsSource';
 import MainSource from './data/MainSource';
 import CollectionSource from '~/data/CollectionSource';
+import BuildersSource from '~/data/BuildersSource';
 import CommandoSource from '~/data/CommandoSource';
 import RPCSource from '~/data/RPCSource';
 
@@ -35,6 +36,7 @@ export const store = createStore<State>({
 		sources: [
 			{ source: MainSource, name: MainSource.name, id: MainSource.id },
 			{ source: CollectionSource, name: CollectionSource.name, id: CollectionSource.id },
+			{ source: BuildersSource, name: BuildersSource.name, id: BuildersSource.id },
 			{ source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
 			{ source: RPCSource, name: RPCSource.name, id: RPCSource.id },
 		],
@@ -292,9 +294,11 @@ export const store = createStore<State>({
 
 				// TypeScript
 				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
+				unknown: 'https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown',
 				readonly: 'https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly',
 				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
 				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
+				Omit: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys',
 				IterableIterator: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols',
 			};
 

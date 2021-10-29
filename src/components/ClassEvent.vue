@@ -24,7 +24,7 @@
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="event.params && event.params.length" :parameters="event.params" />
-			<See v-if="event.see" :see="event.see" />
+			<See v-if="event.see?.length" :see="event.see" />
 		</div>
 	</div>
 
