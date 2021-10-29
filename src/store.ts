@@ -268,7 +268,6 @@ export const store = createStore<State>({
 				void: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined',
 				undefined: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined',
 				null: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null',
-				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
 				Object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
 				object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
 				Function: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function',
@@ -280,6 +279,8 @@ export const store = createStore<State>({
 				RegExp: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp',
 				Promise: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise',
 				Error: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error',
+
+				// Node
 				EventEmitter: 'https://nodejs.org/dist/latest/docs/api/events.html#events_class_eventemitter',
 				Timeout: 'https://nodejs.org/dist/latest/docs/api/timers.html#timers_class_timeout',
 				Immediate: 'https://nodejs.org/dist/latest/docs/api/timers.html#timers_class_immediate',
@@ -288,6 +289,10 @@ export const store = createStore<State>({
 				ChildProcess: 'https://nodejs.org/dist/latest/docs/api/child_process.html#child_process_class_childprocess',
 				Worker: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_worker',
 				MessagePort: 'https://nodejs.org/api/worker_threads.html#worker_threads_class_messageport',
+
+				// TypeScript
+				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
+				readonly: 'https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly',
 				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
 				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
 				IterableIterator: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols',
