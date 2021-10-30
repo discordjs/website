@@ -5,6 +5,7 @@ import DocsSource from './data/DocsSource';
 import MainSource from './data/MainSource';
 import CollectionSource from '~/data/CollectionSource';
 import BuildersSource from '~/data/BuildersSource';
+import VoiceSource from '~/data/VoiceSource';
 import CommandoSource from '~/data/CommandoSource';
 import RPCSource from '~/data/RPCSource';
 
@@ -37,6 +38,7 @@ export const store = createStore<State>({
 			{ source: MainSource, name: MainSource.name, id: MainSource.id },
 			{ source: CollectionSource, name: CollectionSource.name, id: CollectionSource.id },
 			{ source: BuildersSource, name: BuildersSource.name, id: BuildersSource.id },
+			{ source: VoiceSource, name: VoiceSource.name, id: VoiceSource.id },
 			{ source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
 			{ source: RPCSource, name: RPCSource.name, id: RPCSource.id },
 		],
