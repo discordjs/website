@@ -7,6 +7,7 @@ export default new DocsSource({
 	id: 'builders',
 	name: 'Builders',
 	global: 'Builders',
+	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/builders',
 	defaultTag: 'stable',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),

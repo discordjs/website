@@ -4,6 +4,7 @@ interface DocsSourceOptions {
 	id: string;
 	name: string;
 	global: string;
+	docsRepo: string;
 	repo: string;
 	defaultTag?: string;
 	defaultFile?: { category: string; id: string };
@@ -12,7 +13,7 @@ interface DocsSourceOptions {
 	tagFilter?: (tag: string) => boolean;
 }
 
-const json = (res: Response) => {
+export const json = (res: Response) => {
 	if (!res.ok) throw new Error('Failed to fetch docs data file from GitHub');
 	return res.json();
 };
@@ -23,6 +24,8 @@ export default class DocsSource {
 	public name = this.options.name;
 
 	public global = this.options.global;
+
+	public docsRepo = this.options.docsRepo;
 
 	public repo = this.options.repo;
 
@@ -106,7 +109,7 @@ export default class DocsSource {
 	}
 
 	public async fetchDocs(tag: string) {
-		const res = await fetch(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`);
+		const res = await fetch(`https://raw.githubusercontent.com/${this.docsRepo}/main/${this.id}/${tag}.json`);
 		return json(res);
 	}
 }
