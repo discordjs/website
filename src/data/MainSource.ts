@@ -11,5 +11,5 @@ export default new DocsSource({
 	repo: 'discordjs/discord.js',
 	defaultTag: 'stable',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
-	tagFilter: (tag: string) => semver.gte(tag.replace(/^v/, ''), '9.0.0'),
+	tagFilter: (tag: string) => semver.gte(tag.replace(/(^@\w+\/\w+@v?)?(?<semver>\d+.\d+.\d+)-?.*/, ''), '9.0.0'),
 });
