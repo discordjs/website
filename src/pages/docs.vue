@@ -24,6 +24,7 @@ import MainSource from '~/data/MainSource';
 import CollectionSource from '~/data/CollectionSource';
 import BuildersSource from '~/data/BuildersSource';
 import VoiceSource from '~/data/VoiceSource';
+import RESTSource from '~/data/RESTSource';
 import CommandoSource from '~/data/CommandoSource';
 import RPCSource from '~/data/RPCSource';
 import { fetchError } from '~/util/fetchError';
@@ -50,6 +51,7 @@ const sources = reactive({
 	[CollectionSource.id]: CollectionSource,
 	[BuildersSource.id]: BuildersSource,
 	[VoiceSource.id]: VoiceSource,
+	[RESTSource.id]: RESTSource,
 	[CommandoSource.id]: CommandoSource,
 	[RPCSource.id]: RPCSource,
 });
