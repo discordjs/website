@@ -184,7 +184,7 @@
 											<Switch
 												v-model="isShowPrivates"
 												class="relative inline-flex h-6 items-center rounded-full w-11 focus:outline-none"
-												:class="isShowPrivates ? 'bg-discord-red-500' : 'bg-gray-500'"
+												:class="isShowPrivates ? 'bg-discord-blurple-500' : 'bg-gray-500'"
 											>
 												<span
 													class="inline-block w-4 h-4 bg-white rounded-full transition transform-gpu z-20"
