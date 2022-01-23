@@ -39,6 +39,17 @@
 				if (persistedColorPreference === 'dark' || (prefersDarkMode && persistedColorPreference !== 'light')) {
 					document.documentElement.classList.toggle('dark', true);
 				}
+
+				document.addEventListener('DOMNodeInserted', () => {
+					// Only do this title change for class and typedef pages
+					if (window.location.href.match(/class|typedef/g)) {
+						const classOrTypeName = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+						const pageTitle = `discord.js | ${classOrTypeName}`;
+						if (document.title !== pageTitle) document.title = pageTitle;
+					} else {
+						if (document.title !== 'discord.js') document.title = 'discord.js';
+					}
+				});
 			})();
 		</script>
 		<div id="app" class="h-full"></div>
