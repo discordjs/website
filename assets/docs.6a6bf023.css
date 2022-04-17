@@ -1,0 +1,1 @@
+.sidebar-height{height:calc(100vh - 4rem)}.sidebar-color:before{content:"";position:absolute;top:0;right:0;bottom:0;width:999em;background:#ffffff;pointer-events:none}.dark .sidebar-color:before{background:#191919}

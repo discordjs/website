@@ -1,1 +1,0 @@
-import{o as e,b as n,e as t}from"./vendor.79db57bd.js";const o={},s={class:"prose-lg dark:prose-light my-60 mx-auto text-center"},a=t("h1",null,"Unknown page",-1),r=t("p",null,"This page doesn't actually exist. Oh no!",-1);o.render=function(t,o){return e(),n("div",s,[a,r])};export{o as default};
