@@ -102,14 +102,14 @@ export const store = createStore<State>({
 				fetch('https://api.github.com/repos/discordjs/discord.js/stats/contributors').then(toJSON, noop),
 			]);
 
-			if (fetchedDownloads) {
+			if (fetchedDownloads?.downloads) {
 				downloads = 0;
 
 				for (const item of fetchedDownloads.downloads) {
 					downloads += item.downloads;
 				}
 			}
-			if (fetchedStars) {
+			if (fetchedStars?.stargazers_count) {
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				stars = fetchedStars.stargazers_count;
 			}
