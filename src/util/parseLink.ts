@@ -8,6 +8,7 @@ export function parseLink(link: string, docs: Documentation) {
 
 	// Type link
 	const split = link.split(/(\.|#)/);
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (docs.links[split[0] as any]) {
 		if (split[2]?.startsWith('event:')) {
 			split[2] = split[2].replace('event:', 'e-');
@@ -17,13 +18,17 @@ export function parseLink(link: string, docs: Documentation) {
 		return {
 			text: text ?? link,
 			link:
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 				typeof docs.links[split[0] as any] === 'object'
 					? {
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 							name: docs.links[split[0] as any].name,
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 							params: docs.links[split[0] as any].params,
 							query: { scrollTo: split[1] ? `${split[1] === '.' ? 's-' : ''}${split[2]}` : undefined },
 					  }
-					: docs.links[split[0] as any],
+					: // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					  docs.links[split[0] as any],
 		};
 	}
 

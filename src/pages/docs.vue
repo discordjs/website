@@ -15,23 +15,21 @@
 </template>
 
 <script setup lang="ts">
+import { whenever, useEventListener, useMagicKeys } from '@vueuse/core';
 import { reactive, ref, computed, watchEffect, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { whenever, useEventListener, useMagicKeys } from '@vueuse/core';
-
-import { useStore } from '~/store';
-import MainSource from '~/data/MainSource';
-import CollectionSource from '~/data/CollectionSource';
-import BuildersSource from '~/data/BuildersSource';
-import VoiceSource from '~/data/VoiceSource';
-import RESTSource from '~/data/RESTSource';
-import CommandoSource from '~/data/CommandoSource';
-import RPCSource from '~/data/RPCSource';
-import { fetchError } from '~/util/fetchError';
-
+import BackToTop from '~/components/BackToTop.vue';
 import Sidebar from '~/components/Sidebar.vue';
 import Spinner from '~/components/Spinner.vue';
-import BackToTop from '~/components/BackToTop.vue';
+import BuildersSource from '~/data/BuildersSource';
+import CollectionSource from '~/data/CollectionSource';
+// import CommandoSource from '~/data/CommandoSource';
+import MainSource from '~/data/MainSource';
+import RESTSource from '~/data/RESTSource';
+import RPCSource from '~/data/RPCSource';
+import VoiceSource from '~/data/VoiceSource';
+import { useStore } from '~/store';
+import { fetchError } from '~/util/fetchError';
 
 const router = useRouter();
 const route = useRoute();
@@ -52,7 +50,7 @@ const sources = reactive({
 	[BuildersSource.id]: BuildersSource,
 	[VoiceSource.id]: VoiceSource,
 	[RESTSource.id]: RESTSource,
-	[CommandoSource.id]: CommandoSource,
+	// [CommandoSource.id]: CommandoSource,
 	[RPCSource.id]: RPCSource,
 });
 
@@ -83,18 +81,20 @@ const watchRoute = async () => {
 		route.params.source &&
 		route.params.tag &&
 		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/no-unsafe-member-access
 		(docs.value?.id !== sources[route.params.source].id || docs.value?.tag !== route.params.tag)
 	) {
 		await store.dispatch({
 			type: 'fetchDocs',
 			// @ts-expect-error
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			inputSource: sources[route.params.source] ?? MainSource,
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			inputTag: route.params.tag ?? tag.value,
 		});
 
 		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		await store.dispatch({ type: 'fetchTags', currentSource: sources[route.params.source] ?? MainSource });
 	}
 
@@ -103,6 +103,7 @@ const watchRoute = async () => {
 		store.commit({
 			type: 'setSource',
 			// @ts-expect-error
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			source: sources[route.params.source],
 		});
 	} else {
@@ -126,6 +127,7 @@ const watchRoute = async () => {
 		store.commit({
 			type: 'setSource',
 			// @ts-expect-error
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			source: sources[route.params.source],
 		});
 	} else {
@@ -133,6 +135,7 @@ const watchRoute = async () => {
 			name: 'docs-source-tag-category-file',
 			params: {
 				source: source.value?.id ?? MainSource.id,
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				tag: source.value?.recentTag || source.value?.defaultTag,
 				category: source.value?.defaultFile.category ?? MainSource.defaultFile.category,
 				file: source.value?.defaultFile.id ?? MainSource.defaultFile.id,

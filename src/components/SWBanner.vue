@@ -18,24 +18,7 @@
 					</div>
 					<div v-if="needRefresh" class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
 						<button
-							class="
-								flex
-								items-center
-								justify-center
-								px-4
-								py-2
-								border border-transparent
-								rounded-md
-								text-sm
-								font-medium
-								text-gray-200
-								bg-discord-blurple-530
-								dark:bg-discord-blurple-630
-								hover:bg-discord-blurple-460
-								dark:hover:bg-discord-blurple-600
-								focus:outline-none
-								focus-visible:ring-1 focus-visible:ring-white
-							"
+							class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-gray-200 bg-discord-blurple-530 dark:bg-discord-blurple-630 hover:bg-discord-blurple-460 dark:hover:bg-discord-blurple-600 focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
 							@click="updateServiceWorker(true)"
 						>
 							Refresh

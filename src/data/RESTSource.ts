@@ -2,7 +2,7 @@ import semver from 'semver';
 
 import DocsSource from './DocsSource';
 
-const branchBlacklist = new Set(['docs']);
+const branchBlacklist = new Set(['docs', 'v8', 'v11', 'v12', 'v13']);
 export default new DocsSource({
 	id: 'rest',
 	name: 'REST',
@@ -12,5 +12,6 @@ export default new DocsSource({
 	defaultTag: 'stable',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
 	tagFilter: (tag: string) =>
-		semver.gt(tag.replace(/(^@\w+\/\w+@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '0.2.0'),
+		tag.includes('@discordjs/rest') &&
+		semver.gt(tag.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '0.2.0'),
 });

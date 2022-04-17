@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
-
 import DocsSource from './data/DocsSource';
 import MainSource from './data/MainSource';
-import CollectionSource from '~/data/CollectionSource';
-import BuildersSource from '~/data/BuildersSource';
-import VoiceSource from '~/data/VoiceSource';
-import RESTSource from '~/data/RESTSource';
-import CommandoSource from '~/data/CommandoSource';
-import RPCSource from '~/data/RPCSource';
-
 import { Documentation, DocumentationCustomFile } from './interfaces/Documentation';
+import { fetchError } from './util/fetchError';
 import { SearchTerm, DocumentType, DocumentLink } from './util/search';
 import { splitName } from './util/splitName';
-import { fetchError } from './util/fetchError';
+import BuildersSource from '~/data/BuildersSource';
+import CollectionSource from '~/data/CollectionSource';
+// import CommandoSource from '~/data/CommandoSource';
+import RESTSource from '~/data/RESTSource';
+import RPCSource from '~/data/RPCSource';
+import VoiceSource from '~/data/VoiceSource';
 
 export interface State {
 	sources: { source: DocsSource; name: string; id: string }[];
@@ -41,7 +43,7 @@ export const store = createStore<State>({
 			{ source: BuildersSource, name: BuildersSource.name, id: BuildersSource.id },
 			{ source: VoiceSource, name: VoiceSource.name, id: VoiceSource.id },
 			{ source: RESTSource, name: RESTSource.name, id: RESTSource.id },
-			{ source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
+			// { source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
 			{ source: RPCSource, name: RPCSource.name, id: RPCSource.id },
 		],
 		source: MainSource,
@@ -65,12 +67,14 @@ export const store = createStore<State>({
 			state.tag = tag;
 		},
 		setDocs(state, { docs }: { docs: any }) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			state.docs = docs;
 		},
 		setBranches(state, { branches }: { branches: string[] }) {
 			state.branches = branches;
 		},
 		setFile(state, { file }: { file: any }) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			state.file = file;
 		},
 		setStats(state, { stats }: { stats: { downloads: string; stars: string; contributors: string } }) {
@@ -91,6 +95,7 @@ export const store = createStore<State>({
 			// eslint-disable-next-line @typescript-eslint/no-empty-function
 			const noop = () => {};
 
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			const [fetchedDownloads, fetchedStars, fetchedContributors] = await Promise.all([
 				fetch('https://api.npmjs.org/downloads/range/2013-08-21:2100-08-21/discord.js').then(toJSON, noop),
 				fetch('https://api.github.com/repos/discordjs/discord.js').then(toJSON, noop),
@@ -99,14 +104,17 @@ export const store = createStore<State>({
 
 			if (fetchedDownloads) {
 				downloads = 0;
+
 				for (const item of fetchedDownloads.downloads) {
 					downloads += item.downloads;
 				}
 			}
 			if (fetchedStars) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				stars = fetchedStars.stargazers_count;
 			}
 			if (fetchedContributors) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 				contributors = fetchedContributors.length;
 			}
 			commit({
@@ -151,6 +159,7 @@ export const store = createStore<State>({
 		) => {
 			let documentation: any;
 			try {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				documentation = await inputSource.fetchDocs(inputTag);
 			} catch (error) {
 				commit({
@@ -163,7 +172,7 @@ export const store = createStore<State>({
 					docs: null,
 				});
 
-				// @ts-ignore
+				// @ts-expect-error
 				fetchError.value = error;
 
 				return;
@@ -205,6 +214,7 @@ export const store = createStore<State>({
 				const classref = addLink(item.name, DocumentType.Class, undefined, undefined, item.access, item.scope);
 
 				const subRefs: number[] = [];
+
 				for (const m of item.methods ?? []) {
 					addLink(m.name as string, DocumentType.Method, item.name, DocumentType.Class, m.access, m.scope);
 					subRefs.push(linkPosition - 1);
@@ -252,11 +262,14 @@ export const store = createStore<State>({
 			documentation.typedefs.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 			for (const c of documentation.classes) {
 				if (c.props) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 					c.props.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 				}
+
 				if (c.methods) {
 					c.methods.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 				}
+
 				if (c.events) {
 					c.events.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
 				}

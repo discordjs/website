@@ -7,17 +7,7 @@
 				><code v-html="highlight.highlight(code, { language: 'javascript' }).value"></code></pre>
 				<button
 					ref="copyButton"
-					class="
-						absolute
-						right-0
-						top-0
-						mt-4
-						mr-4
-						inline-block
-						hover:text-white
-						focus:outline-none
-						focus-visible:ring-1 focus-visible:ring-gray-200
-					"
+					class="absolute right-0 top-0 mt-4 mr-4 inline-block hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-gray-200"
 					aria-label="Copy code"
 				>
 					<heroicons-outline-clipboard-copy
@@ -39,10 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
-import { useTippy } from 'vue-tippy';
-import debounce from 'lodash/debounce';
 import highlight from 'highlight.js';
+import debounce from 'lodash/debounce';
+import { ref } from 'vue';
+import { useTippy } from 'vue-tippy';
 
 const props = defineProps<{ code: string }>();
 

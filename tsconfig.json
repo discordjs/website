@@ -16,7 +16,7 @@
 		"paths": {
 			"~/*": ["src/*"]
 		},
-		"types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-pwa/client"],
+		"types": ["vite/client", "vite-plugin-pages/client", "vite-plugin-pwa/client", "unplugin-icons/types/vue"],
 		"skipLibCheck": true,
 		"noUnusedLocals": true
 	},

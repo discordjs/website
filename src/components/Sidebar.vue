@@ -6,17 +6,7 @@
 	>
 		<button
 			type="button"
-			class="
-				rounded-md rounded-l-none rounded-tr-none
-				p-3
-				inline-flex
-				items-center
-				justify-center
-				text-gray-200
-				bg-discord-blurple-600
-				hover:bg-discord-blurple-630 hover:text-white
-				focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
-			"
+			class="rounded-md rounded-l-none rounded-tr-none p-3 inline-flex items-center justify-center text-gray-200 bg-discord-blurple-600 hover:bg-discord-blurple-630 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 			aria-controls="sidebar-menu"
 			:aria-expanded="isOpen"
 			@click="isOpen = !isOpen"
@@ -61,46 +51,14 @@
 									<Listbox v-slot="{ open: openSource }" v-model="selectedSource">
 										<div class="relative mt-1">
 											<ListboxButton
-												class="
-													relative
-													w-full
-													py-1
-													px-3
-													text-left
-													flex
-													justify-between
-													items-center
-													dark:text-gray-200
-													rounded
-													bg-gray-100
-													dark:bg-[#1d1d1d]
-													border
-													dark:border-[#101010]
-													cursor-pointer
-												"
+												class="relative w-full py-1 px-3 text-left flex justify-between items-center dark:text-gray-200 rounded bg-gray-100 dark:bg-[#1d1d1d] border dark:border-[#101010] cursor-pointer"
 											>
 												<span class="truncate">{{ selectedSource.name }}</span>
 												<heroicons-outline-chevron-down v-if="!openSource" />
 												<heroicons-outline-chevron-up v-if="openSource" />
 											</ListboxButton>
 											<ListboxOptions
-												class="
-													absolute
-													w-full
-													mt-1
-													overflow-auto
-													text-base
-													dark:text-white
-													bg-gray-100
-													dark:bg-[#1d1d1d]
-													rounded
-													max-h-60
-													border
-													dark:border-[#101010]
-													focus:outline-none
-													z-40
-													lg:custom-scroll
-												"
+												class="absolute w-full mt-1 overflow-auto text-base dark:text-white bg-gray-100 dark:bg-[#1d1d1d] rounded max-h-60 border dark:border-[#101010] focus:outline-none z-40 lg:custom-scroll"
 											>
 												<ListboxOption
 													v-for="source in sources"
@@ -121,46 +79,14 @@
 									<Listbox v-slot="{ open: openBranch }" v-model="selectedBranch">
 										<div class="relative mt-1">
 											<ListboxButton
-												class="
-													relative
-													w-full
-													py-1
-													px-3
-													text-left
-													flex
-													justify-between
-													items-center
-													dark:text-gray-200
-													rounded
-													bg-gray-100
-													dark:bg-[#1d1d1d]
-													border
-													dark:border-[#101010]
-													cursor-pointer
-												"
+												class="relative w-full py-1 px-3 text-left flex justify-between items-center dark:text-gray-200 rounded bg-gray-100 dark:bg-[#1d1d1d] border dark:border-[#101010] cursor-pointer"
 											>
 												<span class="truncate">{{ selectedBranch }}</span>
 												<heroicons-outline-chevron-down v-if="!openBranch" />
 												<heroicons-outline-chevron-up v-if="openBranch" />
 											</ListboxButton>
 											<ListboxOptions
-												class="
-													absolute
-													w-full
-													mt-1
-													overflow-auto
-													text-base
-													dark:text-white
-													bg-gray-100
-													dark:bg-[#1d1d1d]
-													rounded
-													max-h-60
-													border
-													dark:border-[#101010]
-													focus:outline-none
-													z-40
-													lg:custom-scroll
-												"
+												class="absolute w-full mt-1 overflow-auto text-base dark:text-white bg-gray-100 dark:bg-[#1d1d1d] rounded max-h-60 border dark:border-[#101010] focus:outline-none z-40 lg:custom-scroll"
 											>
 												<ListboxOption
 													v-for="branch in branches"
@@ -227,23 +153,7 @@
 											name: 'docs-source-tag-category-file',
 											params: { source: source?.id, tag: tag, category: categoryId, file: fileId },
 										}"
-										class="
-											text-gray-600
-											dark:text-gray-300
-											border-l-4 border-transparent
-											rounded-sm
-											hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800
-											dark:hover:text-gray-100
-											group
-											flex
-											items-center
-											px-3
-											py-2
-											text-sm
-											font-semibold
-											focus:outline-none
-											focus-visible:ring-1 focus-visible:ring-white
-										"
+										class="text-gray-600 dark:text-gray-300 border-l-4 border-transparent rounded-sm hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800 dark:hover:text-gray-100 group flex items-center px-3 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
 										exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 										@click="isOpen = false"
 									>
@@ -276,23 +186,7 @@
 										name: 'docs-source-tag-class-class',
 										params: { source: source?.id, tag: tag, class: cls.name },
 									}"
-									class="
-										text-gray-600
-										dark:text-gray-300
-										border-l-4 border-transparent
-										rounded-sm
-										hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800
-										dark:hover:text-gray-100
-										group
-										flex
-										items-center
-										px-3
-										py-2
-										text-sm
-										font-semibold
-										focus:outline-none
-										focus-visible:ring-1 focus-visible:ring-white
-									"
+									class="text-gray-600 dark:text-gray-300 border-l-4 border-transparent rounded-sm hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800 dark:hover:text-gray-100 group flex items-center px-3 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
 									exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 									@click="isOpen = false"
 								>
@@ -324,23 +218,7 @@
 										name: 'docs-source-tag-typedef-typedef',
 										params: { source: source?.id, tag: tag, typedef: typedef.name },
 									}"
-									class="
-										text-gray-600
-										dark:text-gray-300
-										border-l-4 border-transparent
-										rounded-sm
-										hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800
-										dark:hover:text-gray-100
-										group
-										flex
-										items-center
-										px-3
-										py-2
-										text-sm
-										font-semibold
-										focus:outline-none
-										focus-visible:ring-1 focus-visible:ring-white
-									"
+									class="text-gray-600 dark:text-gray-300 border-l-4 border-transparent rounded-sm hover:border-l-4 hover:border-discord-blurple-500 hover:text-gray-800 dark:hover:text-gray-100 group flex items-center px-3 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-1 focus-visible:ring-white"
 									exact-active-class="border-l-4 border-discord-blurple-530 text-gray-900"
 									@click="isOpen = false"
 								>
@@ -356,14 +234,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { onClickOutside, useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
-
-import { useStore } from '~/store';
-import MainSource from '~/data/MainSource';
-import { isShowPrivates } from '~/util/showPrivates';
-
 import {
 	Disclosure,
 	DisclosureButton,
@@ -376,6 +246,12 @@ import {
 	ListboxOptions,
 	ListboxOption,
 } from '@headlessui/vue';
+import { onClickOutside, useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
+import { ref, computed, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import MainSource from '~/data/MainSource';
+import { useStore } from '~/store';
+import { isShowPrivates } from '~/util/showPrivates';
 
 const router = useRouter();
 const route = useRoute();

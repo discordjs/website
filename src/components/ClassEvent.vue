@@ -34,18 +34,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-
+import ParameterTable from '~/components/ParameterTable.vue';
+import See from '~/components/See.vue';
+import SourceButton from '~/components/SourceButton.vue';
+import type { DocumentationClassEvent } from '~/interfaces/Documentation';
 import { useStore } from '~/store';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
-
-import SourceButton from '~/components/SourceButton.vue';
-import ParameterTable from '~/components/ParameterTable.vue';
-import See from '~/components/See.vue';
-
-import type { DocumentationClassEvent } from '~/interfaces/Documentation';
 
 const props = defineProps<{ event: DocumentationClassEvent }>();
 

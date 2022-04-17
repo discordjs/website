@@ -12,13 +12,14 @@
 	</footer>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
-
-import Stats from './Stats.vue';
-
+<script lang="ts">
 declare const GIT_COMMIT_HASH: string;
 declare const BUILT_AT: string;
+</script>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import Stats from './Stats.vue';
 
 const gitCommit = ref(GIT_COMMIT_HASH);
 const builtAt = ref(new Date(BUILT_AT).toUTCString());

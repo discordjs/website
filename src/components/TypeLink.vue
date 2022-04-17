@@ -8,8 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
-
+import { computed } from 'vue';
 import { useStore } from '~/store';
 
 const props = defineProps<{ type: string | string[] }>();
@@ -19,5 +18,6 @@ const store = useStore();
 const docs = computed(() => store.state.docs);
 const typeName = computed(() => (props.type[0] === 'function' ? 'Function' : props.type[0]));
 // @ts-expect-error
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 const link = computed(() => (docs.value?.links[props.type[0]] ? docs.value.links[props.type[0]] : null));
 </script>

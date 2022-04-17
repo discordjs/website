@@ -1,9 +1,9 @@
-import { precacheAndRoute, createHandlerBoundToURL, cleanupOutdatedCaches } from 'workbox-precaching';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { setCacheNameDetails } from 'workbox-core';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { precacheAndRoute, createHandlerBoundToURL, cleanupOutdatedCaches } from 'workbox-precaching';
 import { setDefaultHandler, registerRoute, NavigationRoute } from 'workbox-routing';
 import { StaleWhileRevalidate, NetworkFirst, CacheFirst } from 'workbox-strategies';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 
 setCacheNameDetails({
 	prefix: 'djs',
@@ -17,6 +17,7 @@ void caches.delete('djs-cdn-v1');
 void caches.delete('djs-external-v1');
 void caches.delete('djs-docs-v1');
 
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html')));
@@ -77,6 +78,7 @@ self.addEventListener('install', () => {
 });
 
 self.addEventListener('message', (event) => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (event.data && event.data.type === 'SKIP_WAITING') {
 		void self.skipWaiting();
 	}

@@ -76,7 +76,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-
 import { search, DocumentType } from '~/util/search';
 
 const filter = ref([
@@ -91,9 +90,7 @@ const route = useRoute();
 
 const query = ref(route.query.query);
 
-const results = computed(() => {
-	return search(query.value as string).filter((r) => filter.value.includes(r.type));
-});
+const results = computed(() => search(query.value as string).filter((r) => filter.value.includes(r.type)));
 
 const getColourFromType = (type: DocumentType) => {
 	switch (type) {

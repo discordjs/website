@@ -20,19 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed, ref } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-
-import { useStore } from '~/store';
-import { markdown } from '~/util/markdown';
-import { convertLinks } from '~/util/convertLinks';
-import { typeKey } from '~/util/typeKey';
-
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-
-import TypeLink from './TypeLink.vue';
+import { computed, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import ParameterTable from './ParameterTable.vue';
+import TypeLink from './TypeLink.vue';
 import Types from './Types.vue';
+import { useStore } from '~/store';
+import { convertLinks } from '~/util/convertLinks';
+import { markdown } from '~/util/markdown';
+import { typeKey } from '~/util/typeKey';
 
 const props = defineProps(['names', 'variable', 'nullable']);
 
@@ -42,6 +39,7 @@ const store = useStore();
 
 const docs = computed(() => store.state.docs);
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const typedef = ref(docs.value?.typedefs.find((typedef) => typedef.name === props.names[0][0]));
 
 // @ts-expect-error

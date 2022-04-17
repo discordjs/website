@@ -23,8 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
-
+import { computed } from 'vue';
 import { useStore } from '~/store';
 import { parseLink } from '~/util/parseLink';
 
@@ -44,6 +43,7 @@ const parsed = computed<
 		// @ts-expect-error
 		parsed[s] = parseLink(props.see[s], docs.value);
 	}
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return parsed;
 });
 </script>

@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
+import debounce from 'lodash/debounce';
 import { ref } from 'vue';
 import { useTippy } from 'vue-tippy';
-import debounce from 'lodash/debounce';
 
 const copyButton = ref();
 const copied = ref(false);

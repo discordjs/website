@@ -42,17 +42,14 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-
-import { useStore } from '~/store';
-import { markdown } from '~/util/markdown';
-import { convertLinks } from '~/util/convertLinks';
-import { typeKey } from '~/util/typeKey';
-
 import Types from '~/components/Types.vue';
-
 import type { ParameterUnion } from '~/interfaces/Documentation';
+import { useStore } from '~/store';
+import { convertLinks } from '~/util/convertLinks';
+import { markdown } from '~/util/markdown';
+import { typeKey } from '~/util/typeKey';
 
 const props = defineProps<{ parameters: ParameterUnion[] }>();
 
@@ -65,6 +62,7 @@ const optional = computed(() => props.parameters.some((parameter) => parameter.o
 
 const parameterDescription = (parameter: any) =>
 	// @ts-expect-error
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 	markdown(convertLinks(parameter.description ?? 'No description.', docs.value, router, route));
 const parameterDefault = (parameter: ParameterUnion) => (parameter.optional ? `<code>${parameter.default}</code>` : '');
 </script>

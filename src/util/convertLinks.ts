@@ -1,7 +1,6 @@
 import { RouteLocationNormalizedLoaded, Router } from 'vue-router';
-
-import { Documentation } from '~/interfaces/Documentation';
 import { parseLink } from './parseLink';
+import { Documentation } from '~/interfaces/Documentation';
 
 // Converts all JSDoc links to markdown links
 export function convertLinks(text: string, docs: Documentation, router: Router, route: RouteLocationNormalizedLoaded) {
@@ -19,11 +18,13 @@ export function convertLinks(text: string, docs: Documentation, router: Router, 
 		if (parsed.link) {
 			let link;
 			if (typeof parsed.link === 'object') {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				if (!parsed.link.params) parsed.link.params = {} as any;
 				// @ts-expect-error
 				parsed.link.params.source = route.params.source;
 				// @ts-expect-error
 				parsed.link.params.tag = route.params.tag;
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				link = router.resolve(parsed.link as any).href;
 			} else {
 				link = parsed.link;

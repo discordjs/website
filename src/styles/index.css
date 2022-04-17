@@ -42,6 +42,7 @@
 	}
 
 	.no-list li {
+		@apply m-0 list-none;
 		padding-left: 0.25rem !important;
 	}
 

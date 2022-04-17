@@ -8,11 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
-import { typeKey } from '~/util/typeKey';
-
 import TypeLink from './TypeLink.vue';
+import { typeKey } from '~/util/typeKey';
 
 defineProps<{ names: string | string[] | string[][]; nullable?: boolean; variable?: boolean }>();
 </script>

@@ -100,23 +100,20 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-
-import { useStore } from '~/store';
-import { parseLink } from '~/util/parseLink';
-import { convertLinks } from '~/util/convertLinks';
-import { markdown } from '~/util/markdown';
-import { typeKey } from '~/util/typeKey';
-
-import SourceButton from '~/components/SourceButton.vue';
+import Codeblock from '~/components/Codeblock.vue';
 import ParameterTable from '~/components/ParameterTable.vue';
+import See from '~/components/See.vue';
+import SourceButton from '~/components/SourceButton.vue';
 import TypeLink from '~/components/TypeLink.vue';
 import Types from '~/components/Types.vue';
-import Codeblock from '~/components/Codeblock.vue';
-import See from '~/components/See.vue';
-
 import type { DocumentationClassMethod } from '~/interfaces/Documentation';
+import { useStore } from '~/store';
+import { convertLinks } from '~/util/convertLinks';
+import { markdown } from '~/util/markdown';
+import { parseLink } from '~/util/parseLink';
+import { typeKey } from '~/util/typeKey';
 
 const props = defineProps<{ method: DocumentationClassMethod }>();
 
@@ -138,12 +135,14 @@ const deprecatedDescription = computed(() =>
 const returnDescription = computed(() =>
 	markdown(
 		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		convertLinks(props.method.returns.description ?? props.method.returnsDescription, docs.value, router, route),
 	),
 );
 const params = computed(() => (props.method.params ? props.method.params.filter((p) => !p.name.includes('.')) : null));
 const emits = computed(() =>
 	// @ts-expect-error
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument
 	props.method.emits ? props.method.emits.map((e) => parseLink(e, docs.value)) : null,
 );
 const scrollTo = computed(() => `${props.method.scope === 'static' ? 's-' : ''}${props.method.name}`);
