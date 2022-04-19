@@ -269,7 +269,7 @@ import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import MainSource from '~/data/MainSource';
 import { useStore } from '~/store';
-import { isReducedMotion, toggleReducedMotion } from '~/util/ReducedMotion';
+import { usePreferredReducedMotion, toggleReducedMotion } from '~/util/ReducedMotion';
 import { isShowPrivates } from '~/util/showPrivates';
 
 const router = useRouter();
