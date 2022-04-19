@@ -12,7 +12,6 @@
 		"esModuleInterop": true,
 		"removeComments": true,
 		"lib": ["ESNext", "DOM", "WebWorker"],
-		"plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
 		"paths": {
 			"~/*": ["src/*"]
 		},
