@@ -29,7 +29,7 @@ export default defineConfig({
 			filename: 'sw.ts',
 			base: '/',
 			strategies: 'injectManifest',
-			registerType: 'prompt',
+			registerType: 'autoUpdate',
 			manifest: {
 				theme_color: '#090a16',
 				background_color: '#090a16',
