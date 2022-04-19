@@ -1,4 +1,0 @@
-import{d as m,h as a,G as p,o as d,c as u,b as f,q as r,a as _,e as h,f as x}from"./index.3edc4dd9.js";import{m as y,_ as g}from"./markdown.ec6622e2.js";const k={class:"prose prose-discord dark:prose-light mx-auto py-16 px-4 break-words-legacy sm:px-8 lg:py-8 w-full max-w-4xl lg:max-w-full"},w=["innerHTML"],$=m({setup(v){const n=h(),s=x(),c=a(()=>s.state.docs),l=a(()=>s.state.file),i=a(()=>{var t;const e=(t=c.value)==null?void 0:t.custom[n.params.category].files[n.params.file];if(!e)return;s.commit({type:"setFile",file:e});let o;return e.type==="md"?o=e.content:o=`# ${e.name}
-\`\`\`${e.type}
-${e.content}
-\`\`\``,y(o)});return p(()=>{const e=document.getElementById("container");e&&e.scrollTop>200&&e.scrollTo({top:0,behavior:"smooth"})}),(e,o)=>{var t;return d(),u("div",k,[f(g,{class:"float-right mt-2",path:(t=r(l))==null?void 0:t.path},null,8,["path"]),_("div",{innerHTML:r(i)},null,8,w)])}}});export{$ as default};
