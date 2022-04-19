@@ -1,1 +1,0 @@
-import{_ as s,o as c,c as o,a as e}from"./index.40fbd583.js";const t={},_={class:"relative h-10 w-10 my-60 mx-auto"},a=e("div",{class:"cube1 bg-discord-blurple-560 h-4 w-4 absolute"},null,-1),n=e("div",{class:"cube2 bg-discord-blurple-560 h-4 w-4 absolute"},null,-1),r=[a,n];function l(i,d){return c(),o("div",_,r)}var p=s(t,[["render",l]]);export{p as S};

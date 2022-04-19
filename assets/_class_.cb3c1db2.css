@@ -1,1 +1,0 @@
-.method-param.optional:before{content:"["}.method-param.optional:last-child:after{content:"]"}.method-param.optional:not(:last-child):after{content:"], "}.method-param:not(:last-child):after{content:", "}
