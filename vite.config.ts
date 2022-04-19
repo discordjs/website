@@ -23,7 +23,7 @@ export default defineConfig({
 	},
 	plugins: [
 		Vue(),
-		Pages(),
+		Pages({ importMode: 'sync' }),
 		VitePWA({
 			srcDir: 'src',
 			filename: 'sw.ts',
