@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
 import { computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import ExpandableTypes from '~/components/ExpandableTypes.vue';
@@ -71,6 +72,10 @@ const typedef = docs.value?.typedefs.find((typedef) => typedef.name === route.pa
 
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(typedef?.description, docs.value, router, route)));
+
+useHead({
+	title: computed(() => `discord.js | ${typedef?.name ?? ''}`),
+});
 
 onMounted(() => {
 	const containerElement = document.getElementById('container');

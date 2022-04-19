@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import SourceButton from '~/components/SourceButton.vue';
@@ -39,6 +40,10 @@ const html = computed(() => {
 		content = `# ${file.name as string}\n\`\`\`${file.type as string}\n${file.content as string}\n\`\`\``;
 	}
 	return markdown(content);
+});
+
+useHead({
+	title: computed(() => `discord.js | ${file.value?.name ?? ''}`),
 });
 
 onMounted(() => {

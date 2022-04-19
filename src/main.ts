@@ -1,4 +1,5 @@
 import 'focus-visible';
+import { createHead } from '@vueuse/head';
 import { createApp } from 'vue';
 import VueTippy from 'vue-tippy';
 import App from './App.vue';
@@ -10,8 +11,9 @@ import './styles/discord-hljs.css';
 import 'tippy.js/dist/tippy.css';
 import './styles/discord-tippy.css';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const app = createApp(App);
+const head = createHead();
+app.use(head);
 app.use(store, key);
 app.use(router);
 app.use(VueTippy);

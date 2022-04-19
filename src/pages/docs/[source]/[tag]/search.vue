@@ -2,7 +2,7 @@
 	<div class="mx-auto py-16 px-4 sm:px-8 lg:py-8 w-full">
 		<div class="prose prose-discord dark:prose-light mx-auto max-w-4xl lg:max-w-full">
 			<h1>Search Results</h1>
-			<div class="flex flex-col md:flex-row">
+			<div class="flex flex-col md:flex-row mb-4">
 				<div class="flex-auto">
 					<input
 						v-model="filter"
@@ -54,7 +54,7 @@
 					<li
 						v-for="result in results"
 						:key="result.computedName"
-						class="cursor-pointer grid grid-layout-search items-center !min-w-0 !min-h-0 break-words-legacy"
+						class="cursor-pointer grid grid-layout-search items-center !min-w-0 !min-h-0 break-words-legacy !p-0"
 					>
 						<span class="text-sm font-semibold uppercase">
 							<span
@@ -74,6 +74,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
 import { ref, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { search, DocumentType } from '~/util/search';
@@ -121,6 +122,10 @@ const getLetterFromType = (type: DocumentType) => {
 			return 'T';
 	}
 };
+
+useHead({
+	title: computed(() => `discord.js | Search: ${(query.value as string | undefined) ?? ''}`),
+});
 
 watch(
 	() => route.query.query,

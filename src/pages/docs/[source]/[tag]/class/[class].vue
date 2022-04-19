@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
 import highlight from 'highlight.js';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -114,6 +115,10 @@ const methods = computed(() => {
 });
 
 const typeToArray = (type: any) => type as string[];
+
+useHead({
+	title: computed(() => `discord.js | ${cls?.name ?? ''}`),
+});
 
 onMounted(() => {
 	const element = document.getElementById(`doc-for-${route.query.scrollTo as string}`);
