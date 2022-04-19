@@ -1,5 +1,5 @@
-import { watchEffect } from 'vue';
 import { useMediaQuery, useStorage } from '@vueuse/core';
+import { watchEffect } from 'vue';
 
 const keyName = 'reduced-motion';
 const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion)');

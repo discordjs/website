@@ -58,12 +58,11 @@ import SourceButton from '~/components/SourceButton.vue';
 import TypeLink from '~/components/TypeLink.vue';
 import Types from '~/components/Types.vue';
 import { useStore } from '~/store';
+import { isReducedMotion, usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
 import { scopedName } from '~/util/scopedName';
-import { isShowPrivates } from '~/util/showPrivates'
-import { isReducedMotion } from '~/util/ReducedMotion';
-import { usePreferredReducedMotion } from '~/util/ReducedMotion';
+import { isShowPrivates } from '~/util/showPrivates';
 import { typeKey } from '~/util/typeKey';
 
 highlight.configure({ ignoreUnescapedHTML: true });

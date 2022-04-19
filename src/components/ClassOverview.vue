@@ -151,20 +151,20 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue';
 
-import { scopedName } from '~/util/scopedName';
-import { usePreferredReducedMotion } from '~/util/ReducedMotion';
-import { isShowPrivates } from '~/util/showPrivates';
 
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
+import { defineProps, ref, computed } from 'vue';
 import type {
 	DocumentationClassEvent,
 	DocumentationClassMethod,
 	DocumentationClassProperty,
 } from '~/interfaces/Documentation';
+import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { scopedName } from '~/util/scopedName';
+import { scopedName } from '~/util/scopedName';
+import { isShowPrivates } from '~/util/showPrivates';
 import { isShowPrivates } from '~/util/showPrivates';
 
 const props = defineProps<{

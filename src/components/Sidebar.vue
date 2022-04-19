@@ -269,8 +269,8 @@ import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import MainSource from '~/data/MainSource';
 import { useStore } from '~/store';
-import { isShowPrivates } from '~/util/showPrivates';
 import { isReducedMotion, toggleReducedMotion } from '~/util/ReducedMotion';
+import { isShowPrivates } from '~/util/showPrivates';
 
 const router = useRouter();
 const route = useRoute();

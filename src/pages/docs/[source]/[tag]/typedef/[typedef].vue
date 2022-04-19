@@ -58,9 +58,9 @@ import See from '~/components/See.vue';
 import SourceButton from '~/components/SourceButton.vue';
 import Types from '~/components/Types.vue';
 import { useStore } from '~/store';
+import { isReducedMotion, usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
-import { isReducedMotion, usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { typeKey } from '~/util/typeKey';
 
 const router = useRouter();

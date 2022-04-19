@@ -13,8 +13,8 @@ import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import SourceButton from '~/components/SourceButton.vue';
 import { useStore } from '~/store';
-import { markdown } from '~/util/markdown';
 import { usePreferredReducedMotion } from '~/util/ReducedMotion';
+import { markdown } from '~/util/markdown';
 
 const route = useRoute();
 const store = useStore();
