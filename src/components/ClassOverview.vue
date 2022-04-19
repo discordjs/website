@@ -159,6 +159,7 @@ import type {
 	DocumentationClassMethod,
 	DocumentationClassProperty,
 } from '~/interfaces/Documentation';
+import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { scopedName } from '~/util/scopedName';
 import { isShowPrivates } from '~/util/showPrivates';
 
@@ -185,7 +186,7 @@ const visibleEvents = computed(() =>
 
 const scrollTo = (elementName: string) => {
 	const element = document.getElementById(`doc-for-${elementName}`);
-	element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	element?.scrollIntoView({ behavior: usePreferredReducedMotion.value ? undefined : 'smooth', block: 'start' });
 };
 
 whenever(lgAndLarger, () => (isOpen.value = true), { immediate: true });

@@ -106,6 +106,24 @@
 								<li>
 									<SwitchGroup>
 										<div class="flex justify-between px-2">
+											<SwitchLabel class="mr-4 dark:text-gray-200">Reduced Motion</SwitchLabel>
+											<Switch
+												v-model="usePreferredReducedMotion"
+												class="relative inline-flex h-6 items-center rounded-full w-11 focus:outline-none"
+												:class="usePreferredReducedMotion ? 'bg-discord-blurple-500' : 'bg-gray-500'"
+												@click="toggleReducedMotion(usePreferredReducedMotion)"
+											>
+												<span
+													class="inline-block w-4 h-4 bg-white rounded-full transition transform-gpu z-20"
+													:class="usePreferredReducedMotion ? 'translate-x-6' : 'translate-x-1'"
+												></span>
+											</Switch>
+										</div>
+									</SwitchGroup>
+								</li>
+								<li>
+									<SwitchGroup>
+										<div class="flex justify-between px-2">
 											<SwitchLabel class="mr-4 dark:text-gray-200">Show privates</SwitchLabel>
 											<Switch
 												v-model="isShowPrivates"
@@ -251,6 +269,7 @@ import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import MainSource from '~/data/MainSource';
 import { useStore } from '~/store';
+import { usePreferredReducedMotion, toggleReducedMotion } from '~/util/ReducedMotion';
 import { isShowPrivates } from '~/util/showPrivates';
 
 const router = useRouter();

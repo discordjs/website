@@ -58,6 +58,7 @@ import SourceButton from '~/components/SourceButton.vue';
 import TypeLink from '~/components/TypeLink.vue';
 import Types from '~/components/Types.vue';
 import { useStore } from '~/store';
+import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
 import { scopedName } from '~/util/scopedName';
@@ -122,11 +123,11 @@ useHead({
 
 onMounted(() => {
 	const element = document.getElementById(`doc-for-${route.query.scrollTo as string}`);
-	element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	element?.scrollIntoView({ behavior: usePreferredReducedMotion.value ? undefined : 'smooth', block: 'start' });
 
 	const containerElement = document.getElementById('container');
 	if (!route.query.scrollTo && containerElement && containerElement.scrollTop > 200) {
-		containerElement.scrollTo({ top: 0, behavior: 'smooth' });
+		containerElement.scrollTo({ top: 0, behavior: usePreferredReducedMotion.value ? undefined : 'smooth' });
 	}
 
 	if (codeblock.value) {
@@ -138,7 +139,7 @@ watch(
 	() => route.query.scrollTo,
 	() => {
 		const element = document.getElementById(`doc-for-${route.query.scrollTo as string}`);
-		element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		element?.scrollIntoView({ behavior: usePreferredReducedMotion.value ? undefined : 'smooth', block: 'start' });
 	},
 );
 </script>

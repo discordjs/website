@@ -58,6 +58,7 @@ import See from '~/components/See.vue';
 import SourceButton from '~/components/SourceButton.vue';
 import Types from '~/components/Types.vue';
 import { useStore } from '~/store';
+import { usePreferredReducedMotion } from '~/util/ReducedMotion';
 import { convertLinks } from '~/util/convertLinks';
 import { markdown } from '~/util/markdown';
 import { typeKey } from '~/util/typeKey';
@@ -80,7 +81,7 @@ useHead({
 onMounted(() => {
 	const containerElement = document.getElementById('container');
 	if (containerElement && containerElement.scrollTop > 200) {
-		containerElement.scrollTo({ top: 0, behavior: 'smooth' });
+		containerElement.scrollTo({ top: 0, behavior: usePreferredReducedMotion.value ? undefined : 'smooth' });
 	}
 });
 </script>
