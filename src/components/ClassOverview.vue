@@ -153,7 +153,7 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { useBreakpoints, breakpointsTailwind, whenever } from '@vueuse/core';
-import { defineProps, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import type {
 	DocumentationClassEvent,
 	DocumentationClassMethod,
