@@ -96,6 +96,8 @@ export default class DocsSource {
 						continue;
 					}
 
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+					tag.name = tag.name.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>');
 					// Make sure the tag is the latest patch version
 					if (semver.valid(tag.name)) {
 						const majorMinor = `${semver.major(tag.name)}.${semver.minor(tag.name)}`;
