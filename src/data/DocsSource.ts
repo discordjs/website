@@ -32,7 +32,7 @@ export default class DocsSource {
 
 	public repo = this.options.repo;
 
-	public defaultTag = this.options.defaultTag ?? 'main';
+	public defaultTag = 'main';
 
 	public defaultFile = this.options.defaultFile ?? { category: 'general', id: 'welcome' };
 
@@ -41,6 +41,8 @@ export default class DocsSource {
 	public branchFilter = this.options.branchFilter ?? ((branch: string) => branch !== 'main');
 
 	public tagFilter = this.options.tagFilter ?? (() => true);
+
+	public branches: any[] | null = null;
 
 	public tags: any[] | null = null;
 
@@ -65,12 +67,13 @@ export default class DocsSource {
 			})
 			.then((data) => {
 				const [branches, tags] = data;
-				this.tags = [this.defaultTag];
+				this.tags = [];
+				this.branches = [];
 				localStorage[`source-${this.id}`] = JSON.stringify({ branches, tags });
 
 				for (const branch of branches) {
-					if (branch.name !== this.defaultTag && this.branchFilter(branch.name)) {
-						this.tags.push(branch.name);
+					if (this.branchFilter(branch.name)) {
+						this.branches.push(branch.name);
 					}
 				}
 
@@ -89,9 +92,6 @@ export default class DocsSource {
 
 				// Build the list of tags
 				for (const tag of tags) {
-					if (tag.name === this.defaultTag) {
-						continue;
-					}
 					if (!this.tagFilter(tag.name)) {
 						continue;
 					}
@@ -110,13 +110,22 @@ export default class DocsSource {
 					this.tags.push(tag.name);
 				}
 
+				this.defaultTag = this.tags[0] ?? this.branches[0];
+				console.log(this.defaultTag);
+				this.tags = [...this.branches, ...this.tags];
+
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				return this.tags;
 			});
 	}
 
-	public async fetchDocs(tag: string) {
-		const res = await fetch(`https://raw.githubusercontent.com/${this.docsRepo}/main/${this.id}/${tag}.json`);
-		return json(res);
+	public async fetchDocs(tag?: string | null) {
+		const tags = await this.fetchTags();
+		console.log(this.defaultTag);
+		const res = await fetch(
+			`https://raw.githubusercontent.com/${this.docsRepo}/main/${this.id}/${tag ?? this.defaultTag}.json`,
+		);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return [tags, await json(res)];
 	}
 }

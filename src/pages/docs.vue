@@ -26,7 +26,7 @@ import CollectionSource from '~/data/CollectionSource';
 // import CommandoSource from '~/data/CommandoSource';
 import MainSource from '~/data/MainSource';
 import RESTSource from '~/data/RESTSource';
-import RPCSource from '~/data/RPCSource';
+// import RPCSource from '~/data/RPCSource';
 import VoiceSource from '~/data/VoiceSource';
 import { useStore } from '~/store';
 import { fetchError } from '~/util/fetchError';
@@ -51,7 +51,7 @@ const sources = reactive({
 	[VoiceSource.id]: VoiceSource,
 	[RESTSource.id]: RESTSource,
 	// [CommandoSource.id]: CommandoSource,
-	[RPCSource.id]: RPCSource,
+	// [RPCSource.id]: RPCSource,
 });
 
 const showBackToTop = ref(false);
@@ -92,10 +92,6 @@ const watchRoute = async () => {
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			inputTag: route.params.tag ?? tag.value,
 		});
-
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		await store.dispatch({ type: 'fetchTags', currentSource: sources[route.params.source] ?? MainSource });
 	}
 
 	// @ts-expect-error
@@ -124,6 +120,7 @@ const watchRoute = async () => {
 			type: 'setTag',
 			tag: route.params.tag,
 		});
+
 		store.commit({
 			type: 'setSource',
 			// @ts-expect-error

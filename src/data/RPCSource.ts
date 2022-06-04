@@ -15,7 +15,6 @@ export default new RPCSource({
 	global: 'RPC',
 	docsRepo: 'discordjs/RPC',
 	repo: 'discordjs/RPC',
-	defaultTag: 'master',
 	branchFilter: (branch: string) => branch !== 'docs' && !branch.includes('greenkeeper'),
 	tagFilter: (tag: string) => semver.gte(tag.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '3.0.0'),
 });

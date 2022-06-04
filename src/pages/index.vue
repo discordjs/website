@@ -61,6 +61,5 @@ const docs = computed(() => store.state.docs);
 
 if (!docs.value) {
 	void store.dispatch('fetchDocs', { inputSource: MainSource });
-	void store.dispatch('fetchTags', { currentSource: MainSource });
 }
 </script>

@@ -9,7 +9,6 @@ export default new DocsSource({
 	global: 'REST',
 	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/discord.js',
-	defaultTag: 'stable',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
 	tagFilter: (tag: string) =>
 		tag.includes('@discordjs/rest') &&

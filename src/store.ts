@@ -14,7 +14,7 @@ import BuildersSource from '~/data/BuildersSource';
 import CollectionSource from '~/data/CollectionSource';
 // import CommandoSource from '~/data/CommandoSource';
 import RESTSource from '~/data/RESTSource';
-import RPCSource from '~/data/RPCSource';
+// import RPCSource from '~/data/RPCSource';
 import VoiceSource from '~/data/VoiceSource';
 
 export interface State {
@@ -44,7 +44,7 @@ export const store = createStore<State>({
 			{ source: VoiceSource, name: VoiceSource.name, id: VoiceSource.id },
 			{ source: RESTSource, name: RESTSource.name, id: RESTSource.id },
 			// { source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
-			{ source: RPCSource, name: RPCSource.name, id: RPCSource.id },
+			// { source: RPCSource, name: RPCSource.name, id: RPCSource.id },
 		],
 		source: MainSource,
 		tag: MainSource.defaultTag,
@@ -155,16 +155,22 @@ export const store = createStore<State>({
 
 		fetchDocs: async (
 			{ commit },
-			{ inputSource, inputTag = inputSource.defaultTag }: { inputSource: DocsSource; inputTag?: string },
+			{ inputSource, inputTag = inputSource.defaultTag }: { inputSource: DocsSource; inputTag?: string | null },
 		) => {
 			let documentation: any;
+			let tags: any[];
 			try {
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-				documentation = await inputSource.fetchDocs(inputTag);
+				[tags, documentation] = await inputSource.fetchDocs(inputTag);
 			} catch (error) {
 				commit({
 					type: 'setDocs',
 					docs: null,
+				});
+
+				commit({
+					type: 'setBranches',
+					branches: null,
 				});
 
 				commit({
@@ -347,17 +353,13 @@ export const store = createStore<State>({
 			documentation.tag = inputTag;
 
 			commit({
-				type: 'setDocs',
-				docs: documentation,
-			});
-		},
-
-		fetchTags: async ({ commit }, { currentSource }: { currentSource: DocsSource }) => {
-			const tags = await currentSource.fetchTags();
-
-			commit({
 				type: 'setBranches',
 				branches: tags,
+			});
+
+			commit({
+				type: 'setDocs',
+				docs: documentation,
 			});
 		},
 	},
