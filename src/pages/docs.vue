@@ -18,6 +18,7 @@
 import { whenever, useEventListener, useMagicKeys } from '@vueuse/core';
 import { reactive, ref, computed, watchEffect, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import ProxySource from '../data/ProxySource';
 import BackToTop from '~/components/BackToTop.vue';
 import Sidebar from '~/components/Sidebar.vue';
 import Spinner from '~/components/Spinner.vue';
@@ -49,6 +50,7 @@ const sources = reactive({
 	[CollectionSource.id]: CollectionSource,
 	[BuildersSource.id]: BuildersSource,
 	[VoiceSource.id]: VoiceSource,
+	[ProxySource.id]: ProxySource,
 	[RESTSource.id]: RESTSource,
 	// [CommandoSource.id]: CommandoSource,
 	// [RPCSource.id]: RPCSource,

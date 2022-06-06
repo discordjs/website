@@ -6,6 +6,7 @@ import { InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import DocsSource from './data/DocsSource';
 import MainSource from './data/MainSource';
+import ProxySource from './data/ProxySource';
 import { Documentation, DocumentationCustomFile } from './interfaces/Documentation';
 import { fetchError } from './util/fetchError';
 import { SearchTerm, DocumentType, DocumentLink } from './util/search';
@@ -42,6 +43,7 @@ export const store = createStore<State>({
 			{ source: CollectionSource, name: CollectionSource.name, id: CollectionSource.id },
 			{ source: BuildersSource, name: BuildersSource.name, id: BuildersSource.id },
 			{ source: VoiceSource, name: VoiceSource.name, id: VoiceSource.id },
+			{ source: ProxySource, name: ProxySource.name, id: ProxySource.id },
 			{ source: RESTSource, name: RESTSource.name, id: RESTSource.id },
 			// { source: CommandoSource, name: CommandoSource.name, id: CommandoSource.id },
 			// { source: RPCSource, name: RPCSource.name, id: RPCSource.id },
