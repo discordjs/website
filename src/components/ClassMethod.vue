@@ -46,7 +46,12 @@
 			<div class="font-semibold mt-3">
 				Returns:
 				<span v-if="method.returns && Array.isArray(method.returns)">
-					<Types v-for="rtrn in method.returns" :key="typeKey(rtrn)" :names="rtrn" />
+					<template v-if="docs!.meta!.format >= 30">
+						<Types v-for="rtrn in method.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
+					</template>
+					<template v-else>
+						<Types v-for="rtrn in method.returns" :key="typeKey(rtrn)" :names="rtrn" />
+					</template>
 				</span>
 				<span v-else-if="method.returns && !Array.isArray(method.returns)">
 					<Types

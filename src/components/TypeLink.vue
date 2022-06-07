@@ -11,7 +11,7 @@
 import { computed } from 'vue';
 import { useStore } from '~/store';
 
-const props = defineProps<{ type: string | string[] }>();
+const props = defineProps<{ type: string | string[] | string[][] }>();
 
 const store = useStore();
 
