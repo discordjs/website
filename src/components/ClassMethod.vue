@@ -43,6 +43,7 @@
 		<div class="grid pl-2.5">
 			<p class="noprose" v-html="description"></p>
 			<ParameterTable v-if="method.params" :parameters="method.params" />
+
 			<div class="font-semibold mt-3">
 				Returns:
 				<span v-if="method.returns && Array.isArray(method.returns)">

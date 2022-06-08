@@ -17,27 +17,33 @@
 
 			<div v-if="fn?.returns">
 				<h2>Returns</h2>
-				<p>
-					<span v-if="fn.returns && Array.isArray(fn.returns)">
-						<template v-if="docs!.meta!.format >= 30">
-							<template v-if="Array.isArray(fn.returns[0])">
-								<Types v-for="rtrn in fn.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
-							</template>
-							<template v-else>
-								<Types
-									v-for="rtrn in fn.returns.flat()"
-									:key="typeKey(rtrn)"
-									:names="rtrn.types?.flat()"
-									:variable="rtrn.variable"
-									:nullable="rtrn.nullable"
-								/>
-							</template>
+				<span v-if="fn.returns && Array.isArray(fn.returns)">
+					<template v-if="docs!.meta!.format >= 30">
+						<template v-if="Array.isArray(fn.returns[0])">
+							<Types v-for="rtrn in fn.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
 						</template>
 						<template v-else>
-							<Types v-for="rtrn in fn.returns" :key="typeKey(rtrn)" :names="rtrn" />
+							<Types
+								v-for="rtrn in fn.returns.flat()"
+								:key="typeKey(rtrn)"
+								:names="rtrn.types?.flat()"
+								:variable="rtrn.variable"
+								:nullable="rtrn.nullable"
+							/>
 						</template>
-					</span>
-				</p>
+					</template>
+					<template v-else>
+						<Types v-for="rtrn in fn.returns" :key="typeKey(rtrn)" :names="rtrn" />
+					</template>
+				</span>
+				<TypeLink v-else :type="['void']" />
+				<div class="mt-3">
+					<p
+						v-if="(fn.returns && !Array.isArray(fn.returns) && fn.returns.description) || fn.returnsDescription"
+						class="noprose"
+						v-html="returnDescription"
+					></p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -67,6 +73,13 @@ const fn = docs.value?.functions?.find((fn) => fn.name === route.params.function
 
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(fn?.description, docs.value, router, route)));
+const returnDescription = computed(() =>
+	markdown(
+		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+		convertLinks(props.method.returns.description ?? props.method.returnsDescription, docs.value, router, route),
+	),
+);
 
 useHead({
 	title: computed(() => `discord.js | ${fn?.name ?? ''}`),

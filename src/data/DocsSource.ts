@@ -110,8 +110,6 @@ export default class DocsSource {
 					this.tags.push(tag.name);
 				}
 
-				this.defaultTag = this.tags[0] ?? this.branches[0];
-				console.log(this.defaultTag);
 				this.tags = [...this.branches, ...this.tags];
 
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -121,7 +119,6 @@ export default class DocsSource {
 
 	public async fetchDocs(tag?: string | null) {
 		const tags = await this.fetchTags();
-		console.log(this.defaultTag);
 		const res = await fetch(
 			`https://raw.githubusercontent.com/${this.docsRepo}/main/${this.id}/${tag ?? this.defaultTag}.json`,
 		);
