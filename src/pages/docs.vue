@@ -143,7 +143,13 @@ const watchRoute = async () => {
 	}
 
 	// Redirect to a default route
-	if (!route.params.file && !route.params.class && !route.params.typedef && route.name !== 'docs-source-tag-search') {
+	if (
+		!route.params.file &&
+		!route.params.class &&
+		!route.params.function &&
+		!route.params.typedef &&
+		route.name !== 'docs-source-tag-search'
+	) {
 		return router.replace({
 			name: 'docs-source-tag-category-file',
 			params: {
