@@ -47,20 +47,22 @@
 				Returns:
 				<span v-if="method.returns && Array.isArray(method.returns)">
 					<template v-if="docs!.meta!.format >= 30">
-						<Types v-for="rtrn in method.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
+						<template v-if="Array.isArray(method.returns[0])">
+							<Types v-for="rtrn in method.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
+						</template>
+						<template v-else>
+							<Types
+								v-for="rtrn in method.returns.flat()"
+								:key="typeKey(rtrn)"
+								:names="rtrn.types?.flat()"
+								:variable="rtrn.variable"
+								:nullable="rtrn.nullable"
+							/>
+						</template>
 					</template>
 					<template v-else>
 						<Types v-for="rtrn in method.returns" :key="typeKey(rtrn)" :names="rtrn" />
 					</template>
-				</span>
-				<span v-else-if="method.returns && !Array.isArray(method.returns)">
-					<Types
-						v-for="rtrn in method.returns.types || method.returns"
-						:key="typeKey(rtrn)"
-						:names="rtrn"
-						:variable="method.returns.variable"
-						:nullable="method.returns.nullable"
-					/>
 				</span>
 				<TypeLink v-else :type="['void']" />
 				<div class="mt-3">

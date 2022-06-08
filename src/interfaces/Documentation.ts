@@ -68,7 +68,7 @@ export interface DocumentationClassMethod {
 	scope?: string;
 	params?: DocumentationClassMethodParameter[];
 	examples?: string[];
-	returns?: string[][][] | { description: string; types: string[][][]; variable: boolean; nullable: boolean };
+	returns?: any;
 	returnsDescription?: string;
 	throws?: string[];
 	see?: string[];
@@ -91,8 +91,8 @@ export interface DocumentationClass {
 	construct: DocumentationClassConstructor;
 	abstract: boolean;
 	access?: string;
-	extends: string[] | string[][];
-	implements: string[] | string[][];
+	extends: any;
+	implements: any;
 	props: DocumentationClassProperty[];
 	methods: DocumentationClassMethod[];
 	events: DocumentationClassEvent[];
