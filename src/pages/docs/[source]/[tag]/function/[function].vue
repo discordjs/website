@@ -77,7 +77,7 @@ const returnDescription = computed(() =>
 	markdown(
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-		convertLinks(props.method.returns.description ?? props.method.returnsDescription, docs.value, router, route),
+		convertLinks(fn.returns.description ?? fn.returnsDescription, docs.value, router, route),
 	),
 );
 

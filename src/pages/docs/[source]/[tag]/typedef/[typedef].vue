@@ -29,20 +29,36 @@
 
 			<div v-if="typedef?.returns">
 				<h2>Returns</h2>
-				<p>
-					<span v-if="typedef.returns && Array.isArray(typedef.returns)">
+				<span v-if="typedef.returns && Array.isArray(typedef.returns)">
+					<template v-if="docs!.meta!.format >= 30">
+						<template v-if="Array.isArray(typedef.returns[0])">
+							<Types v-for="rtrn in typedef.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
+						</template>
+						<template v-else>
+							<Types
+								v-for="rtrn in typedef.returns.flat()"
+								:key="typeKey(rtrn)"
+								:names="rtrn.types?.flat()"
+								:variable="rtrn.variable"
+								:nullable="rtrn.nullable"
+							/>
+						</template>
+					</template>
+					<template v-else>
 						<Types v-for="rtrn in typedef.returns" :key="typeKey(rtrn)" :names="rtrn" />
-					</span>
-					<span v-else-if="typedef.returns && !Array.isArray(typedef.returns)">
-						<Types
-							v-for="rtrn in typedef.returns.types || typedef.returns"
-							:key="typeKey(rtrn)"
-							:names="rtrn"
-							:variable="typedef.returns.variable"
-							:nullable="typedef.returns.nullable"
-						/>
-					</span>
-				</p>
+					</template>
+				</span>
+				<TypeLink v-else :type="['void']" />
+				<div class="mt-3">
+					<p
+						v-if="
+							(typedef.returns && !Array.isArray(typedef.returns) && typedef.returns.description) ||
+							typedef.returnsDescription
+						"
+						class="noprose"
+						v-html="returnDescription"
+					></p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -73,6 +89,13 @@ const typedef = docs.value?.typedefs.find((typedef) => typedef.name === route.pa
 
 // @ts-expect-error
 const description = computed(() => markdown(convertLinks(typedef?.description, docs.value, router, route)));
+const returnDescription = computed(() =>
+	markdown(
+		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+		convertLinks(typedef.returns.description ?? typedef.returnsDescription, docs.value, router, route),
+	),
+);
 
 useHead({
 	title: computed(() => `discord.js | ${typedef?.name ?? ''}`),
