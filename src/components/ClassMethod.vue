@@ -65,6 +65,15 @@
 						<Types v-for="rtrn in method.returns" :key="typeKey(rtrn)" :names="rtrn" />
 					</template>
 				</span>
+				<span v-else-if="method.returns && !Array.isArray(method.returns)">
+					<Types
+						v-for="rtrn in method.returns.types"
+						:key="typeKey(rtrn)"
+						:names="rtrn"
+						:variable="rtrn.variable"
+						:nullable="rtrn.nullable"
+					/>
+				</span>
 				<TypeLink v-else :type="['void']" />
 				<div class="mt-3">
 					<p
