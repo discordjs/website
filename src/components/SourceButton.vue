@@ -1,6 +1,6 @@
 <template>
 	<a
-		:href="`${meta ? sourceURL(meta.path, meta.file, meta.line) : sourceURL(path ?? '')}`"
+		:href="`${meta ? (meta.url ? meta.url : sourceURL(meta.path!, meta.file, meta.line)) : sourceURL(path ?? '')}`"
 		target="_blank"
 		rel="noopener"
 		aria-label="Go to source"

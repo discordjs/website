@@ -7,7 +7,8 @@ interface DocumentationMeta {
 export interface DocumentationClassMeta {
 	line: number;
 	file: string;
-	path: string;
+	path?: string;
+	url?: string;
 }
 type DocumentationClassMethodMeta = DocumentationClassMeta;
 type DocumentationClassMethodParameterMeta = DocumentationClassMeta;
