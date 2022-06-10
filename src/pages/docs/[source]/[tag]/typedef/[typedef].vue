@@ -10,24 +10,26 @@
 			<p v-if="typedef?.description" v-html="description"></p>
 			<See v-if="typedef?.see?.length" :see="typedef?.see" />
 
-			<h2>Types</h2>
-			<ul id="typedef-types">
-				<li v-for="type in typedef?.type" :key="typeKey(type)">
-					<ExpandableTypes class="!m-0" :names="type" />
-				</li>
-			</ul>
+			<template v-if="typedef?.type">
+				<h2>Types</h2>
+				<ul id="typedef-types">
+					<li v-for="type in typedef?.type" :key="typeKey(type)">
+						<ExpandableTypes class="!m-0" :names="type" />
+					</li>
+				</ul>
+			</template>
 
-			<div v-if="typedef?.props && typedef?.props.length">
+			<template v-if="typedef?.props && typedef?.props.length">
 				<h2>Properties</h2>
 				<ParameterTable :parameters="typedef.props" />
-			</div>
+			</template>
 
-			<div v-if="typedef?.params && typedef?.params.length">
+			<template v-if="typedef?.params && typedef?.params.length">
 				<h2>Parameters</h2>
 				<ParameterTable :parameters="typedef.params" />
-			</div>
+			</template>
 
-			<div v-if="typedef?.returns">
+			<template v-if="typedef?.returns">
 				<h2>Returns</h2>
 				<span v-if="typedef.returns && Array.isArray(typedef.returns)">
 					<template v-if="docs!.meta!.format >= 30">
@@ -59,7 +61,7 @@
 						v-html="returnDescription"
 					></p>
 				</div>
-			</div>
+			</template>
 		</div>
 	</div>
 </template>

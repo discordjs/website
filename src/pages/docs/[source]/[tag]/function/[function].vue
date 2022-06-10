@@ -10,12 +10,12 @@
 			<p v-if="fn?.description" v-html="description"></p>
 			<See v-if="fn?.see?.length" :see="fn?.see" />
 
-			<div v-if="fn?.params && fn?.params.length">
+			<template v-if="fn?.params && fn?.params.length">
 				<h2>Parameters</h2>
 				<ParameterTable :parameters="fn.params" />
-			</div>
+			</template>
 
-			<div v-if="fn?.returns">
+			<template v-if="fn?.returns">
 				<h2>Returns</h2>
 				<span v-if="fn.returns && Array.isArray(fn.returns)">
 					<template v-if="docs!.meta!.format >= 30">
@@ -44,7 +44,7 @@
 						v-html="returnDescription"
 					></p>
 				</div>
-			</div>
+			</template>
 		</div>
 	</div>
 </template>
