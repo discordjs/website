@@ -5,11 +5,10 @@ import DocsSource from './DocsSource';
 const branchBlacklist = new Set(['docs', 'v8', 'v11', 'v12', 'v13']);
 export default new DocsSource({
 	id: 'collection',
-	name: 'Collection',
-	global: 'Collection',
+	name: 'collection',
+	global: 'collection',
 	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/discord.js',
-	defaultTag: 'stable',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
 	tagFilter: (tag: string) =>
 		tag.includes('@discordjs/collection') &&

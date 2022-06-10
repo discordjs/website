@@ -13,10 +13,10 @@ class CommandoSource extends DocsSource {
 
 export default new CommandoSource({
 	id: 'commando',
-	name: 'Commando',
-	global: 'Commando',
-	docsRepo: 'discordjs/Commando',
-	repo: 'discordjs/Commando',
+	name: 'commando',
+	global: 'commando',
+	docsRepo: 'discordjs/commando',
+	repo: 'discordjs/commando',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
 	tagFilter: (tag: string) => semver.gt(tag.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '0.4.1'),
 });

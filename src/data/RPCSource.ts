@@ -11,8 +11,8 @@ class RPCSource extends DocsSource {
 
 export default new RPCSource({
 	id: 'rpc',
-	name: 'RPC',
-	global: 'RPC',
+	name: 'rpc',
+	global: 'rpc',
 	docsRepo: 'discordjs/RPC',
 	repo: 'discordjs/RPC',
 	branchFilter: (branch: string) => branch !== 'docs' && !branch.includes('greenkeeper'),

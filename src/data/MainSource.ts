@@ -5,8 +5,8 @@ import DocsSource from './DocsSource';
 const branchBlacklist = new Set(['docs', 'webpack', 'v8']);
 export default new DocsSource({
 	id: 'discord.js',
-	name: 'Discord',
-	global: 'Discord',
+	name: 'discord.js',
+	global: 'discord.js',
 	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/discord.js',
 	branchFilter: (branch: string) => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
