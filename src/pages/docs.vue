@@ -35,10 +35,10 @@ import { fetchError } from '~/util/fetchError';
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
-const { Ctrl_K } = useMagicKeys({
+const { Ctrl_K, MetaLeft_K } = useMagicKeys({
 	passive: false,
 	onEventFired(e) {
-		if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') {
+		if ((e.ctrlKey || e.metaKey) && e.key === 'k' && e.type === 'keydown') {
 			e.preventDefault();
 		}
 	},
@@ -74,6 +74,10 @@ onMounted(() => {
 });
 
 whenever(Ctrl_K, () => {
+	document.getElementById('search')?.focus();
+});
+
+whenever(MetaLeft_K, () => {
 	document.getElementById('search')?.focus();
 });
 
