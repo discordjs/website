@@ -320,7 +320,7 @@ export const store = createStore<State>({
 				// TypeScript
 				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
 				unknown: 'https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown',
-				readonly: 'https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly',
+				Readonly: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype',
 				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
 				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
 				Omit: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys',
