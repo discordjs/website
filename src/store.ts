@@ -325,6 +325,7 @@ export const store = createStore<State>({
 				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
 				Omit: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys',
 				IterableIterator: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols',
+				Partial: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype'
 			};
 
 			// Add links for everything
