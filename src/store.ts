@@ -320,11 +320,13 @@ export const store = createStore<State>({
 				// TypeScript
 				any: 'https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any',
 				unknown: 'https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown',
-				readonly: 'https://www.typescriptlang.org/docs/handbook/2/classes.html#readonly',
+				readonly: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype',
+				Readonly: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype',
 				Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
 				Exclude: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludetype-excludedunion',
 				Omit: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys',
 				IterableIterator: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols',
+				Partial: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype',
 			};
 
 			// Add links for everything
