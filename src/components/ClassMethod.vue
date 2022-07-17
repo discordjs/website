@@ -104,7 +104,11 @@
 
 			<div v-if="method.examples?.length" class="font-semibold mt-3">
 				Examples:
-				<Codeblock v-for="example in method.examples" :key="example" :code="example.trim()" />
+				<Codeblock
+					v-for="example in method.examples"
+					:key="example"
+					:code="example.replace(/(`{3,})(.+)?/gm, '').trim()"
+				/>
 			</div>
 
 			<See v-if="method.see?.length" :see="method.see" />
