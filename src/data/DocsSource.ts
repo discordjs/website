@@ -54,7 +54,7 @@ export default class DocsSource {
 		if (this.tags) return Promise.resolve(this.tags);
 		return Promise.all([
 			fetch(`https://api.github.com/repos/${this.repo}/branches`).then(json),
-			fetch(`https://api.github.com/repos/${this.repo}/tags`).then(json),
+			fetch(`https://api.github.com/repos/${this.repo}/git/refs/tags`).then(json),
 		])
 			.catch((err) => {
 				if (localStorage[`source-${this.id}`]) {
@@ -80,6 +80,8 @@ export default class DocsSource {
 				// Build a list of the latest patch versions
 				const latestPatches: { [key: string]: number } = {};
 				for (const tag of tags) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+					tag.name = tag.ref.replace('refs/tags/', '');
 					if (semver.valid(tag.name)) {
 						const majorMinor = `${semver.major(tag.name)}.${semver.minor(tag.name)}`;
 						const patch = semver.patch(tag.name);
@@ -92,6 +94,8 @@ export default class DocsSource {
 
 				// Build the list of tags
 				for (const tag of tags) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+					tag.name = tag.ref.replace('refs/tags/', '');
 					if (!this.tagFilter(tag.name)) {
 						continue;
 					}
@@ -110,8 +114,7 @@ export default class DocsSource {
 					this.tags.push(tag.name);
 				}
 
-				this.tags = [...this.branches, ...this.tags];
-
+				this.tags = [...this.branches, ...this.tags.reverse()];
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				return this.tags;
 			});

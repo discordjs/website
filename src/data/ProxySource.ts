@@ -1,6 +1,6 @@
 import DocsSource from './DocsSource';
 
-const branchBlacklist = new Set(['docs', 'v8', 'v11', 'v12', 'v13']);
+const branchBlacklist = new Set(['stable', 'docs', 'v8', 'v11', 'v12', 'v13']);
 export default new DocsSource({
 	id: 'proxy',
 	name: 'proxy',
