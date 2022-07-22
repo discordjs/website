@@ -36,6 +36,8 @@ export default class DocsSource {
 
 	public defaultFile = this.options.defaultFile ?? { category: 'general', id: 'welcome' };
 
+	public source = this.options.source ?? `https://github.com/${this.repo}/blob/`;
+
 	public branchFilter = this.options.branchFilter ?? ((branch: string) => branch !== 'main');
 
 	public tagFilter = this.options.tagFilter ?? (() => true);
