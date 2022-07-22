@@ -4,8 +4,10 @@ import DocsSource, { json } from './DocsSource';
 
 class RPCSource extends DocsSource {
 	public override async fetchDocs(tag: string) {
-		const res = await fetch(`https://raw.githubusercontent.com/${this.repo}/docs/${tag}.json`);
-		return json(res);
+		const tags = await this.fetchTags();
+		const res = await fetch(`https://raw.githubusercontent.com/${this.docsRepo}/docs/${tag}.json`);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return [tags, await json(res)];
 	}
 }
 

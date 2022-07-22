@@ -36,8 +36,6 @@ export default class DocsSource {
 
 	public defaultFile = this.options.defaultFile ?? { category: 'general', id: 'welcome' };
 
-	public source = this.options.source ?? `https://github.com/${this.repo}/blob/`;
-
 	public branchFilter = this.options.branchFilter ?? ((branch: string) => branch !== 'main');
 
 	public tagFilter = this.options.tagFilter ?? (() => true);
@@ -122,9 +120,7 @@ export default class DocsSource {
 
 	public async fetchDocs(tag?: string | null) {
 		const tags = await this.fetchTags();
-		const res = await fetch(
-			`https://raw.githubusercontent.com/${this.docsRepo}/main/${this.id}/${tag ?? this.defaultTag}.json`,
-		);
+		const res = await fetch(`https://docs.discordjs.dev/docs/${this.id}/${tag ?? this.defaultTag}.json`);
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return [tags, await json(res)];
 	}
