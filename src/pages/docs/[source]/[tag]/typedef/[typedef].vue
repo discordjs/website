@@ -52,14 +52,7 @@
 				</span>
 				<TypeLink v-else :type="['void']" />
 				<div class="mt-3">
-					<p
-						v-if="
-							(typedef.returns && !Array.isArray(typedef.returns) && typedef.returns.description) ||
-							typedef.returnsDescription
-						"
-						class="noprose"
-						v-html="returnDescription"
-					></p>
+					<p v-if="returnDescription" class="noprose" v-html="returnDescription"></p>
 				</div>
 			</template>
 		</div>
@@ -95,7 +88,7 @@ const returnDescription = computed(() =>
 	markdown(
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-		convertLinks(typedef.returns.description ?? typedef.returnsDescription, docs.value, router, route),
+		convertLinks(typedef.returns[0]?.description, docs.value, router, route) ?? '',
 	),
 );
 
