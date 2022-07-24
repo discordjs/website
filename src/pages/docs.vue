@@ -29,6 +29,7 @@ import MainSource from '~/data/MainSource';
 import RESTSource from '~/data/RESTSource';
 // import RPCSource from '~/data/RPCSource';
 import VoiceSource from '~/data/VoiceSource';
+import WSSource from '~/data/WSSource';
 import { useStore } from '~/store';
 import { fetchError } from '~/util/fetchError';
 
@@ -47,11 +48,12 @@ const { Ctrl_K, MetaLeft_K } = useMagicKeys({
 const sources = reactive({
 	[MainSource.id]: MainSource,
 	main: MainSource,
-	[CollectionSource.id]: CollectionSource,
 	[BuildersSource.id]: BuildersSource,
-	[VoiceSource.id]: VoiceSource,
+	[CollectionSource.id]: CollectionSource,
 	[ProxySource.id]: ProxySource,
 	[RESTSource.id]: RESTSource,
+	[VoiceSource.id]: VoiceSource,
+	[WSSource.id]: WSSource,
 	// [CommandoSource.id]: CommandoSource,
 	// [RPCSource.id]: RPCSource,
 });
