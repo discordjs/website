@@ -33,7 +33,7 @@
 				<h2>Returns</h2>
 				<span v-if="typedef.returns && Array.isArray(typedef.returns)">
 					<template v-if="docs!.meta!.format >= 30">
-						<template v-if="Array.isArray(typedef.returns[0])">
+						<template v-if="Array.isArray(typedef.returns?.[0])">
 							<Types v-for="rtrn in typedef.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
 						</template>
 						<template v-else>
@@ -88,7 +88,7 @@ const returnDescription = computed(() =>
 	markdown(
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-		convertLinks(typedef.returns[0]?.description, docs.value, router, route) ?? '',
+		convertLinks(typedef.returns?.[0]?.description, docs.value, router, route) ?? '',
 	),
 );
 
