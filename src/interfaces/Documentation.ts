@@ -88,6 +88,7 @@ export interface DocumentationClassEvent {
 
 export interface DocumentationClass {
 	name: string;
+	deprecated?: string | boolean;
 	description: string;
 	construct: DocumentationClassConstructor;
 	abstract: boolean;
