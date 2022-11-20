@@ -54,6 +54,11 @@ import Logo from '~/components/Logo.vue';
 import Stats from '~/components/Stats.vue';
 import MainSource from '~/data/MainSource';
 import { useStore } from '~/store';
+import { useHead } from '@vueuse/head';
+
+useHead({
+	title: computed(() => 'discord.js'),
+});
 
 const store = useStore();
 
