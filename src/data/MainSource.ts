@@ -7,6 +7,6 @@ export default new DocsSource({
 	global: 'discord.js',
 	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/discord.js',
-	branchFilter: (branch) => branch === "main" || /^v1[3-9]$/.test(branch),
+	branchFilter: (branch) => branch === 'main' || /^v1[3-9]$/.test(branch),
 	tagFilter: (tag: string) => semver.gte(tag.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '9.0.0'),
 });
