@@ -2,9 +2,10 @@
 	<div class="docs-type inline-block whitespace-pre-wrap">
 		<span class="font-semibold">{{ nullable ? '?' : '' }}{{ variable ? '...' : '' }}</span>
 		<span v-if="Array.isArray(names)">
-			<template v-for="(type, index) in names">
-				<span v-if="index > 0"> or </span>
-				<TypeLink :key="typeKey(type)" :type="type" />
+			<template v-for="type in names">
+				<div class="docs-type inline-block whitespace-pre-wrap">
+					<TypeLink :key="typeKey(type)" :type="type" />
+				</div>
 			</template>
 		</span>
 	</div>
