@@ -8,11 +8,7 @@
 		"jest": true
 	},
 	"rules": {
-		"vue/multi-word-component-names": [
-			2,
-			{
-				"ignores": ["[...all]", "Logo", "Spinner"]
-			}
-		]
+		"vue/multi-word-component-names": 0,
+		"vue/valid-attribute-name": 0
 	}
 }

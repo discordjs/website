@@ -48,13 +48,13 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head';
 import { computed } from 'vue';
 import InstallButton from '~/components/InstallButton.vue';
 import Logo from '~/components/Logo.vue';
 import Stats from '~/components/Stats.vue';
 import MainSource from '~/data/MainSource';
 import { useStore } from '~/store';
-import { useHead } from '@vueuse/head';
 
 useHead({
 	title: computed(() => 'discord.js'),

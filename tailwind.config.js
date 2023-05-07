@@ -108,6 +108,9 @@ module.exports = {
 						a: {
 							textDecoration: 'none',
 						},
+						'a > img[height="44"]': {
+							height: '44px',
+						},
 					},
 				},
 				light: {
