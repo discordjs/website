@@ -4,8 +4,8 @@
 		<span v-if="Array.isArray(names)">
 			<template v-for="type in names">
 				<TypeLink v-if="type[1]" :key="typeKey(type)" :type="type" />
-				<div v-else class="docs-type inline-block whitespace-pre-wrap">
-					<TypeLink :key="typeKey(type)" :type="type" />
+				<div v-else :key="typeKey(type)" class="docs-type inline-block whitespace-pre-wrap">
+					<TypeLink :type="type" />
 				</div>
 			</template>
 		</span>
