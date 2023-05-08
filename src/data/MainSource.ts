@@ -8,5 +8,17 @@ export default new DocsSource({
 	docsRepo: 'discordjs/docs',
 	repo: 'discordjs/discord.js',
 	branchFilter: (branch) => branch === 'main' || /^v1[3-9]$/.test(branch),
-	tagFilter: (tag: string) => semver.gte(tag.replace(/(^@.*\/.*@v?)?(?<semver>\d+.\d+.\d+)-?.*/, '$<semver>'), '9.0.0'),
+	tagFilter: (tag: string) => {
+		const parsed = /(?:^@.*\/(?<package>.*)@v?)?(?<version>\d+.\d+.\d+)-?.*/.exec(tag);
+		const parsedPackage = /(?<package>.*)@v?-?.*/.exec(tag);
+
+		if (parsed?.groups) {
+			const isSubpackage = typeof parsed.groups.package === 'string';
+			const pkg = isSubpackage ? parsed.groups.package : parsedPackage?.groups?.package ?? 'discord.js';
+			const { version } = parsed.groups;
+			if (pkg === 'discord.js') return semver.gte(version, '12.0.0');
+		}
+
+		return false;
+	},
 });
