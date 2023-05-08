@@ -1,1 +1,0 @@
-import{_ as e}from"./Spinner-ccaf1d70.js";import{d as o,B as r,o as t}from"./index-8a3f3152.js";import"./ReducedMotion-22cfeeba.js";const p=o({__name:"index",setup(a){return(n,_)=>(t(),r(e))}});export{p as default};
