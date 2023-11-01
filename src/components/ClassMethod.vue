@@ -52,13 +52,15 @@
 							<Types v-for="rtrn in method.returns.flat()" :key="typeKey(rtrn)" :names="rtrn" />
 						</template>
 						<template v-else>
+							<template v-for="rtrn in method.returns.flat()">
 							<Types
-								v-for="rtrn in method.returns.flat()"
-								:key="typeKey(rtrn)"
-								:names="rtrn.types?.flat()"
+								v-for="type in rtrn.types"
+								:key="typeKey(type)"
+								:names="type"
 								:variable="rtrn.variable"
 								:nullable="rtrn.nullable"
 							/>
+						    </template>
 						</template>
 					</template>
 					<template v-else>
