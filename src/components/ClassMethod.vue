@@ -72,8 +72,8 @@
 						v-for="rtrn in method.returns.types"
 						:key="typeKey(rtrn)"
 						:names="rtrn"
-						:variable="rtrn.variable"
-						:nullable="rtrn.nullable"
+						:variable="method.returns.variable"
+						:nullable="method.returns.nullable"
 					/>
 				</span>
 				<TypeLink v-else :type="['void']" />
@@ -148,11 +148,10 @@ const deprecatedDescription = computed(() =>
 		  markdown(convertLinks(props.method.deprecated, docs.value, router, route))
 		: '',
 );
-const returnDescription = computed(() =>
-	markdown(
+const returnDescription = computed(() =>markdown(
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-		convertLinks(props.method.returns?.[0]?.description, docs.value, router, route) ?? '',
+		convertLinks(props.method.returns?.[0]?.description || props.method.returns?.description, docs.value, router, route) ?? '',
 	),
 );
 const params = computed(() => (props.method.params ? props.method.params.filter((p) => !p.name.includes('.')) : null));
